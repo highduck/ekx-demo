@@ -25,6 +25,9 @@ std::vector<std::function<SampleBase*()>> sampleFactory;
 int currentSampleIndex = 0;
 std::unique_ptr<SampleBase> currentSample = nullptr;
 ecs::entity tfSampleTitle;
+ecs::entity tfFPS = nullptr;
+int prevFPS = 0;
+FpsMeter fpsMeter;
 
 void setCurrentSample(int index);
 
@@ -97,8 +100,16 @@ void DemoApp::update_frame(float dt) {
         currentSample->update(dt);
     }
 
-    //update_game_title_start(w);
     scene_post_update(root);
+
+    if (tfFPS) {
+        fpsMeter.update(dt);
+        auto fps = (int)fpsMeter.getAverageFPS();
+        if (fps != prevFPS) {
+            prevFPS = fps;
+            tfFPS.get<Display2D>().get<Text2D>().text = "FPS: " + std::to_string(fps);
+        }
+    }
 }
 
 void DemoApp::render_frame() {
@@ -128,6 +139,16 @@ void DemoApp::start_game() {
     tfSampleTitle = createNode2D("title");
     addText(tfSampleTitle, "");
     tfSampleTitle.assign<LayoutRect>().enableAlignX(0.5);
+
+    {
+        tfFPS = createNode2D("fps");
+        addText(tfFPS, "");
+        tfFPS.get<Display2D>().get<Text2D>().format.alignment = float2::zero;
+        tfFPS.assign<LayoutRect>()
+                .enableAlignX(0.0, 10)
+                .enableAlignY(0.0, 10);
+        append(game, tfFPS);
+    }
 
     auto controls = createNode2D("controls");
     append(controls, tfSampleTitle);
