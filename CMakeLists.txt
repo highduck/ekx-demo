@@ -12,17 +12,16 @@ add_executable(${PROJECT_NAME}
         src/piko/examples.h
         src/piko/examples.cpp
         src/piko/sample_piko.cpp
-        src/sim/driver_node_script.cpp
-        src/sim/driver_node_script.h
+
         src/sim/Motion.cpp
         src/sim/Motion.hpp
+        src/sim/SampleSim.cpp
+        src/sim/SampleSim.hpp
 
         src/sample_flash.hpp
         src/sample_flash.cpp
         src/sample_integrations.cpp
         src/ui/minimal.cpp
-        src/sim/SampleSim.cpp
-        src/sim/SampleSim.hpp
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
