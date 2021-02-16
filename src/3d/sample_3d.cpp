@@ -95,7 +95,7 @@ void create_coordinate_system_gizmo() {
 
 void Sample3D::update(float dt) {
     SampleBase::update(dt);
-    update_camera_arc_ball(dt);
+    updateCameraArcBall(dt);
 }
 
 void Sample3D::draw() {
@@ -157,7 +157,7 @@ Sample3D::Sample3D() {
     main_scene_3d = ecs::create<Node, Transform3D>();
     setName(main_scene_3d, "scene 3d");
 
-    main_camera = ecs::create<Node, Camera3D, Transform3D, camera_arc_ball>();
+    main_camera = ecs::create<Node, Camera3D, Transform3D, CameraArcBall>();
     setName(main_camera, "main camera");
 
     rs3d->scene = main_scene_3d;

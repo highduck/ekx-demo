@@ -176,7 +176,7 @@ void diamonds::prerender() {
         clear.colors[0].action = SG_ACTION_DONTCARE;
     }
     sg_begin_pass(pass, clear);
-    draw2d::begin({0, 0, w, h}, matrix_2d{}, rt);
+    draw2d::begin({0, 0, (float)w, (float)h}, matrix_2d{}, rt);
     float sc = w / 128.0f;
     float2 center{w * 0.5f, h * 0.5f};
     int e[] = {0, 3, 11, 5, 8, 14, 2, 9, 10, 4, 13, 7, 6};

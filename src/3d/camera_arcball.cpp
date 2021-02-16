@@ -10,9 +10,9 @@
 
 namespace ek {
 
-void update_camera_arc_ball(float dt) {
+void updateCameraArcBall(float dt) {
 
-    auto& im = resolve<InteractionSystem>();
+    const auto& im = resolve<InteractionSystem>();
     static float2 prev_pointer{};
     static bool prev_down = false;
 
@@ -29,8 +29,8 @@ void update_camera_arc_ball(float dt) {
         delta = cur - prev_pointer;
         prev_pointer = cur;
     }
-    for (auto e: ecs::view<Camera3D, camera_arc_ball, Transform3D>()) {
-        auto& arc_ball = e.get<camera_arc_ball>();
+    for (auto e: ecs::view<Camera3D, CameraArcBall, Transform3D>()) {
+        auto& arc_ball = e.get<CameraArcBall>();
         auto& camera_data = e.get<Camera3D>();
         auto& camera_transform = e.get<Transform3D>();
 

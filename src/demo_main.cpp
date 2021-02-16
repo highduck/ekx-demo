@@ -77,7 +77,7 @@ void DemoApp::initialize() {
     using ecs::the_world;
     the_world.registerComponent<sim::motion_t>();
     the_world.registerComponent<sim::attractor_t>();
-    the_world.registerComponent<camera_arc_ball>();
+    the_world.registerComponent<CameraArcBall>();
     the_world.registerComponent<test_rotation_comp>();
 
     auto& cam = Camera2D::Main.get<Camera2D>();
@@ -129,7 +129,7 @@ void DemoApp::start_game() {
     SampleText::prepareInternalResources();
 
     SampleBase::samplesContainer = createNode2D("sample");
-    append(game, SampleBase::samplesContainer);
+    append(root, SampleBase::samplesContainer);
 
     auto prev = createButton("<", [] { scrollSample(-1); });
     auto next = createButton(">", [] { scrollSample(+1); });
@@ -147,7 +147,7 @@ void DemoApp::start_game() {
         tfFPS.assign<LayoutRect>()
                 .enableAlignX(0.0, 10)
                 .enableAlignY(0.0, 10);
-        append(game, tfFPS);
+        append(root, tfFPS);
     }
 
     auto controls = createNode2D("controls");
@@ -156,7 +156,7 @@ void DemoApp::start_game() {
     append(controls, next);
     controls.assign<LayoutRect>().enableAlignY(1, -30);
 
-    append(game, controls);
+    append(root, controls);
 
     EK_DEBUG << "Start Demo: initSamples";
     initSamples();
