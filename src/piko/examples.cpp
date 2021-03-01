@@ -167,10 +167,10 @@ void diamonds::prerender() {
     if (first_frame) {
         float4 clear_color{colorf(2)};
         clear.colors[0].action = SG_ACTION_CLEAR;
-        clear.colors[0].val[0] = clear_color.x;
-        clear.colors[0].val[1] = clear_color.y;
-        clear.colors[0].val[2] = clear_color.z;
-        clear.colors[0].val[3] = clear_color.w;
+        clear.colors[0].value.r = clear_color.x;
+        clear.colors[0].value.g = clear_color.y;
+        clear.colors[0].value.b = clear_color.z;
+        clear.colors[0].value.a = clear_color.w;
         first_frame = false;
     } else {
         clear.colors[0].action = SG_ACTION_DONTCARE;
