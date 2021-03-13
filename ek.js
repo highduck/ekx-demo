@@ -9,7 +9,6 @@ module.exports = function (project) {
     });
 
     const shortname = "ekx-demo";
-    const shortver = "10";
 
     project.name = shortname;
     project.title = "ekx";
@@ -17,9 +16,8 @@ module.exports = function (project) {
     project.binary_name = shortname;
     project.pwa_url = "";
     project.cmake_target = shortname;
-    project.version_name = "1.1.0";
-    project.version_code = shortver;
-    project.build_number = shortver;
+    project.version_name = "1.1.4";
+    project.version_code = "14";
     project.orientation = "portrait";
     project.assets = {
         output: "export/contents/assets"
