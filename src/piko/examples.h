@@ -30,7 +30,7 @@ public:
     float time = 0.0f;
     bool first_frame = true;
 
-    signal_t<>::token ll;
+    signal_t<>::Listener ll;
 };
 
 }
