@@ -31,13 +31,15 @@ module.exports = function (project) {
         admob_app_id: "ca-app-pub-3931267664278058~6275600638",
         game_services_id: "300613663654",
         googleServicesConfigDir: secretPath,
-        signingConfigPath: path.join(secretPath, "google-play-signing.json")
+        signingConfigPath: path.join(secretPath, "google-play-signing.json"),
+        serviceAccountKey: '/Users/ilyak/Dropbox/dev_keys/_fastlane/api-5415425812860184091-52535-0303d398e1e6.json',
     };
 
     project.ios = {
         application_id: "ilj.play.demo",
         admob_app_id: "ca-app-pub-3931267664278058~8636974437",
         googleServicesConfigDir: secretPath,
+        appStoreCredentials: '/Users/ilyak/Dropbox/dev_keys/_fastlane/appstore.json',
     };
 
     project.html = {
