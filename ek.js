@@ -16,14 +16,14 @@ module.exports = function (project) {
     project.binary_name = shortname;
     project.pwa_url = "";
     project.cmake_target = shortname;
-    project.version_name = "1.1.6";
-    project.version_code = "15";
+    project.version_name = "1.1.7";
+    project.version_code = "16";
     project.orientation = "portrait";
     project.assets = {
         output: "export/contents/assets"
     };
 
-    const secretPath = '/Users/ilyak/Dropbox/dev_keys/demo';
+    const secretPath = '../keys/demo';
 
     project.android = {
         application_id: "ilj.play.demo",
@@ -32,14 +32,14 @@ module.exports = function (project) {
         game_services_id: "300613663654",
         googleServicesConfigDir: secretPath,
         signingConfigPath: path.join(secretPath, "google-play-signing.json"),
-        serviceAccountKey: '/Users/ilyak/Dropbox/dev_keys/_fastlane/api-5415425812860184091-52535-0303d398e1e6.json',
+        serviceAccountKey: '../keys/_fastlane/api-5415425812860184091-52535-0303d398e1e6.json',
     };
 
     project.ios = {
         application_id: "ilj.play.demo",
         admob_app_id: "ca-app-pub-3931267664278058~8636974437",
         googleServicesConfigDir: secretPath,
-        appStoreCredentials: '/Users/ilyak/Dropbox/dev_keys/_fastlane/appstore.json',
+        appStoreCredentials: '../keys/_fastlane/appstore.json',
     };
 
     project.html = {
