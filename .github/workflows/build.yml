@@ -21,13 +21,15 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          path: main
 
       - name: Checkout EKX
         uses: actions/checkout@v2
         with:
           repository: highduck/ekx
           #token: ${{ secrets.GitHub_PAT }}
-          path: ../ekx
+          path: ekx
 
       - name: Setup system cache
         id: cache-system-libraries
@@ -49,6 +51,7 @@ jobs:
 
       - name: Install dependencies
         run: yarn
+        working-directory: ./main
         env:
           CI: true
           SHOW_SPAWN_CMD: true
