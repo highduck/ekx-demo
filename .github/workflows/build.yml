@@ -19,18 +19,6 @@ jobs:
     runs-on: ${{ matrix.platform }}
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-        with:
-          path: main
-
-      - name: Checkout EKX
-        uses: actions/checkout@v2
-        with:
-          repository: highduck/ekx
-          #token: ${{ secrets.GitHub_PAT }}
-          path: ekx
-
       - name: Setup system cache
         id: cache-system-libraries
         uses: actions/cache@v2
@@ -48,6 +36,18 @@ jobs:
         with:
           version: ${{env.EM_VERSION}}
           actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
+
+      - name: Checkout Engine
+          uses: actions/checkout@v2
+          with:
+            repository: highduck/ekx
+            token: ${{ secrets.GITHUB_TOKEN }}
+            path: ekx
+
+      - name: Checkout Project
+          uses: actions/checkout@v2
+          with:
+            path: main
 
       - name: Install dependencies
         run: yarn
