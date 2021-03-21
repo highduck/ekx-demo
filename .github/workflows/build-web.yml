@@ -20,22 +20,15 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           path: ekx
 
-      - name: Build dev ekx-cli
-        run: yarn && yarn build
+      - name: Prepare @ekx/cli
+        run: npm i && npm run build && npm link
         working-directory: ./ekx/cli
         env:
           CI: true
           SHOW_SPAWN_CMD: true
 
-      - name: Build dev ekx
-        run: yarn
-        working-directory: ./ekx
-        env:
-          CI: true
-          SHOW_SPAWN_CMD: true
-
-      - name: Install dependencies
-        run: yarn
+      - name: Prepare @ekx/ekx
+        run: npm i && npm link
         working-directory: ./ekx
         env:
           CI: true
@@ -65,7 +58,7 @@ jobs:
           actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
 
       - name: Install dependencies
-        run: yarn
+        run: npm link @ekx/ekx @ekx/cli && npm ci
         working-directory: ./main
         env:
           CI: true

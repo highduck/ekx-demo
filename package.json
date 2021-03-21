@@ -7,8 +7,8 @@
     "build:web": "ekx web clean --verbose"
   },
   "dependencies": {
-    "@ekx/ekx": "link:../ekx",
-    "@ekx/link-cmake-npm": "^0.0.1",
-    "@ekx/cli": "link:../ekx/cli"
+    "@ekx/cli": "0.1.0",
+    "@ekx/ekx": "0.1.0",
+    "@ekx/link-cmake-npm": "^0.0.1"
   }
 }
