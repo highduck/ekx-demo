@@ -54,7 +54,8 @@ jobs:
           SHOW_SPAWN_CMD: true
 
       - name: Install dependencies
-        run: npm link @ekx/ekx @ekx/cli && npm ci
+        # use install, not clean install, because use linked packages?
+        run: npm link @ekx/ekx @ekx/cli && npm install
         working-directory: ./main
         env:
           CI: true
