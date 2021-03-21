@@ -16,6 +16,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: highduck/ekx
+          ref: master
           token: ${{ secrets.GITHUB_TOKEN }}
           path: ekx
 
