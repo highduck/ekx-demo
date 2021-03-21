@@ -38,6 +38,12 @@ jobs:
         with:
           node-version: 14
 
+      - name: Setup OpenGL on Ubuntu
+        if: ${{ matrix.platform == 'ubuntu-latest' }}
+        run: |
+          sudo apt-get install xorg-dev
+          sudo apt-get install freeglut3-dev
+
       # build local dependencies
       - name: Prepare @ekx/cli
         run: npm ci && npm run build && npm link
@@ -52,6 +58,15 @@ jobs:
         env:
           CI: true
           SHOW_SPAWN_CMD: true
+
+      - name: Build EKC
+        run: |
+          cmake . -B cmake-build-${BUILD_TYPE} -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+          cmake --build cmake-build-${{ matrix.build-tyoe }} --target ekc
+        env:
+          CI: true
+          SHOW_SPAWN_CMD: true
+          BUILD_TYPE: ${{ matrix.build-tyoe }}
 
       - name: Install dependencies
         # use install, not clean install, because use linked packages?
