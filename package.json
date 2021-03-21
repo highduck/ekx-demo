@@ -4,13 +4,11 @@
   "private": true,
   "scripts": {
     "postinstall": "link-cmake-npm",
-    "build:web": "ekx web clean"
+    "build:web": "ekx web clean --verbose"
   },
   "dependencies": {
     "@ekx/ekx": "link:../ekx",
-    "@ekx/link-cmake-npm": "^0.0.1"
-  },
-  "devDependencies": {
+    "@ekx/link-cmake-npm": "^0.0.1",
     "@ekx/cli": "link:../ekx/cli"
   }
 }

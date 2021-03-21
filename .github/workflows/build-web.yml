@@ -20,6 +20,27 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           path: ekx
 
+      - name: Build dev ekx-cli
+        run: yarn && yarn build
+        working-directory: ./ekx/cli
+        env:
+          CI: true
+          SHOW_SPAWN_CMD: true
+
+      - name: Build dev ekx
+        run: yarn
+        working-directory: ./ekx
+        env:
+          CI: true
+          SHOW_SPAWN_CMD: true
+
+      - name: Install dependencies
+        run: yarn
+        working-directory: ./ekx
+        env:
+          CI: true
+          SHOW_SPAWN_CMD: true
+
       - name: Checkout Project
         uses: actions/checkout@v2
         with:
