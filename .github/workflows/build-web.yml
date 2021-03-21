@@ -32,11 +32,24 @@ jobs:
         with:
           path: keys
 
-      # setup NPM / Node env
-      - name: Setup Node.js 14
+      # setup native build tools
+      - name: Setup system cache
+        id: cache-system-libraries
+        uses: actions/cache@v2
+        with:
+          path: ${{env.EM_CACHE_FOLDER}}
+          key: ${{env.EM_VERSION}}-${{ runner.os }}
+
+      - name: Setup Emscripten
+        uses: mymindstorm/setup-emsdk@v7
+        with:
+          version: ${{env.EM_VERSION}}
+          actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
+
+      - name: Setup Node.js 15
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 15
 
       - name: Setup OpenGL on Linux
         if: runner.os == 'Linux'
@@ -76,20 +89,6 @@ jobs:
         env:
           CI: true
           SHOW_SPAWN_CMD: true
-
-      # setup native build tools
-      - name: Setup system cache
-        id: cache-system-libraries
-        uses: actions/cache@v2
-        with:
-          path: ${{env.EM_CACHE_FOLDER}}
-          key: ${{env.EM_VERSION}}-${{ runner.os }}
-
-      - name: Setup Emscripten
-        uses: mymindstorm/setup-emsdk@v7
-        with:
-          version: ${{env.EM_VERSION}}
-          actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
 
       - name: Build Web
         run: npm run build:web

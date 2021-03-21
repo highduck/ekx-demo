@@ -3,12 +3,12 @@
   "version": "1.1.8",
   "private": true,
   "scripts": {
-    "postinstall": "link-cmake-npm",
+    "postinstall": "npx @ekx/npm-cmake",
     "build:web": "ekx web clean --verbose"
   },
   "dependencies": {
     "@ekx/cli": "0.1.0",
     "@ekx/ekx": "0.1.0",
-    "@ekx/link-cmake-npm": "^0.0.1"
+    "@ekx/npm-cmake": "^0.0.1"
   }
 }
