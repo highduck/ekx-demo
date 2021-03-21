@@ -62,7 +62,7 @@ jobs:
       - name: Build EKC
         run: |
           cmake . -B cmake-build-${BUILD_TYPE} -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
-          cmake --build cmake-build-${{ matrix.build-tyoe }} --target ekc
+          cmake --build cmake-build-${BUILD_TYPE} --target ekc
         working-directory: ./ekx
         env:
           CI: true
