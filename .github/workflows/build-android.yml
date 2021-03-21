@@ -1,4 +1,4 @@
-name: Build Web
+name: Build Android
 
 on: [push, pull_request]
 
