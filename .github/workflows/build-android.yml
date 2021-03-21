@@ -1,0 +1,82 @@
+name: Build Web
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # checkout repositories
+
+      - name: Checkout Engine
+        uses: actions/checkout@v2
+        with:
+          repository: highduck/ekx
+          ref: master
+          token: ${{ secrets.GH_TOKEN }}
+          path: ekx
+
+      - name: Checkout Project
+        uses: actions/checkout@v2
+        with:
+          path: main
+
+      - name: Checkout Keys
+        uses: actions/checkout@v2
+        with:
+          path: keys
+
+      # setup native build tools
+
+      - name: Setup Node.js 15
+        uses: actions/setup-node@v2
+        with:
+          node-version: 15
+
+      - name: Setup OpenGL on Linux
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get install xorg-dev
+          sudo apt-get install freeglut3-dev
+
+      # build local dependencies
+      - name: Prepare @ekx/cli
+        run: npm ci && npm run build && npm link
+        working-directory: ./ekx/cli
+        env:
+          CI: true
+          SHOW_SPAWN_CMD: true
+
+      - name: Prepare @ekx/ekx
+        run: npm ci && npm link
+        working-directory: ./ekx
+        env:
+          CI: true
+          SHOW_SPAWN_CMD: true
+
+      - name: Build EKC
+        run: |
+          cmake . -B cmake-build-${BUILD_TYPE} -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+          cmake --build cmake-build-${BUILD_TYPE} --target ekc
+        working-directory: ./ekx
+        env:
+          CI: true
+          SHOW_SPAWN_CMD: true
+          BUILD_TYPE: Release
+
+      - name: Install dependencies
+        # use install, not clean install, because use linked packages?
+        run: npm link @ekx/ekx @ekx/cli && npm install
+        working-directory: ./main
+        env:
+          CI: true
+          SHOW_SPAWN_CMD: true
+
+      - name: Build Android
+        run: npm run build:android
+        working-directory: ./main
+        env:
+          CI: true
+          SHOW_SPAWN_CMD: true
