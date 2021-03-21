@@ -17,7 +17,7 @@ jobs:
         with:
           repository: highduck/ekx
           ref: master
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
           path: ekx
 
       - name: Checkout Project
