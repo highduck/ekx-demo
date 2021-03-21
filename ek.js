@@ -42,6 +42,10 @@ module.exports = function (project) {
         appStoreCredentials: '../keys/_fastlane/appstore.json',
     };
 
+    project.web = {
+        firebaseToken: "../keys/_firebase/token.txt"
+    };
+
     project.html = {
         google_analytics_property_id: "UA-3755607-9",
         background_color: "black",

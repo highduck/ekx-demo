@@ -3,7 +3,8 @@
   "version": "1.1.8",
   "private": true,
   "scripts": {
-    "postinstall": "link-cmake-npm"
+    "postinstall": "link-cmake-npm",
+    "build:web": "ekx web clean"
   },
   "dependencies": {
     "@ekx/ekx": "link:../ekx",
