@@ -20,24 +20,29 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           path: ekx
 
+      - name: Checkout Project
+        uses: actions/checkout@v2
+        with:
+          path: main
+
+      - name: Checkout Keys
+        uses: actions/checkout@v2
+        with:
+          path: keys
+
       - name: Prepare @ekx/cli
-        run: npm i && npm run build && npm link
+        run: npm ci && npm run build && npm link
         working-directory: ./ekx/cli
         env:
           CI: true
           SHOW_SPAWN_CMD: true
 
       - name: Prepare @ekx/ekx
-        run: npm i && npm link
+        run: npm ci && npm link
         working-directory: ./ekx
         env:
           CI: true
           SHOW_SPAWN_CMD: true
-
-      - name: Checkout Project
-        uses: actions/checkout@v2
-        with:
-          path: main
 
       - name: Setup system cache
         id: cache-system-libraries
@@ -63,11 +68,6 @@ jobs:
         env:
           CI: true
           SHOW_SPAWN_CMD: true
-
-      - name: Checkout Keys
-        uses: actions/checkout@v2
-        with:
-          path: keys
 
       - name: Build Web
         run: npm run build:web
