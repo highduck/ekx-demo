@@ -1,0 +1,15 @@
+{
+  "name": "@ekx/demo",
+  "version": "1.1.8",
+  "private": true,
+  "scripts": {
+    "postinstall": "link-cmake-npm"
+  },
+  "dependencies": {
+    "@ekx/ekx": "link:../ekx",
+    "@ekx/link-cmake-npm": "^0.0.1"
+  },
+  "devDependencies": {
+    "@ekx/cli": "link:../ekx/cli"
+  }
+}

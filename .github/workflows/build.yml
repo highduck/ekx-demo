@@ -1,0 +1,55 @@
+name: Build
+
+on: [push, pull_request]
+
+env:
+  EM_VERSION: 2.0.15
+  EM_CACHE_FOLDER: 'emsdk-cache'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        # safe the Earth
+        platform: [ ubuntu-latest ]
+        build-tyoe: [ Release ]
+        #platform: [ubuntu-latest, macos-latest]
+        #build-tyoe: [Debug, Release]
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Checkout EKX
+        uses: actions/checkout@v2
+        with:
+          repository: highduck/ekx
+          #token: ${{ secrets.GitHub_PAT }}
+          path: ../ekx
+
+      - name: Setup system cache
+        id: cache-system-libraries
+        uses: actions/cache@v2
+        with:
+          path: ${{env.EM_CACHE_FOLDER}}
+          key: ${{env.EM_VERSION}}-${{ runner.os }}
+
+      - name: Setup Node.js 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Setup Emscripten
+        uses: mymindstorm/setup-emsdk@v7
+        with:
+          version: ${{env.EM_VERSION}}
+          actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
+
+      - name: Install dependencies
+        run: yarn
+        env:
+          CI: true
+          SHOW_SPAWN_CMD: true
+
