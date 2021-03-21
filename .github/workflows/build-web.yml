@@ -70,7 +70,7 @@ jobs:
           path: keys
 
       - name: Build Web
-        run: yarn build:web
+        run: npm run build:web
         working-directory: ./main
         env:
           CI: true
