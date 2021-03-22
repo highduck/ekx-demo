@@ -9,7 +9,7 @@ env:
 jobs:
   build:
 
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       # checkout repositories
@@ -18,7 +18,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: highduck/ekx
-          ref: master
           token: ${{ secrets.GH_TOKEN }}
           path: ekx
 
@@ -27,11 +26,6 @@ jobs:
         with:
           path: main
 
-      - name: Checkout Keys
-        uses: actions/checkout@v2
-        with:
-          path: keys
-
       # setup native build tools
       - name: Setup system cache
         id: cache-system-libraries
@@ -39,12 +33,6 @@ jobs:
         with:
           path: ${{env.EM_CACHE_FOLDER}}
           key: ${{env.EM_VERSION}}-${{ runner.os }}
-
-      - name: Setup Emscripten
-        uses: mymindstorm/setup-emsdk@v7
-        with:
-          version: ${{env.EM_VERSION}}
-          actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
 
       - name: Setup Node.js 15
         uses: actions/setup-node@v2
@@ -89,6 +77,19 @@ jobs:
         env:
           CI: true
           SHOW_SPAWN_CMD: true
+
+      - name: Setup Emscripten
+        uses: mymindstorm/setup-emsdk@v7
+        with:
+          version: ${{env.EM_VERSION}}
+          actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
+
+      - name: Checkout Keys
+        uses: actions/checkout@v2
+        with:
+          repository: highduck/keys
+          token: ${{ secrets.GH_TOKEN }}
+          path: keys
 
       - name: Build Web
         run: npm run build:web

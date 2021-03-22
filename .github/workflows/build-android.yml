@@ -14,7 +14,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: highduck/ekx
-          ref: master
           token: ${{ secrets.GH_TOKEN }}
           path: ekx
 
@@ -22,11 +21,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: main
-
-      - name: Checkout Keys
-        uses: actions/checkout@v2
-        with:
-          path: keys
 
       # setup native build tools
 
@@ -73,6 +67,13 @@ jobs:
         env:
           CI: true
           SHOW_SPAWN_CMD: true
+
+      - name: Checkout Keys
+        uses: actions/checkout@v2
+        with:
+          repository: highduck/keys
+          token: ${{ secrets.GH_TOKEN }}
+          path: keys
 
       - name: Build Android
         run: npm run build:android
