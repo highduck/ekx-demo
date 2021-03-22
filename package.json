@@ -3,13 +3,13 @@
   "version": "1.1.8",
   "private": true,
   "scripts": {
-    "postinstall": "npx @ekx/npm-cmake",
+    "postinstall": "npm-cmake",
     "build:web": "ekx web clean --verbose",
     "build:android": "ekx android bundle clean --verbose"
   },
   "dependencies": {
-    "@ekx/cli": "0.1.0",
-    "@ekx/ekx": "0.1.0",
-    "@ekx/npm-cmake": "^0.0.1"
+    "@ekx/cli": "link:../ekx/cli",
+    "@ekx/ekx": "link:../ekx",
+    "npm-cmake": "0.0.3"
   }
 }

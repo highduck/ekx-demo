@@ -34,49 +34,27 @@ jobs:
           path: ${{env.EM_CACHE_FOLDER}}
           key: ${{env.EM_VERSION}}-${{ runner.os }}
 
-      - name: Setup Node.js 15
-        uses: actions/setup-node@v2
-        with:
-          node-version: 15
-
       - name: Setup OpenGL on Linux
         if: runner.os == 'Linux'
         run: |
           sudo apt-get install xorg-dev
           sudo apt-get install freeglut3-dev
 
+      - name: Setup Ninja
+        uses: seanmiddleditch/gha-setup-ninja@master
+
       # build local dependencies
       - name: Prepare @ekx/cli
-        run: npm ci && npm run build && npm link
+        run: yarn --frozen-lockfile && yarn run build
         working-directory: ./ekx/cli
-        env:
-          CI: true
-          SHOW_SPAWN_CMD: true
 
       - name: Prepare @ekx/ekx
-        run: npm ci && npm link
+        run: yarn --frozen-lockfile
         working-directory: ./ekx
-        env:
-          CI: true
-          SHOW_SPAWN_CMD: true
-
-      - name: Build EKC
-        run: |
-          cmake . -B cmake-build-${BUILD_TYPE} -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
-          cmake --build cmake-build-${BUILD_TYPE} --target ekc
-        working-directory: ./ekx
-        env:
-          CI: true
-          SHOW_SPAWN_CMD: true
-          BUILD_TYPE: Release
 
       - name: Install dependencies
-        # use install, not clean install, because use linked packages?
-        run: npm link @ekx/ekx @ekx/cli && npm install
+        run: yarn --frozen-lockfile
         working-directory: ./main
-        env:
-          CI: true
-          SHOW_SPAWN_CMD: true
 
       - name: Setup Emscripten
         uses: mymindstorm/setup-emsdk@v7
@@ -92,8 +70,5 @@ jobs:
           path: keys
 
       - name: Build Web
-        run: npm run build:web
+        run: yarn run build:web
         working-directory: ./main
-        env:
-          CI: true
-          SHOW_SPAWN_CMD: true
