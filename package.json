@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "npx @ekx/npm-cmake",
     "build:web": "ekx web clean --verbose",
-    "build:android": "ekx android clean --verbose"
+    "build:android": "ekx android bundle clean --verbose"
   },
   "dependencies": {
     "@ekx/cli": "0.1.0",
