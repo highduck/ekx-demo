@@ -7,7 +7,7 @@ env:
   EM_CACHE_FOLDER: 'emsdk-cache'
 
 jobs:
-  build:
+  build-web:
 
     runs-on: ubuntu-latest
 
@@ -45,7 +45,7 @@ jobs:
 
       # build local dependencies
       - name: Prepare @ekx/cli
-        run: yarn --frozen-lockfile && yarn run build
+        run: yarn --frozen-lockfile && yarn run build && yarn link -g
         working-directory: ./ekx/cli
 
       - name: Prepare @ekx/ekx
