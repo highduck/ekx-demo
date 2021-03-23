@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
+include(npm.cmake)
 project(ekx-demo)
 
 add_executable(${PROJECT_NAME}
