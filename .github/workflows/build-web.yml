@@ -8,6 +8,8 @@ env:
 
 jobs:
   build-web:
+    # skip
+    if: false
 
     runs-on: ubuntu-latest
 
@@ -34,11 +36,13 @@ jobs:
           path: ${{env.EM_CACHE_FOLDER}}
           key: ${{env.EM_VERSION}}-${{ runner.os }}
 
+      # `libopengl0` only need for current EKC runtime, need to rewrite to not use regular ekx-app device
       - name: Setup OpenGL on Linux
         if: runner.os == 'Linux'
         run: |
           sudo apt-get install xorg-dev
           sudo apt-get install freeglut3-dev
+          sudo apt-get install libopengl0
 
       - name: Setup Ninja
         uses: seanmiddleditch/gha-setup-ninja@master
