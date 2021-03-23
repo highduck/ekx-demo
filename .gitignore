@@ -1,5 +1,8 @@
 .idea/
+node_modules/
+npm.cmake
 build/
 export/
 cmake-build-*/
 .firebase/
+

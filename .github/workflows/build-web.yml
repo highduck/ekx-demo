@@ -1,0 +1,78 @@
+name: Build Web
+
+on: [push, pull_request]
+
+env:
+  EM_VERSION: 2.0.15
+  EM_CACHE_FOLDER: 'emsdk-cache'
+
+jobs:
+  build-web:
+    # skip
+    if: false
+
+    name: Build Web
+    runs-on: ubuntu-latest
+    steps:
+      # checkout repositories
+
+      - name: Checkout Engine
+        uses: actions/checkout@v2
+        with:
+          repository: highduck/ekx
+          token: ${{ secrets.GH_TOKEN }}
+          path: ekx
+
+      - name: Checkout Project
+        uses: actions/checkout@v2
+        with:
+          path: main
+
+      # setup native build tools
+      - name: Setup system cache
+        id: cache-system-libraries
+        uses: actions/cache@v2
+        with:
+          path: ${{env.EM_CACHE_FOLDER}}
+          key: ${{env.EM_VERSION}}-${{ runner.os }}
+
+      # `libopengl0` only need for current EKC runtime, need to rewrite to not use regular ekx-app device
+      - name: Setup OpenGL on Linux
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get install xorg-dev
+          sudo apt-get install freeglut3-dev
+          sudo apt-get install libopengl0
+
+      - name: Setup Ninja
+        uses: seanmiddleditch/gha-setup-ninja@master
+
+      # build local dependencies
+      - name: Prepare @ekx/cli
+        run: yarn --frozen-lockfile && yarn run build && yarn link -g
+        working-directory: ./ekx/cli
+
+      - name: Prepare @ekx/ekx
+        run: yarn --frozen-lockfile
+        working-directory: ./ekx
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+        working-directory: ./main
+
+      - name: Setup Emscripten
+        uses: mymindstorm/setup-emsdk@v7
+        with:
+          version: ${{env.EM_VERSION}}
+          actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
+
+      - name: Checkout Keys
+        uses: actions/checkout@v2
+        with:
+          repository: highduck/keys
+          token: ${{ secrets.GH_TOKEN }}
+          path: keys
+
+      - name: Build Web
+        run: yarn run build:web
+        working-directory: ./main
