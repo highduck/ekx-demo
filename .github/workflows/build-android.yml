@@ -4,9 +4,11 @@ on: [push, pull_request]
 
 jobs:
   build-android:
+    # skip
+    if: false
 
+    name: Build Android
     runs-on: ubuntu-latest
-
     steps:
       # checkout repositories
       - name: Checkout Engine
