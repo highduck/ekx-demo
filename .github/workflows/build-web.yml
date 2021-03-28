@@ -37,8 +37,7 @@ jobs:
           path: main
 
       - name: Install dependencies
-#        run: yarn --frozen-lockfile
-        run: yarn
+        run: yarn --frozen-lockfile
         working-directory: ./main
 
       - name: Setup Emscripten
