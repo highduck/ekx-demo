@@ -1,0 +1,99 @@
+name: Build Android
+
+on: [push, pull_request]
+
+jobs:
+  build-android:
+    name: Build Android
+    runs-on: ubuntu-latest
+    steps:
+      # NDK will provide these
+#      - name: Setup OpenGL on Linux
+#        if: runner.os == 'Linux'
+#        run: |
+#          sudo apt-get install xorg-dev
+#          sudo apt-get install freeglut3-dev
+#          sudo apt-get install libopengl0
+
+#      - name: Setup Ninja
+#        uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+
+      - name: Checkout Project
+        uses: actions/checkout@v2
+        with:
+          path: main
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+        working-directory: ./main
+
+      - name: Checkout Keys
+        uses: actions/checkout@v2
+        with:
+          repository: highduck/keys
+          token: ${{ secrets.GH_TOKEN }}
+          path: keys
+
+      - name: Build Android
+        run: yarn run build:android
+        working-directory: ./main
+
+  build-web:
+    name: Build Web
+    runs-on: ubuntu-latest
+    env:
+      EM_VERSION: 2.0.15
+      EM_CACHE_FOLDER: 'emsdk-cache'
+    steps:
+      # setup native build tools
+      - name: Setup system cache
+        id: cache-system-libraries
+        uses: actions/cache@v2
+        with:
+          path: ${{env.EM_CACHE_FOLDER}}
+          key: ${{env.EM_VERSION}}-${{ runner.os }}
+
+      # em sdk will provide all libraries
+#      - name: Setup OpenGL on Linux
+#        if: runner.os == 'Linux'
+#        run: |
+#          sudo apt-get install xorg-dev
+#          sudo apt-get install freeglut3-dev
+#          sudo apt-get install libopengl0
+
+      - name: Setup Ninja
+        uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: Setup Emscripten
+        uses: mymindstorm/setup-emsdk@v7
+        with:
+          version: ${{env.EM_VERSION}}
+          actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
+
+      - name: Checkout Project
+        uses: actions/checkout@v2
+        with:
+          path: main
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+        working-directory: ./main
+
+      - name: Keys
+        uses: actions/checkout@v2
+        with:
+          repository: highduck/keys
+          token: ${{ secrets.GH_TOKEN }}
+          path: keys
+
+      - name: Build Web
+        run: yarn run build:web
+        working-directory: ./main
