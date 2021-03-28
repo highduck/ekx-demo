@@ -8,26 +8,9 @@ env:
 
 jobs:
   build-web:
-    # skip
-    if: false
-
     name: Build Web
     runs-on: ubuntu-latest
     steps:
-      # checkout repositories
-
-      - name: Checkout Engine
-        uses: actions/checkout@v2
-        with:
-          repository: highduck/ekx
-          token: ${{ secrets.GH_TOKEN }}
-          path: ekx
-
-      - name: Checkout Project
-        uses: actions/checkout@v2
-        with:
-          path: main
-
       # setup native build tools
       - name: Setup system cache
         id: cache-system-libraries
@@ -47,17 +30,15 @@ jobs:
       - name: Setup Ninja
         uses: seanmiddleditch/gha-setup-ninja@master
 
-      # build local dependencies
-      - name: Prepare @ekx/cli
-        run: yarn --frozen-lockfile && yarn run build && yarn link -g
-        working-directory: ./ekx/cli
-
-      - name: Prepare @ekx/ekx
-        run: yarn --frozen-lockfile
-        working-directory: ./ekx
+      # checkout repositories
+      - name: Checkout Project
+        uses: actions/checkout@v2
+        with:
+          path: main
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+#        run: yarn --frozen-lockfile
+        run: yarn
         working-directory: ./main
 
       - name: Setup Emscripten
@@ -66,7 +47,7 @@ jobs:
           version: ${{env.EM_VERSION}}
           actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
 
-      - name: Checkout Keys
+      - name: Keys
         uses: actions/checkout@v2
         with:
           repository: highduck/keys

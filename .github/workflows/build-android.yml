@@ -4,26 +4,9 @@ on: [push, pull_request]
 
 jobs:
   build-android:
-    # skip
-    if: false
-
     name: Build Android
     runs-on: ubuntu-latest
     steps:
-      # checkout repositories
-      - name: Checkout Engine
-        uses: actions/checkout@v2
-        with:
-          repository: highduck/ekx
-          token: ${{ secrets.GH_TOKEN }}
-          path: ekx
-
-      - name: Checkout Project
-        uses: actions/checkout@v2
-        with:
-          path: main
-
-      # setup native build tools
       - name: Setup OpenGL on Linux
         if: runner.os == 'Linux'
         run: |
@@ -34,17 +17,14 @@ jobs:
       - name: Setup Ninja
         uses: seanmiddleditch/gha-setup-ninja@master
 
-      # build local dependencies
-      - name: Prepare @ekx/cli
-        run: yarn --frozen-lockfile && yarn run build && yarn link -g
-        working-directory: ./ekx/cli
-
-      - name: Prepare @ekx/ekx
-        run: yarn --frozen-lockfile
-        working-directory: ./ekx
+      - name: Checkout Project
+        uses: actions/checkout@v2
+        with:
+          path: main
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        #run: yarn --frozen-lockfile
+        run: yarn
         working-directory: ./main
 
       - name: Set up JDK 1.8
