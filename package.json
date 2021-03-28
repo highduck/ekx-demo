@@ -1,6 +1,6 @@
 {
   "name": "@ekx/demo",
-  "version": "1.1.8",
+  "version": "1.1.15",
   "private": true,
   "scripts": {
     "postinstall": "npm-cmake",
@@ -8,8 +8,8 @@
     "build:android": "ekx android bundle clean --verbose"
   },
   "dependencies": {
-    "@ekx/cli": "link:../ekx/cli",
-    "@ekx/ekx": "link:../ekx",
-    "npm-cmake": "0.0.3"
+    "@ekx/cli": "0.1.0",
+    "@ekx/ekx": "0.1.0",
+    "npm-cmake": "^0.0.4"
   }
 }

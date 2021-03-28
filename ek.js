@@ -16,8 +16,8 @@ module.exports = function (project) {
     project.binary_name = shortname;
     project.pwa_url = "";
     project.cmake_target = shortname;
-    project.version_name = "1.1.8";
-    project.version_code = "17";
+    project.version_name = "1.1.15";
+    project.version_code = "24";
     project.orientation = "portrait";
     project.assets = {
         output: "export/contents/assets"
@@ -55,5 +55,5 @@ module.exports = function (project) {
         image_url: "https://eliasku.github.io/picos/preview.png"
     };
 
-    project.includeProject(path.join(project.path.EKX_ROOT, "appbox"));
+    project.importModule("@ekx/ekx/appbox");
 };
