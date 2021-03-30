@@ -5,8 +5,8 @@
 namespace ek {
 
 class SampleSim : public SampleBase {
-    ecs::entity countLabel;
-    ecs::entity particlesContainer;
+    ecs::EntityApi countLabel;
+    ecs::EntityApi particlesContainer;
     unsigned particlesCount = 0;
 
     void updateCountLabel() const;

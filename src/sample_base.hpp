@@ -16,8 +16,8 @@ public:
     virtual void update(float dt);
 
     std::string title;
-    static ecs::entity samplesContainer;
-    ecs::entity container;
+    static ecs::EntityApi samplesContainer;
+    ecs::EntityApi container;
 private:
 };
 

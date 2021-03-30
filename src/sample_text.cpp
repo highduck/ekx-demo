@@ -11,7 +11,7 @@
 
 namespace ek {
 
-ecs::entity createText(const char* name, const char* font, const char* text) {
+ecs::EntityApi createText(const char* name, const char* font, const char* text) {
     auto e = createNode2D(name);
     auto* tf = new Text2D();
 
@@ -52,7 +52,7 @@ ecs::entity createText(const char* name, const char* font, const char* text) {
     return e;
 }
 
-ecs::entity createScreenZones() {
+ecs::EntityApi createScreenZones() {
     rect_f resolution{0, 0, 360, 480};
     auto zones = createNode2D("zones");
     auto e = createNode2D("zone");

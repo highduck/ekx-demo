@@ -17,7 +17,7 @@ module.exports = function (project) {
     project.pwa_url = "";
     project.cmake_target = shortname;
     project.version_name = "1.1.15";
-    project.version_code = "24";
+    project.version_code = "28";
     project.orientation = "portrait";
     project.assets = {
         output: "export/contents/assets"
@@ -43,7 +43,14 @@ module.exports = function (project) {
     };
 
     project.web = {
-        firebaseToken: "../keys/_firebase/token.txt"
+        firebaseToken: "../keys/_firebase/token.txt",
+        applications: [
+            {
+                platform: "play",
+                url: "https://play.google.com/store/apps/details?id=ilj.play.demo",
+                id: "ilj.play.demo"
+            }
+        ]
     };
 
     project.html = {

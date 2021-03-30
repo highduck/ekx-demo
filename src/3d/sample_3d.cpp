@@ -18,8 +18,8 @@
 
 namespace ek {
 
-static ecs::entity main_camera{};
-static ecs::entity main_scene_3d{};
+static ecs::EntityApi main_camera{};
+static ecs::EntityApi main_scene_3d{};
 
 static const char* test_materials[4] = {"test0",
                                         "test1",

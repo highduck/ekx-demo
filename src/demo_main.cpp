@@ -24,8 +24,8 @@ namespace ek {
 std::vector<std::function<SampleBase*()>> sampleFactory;
 int currentSampleIndex = 0;
 std::unique_ptr<SampleBase> currentSample = nullptr;
-ecs::entity tfSampleTitle;
-ecs::entity tfFPS = nullptr;
+ecs::EntityApi tfSampleTitle;
+ecs::EntityApi tfFPS = nullptr;
 int prevFPS = 0;
 FpsMeter fpsMeter;
 
