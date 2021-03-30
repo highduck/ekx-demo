@@ -10,9 +10,9 @@ namespace ek {
 
 namespace piko {
 
-void create(ecs::entity container) {
+void create(ecs::EntityApi container) {
 
-    ecs::entity e;
+    ecs::EntityApi e;
     e = createNode2D("book");
     assignScript<book>(e);
     //ecs::get<transform_2d>(e).scale = {2.0f, 2.0f};

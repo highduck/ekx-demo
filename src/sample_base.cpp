@@ -19,6 +19,6 @@ void SampleBase::update(float dt) {
     (void)dt;
 }
 
-ecs::entity SampleBase::samplesContainer{};
+ecs::EntityApi SampleBase::samplesContainer{};
 
 }

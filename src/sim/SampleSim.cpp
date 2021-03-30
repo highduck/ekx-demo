@@ -23,7 +23,7 @@ inline const float HEIGHT = 480;
 unsigned ParticlesAddCount = 5000;
 unsigned ParticlesMaxCount = 25000;
 
-void add_objects(ecs::entity game, unsigned addCount) {
+void add_objects(ecs::EntityApi game, unsigned addCount) {
     for (unsigned i = 0; i < addCount; ++i) {
         auto q = createNode2D();
         q.get<Node>().setTouchable(false);
