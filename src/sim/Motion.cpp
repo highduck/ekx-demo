@@ -18,13 +18,13 @@ void update_motion_system(float dt) {
     const auto& w = ecs::the_world;
     for (auto e_ : ecs::view<attractor_t>()) {
         const auto e = e_.index;
-        attractors.push(AttractorsState{
+        attractors.push_back(AttractorsState{
             w.get<attractor_t>(e),
             w.get<Transform2D>(e).getPosition()
         });
     }
-    const auto sz = attractors.size;
-    const auto* attrs = attractors.data;
+    const auto sz = attractors.size();
+    const auto* attrs = attractors.data();
 
     const auto dumpFactor = expf(-6.0f * dt);
     const rect_f bounds{0.0f, 0.0f, WIDTH, HEIGHT};
