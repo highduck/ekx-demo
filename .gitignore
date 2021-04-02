@@ -1,6 +1,7 @@
 .idea/
 node_modules/
 npm.cmake
+yarn-error.log
 build/
 export/
 cmake-build-*/
