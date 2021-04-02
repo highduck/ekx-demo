@@ -8,8 +8,8 @@
     "build:android": "ekx android bundle clean --verbose"
   },
   "dependencies": {
-    "@ekx/cli": "^0.1.0",
-    "@ekx/ekx": "^0.1.0",
-    "npm-cmake": "^0.0.4"
+    "@ekx/cli": "0.1.0",
+    "@ekx/ekx": "0.1.0",
+    "npm-cmake": "0.0.5"
   }
 }
