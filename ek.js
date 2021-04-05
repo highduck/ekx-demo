@@ -62,5 +62,5 @@ module.exports = function (project) {
         image_url: "https://eliasku.github.io/picos/preview.png"
     };
 
-    project.importModule("@ekx/ekx/appbox");
+    project.importModule("@ekx/appbox");
 };

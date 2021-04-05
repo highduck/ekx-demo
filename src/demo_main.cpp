@@ -60,7 +60,7 @@ void scrollSample(int delta) {
 }
 
 void main() {
-    run_app<DemoApp>({"ekx", app::vec2{360, 480}, true});
+    run_app<DemoApp>({"ekx", float2{360, 480}, true});
 }
 
 }
@@ -104,7 +104,7 @@ void DemoApp::update_frame(float dt) {
 
     if (tfFPS) {
         fpsMeter.update(dt);
-        auto fps = (int)fpsMeter.getAverageFPS();
+        auto fps = (int) fpsMeter.getAverageFPS();
         if (fps != prevFPS) {
             prevFPS = fps;
             tfFPS.get<Display2D>().get<Text2D>().text = "FPS: " + std::to_string(fps);
