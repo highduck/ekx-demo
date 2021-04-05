@@ -37,7 +37,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
 target_link_libraries(${PROJECT_NAME}
-        PUBLIC ekx
+        PUBLIC ekx::appbox
         )
 
 add_definitions("-ffast-math -fno-exceptions -fno-rtti -Wall -Wextra")
