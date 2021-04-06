@@ -1,7 +1,8 @@
 #include <ui/minimal.hpp>
 #include <GameServices.hpp>
-#include <ek/scenex/utility/scene_management.hpp>
 #include <ek/scenex/2d/Display2D.hpp>
+#include <ek/scenex/2d/Transform2D.hpp>
+#include <ek/scenex/base/Node.hpp>
 #include <admob.hpp>
 #include <appbox/Ads.hpp>
 #include "sample_integrations.hpp"

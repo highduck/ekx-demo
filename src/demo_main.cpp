@@ -11,8 +11,9 @@
 #include <ek/math/rand.hpp>
 #include <ek/scenex/systems/main_flow.hpp>
 #include <ek/scenex/asset2/builtin_assets.hpp>
-#include <ek/scenex/utility/scene_management.hpp>
+#include <ek/scenex/SceneFactory.hpp>
 #include <ek/scenex/base/Interactive.hpp>
+#include <ek/scenex/base/Node.hpp>
 #include <ek/scenex/2d/LayoutRect.hpp>
 #include <ui/minimal.hpp>
 #include <ek/scenex/2d/Camera2D.hpp>

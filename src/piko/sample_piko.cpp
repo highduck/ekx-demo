@@ -3,8 +3,9 @@
 #include "examples.h"
 #include <ek/scenex/app/basic_application.hpp>
 #include <ek/scenex/base/Node.hpp>
+#include <ek/scenex/2d/Transform2D.hpp>
 #include <ek/scenex/base/Script.hpp>
-#include <ek/scenex/utility/scene_management.hpp>
+#include <ek/scenex/SceneFactory.hpp>
 
 namespace ek {
 
