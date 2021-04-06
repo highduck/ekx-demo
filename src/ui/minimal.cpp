@@ -1,5 +1,5 @@
 #include "minimal.hpp"
-#include <ek/scenex/utility/scene_management.hpp>
+#include <ek/scenex/SceneFactory.hpp>
 #include <ek/scenex/base/Interactive.hpp>
 #include <ek/scenex/2d/Button.hpp>
 #include <ek/scenex/2d/Display2D.hpp>

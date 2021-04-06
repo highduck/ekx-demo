@@ -1,6 +1,6 @@
 #include "sample_flash.hpp"
 
-#include <ek/scenex/data/SGFile.hpp>
+#include <ek/scenex/SceneFactory.hpp>
 #include <ek/scenex/base/Node.hpp>
 
 namespace ek {

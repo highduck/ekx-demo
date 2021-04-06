@@ -1,5 +1,6 @@
 #include "sample_base.hpp"
-#include <ek/scenex/utility/scene_management.hpp>
+#include <ek/scenex/SceneFactory.hpp>
+#include <ek/scenex/base/Node.hpp>
 
 namespace ek {
 

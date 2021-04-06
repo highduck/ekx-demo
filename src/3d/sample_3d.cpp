@@ -5,7 +5,7 @@
 #include <ek/timers.hpp>
 #include <ek/scenex/3d/RenderSystem3D.hpp>
 #include <ek/scenex/base/Node.hpp>
-#include <ek/scenex/utility/scene_management.hpp>
+#include <ek/scenex/SceneFactory.hpp>
 #include <ek/scenex/3d/Light3D.hpp>
 #include <ek/scenex/3d/StaticMesh.hpp>
 #include <ek/util/Res.hpp>
@@ -61,9 +61,9 @@ void create_lights() {
 }
 
 void create_coordinate_system_gizmo() {
-    static auto cube_x = new StaticMesh(MeshData::createCube(float3::zero, float3::one, 0xFF0000_rgb));
-    static auto cube_y = new StaticMesh(MeshData::createCube(float3::zero, float3::one, 0x00FF00_rgb));
-    static auto cube_z = new StaticMesh(MeshData::createCube(float3::zero, float3::one, 0x0000FF_rgb));
+    static auto cube_x = new StaticMesh(Model3D::createCube(float3::zero, float3::one, 0xFF0000_rgb));
+    static auto cube_y = new StaticMesh(Model3D::createCube(float3::zero, float3::one, 0x00FF00_rgb));
+    static auto cube_z = new StaticMesh(Model3D::createCube(float3::zero, float3::one, 0x0000FF_rgb));
 
     auto e = ecs::create<Node, Transform3D>();
     setName(e, "cs");
@@ -152,7 +152,7 @@ Sample3D::Sample3D() {
     //    asset_t<static_mesh_t>{"torus"}.reset(new static_mesh_t(load_obj(get_resource_content("assets/torus.obj"))));
 //    asset_t<static_mesh_t>{"monkey"}.reset(new static_mesh_t(load_obj(get_resource_content("assets/monkey.obj"))));
 //    asset_t<static_mesh_t>{"sphere"}.reset(new static_mesh_t(load_obj(get_resource_content("assets/sphere.obj"))));
-    Res<StaticMesh>{"cube"}.reset(new StaticMesh(MeshData::createCube(float3::zero, float3::one)));
+    Res<StaticMesh>{"cube"}.reset(new StaticMesh(Model3D::createCube(float3::zero, float3::one)));
 
     main_scene_3d = ecs::create<Node, Transform3D>();
     setName(main_scene_3d, "scene 3d");
