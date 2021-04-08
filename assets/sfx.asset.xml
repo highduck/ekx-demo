@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
 <asset name="sfx" type="audio" path="sfx">
-<!--    <music path="music.mp3"/>-->
+    <music filter="music1.mp3"/>
+    <music filter="music2.mp3"/>
 </asset>
