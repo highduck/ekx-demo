@@ -5,6 +5,7 @@
 #include "piko/sample_piko.hpp"
 #include "sim/SampleSim.hpp"
 #include "sample_integrations.hpp"
+#include "sample_audio.hpp"
 #include "sim/Motion.hpp"
 #include "3d/camera_arcball.hpp"
 
@@ -19,6 +20,7 @@
 #include <ek/scenex/2d/Camera2D.hpp>
 #include <ek/scenex/2d/Display2D.hpp>
 #include <ek/util/logger.hpp>
+#include <ek/scenex/AudioManager.hpp>
 
 namespace ek {
 
@@ -38,6 +40,7 @@ void initSamples() {
     //sampleFactory.emplace_back([] { return new SampleFlash("test1"); });
     sampleFactory.emplace_back([] { return new SampleFlash("test2"); });
     sampleFactory.emplace_back([] { return new Sample3D(); });
+    sampleFactory.emplace_back([] { return new SampleAudio(); });
     sampleFactory.emplace_back([] { return new SampleIntegrations(); });
     sampleFactory.emplace_back([] { return new SampleText(); });
     setCurrentSample(0);
@@ -161,6 +164,9 @@ void DemoApp::start_game() {
 
     EK_DEBUG << "Start Demo: initSamples";
     initSamples();
+
+    auto& audio = resolve<AudioManager>();
+    audio.play_music("sfx/music1");
 }
 
 DemoApp::~DemoApp() = default;
