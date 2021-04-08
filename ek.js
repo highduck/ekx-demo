@@ -17,7 +17,7 @@ module.exports = function (project) {
     project.pwa_url = "";
     project.cmake_target = shortname;
     project.version_name = "1.1.16";
-    project.version_code = "29";
+    project.version_code = "30";
     project.orientation = "portrait";
     project.assets = {
         output: "export/contents/assets"
