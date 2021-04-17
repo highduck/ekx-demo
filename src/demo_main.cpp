@@ -22,6 +22,9 @@
 #include <ek/util/logger.hpp>
 #include <ek/scenex/AudioManager.hpp>
 
+#ifdef EK_UITEST
+#include "screenshots.hpp"
+#endif
 namespace ek {
 
 std::vector<std::function<SampleBase*()>> sampleFactory;
@@ -73,6 +76,9 @@ using namespace ek;
 
 DemoApp::DemoApp() :
         basic_application() {
+#ifdef EK_UITEST
+    uitest::UITest("screenshots", uitest::runScreenshotScript);
+#endif
 }
 
 void DemoApp::initialize() {
