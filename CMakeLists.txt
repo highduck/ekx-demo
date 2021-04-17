@@ -52,6 +52,9 @@ else ()
     #    add_definitions(-DNDEBUG)
 endif ()
 
-set_target_properties(${PROJECT_NAME}
-        PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/build")
+if(EK_UITEST)
+    add_definitions(-DEK_UITEST)
+    set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/export/uitest")
+else()
+    set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build")
+endif()

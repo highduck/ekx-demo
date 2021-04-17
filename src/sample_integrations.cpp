@@ -73,6 +73,17 @@ SampleIntegrations::SampleIntegrations() :
     get_drawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
     append(container, btn);
     pos.y += spaceY;
+
+    btn = createButton("CRASH ME", [] {
+        SampleIntegrations* s = try_resolve<SampleIntegrations>();
+        // for sure we have not register this sample globally ;)
+        s->title = "";
+    });
+
+    setPosition(btn, pos);
+    get_drawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+    append(container, btn);
+    pos.y += spaceY;
 }
 
 void SampleIntegrations::initializePlugins() {
