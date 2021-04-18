@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@ekx/appbox": "0.0.3",
-    "@ekx/cli": "0.1.4",
+    "@ekx/cli": "0.1.5",
     "npm-cmake": "^0.1.0"
   }
 }
