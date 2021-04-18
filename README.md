@@ -1,5 +1,8 @@
 # ekx demo
 
+[![Build Android](https://github.com/highduck/ekx-demo/actions/workflows/build.yml/badge.svg)](https://github.com/highduck/ekx-demo/actions/workflows/build.yml)
+
+
 ekx demo project
 
 ### API configuration files
