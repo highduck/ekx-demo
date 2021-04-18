@@ -18,12 +18,12 @@
   resolved "https://registry.yarnpkg.com/@ekx/cairo/-/cairo-0.0.6.tgz#4ce8f7a7fdafefb7dc73b7ee7449396ce84f956f"
   integrity sha512-Ucq2PD1T9DcAiL4g+iiuyjsvDnK0/iJqNoJ2+Q9PDhVar5xC/5iDOaJ0TCnHAsbZ9DmrA573AmKF5alUXBFbnQ==
 
-"@ekx/cli@0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@ekx/cli/-/cli-0.1.4.tgz#3ef8e4e3874e19eeb025af5482ba3ade03912e53"
-  integrity sha512-KAIX7GL97ql0MBUzOfZnehH7M5DzE0cccPJIhhXsa14yQCKUvk6WcX6DGFs19DMQd5sPs0tVE1U1dhwFBHP5gw==
+"@ekx/cli@0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@ekx/cli/-/cli-0.1.5.tgz#c1d320b7e93c965f276fb0e0caaa31e42b7d24e1"
+  integrity sha512-FjJCCfbGef+caLCkkE9WcFvo9TdAU7EsEHw6eIjylETTH/mjUVkGAekPSOsVou/D+P6CBb94fqn9E/iAS9cE6Q==
   dependencies:
-    "@ekx/ekc" "0.1.4"
+    "@ekx/ekc" "0.1.5"
     "@ekx/ekx" "0.1.4"
     glob "^7.1.6"
     mustache "^4.2.0"
@@ -33,14 +33,14 @@
     xcode "^3.0.1"
     xmldoc "^1.1.2"
 
-"@ekx/ekc@0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@ekx/ekc/-/ekc-0.1.4.tgz#7b85a1d13ea4724a6818bdfa397576e7ab6881f0"
-  integrity sha512-k+kQ0amk6QT9CX4I+hvY/3hyasakFtF/EAGZ7G9FWDOPBf+3i/Wb1mQ/EEYHtB+O3KsJz4hzq2qUy8gi5MP7FA==
+"@ekx/ekc@0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@ekx/ekc/-/ekc-0.1.5.tgz#d6a4886374749dffd5fa6e7b7699bde137e52599"
+  integrity sha512-Nh2G1iAHs5KVD+fLEhu2zOkIgI+txFp4Z/EusITEOJ6dOFim8rPCS70kqLOxKll5CNpipzG4ZPoxPyTfhg1cag==
   dependencies:
     "@ekx/ekx" "0.1.4"
     "@ekx/flash-export" "0.0.3"
-    npm-cmake "^0.0.10"
+    npm-cmake "0.0.10"
 
 "@ekx/ekx@0.1.4":
   version "0.1.4"
