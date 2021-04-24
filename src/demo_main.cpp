@@ -101,17 +101,10 @@ void DemoApp::preload() {
     basic_application::preload();
 }
 
-void DemoApp::update_frame(float dt) {
-    basic_application::update_frame(dt);
-
-    scene_pre_update(root, dt);
-
+void DemoApp::onUpdateFrame(float dt) {
     if (currentSample) {
         currentSample->update(dt);
     }
-
-    scene_post_update(root);
-
     if (tfFPS) {
         fpsMeter.update(dt);
         auto fps = (int) fpsMeter.getAverageFPS();
@@ -122,18 +115,13 @@ void DemoApp::update_frame(float dt) {
     }
 }
 
-void DemoApp::render_frame() {
-//    base_app_type::render_frame();
-    if (!started_) return;
-
-    if (currentSample) {
+void DemoApp::onRenderSceneBefore() {
+    if (started_ && currentSample) {
         currentSample->draw();
     }
-
-    scene_render(root);
 }
 
-void DemoApp::start_game() {
+void DemoApp::onAppStart() {
 //    setup_game(w, game);
     EK_DEBUG << "Start Demo: prepareInternalResources";
     SampleText::prepareInternalResources();
