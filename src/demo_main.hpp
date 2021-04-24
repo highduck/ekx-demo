@@ -13,9 +13,9 @@ public:
     void preload() override;
 
 protected:
-    void update_frame(float dt) override;
+    void onUpdateFrame(float dt) override;
 
-    void render_frame() override;
+    void onRenderSceneBefore() override;
 
-    void start_game() override;
+    void onAppStart() override;
 };
