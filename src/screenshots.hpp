@@ -1,7 +1,7 @@
 #pragma once
 
 #include <ek/app/app.hpp>
-#include <ek/util/locator.hpp>
+#include <ek/util/ServiceLocator.hpp>
 #include <ek/scenex/app/uitest.hpp>
 #include <ek/Localization.hpp>
 #include <ek/assert.hpp>
@@ -12,7 +12,7 @@
 namespace ek::uitest {
 
 void runScreenshotScript() {
-    resolve<Ads>().cheat_RemoveAds();
+    Locator::ref<Ads>().cheat_RemoveAds();
     setTimeout([] {
         screenshot("trails");
         click({"controls", ">"});

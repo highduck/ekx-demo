@@ -57,9 +57,10 @@ module.exports = function (project) {
         google_analytics_property_id: "UA-3755607-9",
         background_color: "black",
         text_color: "#73b3cb",
-        deploy_dir: "/Users/ilyak/ek/eliasku.github.io/picos/book",
-        url: "https://eliasku.github.io/picos/book",
-        image_url: "https://eliasku.github.io/picos/preview.png"
+        og: {
+            url: "https://play-ilj.web.app",
+            image: "https://play-ilj.web.app/icons/icon192.png"
+        }
     };
 
     project.importModule("@ekx/appbox");

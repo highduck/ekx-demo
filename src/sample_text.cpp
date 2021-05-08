@@ -107,7 +107,7 @@ SampleText::SampleText() :
 }
 
 void SampleText::prepareInternalResources() {
-    asset_manager_t* am = resolve<basic_application>().asset_manager_;
+    asset_manager_t* am = Locator::ref<basic_application>().asset_manager_;
     auto* ttfFont = new TrueTypeFont(am->scale_factor, 48, "default_glyph_cache");
     ttfFont->loadDeviceFont("Arial Unicode MS");
     auto* font = new Font(ttfFont);

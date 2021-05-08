@@ -2,7 +2,7 @@
 
 #include <ek/math/packed_color.hpp>
 #include <ek/timers.hpp>
-#include <ek/util/locator.hpp>
+#include <ek/util/ServiceLocator.hpp>
 #include <algorithm>
 
 namespace ek::piko {
