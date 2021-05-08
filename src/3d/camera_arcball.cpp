@@ -4,7 +4,7 @@
 #include <ek/scenex/3d/Camera3D.hpp>
 #include <ek/scenex/3d/Transform3D.hpp>
 #include <ek/scenex/InteractionSystem.hpp>
-#include <ek/util/locator.hpp>
+#include <ek/util/ServiceLocator.hpp>
 #include <ek/scenex/app/input_controller.hpp>
 #include <ek/math/quaternion.hpp>
 
@@ -12,7 +12,7 @@ namespace ek {
 
 void updateCameraArcBall(float dt) {
 
-    const auto& im = resolve<InteractionSystem>();
+    const auto& im = Locator::ref<InteractionSystem>();
     static float2 prev_pointer{};
     static bool prev_down = false;
 
@@ -45,7 +45,7 @@ void updateCameraArcBall(float dt) {
         camera_transform.position += -r * delta.x + t * delta.y;
 
         auto dd = 0.0f;
-        auto& input = resolve<input_controller>();
+        auto& input = Locator::ref<input_controller>();
         if (input.is_key(app::key_code::W)) {
             dd -= 10.0f * dt;
         }

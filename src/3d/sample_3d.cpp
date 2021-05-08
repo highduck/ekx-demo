@@ -130,10 +130,9 @@ void Sample3D::draw() {
 }
 
 Sample3D::Sample3D() {
-    auto* rs3d = try_resolve<RenderSystem3D>();
+    auto* rs3d = Locator::get<RenderSystem3D>();
     if (!rs3d) {
-        service_locator_instance<RenderSystem3D>::init();
-        rs3d = try_resolve<RenderSystem3D>();
+        rs3d = &Locator::create<RenderSystem3D>();
     }
 
     title = "SCENE 3D";

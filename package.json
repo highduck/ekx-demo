@@ -9,8 +9,8 @@
     "build:assets:dev": "ekx assets --dev"
   },
   "dependencies": {
-    "@ekx/appbox": "0.0.3",
-    "@ekx/cli": "0.1.6",
+    "@ekx/appbox": "0.0.4",
+    "@ekx/cli": "0.1.7",
     "npm-cmake": "^0.1.0"
   }
 }

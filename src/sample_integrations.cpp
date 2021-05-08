@@ -6,7 +6,7 @@
 #include <admob.hpp>
 #include <appbox/Ads.hpp>
 #include "sample_integrations.hpp"
-#include <ek/util/locator.hpp>
+#include <ek/util/ServiceLocator.hpp>
 
 namespace ek {
 
@@ -46,7 +46,7 @@ SampleIntegrations::SampleIntegrations() :
 
     pos.y += 10.0f;
     btn = createButton("INTERSTITIAL AD", [] {
-        resolve<Ads>().gameOver([] {
+        Locator::ref<Ads>().gameOver([] {
             // TODO:
         });
     });
@@ -56,7 +56,7 @@ SampleIntegrations::SampleIntegrations() :
     pos.y += spaceY;
 
     btn = createButton("VIDEO AD", [] {
-        resolve<Ads>().showRewardVideo([](bool rewarded) {
+        Locator::ref<Ads>().showRewardVideo([](bool rewarded) {
             (void)rewarded;
             // TODO:
         });
@@ -67,7 +67,7 @@ SampleIntegrations::SampleIntegrations() :
     pos.y += spaceY;
 
     btn = createButton("REMOVE ADS", [] {
-        resolve<Ads>().purchaseRemoveAds();
+        Locator::ref<Ads>().purchaseRemoveAds();
     });
     setPosition(btn, pos);
     get_drawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
@@ -75,7 +75,7 @@ SampleIntegrations::SampleIntegrations() :
     pos.y += spaceY;
 
     btn = createButton("CRASH ME", [] {
-        SampleIntegrations* s = try_resolve<SampleIntegrations>();
+        SampleIntegrations* s = Locator::get<SampleIntegrations>();
         // for sure we have not register this sample globally ;)
         s->title = "";
     });
@@ -110,7 +110,7 @@ void SampleIntegrations::initializePlugins() {
     adHelperConfig.key1 = "_ads_removed_key";
     adHelperConfig.val1 = 98765;
 
-    service_locator_instance<Ads>::init(adHelperConfig);
+    Locator::create<Ads>(adHelperConfig);
 
     game_services_init();
 }

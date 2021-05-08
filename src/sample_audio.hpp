@@ -2,7 +2,7 @@
 
 #include "sample_base.hpp"
 #include <ek/scenex/AudioManager.hpp>
-#include <ek/util/locator.hpp>
+#include <ek/util/ServiceLocator.hpp>
 #include <ek/scenex/2d/Display2D.hpp>
 #include <ek/scenex/2d/Transform2D.hpp>
 #include <ek/scenex/base/Node.hpp>
@@ -29,7 +29,7 @@ public:
     }
 
     static void startMusicTrack() {
-        auto& audio = resolve<AudioManager>();
+        auto& audio = Locator::ref<AudioManager>();
         const char* music = ((trackIndex & 1) == 0) ? "sfx/music1" : "sfx/music2";
         audio.play_music(music);
     }

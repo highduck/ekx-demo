@@ -84,11 +84,10 @@ DemoApp::DemoApp() :
 void DemoApp::initialize() {
     basic_application::initialize();
 
-    using ecs::the_world;
-    the_world.registerComponent<sim::motion_t>();
-    the_world.registerComponent<sim::attractor_t>();
-    the_world.registerComponent<CameraArcBall>();
-    the_world.registerComponent<test_rotation_comp>();
+    ECX_COMPONENT(sim::motion_t);
+    ECX_COMPONENT(sim::attractor_t);
+    ECX_COMPONENT(CameraArcBall);
+    ECX_COMPONENT(test_rotation_comp);
 
     auto& cam = Camera2D::Main.get<Camera2D>();
     cam.clearColorEnabled = true;
@@ -159,7 +158,7 @@ void DemoApp::onAppStart() {
     EK_DEBUG << "Start Demo: initSamples";
     initSamples();
 
-    auto& audio = resolve<AudioManager>();
+    auto& audio = Locator::ref<AudioManager>();
     audio.play_music("sfx/music1");
 }
 
