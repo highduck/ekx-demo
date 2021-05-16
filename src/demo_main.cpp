@@ -19,7 +19,7 @@
 #include <ui/minimal.hpp>
 #include <ek/scenex/2d/Camera2D.hpp>
 #include <ek/scenex/2d/Display2D.hpp>
-#include <ek/util/logger.hpp>
+#include <ek/debug.hpp>
 #include <ek/scenex/AudioManager.hpp>
 
 #ifdef EK_UITEST
