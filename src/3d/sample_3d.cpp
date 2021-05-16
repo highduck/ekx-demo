@@ -40,7 +40,7 @@ void create_test_material(const std::string& name, argb32_t color, float roughne
 void create_lights() {
     auto e_dir_light = ecs::create<Node, Transform3D, Light3D, MeshRenderer>();
     setName(e_dir_light, "light_dir");
-    e_dir_light.get<Light3D>().type = light_3d_type::directional;
+    e_dir_light.get<Light3D>().type = Light3DType::Directional;
     e_dir_light.get<MeshRenderer>().mesh = "sphere";
     e_dir_light.get<MeshRenderer>().material = "light_material";
     e_dir_light.get<MeshRenderer>().castShadows = false;

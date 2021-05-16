@@ -39,7 +39,7 @@ inline static argb32_t colorf(float index) {
 }
 
 inline static float time() {
-    return static_cast<float>(ek::clock::now());
+    return static_cast<float>(ek::Clock::now());
 }
 
 inline static float mid(float x, float y, float z = 0.0f) {
@@ -58,11 +58,11 @@ inline static int sgn(float a) {
 }
 
 inline static float sinu(float unit) {
-    return -sinf(unit * math::pi2);
+    return -sinf(unit * math::fPI2);
 }
 
 inline static float cosu(float unit) {
-    return cosf(unit * math::pi2);
+    return cosf(unit * math::fPI2);
 }
 
 }

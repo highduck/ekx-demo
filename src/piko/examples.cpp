@@ -143,7 +143,7 @@ void diamonds::draw() {
 diamonds::diamonds() {
 //        recorder{"result", {0, 0, 512 * 2 / 2, 512 * 2 / 2}}
     rt = graphics::createRenderTarget(128, 128);
-    ll = Locator::ref<basic_application>().onPreRender.add([this] { prerender(); });
+    Locator::ref<basic_application>().dispatcher.listeners.push_back(this);
 
     sg_pass_desc passDesc{};
     passDesc.color_attachments[0].image = rt->image;
@@ -154,10 +154,10 @@ diamonds::diamonds() {
 diamonds::~diamonds() {
     sg_destroy_pass(pass);
     delete rt;
-    Locator::ref<basic_application>().onPreRender.remove(ll);
+    Locator::ref<basic_application>().dispatcher.listeners.remove(this);
 }
 
-void diamonds::prerender() {
+void diamonds::onPreRender() {
     time += TimeLayer::Root->dt;
     float t = time;
     int w = rt->desc.width;
