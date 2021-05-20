@@ -14,7 +14,7 @@ struct AttractorsState {
 };
 
 void update_motion_system(float dt) {
-    SmallArray<AttractorsState, 10> attractors;
+    FixedArray<AttractorsState, 10> attractors;
     const auto& w = ecs::the_world;
     for (auto e_ : ecs::view<attractor_t>()) {
         const auto e = e_.index;
