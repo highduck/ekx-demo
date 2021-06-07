@@ -4,7 +4,7 @@
 #include <ek/scenex/text/TextEngine.hpp>
 #include <ek/scenex/text/TrueTypeFont.hpp>
 #include <ek/scenex/app/basic_application.hpp>
-#include <ek/scenex/asset2/asset_manager.hpp>
+#include <ek/scenex/asset2/Asset.hpp>
 #include <ek/scenex/SceneFactory.hpp>
 #include <ek/scenex/base/Node.hpp>
 #include <ek/scenex/2d/LayoutRect.hpp>
@@ -107,7 +107,7 @@ SampleText::SampleText() :
 }
 
 void SampleText::prepareInternalResources() {
-    asset_manager_t* am = Locator::ref<basic_application>().asset_manager_;
+    AssetManager* am = Locator::ref<basic_application>().asset_manager_;
     auto* ttfFont = new TrueTypeFont(am->scale_factor, 48, "default_glyph_cache");
     ttfFont->loadDeviceFont("Arial Unicode MS");
     auto* font = new Font(ttfFont);
