@@ -11,7 +11,7 @@
 
 #include <ek/math/rand.hpp>
 #include <ek/scenex/systems/main_flow.hpp>
-#include <ek/scenex/asset2/builtin_assets.hpp>
+#include <ek/scenex/asset2/Asset.hpp>
 #include <ek/scenex/SceneFactory.hpp>
 #include <ek/scenex/base/Interactive.hpp>
 #include <ek/scenex/base/Node.hpp>
