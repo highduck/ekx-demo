@@ -23,7 +23,7 @@ public:
             startMusicTrack();
         });
         setPosition(btn, pos);
-        get_drawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+        getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
         append(container, btn);
         pos.y += spaceY;
     }

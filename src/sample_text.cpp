@@ -82,26 +82,26 @@ SampleText::SampleText() :
 
     auto bmText = createText("bmfont", "TickingTimebombBB",
                              "88:88:88\n-=98");
-    get_drawable<Text2D>(bmText).format.setAlignment(Alignment::Center);
-    get_drawable<Text2D>(bmText).format.size = 24;
-    get_drawable<Text2D>(bmText).borderColor = 0xFF000000_argb;
-    get_drawable<Text2D>(bmText).rect.set(0, 0, 360 - 40, 100);
+    getDrawable<Text2D>(bmText).format.setAlignment(Alignment::Center);
+    getDrawable<Text2D>(bmText).format.size = 24;
+    getDrawable<Text2D>(bmText).borderColor = 0xFF000000_argb;
+    getDrawable<Text2D>(bmText).rect.set(0, 0, 360 - 40, 100);
 
     setPosition(bmText, {20.0f, 20.0f});
     append(container, bmText);
 
     auto ttfText = createText("TTF-Cousine-Regular", "Cousine-Regular",
                               u8"£ü÷\n< Приветики >\n你好\nनमस्कार\nこんにちは");
-    get_drawable<Text2D>(ttfText).format.setAlignment(Alignment::Right | Alignment::Top);
-    get_drawable<Text2D>(ttfText).format.leading = -8;
-    get_drawable<Text2D>(ttfText).format.setTextColor(0xFF00FF00_argb);
+    getDrawable<Text2D>(ttfText).format.setAlignment(Alignment::Right | Alignment::Top);
+    getDrawable<Text2D>(ttfText).format.leading = -8;
+    getDrawable<Text2D>(ttfText).format.setTextColor(0xFF00FF00_argb);
     setPosition(ttfText, {360 - 20, 120.0f});
     append(container, ttfText);
 
     auto ttfText2 = createText("TTF-Comfortaa-Regular", "Comfortaa-Regular",
                                u8"I don't know KERN TABLE.\nНо кириллица тоже есть");
-    get_drawable<Text2D>(ttfText2).format.setTextColor(0xFFFF00FF_argb);
-    get_drawable<Text2D>(ttfText2).format.size = 24;
+    getDrawable<Text2D>(ttfText2).format.setTextColor(0xFFFF00FF_argb);
+    getDrawable<Text2D>(ttfText2).format.size = 24;
     setPosition(ttfText2, {20.0f, 340.0f});
     append(container, ttfText2);
 }

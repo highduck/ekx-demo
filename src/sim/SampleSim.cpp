@@ -104,7 +104,7 @@ SampleSim::SampleSim() {
         }
     });
     btn.get<Transform2D>().setPosition(360.0f / 2.0f, 60.0f);
-    get_drawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+    getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
     append(container, btn);
 
     btn = createButton("RESET", [this] {
@@ -114,7 +114,7 @@ SampleSim::SampleSim() {
         updateCountLabel();
     });
     btn.get<Transform2D>().setPosition(360.0f / 2.0f, 120.0f);
-    get_drawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+    getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
     append(container, btn);
 }
 
