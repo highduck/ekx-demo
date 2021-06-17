@@ -59,7 +59,7 @@ void setCurrentSample(int index) {
         currentSampleIndex = samplesCount - 1;
     }
     currentSample.reset(sampleFactory[currentSampleIndex]());
-    get_drawable<Text2D>(tfSampleTitle).text = currentSample->title;
+    getDrawable<Text2D>(tfSampleTitle).text = currentSample->title;
 }
 
 void scrollSample(int delta) {
