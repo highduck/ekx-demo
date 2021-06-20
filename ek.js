@@ -1,5 +1,4 @@
 const path = require("path");
-const fs = require("fs");
 
 module.exports = function (project) {
     project.addModule({
@@ -54,7 +53,7 @@ module.exports = function (project) {
     };
 
     project.html = {
-        google_analytics_property_id: "UA-3755607-9",
+        firebaseAutoSetup: true,
         background_color: "black",
         text_color: "#73b3cb",
         og: {
