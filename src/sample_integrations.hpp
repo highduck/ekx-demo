@@ -8,7 +8,7 @@ namespace ek {
 class SampleIntegrations: public SampleBase {
 public:
     SampleIntegrations();
-
+    ~SampleIntegrations() override = default;
 
     static void initializePlugins();
 };

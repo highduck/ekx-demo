@@ -7,6 +7,7 @@ namespace ek {
 class SamplePiko : public SampleBase {
 public:
     SamplePiko();
+    ~SamplePiko() override = default;
 
     void draw() override;
 

@@ -8,6 +8,7 @@ namespace ek {
 class SampleText : public SampleBase {
 public:
     SampleText();
+    ~SampleText() override = default;
 
     void update(float dt) override;
 

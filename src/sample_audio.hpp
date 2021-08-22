@@ -13,6 +13,8 @@ namespace ek {
 class SampleAudio : public SampleBase {
     inline static uint32_t trackIndex = 0;
 public:
+    ~SampleAudio() override = default;
+
     SampleAudio() : SampleBase() {
         title = "AUDIO";
 

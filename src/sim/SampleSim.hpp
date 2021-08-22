@@ -12,6 +12,7 @@ class SampleSim : public SampleBase {
     void updateCountLabel() const;
 public:
     SampleSim();
+    ~SampleSim() override = default;
 
     void draw() override;
 

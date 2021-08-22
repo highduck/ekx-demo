@@ -7,6 +7,7 @@ namespace ek {
 class SampleFlash : public SampleBase {
 public:
     explicit SampleFlash(const char* scene);
+    ~SampleFlash() override = default;
 };
 
 }
