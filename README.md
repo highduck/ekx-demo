@@ -1,7 +1,16 @@
-# ekx demo
+# EKX Demo
 
 [![Build Android](https://github.com/highduck/ekx-demo/actions/workflows/build.yml/badge.svg)](https://github.com/highduck/ekx-demo/actions/workflows/build.yml)
 
+### Production
+- [Live Demo](https://play-ilj.web.app/)
+- [Google Play](https://play.google.com/store/apps/details?id=ilj.play.demo)
+- **AppStore** (To publish)
+
+### Testing
+- [Google Play: Internal Testing](https://play.google.com/apps/internaltest/4697583231840009112)
+
+## How to build
 
 ekx demo project
 

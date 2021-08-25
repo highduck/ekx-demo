@@ -2,7 +2,7 @@
 
 namespace AppVersion {
 
-const char* Name = "1.1.24";
-const char* Code = "46";
+const char* Name = "1.1.35";
+const char* Code = "57";
 
 }
