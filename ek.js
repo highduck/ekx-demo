@@ -3,8 +3,9 @@ const path = require("path");
 module.exports = function (project) {
     project.addModule({
         name: "demo",
-        cpp: [path.join(__dirname, "src")],
-        assets: [path.join(__dirname, "export/contents")]
+        path: __dirname,
+        cpp: ["src"],
+        assets: ["export/contents"]
     });
 
     const shortname = "ekx-demo";
@@ -15,8 +16,8 @@ module.exports = function (project) {
     project.binary_name = shortname;
     project.pwa_url = "";
     project.cmake_target = shortname;
-    project.version_name = "1.1.35";
-    project.version_code = "57";
+    project.version_name = "1.1.37";
+    project.version_code = "60";
     project.orientation = "portrait";
     project.assets = {
         output: "export/contents/assets"
