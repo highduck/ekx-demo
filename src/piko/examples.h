@@ -28,7 +28,7 @@ public:
     void draw() override;
 
     graphics::Texture* rt = nullptr;
-    sg_pass pass;
+    sg_pass pass{};
 //    screen_recorder recorder;
     float time = 0.0f;
     bool first_frame = true;

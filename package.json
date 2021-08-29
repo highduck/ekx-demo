@@ -10,8 +10,8 @@
     "clean": "rimraf ./build ./export ./.firebase"
   },
   "dependencies": {
-    "@ekx/appbox": "0.0.4",
-    "@ekx/cli": "0.1.7",
+    "@ekx/appbox": "0.0.5",
+    "@ekx/cli": "0.1.8",
     "npm-cmake": "^0.1.0"
   },
   "devDependencies": {
