@@ -88,7 +88,7 @@ SampleIntegrations::SampleIntegrations() :
 
 void SampleIntegrations::initializePlugins() {
     const char* billingKey = "";
-    admob::config_t adMobConfig;
+    admob::Config adMobConfig;
     Ads::Config adHelperConfig{};
 #if EK_ANDROID
     adMobConfig.banner = "ca-app-pub-3931267664278058/7752333837";

@@ -4,24 +4,15 @@ module.exports = function (project) {
     project.addModule({
         name: "demo",
         path: __dirname,
-        cpp: ["src"],
-        assets: ["export/contents"]
+        cpp: "src"
     });
 
-    const shortname = "ekx-demo";
-
-    project.name = shortname;
+    project.name = "ekx-demo";
     project.title = "ekx";
     project.desc = "Engine Demo";
-    project.binary_name = shortname;
-    project.pwa_url = "";
-    project.cmake_target = shortname;
-    project.version_name = "1.1.37";
-    project.version_code = "60";
+    project.version_name = "1.1.41";
+    project.version_code = "64";
     project.orientation = "portrait";
-    project.assets = {
-        output: "export/contents/assets"
-    };
 
     const secretPath = '../keys/demo';
 

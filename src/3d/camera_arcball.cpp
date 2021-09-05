@@ -46,10 +46,10 @@ void updateCameraArcBall(float dt) {
 
         auto dd = 0.0f;
         auto& input = Locator::ref<input_controller>();
-        if (input.is_key(app::key_code::W)) {
+        if (input.is_key(app::KeyCode::W)) {
             dd -= 10.0f * dt;
         }
-        if (input.is_key(app::key_code::S)) {
+        if (input.is_key(app::KeyCode::S)) {
             dd += 10.0f * dt;
         }
         arc_ball.distance = std::max(arc_ball.distance + dd, 0.0f);
