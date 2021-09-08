@@ -67,7 +67,7 @@ void scrollSample(int delta) {
 }
 
 void main() {
-    run_app<DemoApp>({"ekx", float2{360, 480}, true});
+    run_app<DemoApp>({"ekx", 360, 480, true});
 }
 
 }
