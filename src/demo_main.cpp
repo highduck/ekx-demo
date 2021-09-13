@@ -1,3 +1,5 @@
+#include <ek/firebase/Firebase.h>
+
 #include "demo_main.hpp"
 #include "sample_text.hpp"
 #include "sample_flash.hpp"
@@ -27,6 +29,7 @@
 #endif
 
 void ek::app::main() {
+    ek::analytics::init();
     run_app<DemoApp>({"ekx", 360, 480, true});
 }
 
