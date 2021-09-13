@@ -25,6 +25,11 @@
 #ifdef EK_UITEST
 #include "screenshots.hpp"
 #endif
+
+void ek::app::main() {
+    run_app<DemoApp>({"ekx", 360, 480, true});
+}
+
 namespace ek {
 
 std::vector<std::function<SampleBase*()>> sampleFactory;
@@ -64,10 +69,6 @@ void setCurrentSample(int index) {
 
 void scrollSample(int delta) {
     setCurrentSample(currentSampleIndex + delta);
-}
-
-void main() {
-    run_app<DemoApp>({"ekx", 360, 480, true});
 }
 
 }

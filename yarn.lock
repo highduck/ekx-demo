@@ -421,6 +421,11 @@ clone-response@1.0.2:
   dependencies:
     mimic-response "^1.0.0"
 
+cmake-build@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/cmake-build/-/cmake-build-0.0.3.tgz#dab8e066dbc9b070cb36ef9752159bf221fc9b3b"
+  integrity sha512-wx9SuGl4uoJkGiFFTskwgV8k96vlBEjq0yt4vyHrZUZxPvrdQK4TQOj90AxNWVHkmIxFBxcZbJJpYjNdHEyMwA==
+
 color-convert@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-2.0.1.tgz#72d3a68d598c9bdb3af2ad1e84f21d896abd4de3"
