@@ -126,7 +126,7 @@ void DemoApp::onRenderSceneBefore() {
 
 void DemoApp::onAppStart() {
 //    setup_game(w, game);
-    EK_DEBUG << "Start Demo: prepareInternalResources";
+    EK_DEBUG("Start Demo: prepareInternalResources");
     SampleText::prepareInternalResources();
 
     SampleBase::samplesContainer = createNode2D("sample");
@@ -159,7 +159,7 @@ void DemoApp::onAppStart() {
 
     append(root, controls);
 
-    EK_DEBUG << "Start Demo: initSamples";
+    EK_DEBUG("Start Demo: initSamples");
     initSamples();
 
     auto& audio = Locator::ref<AudioManager>();
