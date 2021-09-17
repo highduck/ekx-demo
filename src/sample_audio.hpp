@@ -28,6 +28,22 @@ public:
         getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
         append(container, btn);
         pos.y += spaceY;
+
+        btn = createButton("VIBRATE 10 MS", [] {
+            auph::vibrate(10);
+        });
+        setPosition(btn, pos);
+        getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+        append(container, btn);
+        pos.y += spaceY;
+
+        btn = createButton("VIBRATE 100 MS", [] {
+            auph::vibrate(100);
+        });
+        setPosition(btn, pos);
+        getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+        append(container, btn);
+        pos.y += spaceY;
     }
 
     static void startMusicTrack() {
