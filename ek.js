@@ -10,8 +10,8 @@ module.exports = function (project) {
     project.name = "ekx-demo";
     project.title = "ekx";
     project.desc = "Engine Demo";
-    project.version_name = "1.5.0";
-    project.version_code = "69";
+    project.version_name = "1.5.1";
+    project.version_code = "72";
     project.orientation = "portrait";
 
     const secretPath = '../keys/demo';
