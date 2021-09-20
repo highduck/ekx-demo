@@ -131,9 +131,6 @@ void Sample3D::draw() {
 
 Sample3D::Sample3D() {
     auto* rs3d = Locator::get<RenderSystem3D>();
-    if (!rs3d) {
-        rs3d = &Locator::create<RenderSystem3D>();
-    }
 
     title = "SCENE 3D";
     Camera2D::Main.get<Camera2D>().clearColorEnabled = false;

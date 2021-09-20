@@ -23,6 +23,7 @@
 #include <ek/scenex/2d/Display2D.hpp>
 #include <ek/debug.hpp>
 #include <ek/scenex/AudioManager.hpp>
+#include <ek/scenex/3d/Scene3D.h>
 
 #ifdef EK_UITEST
 #include "screenshots.hpp"
@@ -88,6 +89,8 @@ DemoApp::DemoApp() :
 void DemoApp::initialize() {
     basic_application::initialize();
 
+    initScene3D();
+
     ECX_COMPONENT(sim::motion_t);
     ECX_COMPONENT(sim::attractor_t);
     ECX_COMPONENT(CameraArcBall);
@@ -118,7 +121,13 @@ void DemoApp::onUpdateFrame(float dt) {
     }
 }
 
+void DemoApp::onPreRender() {
+    preRenderScene3D();
+}
+
 void DemoApp::onRenderSceneBefore() {
+    renderScene3D(display);
+
     if (started_ && currentSample) {
         currentSample->draw();
     }

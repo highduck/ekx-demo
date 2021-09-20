@@ -15,6 +15,8 @@ public:
 protected:
     void onUpdateFrame(float dt) override;
 
+    void onPreRender() override;
+
     void onRenderSceneBefore() override;
 
     void onAppStart() override;
