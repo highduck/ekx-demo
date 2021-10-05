@@ -1,8 +1,6 @@
+
 #pragma once
-
 namespace AppVersion {
-
-const char* Name = "1.5.1";
-const char* Code = "72";
-
+const char* Name = "1.5.4";
+const char* Code = "76";
 }
