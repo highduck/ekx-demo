@@ -30,25 +30,27 @@ module.exports = function (project) {
         appStoreCredentials: '../keys/_fastlane/appstore.json',
     };
 
-    project.web = {
-        firebaseToken: "../keys/_firebase/token.txt",
-        applications: [
-            {
-                platform: "play",
-                url: "https://play.google.com/store/apps/details?id=ilj.play.demo",
-                id: "ilj.play.demo"
-            }
-        ]
+    project.web.firebaseToken = "../keys/_firebase/token.txt";
+    project.web.applications = [{
+        platform: "play",
+        url: "https://play.google.com/store/apps/details?id=ilj.play.demo",
+        id: "ilj.play.demo"
+    }];
+    project.web.firebaseConfig = {
+        apiKey: "AIzaSyBPw5wA9U8CV6MN-65bBmxOsJOUzR_ZowM",
+        authDomain: "play-ilj.firebaseapp.com",
+        databaseURL: "https://play-ilj.firebaseio.com",
+        projectId: "play-ilj",
+        storageBucket: "play-ilj.appspot.com",
+        messagingSenderId: "300613663654",
+        appId: "1:300613663654:web:3e7a04085236af51a9ad67",
+        measurementId: "G-CFW5S2M6KZ"
     };
-
-    project.html = {
-        firebaseAutoSetup: true,
-        background_color: "black",
-        text_color: "#73b3cb",
-        og: {
-            url: "https://play-ilj.web.app",
-            image: "https://play-ilj.web.app/icons/icon192.png"
-        }
+    project.web.background_color = "black";
+    project.web.text_color = "#73b3cb";
+    project.web.og = {
+        url: "https://play-ilj.web.app",
+        image: "https://play-ilj.web.app/icons/icon192.png"
     };
 
     project.importModule("@ekx/appbox");

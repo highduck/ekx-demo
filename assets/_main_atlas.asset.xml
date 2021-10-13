@@ -4,4 +4,5 @@
     <resolution scale="2" max_width="2048" max_height="2048"/>
     <resolution scale="3" max_width="2048" max_height="2048"/>
     <resolution scale="4" max_width="2048" max_height="2048"/>
+    <webp lossless="true"/>
 </asset>

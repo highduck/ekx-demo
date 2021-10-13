@@ -7,4 +7,5 @@
     <image path="bottom.jpg"/>
     <image path="front.jpg"/>
     <image path="back.jpg"/>
+    <webp lossless="false"/>
 </asset>
