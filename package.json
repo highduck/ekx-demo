@@ -1,6 +1,6 @@
 {
   "name": "@ekx/demo",
-  "version": "1.5.11+84",
+  "version": "1.5.12+86",
   "private": true,
   "scripts": {
     "postinstall": "cmake-build",
