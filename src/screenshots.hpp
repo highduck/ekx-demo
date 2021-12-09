@@ -3,7 +3,7 @@
 #include <ek/app/app.hpp>
 #include <ek/util/ServiceLocator.hpp>
 #include <ek/scenex/app/uitest.hpp>
-#include <ek/Localization.hpp>
+#include <ek/scenex/Localization.hpp>
 #include <ek/assert.hpp>
 #include <ek/scenex/2d/Button.hpp>
 #include <ek/scenex/base/Interactive.hpp>

@@ -17,7 +17,7 @@ SampleIntegrations::SampleIntegrations() :
     // TODO: show all leaderboards, achievements, ads
 
     float spaceY = 60.0f;
-    float2 pos{360.0f / 2, 50.0f};
+    Vec2f pos{360.0f / 2, 50.0f};
     auto btn = createButton("POST SCORE", [] {
         static int bestScore = 1;
         leader_board_submit("CgkIpvfh798IEAIQAA", ++bestScore);

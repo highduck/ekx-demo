@@ -6,17 +6,17 @@
 #include <ek/scenex/InteractionSystem.hpp>
 #include <ek/util/ServiceLocator.hpp>
 #include <ek/scenex/app/input_controller.hpp>
-#include <ek/math/quaternion.hpp>
+#include <ek/math/Quaternion.hpp>
 
 namespace ek {
 
 void updateCameraArcBall(float dt) {
 
     const auto& im = Locator::ref<InteractionSystem>();
-    static float2 prev_pointer{};
+    static Vec2f prev_pointer{};
     static bool prev_down = false;
 
-    float2 delta{};
+    Vec2f delta{};
     if (im.pointerDown_ && !prev_down) {
         prev_down = true;
         prev_pointer = im.pointerScreenPosition_;
@@ -25,7 +25,7 @@ void updateCameraArcBall(float dt) {
         prev_down = false;
     }
     if (prev_down) {
-        float2 cur = im.pointerScreenPosition_;
+        Vec2f cur = im.pointerScreenPosition_;
         delta = cur - prev_pointer;
         prev_pointer = cur;
     }
@@ -38,7 +38,7 @@ void updateCameraArcBall(float dt) {
         auto r = cross(dir, camera_data.up);
         auto t = cross(r, dir);
         if (length(r) < 0.001f) {
-            t = cross(dir, float3{0, 1, 0});
+            t = cross(dir, Vec3f{0, 1, 0});
             r = -cross(t, dir);
         }
 

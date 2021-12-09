@@ -11,7 +11,7 @@
 #include "sim/Motion.hpp"
 #include "3d/camera_arcball.hpp"
 
-#include <ek/math/rand.hpp>
+#include <ek/math/Random.hpp>
 #include <ek/scenex/systems/main_flow.hpp>
 #include <ek/scenex/asset2/Asset.hpp>
 #include <ek/scenex/SceneFactory.hpp>
@@ -21,7 +21,7 @@
 #include <ui/minimal.hpp>
 #include <ek/scenex/2d/Camera2D.hpp>
 #include <ek/scenex/2d/Display2D.hpp>
-#include <ek/debug.hpp>
+#include <ek_log.h>
 #include <ek/scenex/AudioManager.hpp>
 #include <ek/scenex/3d/Scene3D.h>
 
@@ -36,7 +36,7 @@ void ek::app::main() {
 
 namespace ek {
 
-std::vector<std::function<SampleBase*()>> sampleFactory;
+Array<std::function<SampleBase*()>> sampleFactory;
 int currentSampleIndex = 0;
 std::unique_ptr<SampleBase> currentSample = nullptr;
 ecs::EntityApi tfSampleTitle;
@@ -98,7 +98,7 @@ void DemoApp::initialize() {
 
     auto& cam = Camera2D::Main.get<Camera2D>();
     cam.clearColorEnabled = true;
-    cam.clearColor = float4{0xFF666666_argb};
+    cam.clearColor = Vec4f{0xFF666666_argb};
 
     SampleIntegrations::initializePlugins();
 }
@@ -116,7 +116,7 @@ void DemoApp::onUpdateFrame(float dt) {
         auto fps = (int) fpsMeter.getAverageFPS();
         if (fps != prevFPS) {
             prevFPS = fps;
-            tfFPS.get<Display2D>().get<Text2D>().text = "FPS: " + std::to_string(fps);
+            tfFPS.get<Display2D>().get<Text2D>().text = String::format("FPS: %d", fps);
         }
     }
 }
@@ -153,7 +153,7 @@ void DemoApp::onAppStart() {
     {
         tfFPS = createNode2D("fps");
         addText(tfFPS, "");
-        tfFPS.get<Display2D>().get<Text2D>().format.alignment = float2::zero;
+        tfFPS.get<Display2D>().get<Text2D>().format.alignment = Vec2f::zero;
         tfFPS.assign<LayoutRect>()
                 .enableAlignX(0.0, 10)
                 .enableAlignY(0.0, 10);

@@ -1,9 +1,9 @@
 #include "examples.h"
 #include "piko.h"
 #include <ek/draw2d/drawer.hpp>
-#include <ek/math/rand.hpp>
+#include <ek/math/Random.hpp>
 #include <ek/timers.hpp>
-#include <ek/math/matrix_camera.hpp>
+#include <ek/math/MatrixCamera.hpp>
 #include <ek/scenex/app/basic_application.hpp>
 
 namespace ek::piko {
@@ -26,7 +26,7 @@ void book::draw() {
             float w = q / 2;
             for (float i = 0.0f; i <= 1.0f; i += 0.01f) {
                 int c = 6 + j % 2;
-                if (fabs(j * i) < math::epsilon<float>() || j > 15) {
+                if (fabs(j * i) < Math::epsilon<float>() || j > 15) {
                     c = 1;
                 }
                 if (sgn(x - 60.0f) == k) {
@@ -80,7 +80,7 @@ void dna::draw() {
         int y = i / 17;
         auto color = colorf(1 + i % 3);
         //circfill(x*8,y*8,5+sin(t()+i*.618)*2,1+i%3)
-        circle_f circ{
+        CircleF circ{
                 x * 8.0f,
                 y * 8.0f,
                 5.0f + sinu(t + i * 0.618f) * 2.0f
@@ -98,7 +98,7 @@ void dna::draw() {
                 float z = 4 + k * sinu(a);
                 float y = i / 150.0f - 0.5f;
                 if (fabs(z - j) < 0.3f) {
-                    circle_f circ{
+                    CircleF circ{
                             64 + cosu(a) * k * 50.0f / z,
                             64 + y * 999 / z,
                             11 / z
@@ -134,7 +134,7 @@ void diamonds::draw() {
     const float w = rt->desc.width;
     const float h = rt->desc.height;
 
-    draw2d::state.setTextureRegion(rt, rect_f::zero_one);
+    draw2d::state.setTextureRegion(rt, Rect2f::zero_one);
     draw2d::quad(0.0f, 0.0f, w, h);
 
 //    recorder.render();
@@ -165,7 +165,7 @@ void diamonds::onPreRender() {
 
     sg_pass_action clear{};
     if (first_frame) {
-        float4 clear_color{colorf(2)};
+        Vec4f clear_color{colorf(2)};
         clear.colors[0].action = SG_ACTION_CLEAR;
         clear.colors[0].value.r = clear_color.x;
         clear.colors[0].value.g = clear_color.y;
@@ -176,25 +176,25 @@ void diamonds::onPreRender() {
         clear.colors[0].action = SG_ACTION_DONTCARE;
     }
     sg_begin_pass(pass, clear);
-    draw2d::begin({0, 0, (float)w, (float)h}, matrix_2d{}, rt);
+    draw2d::begin({0, 0, (float)w, (float)h}, Matrix3x2f{}, rt);
     float sc = w / 128.0f;
-    float2 center{w * 0.5f, h * 0.5f};
+    Vec2f center{w * 0.5f, h * 0.5f};
     int e[] = {0, 3, 11, 5, 8, 14, 2, 9, 10, 4, 13, 7, 6};
     auto c = colorf(1);
     c.af(0.3f);
     for (int i = 0; i < 80; ++i) {
-        draw2d::line(float2{ek::random(0.0f, w), ek::random(0.0f, h)},
-                     float2{ek::random(0.0f, w), ek::random(0.0f, h)},
+        draw2d::line(Vec2f{ek::random(0.0f, w), ek::random(0.0f, h)},
+                     Vec2f{ek::random(0.0f, w), ek::random(0.0f, h)},
                      c, sc * 4.0f);
     }
 
     for (int n = 1; n <= 10; n += 3) {
         float a = n / 4.0f - t / 4.0f;
-        float2 p = center + sc * 42.0f * float2{cosu(a), sinu(a)};
+        Vec2f p = center + sc * 42.0f * Vec2f{cosu(a), sinu(a)};
         for (float j = -1.0f; j <= 1.0f; j += 0.02f) {
             int i = static_cast<int>(floorf(j + t * 3.0f));
-            draw2d::line(p + float2{0.0f, sc * 20.0f}, p + float2{j * sc * 20, 0}, colorf(e[n + i % 3]), sc * 1.0f);
-            draw2d::line(p + float2{j * sc * 20, 0}, p + float2{j * sc * 10, -sc * 10}, colorf(e[n + (i + 1) % 3]),
+            draw2d::line(p + Vec2f{0.0f, sc * 20.0f}, p + Vec2f{j * sc * 20, 0}, colorf(e[n + i % 3]), sc * 1.0f);
+            draw2d::line(p + Vec2f{j * sc * 20, 0}, p + Vec2f{j * sc * 10, -sc * 10}, colorf(e[n + (i + 1) % 3]),
                          sc * 1.0f);
         }
     }

@@ -10,6 +10,7 @@ module.exports = function (project) {
     project.name = "ekx-demo";
     project.title = "ekx";
     project.desc = "Engine Demo";
+    project.appIcon = "assets/res#icon";
 
     const secretPath = '../keys/demo';
 

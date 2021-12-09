@@ -15,7 +15,7 @@ public:
 
     virtual void update(float dt);
 
-    std::string title;
+    const char* title = nullptr;
     static ecs::EntityApi samplesContainer;
     ecs::EntityApi container;
 private:

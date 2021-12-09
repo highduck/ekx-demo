@@ -1,7 +1,7 @@
 #include "SampleSim.hpp"
 
 #include <ek/timers.hpp>
-#include <ek/math/rand.hpp>
+#include <ek/math/Random.hpp>
 #include "Motion.hpp"
 #include <ek/scenex/SceneFactory.hpp>
 #include <ek/scenex/2d/Transform2D.hpp>
@@ -27,8 +27,8 @@ void add_objects(ecs::EntityApi game, unsigned addCount) {
     for (unsigned i = 0; i < addCount; ++i) {
         auto q = createNode2D();
         q.get<Node>().setTouchable(false);
-        const float2 pos{random(0.0f, WIDTH),
-                         random(0.0f, HEIGHT)};
+        const Vec2f pos{random(0.0f, WIDTH),
+                        random(0.0f, HEIGHT)};
         q.get<Transform2D>().setPosition(pos);
 
         auto& mot = q.assign<motion_t>();
@@ -129,7 +129,7 @@ void SampleSim::update(float dt) {
 }
 
 void SampleSim::updateCountLabel() const {
-    countLabel.get<Display2D>().get<Text2D>().text = std::to_string(particlesCount);
+    countLabel.get<Display2D>().get<Text2D>().text = String::format("%d", particlesCount);
 }
 
 }

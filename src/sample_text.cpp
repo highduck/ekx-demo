@@ -54,7 +54,7 @@ ecs::EntityApi createText(const char* name, const char* font, const char* text) 
 }
 
 ecs::EntityApi createScreenZones() {
-    rect_f resolution{0, 0, 360, 480};
+    Rect2f resolution{0, 0, 360, 480};
     auto zones = createNode2D("zones");
     auto e = createNode2D("zone");
     auto* q = new Quad2D();

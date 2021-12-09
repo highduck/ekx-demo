@@ -1,11 +1,11 @@
 #pragma once
 
-#include <ek/math/vec.hpp>
+#include <ek/math/Vec.hpp>
 
 namespace ek {
 
 struct CameraArcBall {
-    float3 center{};
+    Vec3f center{};
     float distance = 200.0f;
 };
 

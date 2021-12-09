@@ -10,7 +10,7 @@ inline const float HEIGHT = 480;
 
 struct AttractorsState {
     attractor_t props;
-    float2 position;
+    Vec2f position;
 };
 
 void update_motion_system(float dt) {
@@ -27,7 +27,7 @@ void update_motion_system(float dt) {
     const auto* attrs = attractors.data();
 
     const auto dumpFactor = expf(-6.0f * dt);
-    const rect_f bounds{0.0f, 0.0f, WIDTH, HEIGHT};
+    const Rect2f bounds{0.0f, 0.0f, WIDTH, HEIGHT};
     for (auto e_ : ecs::view<motion_t>()) {
         auto e = e_.index;
         auto& mot = w.get<motion_t>(e);
@@ -41,7 +41,7 @@ void update_motion_system(float dt) {
             const auto attractor = attrs[i];
             const auto diff = attractor.position - p;
             const auto len = length(diff);
-            const float factor = 1.0f - math::clamp(len / attractor.props.radius);
+            const float factor = 1.0f - Math::clamp(len / attractor.props.radius);
             v += dt * attractor.props.force * factor * factor * diff * (1.0f / len);
         }
 

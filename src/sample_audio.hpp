@@ -19,7 +19,7 @@ public:
         title = "AUDIO";
 
         float spaceY = 60.0f;
-        float2 pos{360.0f / 2, 50.0f};
+        Vec2f pos{360.0f / 2, 50.0f};
         auto btn = createButton("NEXT TRACK", [] {
             ++trackIndex;
             startMusicTrack();

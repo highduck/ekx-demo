@@ -1,12 +1,12 @@
 #pragma once
 
 #include <ecxx/ecxx.hpp>
-#include <ek/math/vec.hpp>
+#include <ek/math/Vec.hpp>
 
 namespace ek::sim {
 
 struct motion_t {
-    float2 velocity;
+    Vec2f velocity;
 };
 
 struct attractor_t {
