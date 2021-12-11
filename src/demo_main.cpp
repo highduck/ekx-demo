@@ -21,7 +21,7 @@
 #include <ui/minimal.hpp>
 #include <ek/scenex/2d/Camera2D.hpp>
 #include <ek/scenex/2d/Display2D.hpp>
-#include <ek_log.h>
+#include <ek/log.h>
 #include <ek/scenex/AudioManager.hpp>
 #include <ek/scenex/3d/Scene3D.h>
 
@@ -29,9 +29,15 @@
 #include "screenshots.hpp"
 #endif
 
-void ek::app::main() {
+void ek_app_main() {
     ek::analytics::init();
-    run_app<DemoApp>({"ekx", 360, 480, true});
+    ek_app_config cfg = ek_app.config;
+    cfg.title = "ekx";
+    cfg.width = 360;
+    cfg.height = 480;
+    cfg.need_depth = true;
+
+    ek::run_app<DemoApp>(cfg);
 }
 
 namespace ek {
