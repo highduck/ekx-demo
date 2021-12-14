@@ -1,4 +1,4 @@
-#include <ek/firebase/Firebase.h>
+#include <ek/firebase.h>
 
 #include "demo_main.hpp"
 #include "sample_text.hpp"
@@ -30,14 +30,12 @@
 #endif
 
 void ek_app_main() {
-    ek::analytics::init();
-    ek_app_config cfg = ek_app.config;
-    cfg.title = "ekx";
-    cfg.width = 360;
-    cfg.height = 480;
-    cfg.need_depth = true;
-
-    ek::run_app<DemoApp>(cfg);
+    ek_firebase_init();
+    ek_app.config.title = "ekx";
+    ek_app.config.width = 360;
+    ek_app.config.height = 480;
+    ek_app.config.need_depth = true;
+    ek::run_app<DemoApp>();
 }
 
 namespace ek {

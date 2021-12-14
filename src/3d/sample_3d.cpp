@@ -5,6 +5,7 @@
 #include <ek/timers.hpp>
 #include <ek/scenex/3d/RenderSystem3D.hpp>
 #include <ek/scenex/base/Node.hpp>
+#include <ek/scenex/base/TimeLayer.hpp>
 #include <ek/scenex/SceneFactory.hpp>
 #include <ek/scenex/3d/Light3D.hpp>
 #include <ek/scenex/3d/StaticMesh.hpp>
