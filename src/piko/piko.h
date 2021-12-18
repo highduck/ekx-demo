@@ -1,7 +1,7 @@
 #pragma once
 
 #include <ek/math/Color32.hpp>
-#include <ek/timers.hpp>
+#include <ek/time.h>
 #include <ek/util/ServiceLocator.hpp>
 #include <algorithm>
 

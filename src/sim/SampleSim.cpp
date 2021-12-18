@@ -1,6 +1,6 @@
 #include "SampleSim.hpp"
 
-#include <ek/timers.hpp>
+#include <ek/time.h>
 #include <ek/math/Random.hpp>
 #include "Motion.hpp"
 #include <ek/scenex/SceneFactory.hpp>

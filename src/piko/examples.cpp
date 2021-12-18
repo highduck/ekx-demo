@@ -2,7 +2,7 @@
 #include "piko.h"
 #include <ek/draw2d/drawer.hpp>
 #include <ek/math/Random.hpp>
-#include <ek/timers.hpp>
+#include <ek/time.h>
 #include <ek/math/MatrixCamera.hpp>
 #include <ek/scenex/app/basic_application.hpp>
 
@@ -131,18 +131,15 @@ void dna::draw() {
 //flip()goto _
 
 void diamonds::draw() {
-    const float w = rt->desc.width;
-    const float h = rt->desc.height;
-
+    auto info = sg_query_image_info(rt->image);
     draw2d::state.setTextureRegion(rt, Rect2f::zero_one);
-    draw2d::quad(0.0f, 0.0f, w, h);
-
+    draw2d::quad(0.0f, 0.0f, (float)info.width, (float)info.height);
 //    recorder.render();
 }
 
 diamonds::diamonds() {
 //        recorder{"result", {0, 0, 512 * 2 / 2, 512 * 2 / 2}}
-    rt = graphics::createRenderTarget(128, 128);
+    rt = graphics::Texture::renderTarget(128, 128);
     Locator::ref<basic_application>().dispatcher.listeners.push_back(this);
 
     sg_pass_desc passDesc{};
@@ -160,8 +157,9 @@ diamonds::~diamonds() {
 void diamonds::onPreRender() {
     time += TimeLayer::Root->dt;
     float t = time;
-    int w = rt->desc.width;
-    int h = rt->desc.height;
+    auto info = sg_query_image_info(rt->image);
+    int w = info.width;
+    int h = info.height;
 
     sg_pass_action clear{};
     if (first_frame) {

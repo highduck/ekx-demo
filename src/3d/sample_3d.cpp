@@ -2,7 +2,7 @@
 #include <ek/scenex/3d/Transform3D.hpp>
 #include <ek/scenex/3d/Camera3D.hpp>
 #include <ek/scenex/3d/Transform3D.hpp>
-#include <ek/timers.hpp>
+#include <ek/time.h>
 #include <ek/scenex/3d/RenderSystem3D.hpp>
 #include <ek/scenex/base/Node.hpp>
 #include <ek/scenex/base/TimeLayer.hpp>
@@ -183,7 +183,7 @@ Sample3D::Sample3D() {
         es.get<MeshRenderer>().mesh = "sphere";
 
         char mat_id[64];
-        stbsp_snprintf(mat_id, 64, "rr%d", i);
+        ek_snprintf(mat_id, 64, "rr%d", i);
         auto r = static_cast<float>(i) / 20.0f;
         create_test_material(mat_id,
                              0xFF0000_rgb,

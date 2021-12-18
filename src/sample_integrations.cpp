@@ -1,9 +1,9 @@
 #include <ui/minimal.hpp>
-#include <GameServices.hpp>
+#include <ek/game_services.h>
 #include <ek/scenex/2d/Display2D.hpp>
 #include <ek/scenex/2d/Transform2D.hpp>
 #include <ek/scenex/base/Node.hpp>
-#include <admob.hpp>
+#include <ek/admob.h>
 #include <appbox/Ads.hpp>
 #include "sample_integrations.hpp"
 #include <ek/util/ServiceLocator.hpp>
@@ -20,7 +20,7 @@ SampleIntegrations::SampleIntegrations() :
     Vec2f pos{360.0f / 2, 50.0f};
     auto btn = createButton("POST SCORE", [] {
         static int bestScore = 1;
-        leader_board_submit("CgkIpvfh798IEAIQAA", ++bestScore);
+        ek_leaderboard_submit("CgkIpvfh798IEAIQAA", ++bestScore);
     });
     setPosition(btn, pos);
     getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
@@ -29,7 +29,7 @@ SampleIntegrations::SampleIntegrations() :
 
 
     btn = createButton("LEADERBOARD", [] {
-        leader_board_show("CgkIpvfh798IEAIQAA");
+        ek_leaderboard_show("CgkIpvfh798IEAIQAA");
     });
     setPosition(btn, pos);
     getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
@@ -37,7 +37,7 @@ SampleIntegrations::SampleIntegrations() :
     pos.y += spaceY;
 
     btn = createButton("ACHIEVEMENTS", [] {
-        achievement_show();
+        ek_achievement_show();
     });
     setPosition(btn, pos);
     getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
@@ -88,7 +88,9 @@ SampleIntegrations::SampleIntegrations() :
 
 void SampleIntegrations::initializePlugins() {
     const char* billingKey = "";
-    admob::Config adMobConfig;
+    ek_admob_config adMobConfig{};
+    adMobConfig.child_directed = EK_ADMOB_CHILD_DIRECTED_UNSPECIFIED;
+
     Ads::Config adHelperConfig{};
 #if EK_ANDROID
     adMobConfig.banner = "ca-app-pub-3931267664278058/7752333837";
@@ -103,7 +105,7 @@ void SampleIntegrations::initializePlugins() {
 #endif
 
     billing::initialize(billingKey);
-    admob::initialize(adMobConfig);
+    ek_admob_init(adMobConfig);
 
     adHelperConfig.key0 = "_ads_removed_purchase_cache";
     adHelperConfig.val0 = 12345;
@@ -112,7 +114,7 @@ void SampleIntegrations::initializePlugins() {
 
     Locator::create<Ads>(adHelperConfig);
 
-    game_services_init();
+    ek_game_services_init();
 }
 
 }
