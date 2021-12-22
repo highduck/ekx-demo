@@ -139,7 +139,7 @@ void diamonds::draw() {
 
 diamonds::diamonds() {
 //        recorder{"result", {0, 0, 512 * 2 / 2, 512 * 2 / 2}}
-    rt = graphics::Texture::renderTarget(128, 128);
+    rt = Texture::renderTarget(128, 128);
     Locator::ref<basic_application>().dispatcher.listeners.push_back(this);
 
     sg_pass_desc passDesc{};
