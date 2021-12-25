@@ -164,7 +164,7 @@ Sample3D::Sample3D() {
     auto& camera_transform = main_camera.get<Transform3D>();
     camera_transform.position = {-100.0f, -100.0f, 100.0f};
     append(main_scene_3d, main_camera);
-    main_camera.get<Camera3D>().cubeMap = ek_texture_reg_named("skybox");
+    main_camera.get<Camera3D>().cubeMap = ek_image_reg_named("skybox");
     main_camera.get<Camera3D>().clearColorEnabled = false;
 
     create_lights();

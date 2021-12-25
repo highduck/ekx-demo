@@ -10,7 +10,7 @@ namespace ek::piko {
 
 void book::draw() {
 
-    draw2d::state.setEmptyTexture();
+    draw2d::state.set_empty_image();
     draw2d::quad(0, 0, 128, 128, 0x0_rgb);
 
     draw2d::state
@@ -72,7 +72,7 @@ void dna::draw() {
     goto _
      */
 
-    draw2d::state.setEmptyTexture();
+    draw2d::state.set_empty_image();
     draw2d::quad(0, 0, 128, 128, 0x0_rgb);
 
     for (int i = 0; i <= 288; ++i) {
@@ -132,7 +132,7 @@ void dna::draw() {
 
 void diamonds::draw() {
     auto info = sg_query_image_info(rt);
-    draw2d::state.setTextureRegion(rt, Rect2f::zero_one);
+    draw2d::state.set_image_region(rt, Rect2f::zero_one);
     draw2d::quad(0.0f, 0.0f, (float)info.width, (float)info.height);
 //    recorder.render();
 }
