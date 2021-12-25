@@ -27,7 +27,7 @@ public:
 
     void draw() override;
 
-    Texture* rt = nullptr;
+    sg_image rt{};
     sg_pass pass{};
 //    screen_recorder recorder;
     float time = 0.0f;

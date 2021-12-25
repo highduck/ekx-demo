@@ -131,7 +131,7 @@ void dna::draw() {
 //flip()goto _
 
 void diamonds::draw() {
-    auto info = sg_query_image_info(rt->image);
+    auto info = sg_query_image_info(rt);
     draw2d::state.setTextureRegion(rt, Rect2f::zero_one);
     draw2d::quad(0.0f, 0.0f, (float)info.width, (float)info.height);
 //    recorder.render();
@@ -139,25 +139,25 @@ void diamonds::draw() {
 
 diamonds::diamonds() {
 //        recorder{"result", {0, 0, 512 * 2 / 2, 512 * 2 / 2}}
-    rt = Texture::renderTarget(128, 128);
+    rt = ek_gfx_make_render_target(128, 128, nullptr);
     Locator::ref<basic_application>().dispatcher.listeners.push_back(this);
 
     sg_pass_desc passDesc{};
-    passDesc.color_attachments[0].image = rt->image;
+    passDesc.color_attachments[0].image = rt;
     passDesc.label = "diamonds-rt-pass";
     pass = sg_make_pass(passDesc);
 }
 
 diamonds::~diamonds() {
     sg_destroy_pass(pass);
-    delete rt;
+    sg_destroy_image(rt);
     Locator::ref<basic_application>().dispatcher.listeners.remove(this);
 }
 
 void diamonds::onPreRender() {
     time += TimeLayer::Root->dt;
     float t = time;
-    auto info = sg_query_image_info(rt->image);
+    auto info = sg_query_image_info(rt);
     int w = info.width;
     int h = info.height;
 
