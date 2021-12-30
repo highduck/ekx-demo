@@ -1,7 +1,7 @@
 #pragma once
 
 #include <ek/scenex/base/Script.hpp>
-#include <ek/graphics/graphics.hpp>
+#include <ek/gfx.h>
 #include <ek/util/Signal.hpp>
 #include <ek/scenex/app/GameAppListener.hpp>
 
