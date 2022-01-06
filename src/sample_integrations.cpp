@@ -17,13 +17,13 @@ SampleIntegrations::SampleIntegrations() :
     // TODO: show all leaderboards, achievements, ads
 
     float spaceY = 60.0f;
-    Vec2f pos{360.0f / 2, 50.0f};
+    vec2_t pos = vec2(360.0f / 2, 50.0f);
     auto btn = createButton("POST SCORE", [] {
         static int bestScore = 1;
         ek_leaderboard_submit("CgkIpvfh798IEAIQAA", ++bestScore);
     });
     setPosition(btn, pos);
-    getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -32,7 +32,7 @@ SampleIntegrations::SampleIntegrations() :
         ek_leaderboard_show("CgkIpvfh798IEAIQAA");
     });
     setPosition(btn, pos);
-    getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -40,7 +40,7 @@ SampleIntegrations::SampleIntegrations() :
         ek_achievement_show();
     });
     setPosition(btn, pos);
-    getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -51,7 +51,7 @@ SampleIntegrations::SampleIntegrations() :
         });
     });
     setPosition(btn, pos);
-    getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -62,7 +62,7 @@ SampleIntegrations::SampleIntegrations() :
         });
     });
     setPosition(btn, pos);
-    getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -70,7 +70,7 @@ SampleIntegrations::SampleIntegrations() :
         Locator::ref<Ads>().purchaseRemoveAds();
     });
     setPosition(btn, pos);
-    getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -81,7 +81,7 @@ SampleIntegrations::SampleIntegrations() :
     });
 
     setPosition(btn, pos);
-    getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 }

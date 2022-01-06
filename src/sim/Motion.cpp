@@ -10,7 +10,7 @@ inline const float HEIGHT = 480;
 
 struct AttractorsState {
     attractor_t props;
-    Vec2f position;
+    vec2_t position;
 };
 
 void update_motion_system(float dt) {
@@ -27,7 +27,7 @@ void update_motion_system(float dt) {
     const auto* attrs = attractors.data();
 
     const auto dumpFactor = expf(-6.0f * dt);
-    const Rect2f bounds{0.0f, 0.0f, WIDTH, HEIGHT};
+    const brect_t bounds = brect_from_rect(rect_wh(WIDTH, HEIGHT));
     for (auto e_ : ecs::view<motion_t>()) {
         auto e = e_.index;
         auto& mot = w.get<motion_t>(e);
@@ -40,26 +40,26 @@ void update_motion_system(float dt) {
         for (unsigned i = 0; i < sz; ++i) {
             const auto attractor = attrs[i];
             const auto diff = attractor.position - p;
-            const auto len = length(diff);
-            const float factor = 1.0f - Math::clamp(len / attractor.props.radius);
-            v += dt * attractor.props.force * factor * factor * diff * (1.0f / len);
+            const auto len = vec2_length(diff);
+            const float factor = 1.0f - clamp_f32(len / attractor.props.radius, 0.0f, 1.0f);
+            v += dt * attractor.props.force * factor * factor * diff / len;
         }
 
         p += dt * mot.velocity;
 
-        if (p.x < bounds.x) {
+        if (p.x < bounds.x0) {
             v.x = -v.x;
-            p.x = bounds.x;
-        } else if (p.x > bounds.right()) {
+            p.x = bounds.x0;
+        } else if (p.x > bounds.x1) {
             v.x = -v.x;
-            p.x = bounds.right();
+            p.x = bounds.x1;
         }
-        if (p.y < bounds.y) {
+        if (p.y < bounds.y0) {
             v.y = -v.y;
-            p.y = bounds.y;
-        } else if (p.y > bounds.bottom()) {
+            p.y = bounds.y0;
+        } else if (p.y > bounds.y1) {
             v.y = -v.y;
-            p.y = bounds.bottom();
+            p.y = bounds.y1;
         }
 
         mot.velocity = v * dumpFactor;

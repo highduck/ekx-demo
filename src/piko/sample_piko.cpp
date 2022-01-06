@@ -1,7 +1,6 @@
 #include "sample_piko.hpp"
 
 #include "examples.h"
-#include <ek/scenex/app/basic_application.hpp>
 #include <ek/scenex/base/Node.hpp>
 #include <ek/scenex/2d/Transform2D.hpp>
 #include <ek/scenex/base/Script.hpp>
@@ -19,7 +18,7 @@ void create(ecs::EntityApi container) {
     //ecs::get<transform_2d>(e).scale = {2.0f, 2.0f};
     e.get<Transform2D>().setPosition(20.0f, 20.0f);
     // TODO: fix scissors stats
-    e.assign<Bounds2D>(Rect2f{0.0f, 0.0f, 128.0f, 128.0f}).scissors = true;
+    e.assign<Bounds2D>(rect_wh(128, 128)).scissors = true;
     append(container, e);
 
     e = createNode2D("dna");
@@ -27,13 +26,13 @@ void create(ecs::EntityApi container) {
 //    ecs::get<transform_2d>(e).scale = {2.0f, 2.0f};
     e.get<Transform2D>().setPosition(20.0f, 20.0f + 128.0f + 10.0f);
     // TODO: fix scissors stats
-    e.assign<Bounds2D>(Rect2f{0.0f, 0.0f, 128.0f, 128.0f}).scissors = true;
+    e.assign<Bounds2D>(rect_wh(128, 128)).scissors = true;
     append(container, e);
 
     e = createNode2D("diamonds");
     assignScript<diamonds>(e);
     e.get<Transform2D>().setPosition(20.0f + 128.0f + 10.0f, 20.0f);
-    e.assign<Bounds2D>(Rect2f{0.0f, 0.0f, 128.0f, 128.0f}).scissors = true;;
+    e.assign<Bounds2D>(rect_wh(128, 128)).scissors = true;;
     append(container, e);
 }
 

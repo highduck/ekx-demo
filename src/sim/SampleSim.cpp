@@ -27,15 +27,15 @@ void add_objects(ecs::EntityApi game, unsigned addCount) {
     for (unsigned i = 0; i < addCount; ++i) {
         auto q = createNode2D();
         q.get<Node>().setTouchable(false);
-        const Vec2f pos{random(0.0f, WIDTH),
-                        random(0.0f, HEIGHT)};
+        const vec2_t pos = vec2(random(0.0f, WIDTH),
+                        random(0.0f, HEIGHT));
         q.get<Transform2D>().setPosition(pos);
 
         auto& mot = q.assign<motion_t>();
-        mot.velocity = {random(-50.0f, 50.0f), random(-50.0f, 50.0f)};
+        mot.velocity = vec2(random(-50.0f, 50.0f), random(-50.0f, 50.0f));
 
         auto* quad = new Quad2D();
-        quad->rect = {-0.25f, -0.25f, 0.5f, 0.5f};
+        quad->rect = rect(-0.25f, -0.25f, 0.5f, 0.5f);
         quad->setColor(0xFFFFFF_rgb);
         q.assign<Display2D>(quad);
 
@@ -104,7 +104,7 @@ SampleSim::SampleSim() {
         }
     });
     btn.get<Transform2D>().setPosition(360.0f / 2.0f, 60.0f);
-    getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
 
     btn = createButton("RESET", [this] {
@@ -114,7 +114,7 @@ SampleSim::SampleSim() {
         updateCountLabel();
     });
     btn.get<Transform2D>().setPosition(360.0f / 2.0f, 120.0f);
-    getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
 }
 

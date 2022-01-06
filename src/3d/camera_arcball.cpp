@@ -13,10 +13,10 @@ namespace ek {
 void updateCameraArcBall(float dt) {
 
     const auto& im = Locator::ref<InteractionSystem>();
-    static Vec2f prev_pointer{};
+    static vec2_t prev_pointer = {};
     static bool prev_down = false;
 
-    Vec2f delta{};
+    vec2_t delta = {};
     if (im.pointerDown_ && !prev_down) {
         prev_down = true;
         prev_pointer = im.pointerScreenPosition_;
@@ -25,7 +25,7 @@ void updateCameraArcBall(float dt) {
         prev_down = false;
     }
     if (prev_down) {
-        Vec2f cur = im.pointerScreenPosition_;
+        vec2_t cur = im.pointerScreenPosition_;
         delta = cur - prev_pointer;
         prev_pointer = cur;
     }
@@ -34,15 +34,16 @@ void updateCameraArcBall(float dt) {
         auto& camera_data = e.get<Camera3D>();
         auto& camera_transform = e.get<Transform3D>();
 
-        auto dir = normalize(arc_ball.center - camera_transform.position);
-        auto r = cross(dir, camera_data.up);
-        auto t = cross(r, dir);
-        if (length(r) < 0.001f) {
-            t = cross(dir, Vec3f{0, 1, 0});
-            r = -cross(t, dir);
+        auto dir = vec3_normalize(vec3_sub(arc_ball.center, camera_transform.position));
+        auto r = vec3_cross(dir, camera_data.up);
+        auto t = vec3_cross(r, dir);
+        if (vec3_length(r) < 0.001f) {
+            t = vec3_cross(dir, vec3(0, 1, 0));
+            r = vec3_neg(vec3_cross(t, dir));
         }
 
-        camera_transform.position += -r * delta.x + t * delta.y;
+        vec3_t translation = vec3_add(vec3_scale(r, -delta.x), vec3_scale(t, delta.y));
+        camera_transform.position = vec3_add(camera_transform.position, translation);
 
         auto dd = 0.0f;
         auto& input = Locator::ref<input_controller>();
@@ -52,11 +53,11 @@ void updateCameraArcBall(float dt) {
         if (input.is_key(EK_KEYCODE_S)) {
             dd += 10.0f * dt;
         }
-        arc_ball.distance = std::max(arc_ball.distance + dd, 0.0f);
+        arc_ball.distance = fmaxf(arc_ball.distance + dd, 0.0f);
 
-        dir = normalize(arc_ball.center - camera_transform.position);
-        camera_transform.position = arc_ball.center - arc_ball.distance * dir;
-        camera_transform.rotation = euler_angles(quat_look_at_rh(dir, camera_data.up));
+        dir = vec3_normalize(vec3_sub(arc_ball.center, camera_transform.position));
+        camera_transform.position = vec3_sub(arc_ball.center, vec3_scale(dir, arc_ball.distance));
+        camera_transform.rotation = euler_angles(quat_look_at_rh((Vec3f)dir, (Vec3f)camera_data.up));
     }
 }
 

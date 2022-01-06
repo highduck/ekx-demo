@@ -102,7 +102,7 @@ void DemoApp::initialize() {
 
     auto& cam = Camera2D::Main.get<Camera2D>();
     cam.clearColorEnabled = true;
-    cam.clearColor = Vec4f{0xFF666666_argb};
+    cam.clearColor = vec4_rgba(0xFF666666_argb);
 
     SampleIntegrations::initializePlugins();
 }
@@ -157,7 +157,7 @@ void DemoApp::onAppStart() {
     {
         tfFPS = createNode2D("fps");
         addText(tfFPS, "");
-        tfFPS.get<Display2D>().get<Text2D>().format.alignment = Vec2f::zero;
+        tfFPS.get<Display2D>().get<Text2D>().format.alignment = vec2(0, 0);
         tfFPS.assign<LayoutRect>()
                 .enableAlignX(0.0, 10)
                 .enableAlignY(0.0, 10);

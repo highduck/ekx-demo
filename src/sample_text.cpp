@@ -1,6 +1,5 @@
 #include "sample_text.hpp"
 
-#include <string>
 #include <ek/scenex/text/TextEngine.hpp>
 #include <ek/scenex/text/TrueTypeFont.hpp>
 #include <ek/scenex/app/basic_application.hpp>
@@ -42,7 +41,7 @@ ecs::EntityApi createText(const char* name, const char* font, const char* text) 
     tf->format.layers[3].blurRadius = 8;
     tf->format.layers[3].blurIterations = 3;
     tf->format.layers[3].strength = 1;
-    tf->format.layers[3].offset = {4, 4};
+    tf->format.layers[3].offset = vec2(4, 4);
     tf->format.layers[3].color = 0x0_rgb;
 
     tf->format.layersCount = 4;
@@ -54,7 +53,7 @@ ecs::EntityApi createText(const char* name, const char* font, const char* text) 
 }
 
 ecs::EntityApi createScreenZones() {
-    Rect2f resolution{0, 0, 360, 480};
+    rect_t resolution = rect_wh(360, 480);
     auto zones = createNode2D("zones");
     auto e = createNode2D("zone");
     auto* q = new Quad2D();
@@ -85,9 +84,9 @@ SampleText::SampleText() :
     getDrawable<Text2D>(bmText).format.setAlignment(Alignment::Center);
     getDrawable<Text2D>(bmText).format.size = 24;
     getDrawable<Text2D>(bmText).borderColor = 0xFF000000_argb;
-    getDrawable<Text2D>(bmText).rect.set(0, 0, 360 - 40, 100);
+    getDrawable<Text2D>(bmText).rect = {{0, 0, 360 - 40, 100}};
 
-    setPosition(bmText, {20.0f, 20.0f});
+    setPosition(bmText, vec2(20, 20));
     append(container, bmText);
 
     auto ttfText = createText("TTF-Cousine-Regular", "Cousine-Regular",
@@ -95,14 +94,14 @@ SampleText::SampleText() :
     getDrawable<Text2D>(ttfText).format.setAlignment(Alignment::Right | Alignment::Top);
     getDrawable<Text2D>(ttfText).format.leading = -8;
     getDrawable<Text2D>(ttfText).format.setTextColor(0xFF00FF00_argb);
-    setPosition(ttfText, {360 - 20, 120.0f});
+    setPosition(ttfText, vec2(360 - 20, 120));
     append(container, ttfText);
 
     auto ttfText2 = createText("TTF-Comfortaa-Regular", "Comfortaa-Regular",
                                u8"I don't know KERN TABLE.\nНо кириллица тоже есть");
     getDrawable<Text2D>(ttfText2).format.setTextColor(0xFFFF00FF_argb);
     getDrawable<Text2D>(ttfText2).format.size = 24;
-    setPosition(ttfText2, {20.0f, 340.0f});
+    setPosition(ttfText2, vec2(20, 340));
     append(container, ttfText2);
 }
 

@@ -19,13 +19,13 @@ public:
         title = "AUDIO";
 
         float spaceY = 60.0f;
-        Vec2f pos{360.0f / 2, 50.0f};
+        vec2_t pos = vec2(360.0f / 2, 50.0f);
         auto btn = createButton("NEXT TRACK", [] {
             ++trackIndex;
             startMusicTrack();
         });
         setPosition(btn, pos);
-        getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+        getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
         append(container, btn);
         pos.y += spaceY;
 
@@ -33,7 +33,7 @@ public:
             auph_vibrate(10);
         });
         setPosition(btn, pos);
-        getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+        getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
         append(container, btn);
         pos.y += spaceY;
 
@@ -41,7 +41,7 @@ public:
             auph_vibrate(100);
         });
         setPosition(btn, pos);
-        getDrawable<Text2D>(btn).rect.set(-100, -25, 200, 50);
+        getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
         append(container, btn);
         pos.y += spaceY;
     }

@@ -1,22 +1,20 @@
 #include "examples.h"
 #include "piko.h"
-#include <ek/draw2d/drawer.hpp>
+#include <ek/canvas.h>
 #include <ek/math/Random.hpp>
 #include <ek/time.h>
-#include <ek/math/MatrixCamera.hpp>
 #include <ek/scenex/app/basic_application.hpp>
 
 namespace ek::piko {
 
 void book::draw() {
 
-    draw2d::state.set_empty_image();
-    draw2d::quad(0, 0, 128, 128, 0x0_rgb);
+    canvas_set_empty_image();
+    canvas_quad_color(0, 0, 128, 128, 0x0_rgb);
 
-    draw2d::state
-            .save_transform()
-            .scale(0.5f, 0.5f)
-            .translate(64, 64 + 32);
+    canvas_save_transform();
+    canvas_scale(vec2(0.5f, 0.5f));
+    canvas_translate(vec2(64, 64 + 32));
     for (int k = -1; k <= 1; k += 2) {
         for (int j = 8 - 8 * k; j >= 0 && j <= 16; j += k) {
             float x = 59.5f;
@@ -30,7 +28,7 @@ void book::draw() {
                     c = 1;
                 }
                 if (sgn(x - 60.0f) == k) {
-                    draw2d::line({x, y}, {x + 10, y - 41}, colorf(c), 2.0f);
+                    canvas_line(vec2(x, y), vec2(x + 10, y - 41), colorf(c), 2.0f);
                 }
                 x += cosu(w);
                 y += sinu(w);
@@ -39,7 +37,7 @@ void book::draw() {
         }
     }
 
-    draw2d::state.restore_transform();
+    canvas_restore_transform();
 }
 
 void dna::draw() {
@@ -72,20 +70,20 @@ void dna::draw() {
     goto _
      */
 
-    draw2d::state.set_empty_image();
-    draw2d::quad(0, 0, 128, 128, 0x0_rgb);
+    canvas_set_empty_image();
+    canvas_quad_color(0, 0, 128, 128, 0x0_rgb);
 
     for (int i = 0; i <= 288; ++i) {
         int x = i % 17;
         int y = i / 17;
         auto color = colorf(1 + i % 3);
         //circfill(x*8,y*8,5+sin(t()+i*.618)*2,1+i%3)
-        CircleF circ{
-                x * 8.0f,
-                y * 8.0f,
-                5.0f + sinu(t + i * 0.618f) * 2.0f
-        };
-        draw2d::fill_circle(circ, color, color, 10);
+        circle_t circ = circle(
+                (float)x * 8.0f,
+                (float)y * 8.0f,
+                5.0f + sinu(t + (float)i * 0.618f) * 2.0f
+        );
+        canvas_fill_circle(circ, color, color, 10);
     }
     for (float j = 5.0f; j >= 3.0f; j -= 0.5f) {
         for (int i = 0; i <= 150; ++i) {
@@ -98,13 +96,13 @@ void dna::draw() {
                 float z = 4 + k * sinu(a);
                 float y = i / 150.0f - 0.5f;
                 if (fabs(z - j) < 0.3f) {
-                    CircleF circ{
+                    const circle_t circ = circle(
                             64 + cosu(a) * k * 50.0f / z,
                             64 + y * 999 / z,
                             11 / z
-                    };
+                    );
                     float ci = 18.6f - z; // color index
-                    draw2d::fill_circle(circ, colorf(ci) & 0x00FFFFFF, colorf(ci), 10);
+                    canvas_fill_circle(circ, colorf(ci) & 0x00FFFFFF, colorf(ci), 10);
                 }
             }
         }
@@ -132,8 +130,9 @@ void dna::draw() {
 
 void diamonds::draw() {
     auto info = sg_query_image_info(rt);
-    draw2d::state.set_image_region(rt, Rect2f::zero_one);
-    draw2d::quad(0.0f, 0.0f, (float)info.width, (float)info.height);
+    canvas_set_image(rt);
+    canvas_set_image_rect(rect_01());
+    canvas_quad(0, 0, (float)info.width, (float)info.height);
 //    recorder.render();
 }
 
@@ -163,7 +162,7 @@ void diamonds::onPreRender() {
 
     sg_pass_action clear{};
     if (first_frame) {
-        Vec4f clear_color{colorf(2)};
+        const vec4_t clear_color = vec4_rgba(colorf(2));
         clear.colors[0].action = SG_ACTION_CLEAR;
         clear.colors[0].value.r = clear_color.x;
         clear.colors[0].value.g = clear_color.y;
@@ -174,14 +173,14 @@ void diamonds::onPreRender() {
         clear.colors[0].action = SG_ACTION_DONTCARE;
     }
     sg_begin_pass(pass, clear);
-    draw2d::begin({0, 0, (float)w, (float)h}, Matrix3x2f{}, rt);
+    canvas_begin_ex(rect_wh((float)w, (float)h), mat3x2_identity(), rt, {0});
     float sc = w / 128.0f;
     Vec2f center{w * 0.5f, h * 0.5f};
     int e[] = {0, 3, 11, 5, 8, 14, 2, 9, 10, 4, 13, 7, 6};
     auto c = colorf(1);
     c.af(0.3f);
     for (int i = 0; i < 80; ++i) {
-        draw2d::line(Vec2f{ek::random(0.0f, w), ek::random(0.0f, h)},
+        canvas_line(Vec2f{ek::random(0.0f, w), ek::random(0.0f, h)},
                      Vec2f{ek::random(0.0f, w), ek::random(0.0f, h)},
                      c, sc * 4.0f);
     }
@@ -191,12 +190,12 @@ void diamonds::onPreRender() {
         Vec2f p = center + sc * 42.0f * Vec2f{cosu(a), sinu(a)};
         for (float j = -1.0f; j <= 1.0f; j += 0.02f) {
             int i = static_cast<int>(floorf(j + t * 3.0f));
-            draw2d::line(p + Vec2f{0.0f, sc * 20.0f}, p + Vec2f{j * sc * 20, 0}, colorf(e[n + i % 3]), sc * 1.0f);
-            draw2d::line(p + Vec2f{j * sc * 20, 0}, p + Vec2f{j * sc * 10, -sc * 10}, colorf(e[n + (i + 1) % 3]),
+            canvas_line(p + Vec2f{0.0f, sc * 20.0f}, p + Vec2f{j * sc * 20, 0}, colorf(e[n + i % 3]), sc * 1.0f);
+            canvas_line(p + Vec2f{j * sc * 20, 0}, p + Vec2f{j * sc * 10, -sc * 10}, colorf(e[n + (i + 1) % 3]),
                          sc * 1.0f);
         }
     }
-    draw2d::end();
+    canvas_end();
     sg_end_pass();
 }
 
