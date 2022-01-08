@@ -24,7 +24,7 @@ void book::draw() {
             float w = q / 2;
             for (float i = 0.0f; i <= 1.0f; i += 0.01f) {
                 int c = 6 + j % 2;
-                if (fabsf((float)j * i) < MATH_F32_EPSILON || j > 15) {
+                if (fabsf((float) j * i) < MATH_F32_EPSILON || j > 15) {
                     c = 1;
                 }
                 if (sgn(x - 60.0f) == k) {
@@ -79,9 +79,9 @@ void dna::draw() {
         auto color = colorf(1 + i % 3);
         //circfill(x*8,y*8,5+sin(t()+i*.618)*2,1+i%3)
         circle_t circ = circle(
-                (float)x * 8.0f,
-                (float)y * 8.0f,
-                5.0f + sinu(t + (float)i * 0.618f) * 2.0f
+                (float) x * 8.0f,
+                (float) y * 8.0f,
+                5.0f + sinu(t + (float) i * 0.618f) * 2.0f
         );
         canvas_fill_circle(circ, color, color, 10);
     }
@@ -132,7 +132,7 @@ void diamonds::draw() {
     auto info = sg_query_image_info(rt);
     canvas_set_image(rt);
     canvas_set_image_rect(rect_01());
-    canvas_quad(0, 0, (float)info.width, (float)info.height);
+    canvas_quad(0, 0, (float) info.width, (float) info.height);
 //    recorder.render();
 }
 
@@ -173,26 +173,31 @@ void diamonds::onPreRender() {
         clear.colors[0].action = SG_ACTION_DONTCARE;
     }
     sg_begin_pass(pass, clear);
-    canvas_begin_ex(rect_wh((float)w, (float)h), mat3x2_identity(), rt, {0});
+    canvas_begin_ex(rect_wh((float) w, (float) h), mat3x2_identity(), rt, {0});
     float sc = w / 128.0f;
-    Vec2f center{w * 0.5f, h * 0.5f};
+    vec2_t center = vec2(w * 0.5f, h * 0.5f);
     int e[] = {0, 3, 11, 5, 8, 14, 2, 9, 10, 4, 13, 7, 6};
     auto c = colorf(1);
     c.af(0.3f);
     for (int i = 0; i < 80; ++i) {
-        canvas_line(Vec2f{ek::random(0.0f, w), ek::random(0.0f, h)},
-                     Vec2f{ek::random(0.0f, w), ek::random(0.0f, h)},
-                     c, sc * 4.0f);
+        canvas_line(vec2(ek::random(0.0f, w), ek::random(0.0f, h)),
+                    vec2(ek::random(0.0f, w), ek::random(0.0f, h)),
+                    c, sc * 4.0f);
     }
 
     for (int n = 1; n <= 10; n += 3) {
         float a = n / 4.0f - t / 4.0f;
-        Vec2f p = center + sc * 42.0f * Vec2f{cosu(a), sinu(a)};
+        vec2_t p = center + sc * 42.0f * vec2(cosu(a), sinu(a));
         for (float j = -1.0f; j <= 1.0f; j += 0.02f) {
             int i = static_cast<int>(floorf(j + t * 3.0f));
-            canvas_line(p + Vec2f{0.0f, sc * 20.0f}, p + Vec2f{j * sc * 20, 0}, colorf(e[n + i % 3]), sc * 1.0f);
-            canvas_line(p + Vec2f{j * sc * 20, 0}, p + Vec2f{j * sc * 10, -sc * 10}, colorf(e[n + (i + 1) % 3]),
-                         sc * 1.0f);
+            canvas_line(p + vec2(0.0f, sc * 20.0f),
+                        p + vec2(j * sc * 20, 0),
+                        colorf(e[n + i % 3]),
+                        sc * 1.0f);
+            canvas_line(p + vec2(j * sc * 20, 0),
+                        p + vec2(j * sc * 10, -sc * 10),
+                        colorf(e[n + (i + 1) % 3]),
+                        sc * 1.0f);
         }
     }
     canvas_end();
