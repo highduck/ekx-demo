@@ -36,12 +36,11 @@ void update_motion_system(float dt) {
         auto p = tra.getPosition();
         auto v = mot.velocity;
 
-
         for (unsigned i = 0; i < sz; ++i) {
             const auto attractor = attrs[i];
             const auto diff = attractor.position - p;
             const auto len = vec2_length(diff);
-            const float factor = 1.0f - clamp_f32(len / attractor.props.radius, 0.0f, 1.0f);
+            const float factor = 1 - saturate(len / attractor.props.radius);
             v += dt * attractor.props.force * factor * factor * diff / len;
         }
 

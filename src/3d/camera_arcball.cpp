@@ -6,7 +6,6 @@
 #include <ek/scenex/InteractionSystem.hpp>
 #include <ek/util/ServiceLocator.hpp>
 #include <ek/scenex/app/input_controller.hpp>
-#include <ek/math/Quaternion.hpp>
 
 namespace ek {
 
@@ -57,7 +56,7 @@ void updateCameraArcBall(float dt) {
 
         dir = vec3_normalize(vec3_sub(arc_ball.center, camera_transform.position));
         camera_transform.position = vec3_sub(arc_ball.center, vec3_scale(dir, arc_ball.distance));
-        camera_transform.rotation = euler_angles(quat_look_at_rh((Vec3f)dir, (Vec3f)camera_data.up));
+        camera_transform.rotation = quat_to_euler_angles(quat_look_at_rh(dir,camera_data.up));
     }
 }
 

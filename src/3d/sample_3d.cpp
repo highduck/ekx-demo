@@ -32,7 +32,7 @@ static const char* test_models[4] = {"torus",
                                      "sphere",
                                      "cube"};
 
-void create_test_material(const char* name, argb32_t color, float roughness) {
+void create_test_material(const char* name, rgba_t color, float roughness) {
     auto m = new Material3D;
     m->set_base_color(color);
     m->roughness = roughness;
@@ -108,12 +108,12 @@ void Sample3D::draw() {
     for (auto e: ecs::view<test_rotation_comp>()) {
         auto& tr = e.get<Transform3D>();
         tr.rotation.x += dt;
-        if (tr.rotation.x > Math::pi2) {
-            tr.rotation.x -= Math::pi2;
+        if (tr.rotation.x > MATH_PI) {
+            tr.rotation.x -= 2 * MATH_PI;
         }
         tr.rotation.y += dt * 2;
-        if (tr.rotation.y > Math::pi2) {
-            tr.rotation.y -= Math::pi2;
+        if (tr.rotation.y > MATH_PI) {
+            tr.rotation.y -= 2 * MATH_PI;
         }
     }
 
@@ -138,19 +138,19 @@ Sample3D::Sample3D() {
     Camera2D::Main.get<Camera2D>().clearColorEnabled = false;
 
     auto light_material = new Material3D;
-    light_material->emission = vec3(1,1,1);
+    light_material->emission = vec3(1, 1, 1);
     Res<Material3D>{"light_material"}.reset(light_material);
 
-    create_test_material("test0", 0xFFFF0000_argb, 0.05f);
-    create_test_material("test1", 0xFF00FF00_argb, 0.1f);
-    create_test_material("test2", 0xFF00FFFF_argb, 0.2f);
-    create_test_material("test3", 0xFFFFFF00_argb, 0.3f);
-    create_test_material("ground", 0xFF77FF77_argb, 0.01f);
+    create_test_material("test0", RGB(0xFF0000), 0.05f);
+    create_test_material("test1", RGB(0x00FF00), 0.1f);
+    create_test_material("test2", RGB(0x00FFFF), 0.2f);
+    create_test_material("test3", RGB(0xFFFF00), 0.3f);
+    create_test_material("ground", RGB(0x77FF77), 0.01f);
 
     //    asset_t<static_mesh_t>{"torus"}.reset(new static_mesh_t(load_obj(get_resource_content("assets/torus.obj"))));
 //    asset_t<static_mesh_t>{"monkey"}.reset(new static_mesh_t(load_obj(get_resource_content("assets/monkey.obj"))));
 //    asset_t<static_mesh_t>{"sphere"}.reset(new static_mesh_t(load_obj(get_resource_content("assets/sphere.obj"))));
-    Res<StaticMesh>{"cube"}.reset(new StaticMesh(Model3D::createCube(vec3(0,0,0), vec3(1,1,1))));
+    Res<StaticMesh>{"cube"}.reset(new StaticMesh(Model3D::createCube(vec3(0, 0, 0), vec3(1, 1, 1))));
 
     main_scene_3d = ecs::create<Node, Transform3D>();
     setName(main_scene_3d, "scene 3d");
@@ -194,7 +194,7 @@ Sample3D::Sample3D() {
                 0.0f,
                 5.0f
         );
-        es.get<Transform3D>().scale = vec3(4,4,4);
+        es.get<Transform3D>().scale = vec3(4, 4, 4);
         append(main_scene_3d, es);
     }
     for (int i = 0; i < 10; ++i) {
@@ -209,7 +209,7 @@ Sample3D::Sample3D() {
         );
 
         const float tor_scale = rand_fx.random(1.0f, 5.0f);
-        e_cube.get<Transform3D>().scale = vec3(tor_scale,tor_scale,tor_scale);
+        e_cube.get<Transform3D>().scale = vec3(tor_scale, tor_scale, tor_scale);
         e_cube.get<Transform3D>().rotation = vec3(
                 rand_fx.random(0.0f, 180.0f),
                 rand_fx.random(0.0f, 180.0f),

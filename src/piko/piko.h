@@ -58,11 +58,11 @@ inline static int sgn(float a) {
 }
 
 inline static float sinu(float unit) {
-    return -sinf(unit * Math::fPI2);
+    return -sinf(unit * MATH_PI * 2);
 }
 
 inline static float cosu(float unit) {
-    return cosf(unit * Math::fPI2);
+    return cosf(unit * MATH_PI * 2);
 }
 
 }

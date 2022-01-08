@@ -24,7 +24,7 @@ void book::draw() {
             float w = q / 2;
             for (float i = 0.0f; i <= 1.0f; i += 0.01f) {
                 int c = 6 + j % 2;
-                if (fabs(j * i) < Math::epsilon<float>() || j > 15) {
+                if (fabsf((float)j * i) < MATH_F32_EPSILON || j > 15) {
                     c = 1;
                 }
                 if (sgn(x - 60.0f) == k) {
