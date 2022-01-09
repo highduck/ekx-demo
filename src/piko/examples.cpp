@@ -78,7 +78,7 @@ void dna::draw() {
         int y = i / 17;
         auto color = colorf(1 + i % 3);
         //circfill(x*8,y*8,5+sin(t()+i*.618)*2,1+i%3)
-        circle_t circ = circle(
+        vec3_t circ = vec3(
                 (float) x * 8.0f,
                 (float) y * 8.0f,
                 5.0f + sinu(t + (float) i * 0.618f) * 2.0f
@@ -96,7 +96,7 @@ void dna::draw() {
                 float z = 4 + k * sinu(a);
                 float y = i / 150.0f - 0.5f;
                 if (fabs(z - j) < 0.3f) {
-                    const circle_t circ = circle(
+                    const vec3_t circ = vec3(
                             64 + cosu(a) * k * 50.0f / z,
                             64 + y * 999 / z,
                             11 / z
