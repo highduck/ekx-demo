@@ -102,7 +102,7 @@ void DemoApp::initialize() {
 
     auto& cam = Camera2D::Main.get<Camera2D>();
     cam.clearColorEnabled = true;
-    cam.clearColor = vec4_rgba(0xFF666666_argb);
+    cam.clearColor = vec4_rgba(ARGB(0xFF666666));
 
     SampleIntegrations::initializePlugins();
 }

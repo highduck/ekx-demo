@@ -39,7 +39,7 @@ void update_motion_system(float dt) {
         for (unsigned i = 0; i < sz; ++i) {
             const auto attractor = attrs[i];
             const auto diff = attractor.position - p;
-            const auto len = vec2_length(diff);
+            const auto len = length_vec2(diff);
             const float factor = 1 - saturate(len / attractor.props.radius);
             v += dt * attractor.props.force * factor * factor * diff / len;
         }

@@ -10,7 +10,7 @@ namespace ek::piko {
 void book::draw() {
 
     canvas_set_empty_image();
-    canvas_quad_color(0, 0, 128, 128, 0x0_rgb);
+    canvas_quad_color(0, 0, 128, 128, COLOR_BLACK);
 
     canvas_save_transform();
     canvas_scale(vec2(0.5f, 0.5f));
@@ -71,7 +71,7 @@ void dna::draw() {
      */
 
     canvas_set_empty_image();
-    canvas_quad_color(0, 0, 128, 128, 0x0_rgb);
+    canvas_quad_color(0, 0, 128, 128, COLOR_BLACK);
 
     for (int i = 0; i <= 288; ++i) {
         int x = i % 17;
@@ -102,7 +102,10 @@ void dna::draw() {
                             11 / z
                     );
                     float ci = 18.6f - z; // color index
-                    canvas_fill_circle(circ, colorf(ci) & 0x00FFFFFF, colorf(ci), 10);
+                    rgba_t color1 = colorf(ci);
+                    const rgba_t color2 = color1;
+                    color1.a = 0;
+                    canvas_fill_circle(circ, color1, color2, 10);
                 }
             }
         }
@@ -178,7 +181,7 @@ void diamonds::onPreRender() {
     vec2_t center = vec2(w * 0.5f, h * 0.5f);
     int e[] = {0, 3, 11, 5, 8, 14, 2, 9, 10, 4, 13, 7, 6};
     auto c = colorf(1);
-    c.af(0.3f);
+    c.a = (uint8_t)(255.0f * 0.3f);
     for (int i = 0; i < 80; ++i) {
         canvas_line(vec2(ek::random(0.0f, w), ek::random(0.0f, h)),
                     vec2(ek::random(0.0f, w), ek::random(0.0f, h)),

@@ -63,9 +63,9 @@ void create_lights() {
 }
 
 void create_coordinate_system_gizmo() {
-    static auto cube_x = new StaticMesh(Model3D::createCube(vec3(0, 0, 0), vec3(1, 1, 1), 0xFF0000_rgb));
-    static auto cube_y = new StaticMesh(Model3D::createCube(vec3(0, 0, 0), vec3(1, 1, 1), 0x00FF00_rgb));
-    static auto cube_z = new StaticMesh(Model3D::createCube(vec3(0, 0, 0), vec3(1, 1, 1), 0x0000FF_rgb));
+    static auto cube_x = new StaticMesh(Model3D::createCube(vec3(0, 0, 0), vec3(1, 1, 1), RGB(0xFF0000)));
+    static auto cube_y = new StaticMesh(Model3D::createCube(vec3(0, 0, 0), vec3(1, 1, 1), RGB(0x00FF00)));
+    static auto cube_z = new StaticMesh(Model3D::createCube(vec3(0, 0, 0), vec3(1, 1, 1), RGB(0x0000FF)));
 
     auto e = ecs::create<Node, Transform3D>();
     setName(e, "cs");
@@ -109,11 +109,11 @@ void Sample3D::draw() {
         auto& tr = e.get<Transform3D>();
         tr.rotation.x += dt;
         if (tr.rotation.x > MATH_PI) {
-            tr.rotation.x -= 2 * MATH_PI;
+            tr.rotation.x -= MATH_TAU;
         }
         tr.rotation.y += dt * 2;
         if (tr.rotation.y > MATH_PI) {
-            tr.rotation.y -= 2 * MATH_PI;
+            tr.rotation.y -= MATH_TAU;
         }
     }
 
@@ -186,11 +186,11 @@ Sample3D::Sample3D() {
         ek_snprintf(mat_id, 64, "rr%d", i);
         auto r = static_cast<float>(i) / 20.0f;
         create_test_material(mat_id,
-                             0xFF0000_rgb,
-                             Math::lerp(0.001f, 0.33f, r));
+                             RGB(0xFF0000),
+                             lerp_f32(0.001f, 0.33f, r));
         es.get<MeshRenderer>().material = mat_id;
         es.get<Transform3D>().position = vec3(
-                Math::lerp(-100.0f, 100.0f, r),
+                lerp_f32(-100.0f, 100.0f, r),
                 0.0f,
                 5.0f
         );

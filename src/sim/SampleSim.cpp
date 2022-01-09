@@ -36,7 +36,7 @@ void add_objects(ecs::EntityApi game, unsigned addCount) {
 
         auto* quad = new Quad2D();
         quad->rect = rect(-0.25f, -0.25f, 0.5f, 0.5f);
-        quad->setColor(0xFFFFFF_rgb);
+        quad->setColor(RGB(0xFFFFFF));
         q.assign<Display2D>(quad);
 
         append(game, q);

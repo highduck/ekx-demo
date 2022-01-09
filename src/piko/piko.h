@@ -1,33 +1,33 @@
 #pragma once
 
-#include <ek/math/Color32.hpp>
+#include <ek/math.h>
 #include <ek/time.h>
 #include <ek/util/ServiceLocator.hpp>
 #include <algorithm>
 
 namespace ek::piko {
 
-static argb32_t palette[] = {
-        0x000000_argb, //black
-        0x1D2B53_argb, // dark-blue
-        0x7E2553_argb, // dark-purple
-        0x008751_argb, // dark-green
-        0xAB5236_argb, // brown
-        0x5F574F_argb, // dark-gray
-        0xC2C3C7_argb, // light-gray
-        0xFFF1E8_argb, // white
-        0xFF004D_argb, // red
-        0xFFA300_argb, // orange
-        0xFFEC27_argb, // yellow
-        0x00E436_argb, // green
-        0x29ADFF_argb, // blue
-        0x83769C_argb, // indigo
-        0xFF77A8_argb, // pink
-        0xFFCCAA_argb, // peach
+static rgba_t palette[] = {
+        RGB(0x000000), //black
+        RGB(0x1D2B53), // dark-blue
+        RGB(0x7E2553), // dark-purple
+        RGB(0x008751), // dark-green
+        RGB(0xAB5236), // brown
+        RGB(0x5F574F), // dark-gray
+        RGB(0xC2C3C7), // light-gray
+        RGB(0xFFF1E8), // white
+        RGB(0xFF004D), // red
+        RGB(0xFFA300), // orange
+        RGB(0xFFEC27), // yellow
+        RGB(0x00E436), // green
+        RGB(0x29ADFF), // blue
+        RGB(0x83769C), // indigo
+        RGB(0xFF77A8), // pink
+        RGB(0xFFCCAA), // peach
 //			0x000000, // reset cycle
 };
 
-inline static argb32_t colorf(float index) {
+inline static rgba_t colorf(float index) {
     if (index < 0.0f) index = 0.0f;
     int i = (int) index;
     int e = i + 1;
@@ -35,7 +35,7 @@ inline static argb32_t colorf(float index) {
 //    int count = sizeof(kPalette) / sizeof(ARGB32);
     int count = 16;
     if (e >= count) e = count - 1;
-    return lerp(colors[i], colors[e], index - i) | 0xFF000000;
+    return lerp_rgba(colors[i], colors[e], index - i);
 }
 
 inline static float time() {
@@ -58,11 +58,11 @@ inline static int sgn(float a) {
 }
 
 inline static float sinu(float unit) {
-    return -sinf(unit * MATH_PI * 2);
+    return -sinf(unit * MATH_TAU);
 }
 
 inline static float cosu(float unit) {
-    return cosf(unit * MATH_PI * 2);
+    return cosf(unit * MATH_TAU);
 }
 
 }
