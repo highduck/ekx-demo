@@ -102,8 +102,8 @@ void dna::draw() {
                             11 / z
                     );
                     float ci = 18.6f - z; // color index
-                    rgba_t color1 = colorf(ci);
-                    const rgba_t color2 = color1;
+                    color_t color1 = colorf(ci);
+                    const color_t color2 = color1;
                     color1.a = 0;
                     canvas_fill_circle(circ, color1, color2, 10);
                 }
@@ -165,7 +165,7 @@ void diamonds::onPreRender() {
 
     sg_pass_action clear{};
     if (first_frame) {
-        const vec4_t clear_color = vec4_rgba(colorf(2));
+        const vec4_t clear_color = vec4_color(colorf(2));
         clear.colors[0].action = SG_ACTION_CLEAR;
         clear.colors[0].value.r = clear_color.x;
         clear.colors[0].value.g = clear_color.y;

@@ -32,7 +32,7 @@ static const char* test_models[4] = {"torus",
                                      "sphere",
                                      "cube"};
 
-void create_test_material(const char* name, rgba_t color, float roughness) {
+void create_test_material(const char* name, color_t color, float roughness) {
     auto m = new Material3D;
     m->set_base_color(color);
     m->roughness = roughness;

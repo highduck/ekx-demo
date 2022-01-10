@@ -7,7 +7,7 @@
 
 namespace ek::piko {
 
-static rgba_t palette[] = {
+static color_t palette[] = {
         RGB(0x000000), //black
         RGB(0x1D2B53), // dark-blue
         RGB(0x7E2553), // dark-purple
@@ -27,7 +27,7 @@ static rgba_t palette[] = {
 //			0x000000, // reset cycle
 };
 
-inline static rgba_t colorf(float index) {
+inline static color_t colorf(float index) {
     if (index < 0.0f) index = 0.0f;
     int i = (int) index;
     int e = i + 1;
@@ -35,7 +35,7 @@ inline static rgba_t colorf(float index) {
 //    int count = sizeof(kPalette) / sizeof(ARGB32);
     int count = 16;
     if (e >= count) e = count - 1;
-    return lerp_rgba(colors[i], colors[e], index - i);
+    return lerp_color(colors[i], colors[e], index - i);
 }
 
 inline static float time() {

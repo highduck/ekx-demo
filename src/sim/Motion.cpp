@@ -27,7 +27,7 @@ void update_motion_system(float dt) {
     const auto* attrs = attractors.data();
 
     const auto dumpFactor = expf(-6.0f * dt);
-    const brect_t bounds = brect_from_rect(rect_wh(WIDTH, HEIGHT));
+    const aabb2_t bounds = aabb2_from_rect(rect_wh(WIDTH, HEIGHT));
     for (auto e_ : ecs::view<motion_t>()) {
         auto e = e_.index;
         auto& mot = w.get<motion_t>(e);
