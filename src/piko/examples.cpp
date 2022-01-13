@@ -1,7 +1,7 @@
 #include "examples.h"
 #include "piko.h"
 #include <ek/canvas.h>
-#include <ek/math/Random.hpp>
+#include <ek/rnd.h>
 #include <ek/time.h>
 #include <ek/scenex/app/basic_application.hpp>
 
@@ -183,8 +183,8 @@ void diamonds::onPreRender() {
     auto c = colorf(1);
     c.a = (uint8_t)(255.0f * 0.3f);
     for (int i = 0; i < 80; ++i) {
-        canvas_line(vec2(ek::random(0.0f, w), ek::random(0.0f, h)),
-                    vec2(ek::random(0.0f, w), ek::random(0.0f, h)),
+        canvas_line(vec2(w * random_f(), h * random_f()),
+                    vec2(w * random_f(), h * random_f()),
                     c, sc * 4.0f);
     }
 

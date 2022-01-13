@@ -11,7 +11,7 @@
 #include "sim/Motion.hpp"
 #include "3d/camera_arcball.hpp"
 
-#include <ek/math/Random.hpp>
+#include <ek/rnd.h>
 #include <ek/scenex/systems/main_flow.hpp>
 #include <ek/scenex/asset2/Asset.hpp>
 #include <ek/scenex/SceneFactory.hpp>

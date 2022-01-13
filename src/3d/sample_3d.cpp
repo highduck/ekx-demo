@@ -12,7 +12,7 @@
 #include <ek/util/Res.hpp>
 
 #include <demo_main.hpp>
-#include <ek/math/Random.hpp>
+#include <ek/rnd.h>
 #include <ek/scenex/2d/Camera2D.hpp>
 #include <stb/stb_sprintf.h>
 #include "sample_3d.hpp"
@@ -199,21 +199,21 @@ Sample3D::Sample3D() {
     }
     for (int i = 0; i < 10; ++i) {
         auto e_cube = ecs::create<Node, Transform3D, MeshRenderer, test_rotation_comp>();
-        e_cube.get<MeshRenderer>().mesh = test_models[rand_fx.random_int(0, 3)];
-        e_cube.get<MeshRenderer>().material = test_materials[rand_fx.random_int(0, 3)];
+        e_cube.get<MeshRenderer>().mesh = test_models[random_n(4)];
+        e_cube.get<MeshRenderer>().material = test_materials[random_n(4)];
         setName(e_cube, "cube");
         e_cube.get<Transform3D>().position = vec3(
-                rand_fx.random(-50.0f, 50.0f),
-                rand_fx.random(-50.0f, 50.0f),
-                rand_fx.random(5.0f, 15.0f)
+                random_range_f(-50.0f, 50.0f),
+                random_range_f(-50.0f, 50.0f),
+                random_range_f(5.0f, 15.0f)
         );
 
-        const float tor_scale = rand_fx.random(1.0f, 5.0f);
+        const float tor_scale = random_range_f(1.0f, 5.0f);
         e_cube.get<Transform3D>().scale = vec3(tor_scale, tor_scale, tor_scale);
         e_cube.get<Transform3D>().rotation = vec3(
-                rand_fx.random(0.0f, 180.0f),
-                rand_fx.random(0.0f, 180.0f),
-                rand_fx.random(0.0f, 180.0f)
+                random_range_f(0.0f, 180.0f),
+                random_range_f(0.0f, 180.0f),
+                random_range_f(0.0f, 180.0f)
         );
         append(main_scene_3d, e_cube);
     }

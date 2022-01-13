@@ -1,7 +1,7 @@
 #include "SampleSim.hpp"
 
 #include <ek/time.h>
-#include <ek/math/Random.hpp>
+#include <ek/rnd.h>
 #include "Motion.hpp"
 #include <ek/scenex/SceneFactory.hpp>
 #include <ek/scenex/2d/Transform2D.hpp>
@@ -27,12 +27,12 @@ void add_objects(ecs::EntityApi game, unsigned addCount) {
     for (unsigned i = 0; i < addCount; ++i) {
         auto q = createNode2D();
         q.get<Node>().setTouchable(false);
-        const vec2_t pos = vec2(random(0.0f, WIDTH),
-                        random(0.0f, HEIGHT));
+        const vec2_t pos = vec2(random_range_f(0.0f, WIDTH),
+                                random_range_f(0.0f, HEIGHT));
         q.get<Transform2D>().setPosition(pos);
 
         auto& mot = q.assign<motion_t>();
-        mot.velocity = vec2(random(-50.0f, 50.0f), random(-50.0f, 50.0f));
+        mot.velocity = vec2(random_range_f(-50.0f, 50.0f), random_range_f(-50.0f, 50.0f));
 
         auto* quad = new Quad2D();
         quad->rect = rect(-0.25f, -0.25f, 0.5f, 0.5f);
