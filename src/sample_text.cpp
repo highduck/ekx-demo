@@ -11,7 +11,7 @@
 
 namespace ek {
 
-ecs::EntityApi createText(const char* name, const char* font, const char* text) {
+ecs::EntityApi createText(string_hash_t name, string_hash_t font, const char* text) {
     auto e = createNode2D(name);
     auto* tf = new Text2D();
 
@@ -54,8 +54,8 @@ ecs::EntityApi createText(const char* name, const char* font, const char* text) 
 
 ecs::EntityApi createScreenZones() {
     rect_t resolution = rect_wh(360, 480);
-    auto zones = createNode2D("zones");
-    auto e = createNode2D("zone");
+    auto zones = createNode2D(H("zones"));
+    auto e = createNode2D(H("zone"));
     auto* q = new Quad2D();
     q->setGradientVertical(COLOR_WHITE, ARGB(0x77FFFFFF));
     q->rect = resolution;
@@ -63,7 +63,7 @@ ecs::EntityApi createScreenZones() {
     e.get<Transform2D>().color.scale = ARGB(0x33FF00FF);
     e.assign<LayoutRect>().fill(true, true).doSafeInsets = true;
     append(zones, e);
-    e = createNode2D("safe_zone");
+    e = createNode2D(H("safe_zone"));
     q = new Quad2D();
     q->setGradientVertical(COLOR_WHITE, ARGB(0x77FFFFFF));
     q->rect = resolution;
@@ -79,7 +79,7 @@ SampleText::SampleText() :
 
     append(container, createScreenZones());
 
-    auto bmText = createText("bmfont", "TickingTimebombBB",
+    auto bmText = createText(H("bmfont"), H("TickingTimebombBB"),
                              "88:88:88\n-=98");
     getDrawable<Text2D>(bmText).format.setAlignment(Alignment::Center);
     getDrawable<Text2D>(bmText).format.size = 24;
@@ -89,7 +89,7 @@ SampleText::SampleText() :
     setPosition(bmText, vec2(20, 20));
     append(container, bmText);
 
-    auto ttfText = createText("TTF-Cousine-Regular", "Cousine-Regular",
+    auto ttfText = createText(H("TTF-Cousine-Regular"), H("Cousine-Regular"),
                               u8"£ü÷\n< Приветики >\n你好\nनमस्कार\nこんにちは");
     getDrawable<Text2D>(ttfText).format.setAlignment(Alignment::Right | Alignment::Top);
     getDrawable<Text2D>(ttfText).format.leading = -8;
@@ -97,7 +97,7 @@ SampleText::SampleText() :
     setPosition(ttfText, vec2(360 - 20, 120));
     append(container, ttfText);
 
-    auto ttfText2 = createText("TTF-Comfortaa-Regular", "Comfortaa-Regular",
+    auto ttfText2 = createText(H("TTF-Comfortaa-Regular"), H("Comfortaa-Regular"),
                                u8"I don't know KERN TABLE.\nНо кириллица тоже есть");
     getDrawable<Text2D>(ttfText2).format.setTextColor(ARGB(0xFFFF00FF));
     getDrawable<Text2D>(ttfText2).format.size = 24;
@@ -107,11 +107,11 @@ SampleText::SampleText() :
 
 void SampleText::prepareInternalResources() {
     AssetManager* am = Locator::ref<basic_application>().asset_manager_;
-    auto* ttfFont = new TrueTypeFont(am->scale_factor, 48, "default_glyph_cache");
+    auto* ttfFont = new TrueTypeFont(am->scale_factor, 48, H("default_glyph_cache"));
     ttfFont->loadDeviceFont("Arial Unicode MS");
     auto* font = new Font(ttfFont);
-    Res<Font>{"native"}.reset(font);
-    Res<Font>{"Cousine-Regular"}->setFallbackFont(font);
+    Res<Font>{H("native")}.reset(font);
+    Res<Font>{H("Cousine-Regular")}->setFallbackFont(font);
 }
 
 void SampleText::update(float dt) {

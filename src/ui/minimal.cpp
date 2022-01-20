@@ -8,7 +8,7 @@ namespace ek {
 
 Text2D& addText(ecs::EntityApi e, const char* text) {
     auto* tf = new Text2D();
-    tf->format.font.setID("mini");
+    tf->format.font.setID(H("mini"));
     tf->format.size = 14;
     tf->format.addShadow(COLOR_BLACK, 8);
     tf->text = text;
@@ -18,7 +18,7 @@ Text2D& addText(ecs::EntityApi e, const char* text) {
 }
 
 ecs::EntityApi createButton(const char* label, const std::function<void()>& fn) {
-    auto e = createNode2D(label);
+    auto e = createNode2D(H(label));
     auto& tf = addText(e, label);
     tf.fillColor = ARGB(0x77000000);
     tf.borderColor = ARGB(0x77FFFFFF);

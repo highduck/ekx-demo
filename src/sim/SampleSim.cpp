@@ -61,14 +61,14 @@ SampleSim::SampleSim() {
 
     title = "SIMULATION";
 
-    particlesContainer = createNode2D("particles");
+    particlesContainer = createNode2D(H("particles"));
 
     append(container, particlesContainer);
 
-    auto mouse_entity = createNode2D("Mouse");
+    auto mouse_entity = createNode2D(H("Mouse"));
     assignScript<mouse_follow_script>(mouse_entity);
 
-    auto attractor_entity = createNode2D("Follower");
+    auto attractor_entity = createNode2D(H("Follower"));
     attractor_entity.assign<attractor_t>();
     auto& attr = assignScript<target_follow_script>(attractor_entity);
     attr.target_entity = ecs::EntityRef{mouse_entity};
@@ -79,14 +79,14 @@ SampleSim::SampleSim() {
     append(container, mouse_entity);
     append(container, attractor_entity);
 
-    attractor_entity = createNode2D("Centroid");
+    attractor_entity = createNode2D(H("Centroid"));
     attractor_entity.assign<attractor_t>();
     attractor_entity.get<attractor_t>().radius = 200.0f;
     attractor_entity.get<attractor_t>().force = -1000.0f;
     attractor_entity.get<Transform2D>().setPosition(300.0f, 400.0f);
     append(container, attractor_entity);
 
-    countLabel = createNode2D("lbl");
+    countLabel = createNode2D(H("lbl"));
     addText(countLabel, "");
     countLabel.get<Transform2D>().setPosition(360.0f / 2.0f, 15.0f);
     append(container, countLabel);

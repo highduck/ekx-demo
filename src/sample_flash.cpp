@@ -8,6 +8,6 @@ namespace ek {
 SampleFlash::SampleFlash(const char* scene) :
         SampleBase() {
     title = scene;
-    append(container, sg_create("tests", scene));
+    append(container, sg_create(H("tests"), H(scene)));
 }
 }

@@ -13,7 +13,7 @@ namespace piko {
 void create(ecs::EntityApi container) {
 
     ecs::EntityApi e;
-    e = createNode2D("book");
+    e = createNode2D(H("book"));
     assignScript<book>(e);
     //ecs::get<transform_2d>(e).scale = {2.0f, 2.0f};
     e.get<Transform2D>().setPosition(20.0f, 20.0f);
@@ -21,7 +21,7 @@ void create(ecs::EntityApi container) {
     e.assign<Bounds2D>(rect_wh(128, 128)).scissors = true;
     append(container, e);
 
-    e = createNode2D("dna");
+    e = createNode2D(H("dna"));
     assignScript<dna>(e);
 //    ecs::get<transform_2d>(e).scale = {2.0f, 2.0f};
     e.get<Transform2D>().setPosition(20.0f, 20.0f + 128.0f + 10.0f);
@@ -29,7 +29,7 @@ void create(ecs::EntityApi container) {
     e.assign<Bounds2D>(rect_wh(128, 128)).scissors = true;
     append(container, e);
 
-    e = createNode2D("diamonds");
+    e = createNode2D(H("diamonds"));
     assignScript<diamonds>(e);
     e.get<Transform2D>().setPosition(20.0f + 128.0f + 10.0f, 20.0f);
     e.assign<Bounds2D>(rect_wh(128, 128)).scissors = true;;

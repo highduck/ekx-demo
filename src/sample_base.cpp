@@ -5,7 +5,7 @@
 namespace ek {
 
 SampleBase::SampleBase() {
-    container = createNode2D("sample content");
+    container = createNode2D(H("sample content"));
     append(SampleBase::samplesContainer, container);
 }
 

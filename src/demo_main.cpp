@@ -142,7 +142,7 @@ void DemoApp::onAppStart() {
     EK_DEBUG("Start Demo: prepareInternalResources");
     SampleText::prepareInternalResources();
 
-    SampleBase::samplesContainer = createNode2D("sample");
+    SampleBase::samplesContainer = createNode2D(H("sample"));
     append(root, SampleBase::samplesContainer);
 
     auto prev = createButton("<", [] { scrollSample(-1); });
@@ -150,12 +150,12 @@ void DemoApp::onAppStart() {
     prev.assign<LayoutRect>().enableAlignX(0, 30);
     next.assign<LayoutRect>().enableAlignX(1, -30);
 
-    tfSampleTitle = createNode2D("title");
+    tfSampleTitle = createNode2D(H("title"));
     addText(tfSampleTitle, "");
     tfSampleTitle.assign<LayoutRect>().enableAlignX(0.5);
 
     {
-        tfFPS = createNode2D("fps");
+        tfFPS = createNode2D(H("fps"));
         addText(tfFPS, "");
         tfFPS.get<Display2D>().get<Text2D>().format.alignment = vec2(0, 0);
         tfFPS.assign<LayoutRect>()
@@ -164,7 +164,7 @@ void DemoApp::onAppStart() {
         append(root, tfFPS);
     }
 
-    auto controls = createNode2D("controls");
+    auto controls = createNode2D(H("controls"));
     append(controls, tfSampleTitle);
     append(controls, prev);
     append(controls, next);
@@ -176,7 +176,7 @@ void DemoApp::onAppStart() {
     initSamples();
 
     auto& audio = Locator::ref<AudioManager>();
-    audio.play_music("sfx/music1");
+    audio.play_music(H("sfx/music1"));
 }
 
 DemoApp::~DemoApp() = default;
