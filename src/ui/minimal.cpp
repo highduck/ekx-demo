@@ -8,7 +8,7 @@ namespace ek {
 
 Text2D& addText(ecs::EntityApi e, const char* text) {
     auto* tf = new Text2D();
-    tf->format.font.setID(H("mini"));
+    tf->format.font = R_FONT(H("mini"));
     tf->format.size = 14;
     tf->format.addShadow(COLOR_BLACK, 8);
     tf->text = text;

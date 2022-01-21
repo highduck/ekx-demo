@@ -9,7 +9,6 @@
 #include <ek/scenex/SceneFactory.hpp>
 #include <ek/scenex/3d/Light3D.hpp>
 #include <ek/scenex/3d/StaticMesh.hpp>
-#include <ek/util/Res.hpp>
 
 #include <demo_main.hpp>
 #include <ek/rnd.h>
@@ -37,10 +36,10 @@ static string_hash_t test_models[4] = {
 };
 
 void create_test_material(string_hash_t name, color_t color, float roughness) {
-    auto m = new Material3D;
-    m->set_base_color(color);
-    m->roughness = roughness;
-    Res<Material3D>{name}.reset(m);
+    Material3D m = {};
+    m.set_base_color(color);
+    m.roughness = roughness;
+    RES_NAME_RESOLVE(res_material3d, name) = m;
 }
 
 void create_lights() {
@@ -141,9 +140,9 @@ Sample3D::Sample3D() {
     title = "SCENE 3D";
     Camera2D::Main.get<Camera2D>().clearColorEnabled = false;
 
-    auto light_material = new Material3D;
-    light_material->emission = vec3(1, 1, 1);
-    Res<Material3D>{H("light_material")}.reset(light_material);
+    Material3D light_material = {};
+    light_material.emission = vec3(1, 1, 1);
+    RES_NAME_RESOLVE(res_material3d, H("light_material")) = light_material;
 
     create_test_material(H("test0"), RGB(0xFF0000), 0.05f);
     create_test_material(H("test1"), RGB(0x00FF00), 0.1f);
@@ -154,7 +153,7 @@ Sample3D::Sample3D() {
     //    asset_t<static_mesh_t>{"torus"}.reset(new static_mesh_t(load_obj(get_resource_content("assets/torus.obj"))));
 //    asset_t<static_mesh_t>{"monkey"}.reset(new static_mesh_t(load_obj(get_resource_content("assets/monkey.obj"))));
 //    asset_t<static_mesh_t>{"sphere"}.reset(new static_mesh_t(load_obj(get_resource_content("assets/sphere.obj"))));
-    Res<StaticMesh>{H("cube")}.reset(new StaticMesh(Model3D::createCube(vec3(0, 0, 0), vec3(1, 1, 1))));
+    RES_NAME_RESOLVE(res_mesh3d, H("cube")) = new StaticMesh(Model3D::createCube(vec3(0, 0, 0), vec3(1, 1, 1)));
 
     main_scene_3d = ecs::create<Node, Transform3D>();
     set_tag(main_scene_3d, H("scene 3d"));
@@ -168,7 +167,7 @@ Sample3D::Sample3D() {
     auto& camera_transform = main_camera.get<Transform3D>();
     camera_transform.position = vec3(-100.0f, -100.0f, 100.0f);
     append(main_scene_3d, main_camera);
-    main_camera.get<Camera3D>().cubeMap = rr_named(&res_image.rr, H("skybox"));
+    main_camera.get<Camera3D>().cubeMap = R_IMAGE(H("skybox"));
     main_camera.get<Camera3D>().clearColorEnabled = false;
 
     create_lights();

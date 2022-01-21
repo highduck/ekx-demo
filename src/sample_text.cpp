@@ -15,7 +15,7 @@ ecs::EntityApi createText(string_hash_t name, string_hash_t font, const char* te
     auto e = createNode2D(name);
     auto* tf = new Text2D();
 
-    tf->format.font.setID(font);
+    tf->format.font = R_FONT(font);
     tf->format.size = 48.0f;
     tf->format.wordWrap = true;
 
@@ -109,9 +109,11 @@ void SampleText::prepareInternalResources() {
     AssetManager* am = Locator::ref<basic_application>().asset_manager_;
     auto* ttfFont = new TrueTypeFont(am->scale_factor, 48, H("default_glyph_cache"));
     ttfFont->loadDeviceFont("Arial Unicode MS");
-    auto* font = new Font(ttfFont);
-    Res<Font>{H("native")}.reset(font);
-    Res<Font>{H("Cousine-Regular")}->setFallbackFont(font);
+
+    R(Font) native = R_FONT(H("native"));
+    REF_RESOLVE(res_font, native).impl = ttfFont;
+
+    RES_NAME_RESOLVE(res_font, H("Cousine-Regular")).fallback = native;
 }
 
 void SampleText::update(float dt) {
