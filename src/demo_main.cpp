@@ -175,8 +175,7 @@ void DemoApp::onAppStart() {
     EK_DEBUG("Start Demo: initSamples");
     initSamples();
 
-    auto& audio = Locator::ref<AudioManager>();
-    audio.play_music(H("sfx/music1"));
+    g_audio->play_music(H("sfx/music1"));
 }
 
 DemoApp::~DemoApp() = default;

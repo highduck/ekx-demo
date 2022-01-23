@@ -142,7 +142,7 @@ void diamonds::draw() {
 diamonds::diamonds() {
 //        recorder{"result", {0, 0, 512 * 2 / 2, 512 * 2 / 2}}
     rt = ek_gfx_make_render_target(128, 128, nullptr);
-    Locator::ref<basic_application>().dispatcher.listeners.push_back(this);
+    g_game_app->dispatcher.listeners.push_back(this);
 
     sg_pass_desc passDesc{};
     passDesc.color_attachments[0].image = rt;
@@ -153,7 +153,7 @@ diamonds::diamonds() {
 diamonds::~diamonds() {
     sg_destroy_pass(pass);
     sg_destroy_image(rt);
-    Locator::ref<basic_application>().dispatcher.listeners.remove(this);
+    g_game_app->dispatcher.listeners.remove(this);
 }
 
 void diamonds::onPreRender() {

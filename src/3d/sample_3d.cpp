@@ -135,8 +135,6 @@ void Sample3D::draw() {
 }
 
 Sample3D::Sample3D() {
-    auto* rs3d = Locator::get<RenderSystem3D>();
-
     title = "SCENE 3D";
     Camera2D::Main.get<Camera2D>().clearColorEnabled = false;
 
@@ -161,8 +159,8 @@ Sample3D::Sample3D() {
     main_camera = ecs::create<Node, Camera3D, Transform3D, CameraArcBall>();
     set_tag(main_camera, H("main camera"));
 
-    rs3d->scene = main_scene_3d;
-    rs3d->camera = main_camera;
+    g_render_system_3d->scene = main_scene_3d;
+    g_render_system_3d->camera = main_camera;
 
     auto& camera_transform = main_camera.get<Transform3D>();
     camera_transform.position = vec3(-100.0f, -100.0f, 100.0f);

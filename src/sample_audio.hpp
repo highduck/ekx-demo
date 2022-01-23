@@ -47,9 +47,8 @@ public:
     }
 
     static void startMusicTrack() {
-        auto& audio = Locator::ref<AudioManager>();
         string_hash_t music = ((trackIndex & 1) == 0) ? H("sfx/music1") : H("sfx/music2");
-        audio.play_music(music);
+        g_audio->play_music(music);
     }
 };
 

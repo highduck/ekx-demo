@@ -106,7 +106,7 @@ SampleText::SampleText() :
 }
 
 void SampleText::prepareInternalResources() {
-    AssetManager* am = Locator::ref<basic_application>().asset_manager_;
+    AssetManager* am = g_game_app->asset_manager_;
     auto* ttfFont = new TrueTypeFont(am->scale_factor, 48, H("default_glyph_cache"));
     ttfFont->loadDeviceFont("Arial Unicode MS");
 

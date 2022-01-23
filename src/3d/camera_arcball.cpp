@@ -11,20 +11,20 @@ namespace ek {
 
 void updateCameraArcBall(float dt) {
 
-    const auto& im = Locator::ref<InteractionSystem>();
+    const auto* im = g_interaction_system;
     static vec2_t prev_pointer = {};
     static bool prev_down = false;
 
     vec2_t delta = {};
-    if (im.pointerDown_ && !prev_down) {
+    if (im->pointerDown_ && !prev_down) {
         prev_down = true;
-        prev_pointer = im.pointerScreenPosition_;
+        prev_pointer = im->pointerScreenPosition_;
     }
-    if (!im.pointerDown_ && prev_down) {
+    if (!im->pointerDown_ && prev_down) {
         prev_down = false;
     }
     if (prev_down) {
-        vec2_t cur = im.pointerScreenPosition_;
+        vec2_t cur = im->pointerScreenPosition_;
         delta = cur - prev_pointer;
         prev_pointer = cur;
     }
@@ -45,11 +45,11 @@ void updateCameraArcBall(float dt) {
         camera_transform.position = add_vec3(camera_transform.position, translation);
 
         auto dd = 0.0f;
-        auto& input = Locator::ref<input_controller>();
-        if (input.is_key(EK_KEYCODE_W)) {
+        auto* input = g_input_controller;
+        if (input->is_key(EK_KEYCODE_W)) {
             dd -= 10.0f * dt;
         }
-        if (input.is_key(EK_KEYCODE_S)) {
+        if (input->is_key(EK_KEYCODE_S)) {
             dd += 10.0f * dt;
         }
         arc_ball.distance = fmaxf(arc_ball.distance + dd, 0.0f);

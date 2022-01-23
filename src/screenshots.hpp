@@ -4,7 +4,7 @@
 #include <ek/util/ServiceLocator.hpp>
 #include <ek/scenex/app/uitest.hpp>
 #include <ek/scenex/Localization.hpp>
-#include <ek/assert.hpp>
+#include <ek/assert.h>
 #include <ek/scenex/2d/Button.hpp>
 #include <ek/scenex/base/Interactive.hpp>
 #include <appbox/Ads.hpp>
@@ -12,7 +12,7 @@
 namespace ek::uitest {
 
 void runScreenshotScript() {
-    Locator::ref<Ads>().cheat_RemoveAds();
+    ads_instance->cheat_RemoveAds();
     setTimeout([] {
         screenshot("trails");
         click({"controls", ">"});

@@ -46,7 +46,7 @@ SampleIntegrations::SampleIntegrations() :
 
     pos.y += 10.0f;
     btn = createButton("INTERSTITIAL AD", [] {
-        Locator::ref<Ads>().gameOver([] {
+        g_ads->gameOver([] {
             // TODO:
         });
     });
@@ -56,7 +56,7 @@ SampleIntegrations::SampleIntegrations() :
     pos.y += spaceY;
 
     btn = createButton("VIDEO AD", [] {
-        Locator::ref<Ads>().showRewardVideo([](bool rewarded) {
+        g_ads->showRewardVideo([](bool rewarded) {
             (void)rewarded;
             // TODO:
         });
@@ -67,7 +67,7 @@ SampleIntegrations::SampleIntegrations() :
     pos.y += spaceY;
 
     btn = createButton("REMOVE ADS", [] {
-        Locator::ref<Ads>().purchaseRemoveAds();
+        g_ads->purchaseRemoveAds();
     });
     setPosition(btn, pos);
     getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
