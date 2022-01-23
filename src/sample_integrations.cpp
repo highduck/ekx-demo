@@ -112,7 +112,7 @@ void SampleIntegrations::initializePlugins() {
     adHelperConfig.key1 = "_ads_removed_key";
     adHelperConfig.val1 = 98765;
 
-    Locator::create<Ads>(adHelperConfig);
+    ads_init(adHelperConfig);
 
     ek_game_services_init();
 }
