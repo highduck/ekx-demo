@@ -6,7 +6,6 @@
 #include <ek/admob.h>
 #include <appbox/Ads.hpp>
 #include "sample_integrations.hpp"
-#include <ek/util/ServiceLocator.hpp>
 
 namespace ek {
 
@@ -75,9 +74,8 @@ SampleIntegrations::SampleIntegrations() :
     pos.y += spaceY;
 
     btn = createButton("CRASH ME", [] {
-        SampleIntegrations* s = Locator::get<SampleIntegrations>();
-        // for sure we have not register this sample globally ;)
-        s->title = "";
+        // simple null-pointer abort
+        ((SampleIntegrations*)nullptr)->title = "";
     });
 
     setPosition(btn, pos);

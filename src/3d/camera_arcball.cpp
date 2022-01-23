@@ -4,7 +4,7 @@
 #include <ek/scenex/3d/Camera3D.hpp>
 #include <ek/scenex/3d/Transform3D.hpp>
 #include <ek/scenex/InteractionSystem.hpp>
-#include <ek/util/ServiceLocator.hpp>
+
 #include <ek/scenex/app/input_controller.hpp>
 
 namespace ek {

@@ -2,7 +2,7 @@
 
 #include "sample_base.hpp"
 #include <ek/scenex/AudioManager.hpp>
-#include <ek/util/ServiceLocator.hpp>
+
 #include <ek/scenex/2d/Display2D.hpp>
 #include <ek/scenex/2d/Transform2D.hpp>
 #include <ek/scenex/base/Node.hpp>

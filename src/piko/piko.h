@@ -2,7 +2,7 @@
 
 #include <ek/math.h>
 #include <ek/time.h>
-#include <ek/util/ServiceLocator.hpp>
+
 #include <algorithm>
 
 namespace ek::piko {

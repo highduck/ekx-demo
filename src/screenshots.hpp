@@ -1,7 +1,7 @@
 #pragma once
 
 #include <ek/app.h>
-#include <ek/util/ServiceLocator.hpp>
+
 #include <ek/scenex/app/uitest.hpp>
 #include <ek/scenex/Localization.hpp>
 #include <ek/assert.h>
