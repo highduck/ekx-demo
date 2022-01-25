@@ -3,7 +3,7 @@
 #include <ek/app.h>
 
 #include <ek/scenex/app/uitest.hpp>
-#include <ek/scenex/Localization.hpp>
+#include <ekx/app/localization.h>
 #include <ek/assert.h>
 #include <ek/scenex/2d/Button.hpp>
 #include <ek/scenex/base/Interactive.hpp>

@@ -5,7 +5,7 @@
 #include <ek/time.h>
 #include <ek/scenex/3d/RenderSystem3D.hpp>
 #include <ek/scenex/base/Node.hpp>
-#include <ek/scenex/base/TimeLayer.hpp>
+#include <ekx/app/time_layers.h>
 #include <ek/scenex/SceneFactory.hpp>
 #include <ek/scenex/3d/Light3D.hpp>
 #include <ek/scenex/3d/StaticMesh.hpp>
@@ -106,7 +106,7 @@ void Sample3D::update(float dt) {
 void Sample3D::draw() {
     SampleBase::draw();
 
-    const float dt = TimeLayer::Root->dt;
+    const float dt = g_time_layers->dt;
 
     for (auto e: ecs::view<test_rotation_comp>()) {
         auto& tr = e.get<Transform3D>();

@@ -35,9 +35,3 @@ public:
 };
 
 }
-
-namespace ek {
-EK_TYPE_INDEX_T(ScriptBase, piko::book , 1);
-EK_TYPE_INDEX_T(ScriptBase, piko::diamonds , 2);
-EK_TYPE_INDEX_T(ScriptBase, piko::dna , 3);
-}

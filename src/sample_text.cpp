@@ -106,8 +106,8 @@ SampleText::SampleText() :
 }
 
 void SampleText::prepareInternalResources() {
-    AssetManager* am = g_game_app->asset_manager_;
-    auto* ttfFont = new TrueTypeFont(am->scale_factor, 48, H("default_glyph_cache"));
+    const float scale_factor = g_game_app->asset_manager.scale_factor;
+    auto* ttfFont = new TrueTypeFont(scale_factor, 48, H("default_glyph_cache"));
     ttfFont->loadDeviceFont("Arial Unicode MS");
 
     R(Font) native = R_FONT(H("native"));

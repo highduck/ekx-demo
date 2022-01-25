@@ -22,7 +22,7 @@
 #include <ek/scenex/2d/Camera2D.hpp>
 #include <ek/scenex/2d/Display2D.hpp>
 #include <ek/log.h>
-#include <ek/scenex/AudioManager.hpp>
+#include <ekx/app/audio_manager.h>
 #include <ek/scenex/3d/Scene3D.h>
 
 #ifdef EK_UITEST
@@ -46,7 +46,7 @@ std::unique_ptr<SampleBase> currentSample = nullptr;
 ecs::EntityApi tfSampleTitle;
 ecs::EntityApi tfFPS = nullptr;
 int prevFPS = 0;
-FpsMeter fpsMeter;
+fps_counter fps_cnt = {};
 
 void setCurrentSample(int index);
 
@@ -116,8 +116,8 @@ void DemoApp::onUpdateFrame(float dt) {
         currentSample->update(dt);
     }
     if (tfFPS) {
-        fpsMeter.update(dt);
-        auto fps = (int) fpsMeter.getAverageFPS();
+        fps_counter_update(&fps_cnt, dt);
+        auto fps = (int) fps_cnt.average;
         if (fps != prevFPS) {
             prevFPS = fps;
             tfFPS.get<Display2D>().get<Text2D>().text = String::format("FPS: %d", fps);
@@ -130,7 +130,7 @@ void DemoApp::onPreRender() {
 }
 
 void DemoApp::onRenderSceneBefore() {
-    renderScene3D(display);
+    renderScene3D(&display.info);
 
     if (started_ && currentSample) {
         currentSample->draw();
@@ -139,7 +139,7 @@ void DemoApp::onRenderSceneBefore() {
 
 void DemoApp::onAppStart() {
 //    setup_game(w, game);
-    EK_DEBUG("Start Demo: prepareInternalResources");
+    log_debug("Start Demo: prepareInternalResources");
     SampleText::prepareInternalResources();
 
     SampleBase::samplesContainer = createNode2D(H("sample"));
@@ -172,10 +172,10 @@ void DemoApp::onAppStart() {
 
     append(root, controls);
 
-    EK_DEBUG("Start Demo: initSamples");
+    log_debug("Start Demo: initSamples");
     initSamples();
 
-    g_audio->play_music(H("sfx/music1"));
+    play_music(H("sfx/music1"));
 }
 
 DemoApp::~DemoApp() = default;

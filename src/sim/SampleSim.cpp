@@ -125,7 +125,7 @@ void SampleSim::draw() {
 void SampleSim::update(float dt) {
     SampleBase::update(dt);
 
-    sim::update_motion_system(TimeLayer::Game->dt);
+    sim::update_motion_system(g_time_layers[TIME_LAYER_GAME].dt);
 }
 
 void SampleSim::updateCountLabel() const {

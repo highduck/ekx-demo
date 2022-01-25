@@ -5,7 +5,7 @@
 #include <ek/scenex/3d/Transform3D.hpp>
 #include <ek/scenex/InteractionSystem.hpp>
 
-#include <ek/scenex/app/input_controller.hpp>
+#include <ekx/app/input_state.h>
 
 namespace ek {
 
@@ -45,11 +45,10 @@ void updateCameraArcBall(float dt) {
         camera_transform.position = add_vec3(camera_transform.position, translation);
 
         auto dd = 0.0f;
-        auto* input = g_input_controller;
-        if (input->is_key(EK_KEYCODE_W)) {
+        if (is_key(EK_KEYCODE_W)) {
             dd -= 10.0f * dt;
         }
-        if (input->is_key(EK_KEYCODE_S)) {
+        if (is_key(EK_KEYCODE_S)) {
             dd += 10.0f * dt;
         }
         arc_ball.distance = fmaxf(arc_ball.distance + dd, 0.0f);

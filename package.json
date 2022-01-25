@@ -6,7 +6,7 @@
         "postinstall": "cmake-build",
         "build:web": "ekx web clean --verbose",
         "build:android": "ekx android bundle clean --verbose",
-        "build:assets:dev": "ekx assets --dev",
+        "build:assets:dev": "ekx assets --dev -v",
         "clean": "rimraf ./build ./export ./.firebase"
     },
     "dependencies": {

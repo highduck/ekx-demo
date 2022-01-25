@@ -157,7 +157,7 @@ diamonds::~diamonds() {
 }
 
 void diamonds::onPreRender() {
-    time += TimeLayer::Root->dt;
+    time += g_time_layers->dt;
     float t = time;
     auto info = sg_query_image_info(rt);
     int w = info.width;

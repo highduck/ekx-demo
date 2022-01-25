@@ -1,7 +1,7 @@
 #pragma once
 
 #include "sample_base.hpp"
-#include <ek/scenex/AudioManager.hpp>
+#include <ekx/app/audio_manager.h>
 
 #include <ek/scenex/2d/Display2D.hpp>
 #include <ek/scenex/2d/Transform2D.hpp>
@@ -48,7 +48,7 @@ public:
 
     static void startMusicTrack() {
         string_hash_t music = ((trackIndex & 1) == 0) ? H("sfx/music1") : H("sfx/music2");
-        g_audio->play_music(music);
+        play_music(music);
     }
 };
 
