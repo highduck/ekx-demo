@@ -1,4 +1,5 @@
 #include "minimal.hpp"
+#include "ek/scenex/base/NodeEvents.hpp"
 #include <ek/scenex/SceneFactory.hpp>
 #include <ek/scenex/base/Interactive.hpp>
 #include <ek/scenex/2d/Button.hpp>
@@ -7,13 +8,12 @@
 namespace ek {
 
 Text2D& addText(ecs::EntityApi e, const char* text) {
-    auto* tf = new Text2D();
+    auto* tf = text2d_setup(e.index);
     tf->format.font = R_FONT(H("mini"));
     tf->format.size = 14;
     tf->format.addShadow(COLOR_BLACK, 8);
     tf->text = text;
     tf->format.setAlignment(Alignment::Center);
-    e.get_or_create<Display2D>().drawable.reset(tf);
     return *tf;
 }
 
@@ -25,7 +25,10 @@ ecs::EntityApi createButton(const char* label, const std::function<void()>& fn) 
     tf.hitFullBounds = true;
     tf.rect = {{-20, -20, 40, 40}};
     e.assign<Interactive>().cursor = EK_MOUSE_CURSOR_BUTTON;
-    e.assign<Button>().clicked += fn;
+    e.assign<Button>();
+    e.assign<NodeEventHandler>().on(BUTTON_EVENT_CLICK, [fn](const NodeEventData& event) {
+        fn();
+    });
     return e;
 }
 

@@ -11,7 +11,7 @@ namespace ek {
 
 void updateCameraArcBall(float dt) {
 
-    const auto* im = g_interaction_system;
+    const auto* im = &g_interaction_system;
     static vec2_t prev_pointer = {};
     static bool prev_down = false;
 

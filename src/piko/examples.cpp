@@ -7,8 +7,8 @@
 
 namespace ek::piko {
 
-void book::draw() {
-
+void draw_book(entity_t e) {
+    (void)e;
     canvas_set_empty_image();
     canvas_quad_color(0, 0, 128, 128, COLOR_BLACK);
 
@@ -40,7 +40,9 @@ void book::draw() {
     canvas_restore_transform();
 }
 
-void dna::draw() {
+void draw_dna(entity_t e) {
+    (void)e;
+
     float t = time();
 
     /*
@@ -131,16 +133,31 @@ void dna::draw() {
 //        end
 //flip()goto _
 
-void diamonds::draw() {
-    auto info = sg_query_image_info(rt);
-    canvas_set_image(rt);
+void draw_diamonds(entity_t e) {
+    auto& d = ecs::EntityApi{e}.get<diamonds>();
+    if(!d.rt.id) {
+        d.start();
+    }
+
+    auto info = sg_query_image_info(d.rt);
+    canvas_set_image(d.rt);
     canvas_set_image_rect(rect_01());
     canvas_quad(0, 0, (float) info.width, (float) info.height);
 //    recorder.render();
 }
 
-diamonds::diamonds() {
-//        recorder{"result", {0, 0, 512 * 2 / 2, 512 * 2 / 2}}
+diamonds::diamonds() = default;
+
+diamonds::~diamonds() {
+    if(pass.id) sg_destroy_pass(pass);
+    if(rt.id) {
+        sg_destroy_image(rt);
+        g_game_app->dispatcher.listeners.remove(this);
+    }
+}
+
+void diamonds::start() {
+    //        recorder{"result", {0, 0, 512 * 2 / 2, 512 * 2 / 2}}
     rt = ek_gfx_make_render_target(128, 128, nullptr);
     g_game_app->dispatcher.listeners.push_back(this);
 
@@ -148,12 +165,6 @@ diamonds::diamonds() {
     passDesc.color_attachments[0].image = rt;
     passDesc.label = "diamonds-rt-pass";
     pass = sg_make_pass(passDesc);
-}
-
-diamonds::~diamonds() {
-    sg_destroy_pass(pass);
-    sg_destroy_image(rt);
-    g_game_app->dispatcher.listeners.remove(this);
 }
 
 void diamonds::onPreRender() {

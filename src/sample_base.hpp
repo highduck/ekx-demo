@@ -1,6 +1,5 @@
 #pragma once
 
-#include <string>
 #include <ecxx/ecxx.hpp>
 
 namespace ek {

@@ -15,12 +15,11 @@ struct AttractorsState {
 
 void update_motion_system(float dt) {
     FixedArray<AttractorsState, 10> attractors;
-    const auto& w = ecs::the_world;
     for (auto e_ : ecs::view<attractor_t>()) {
         const auto e = e_.index;
         attractors.push_back(AttractorsState{
-            w.get<attractor_t>(e),
-            w.get<Transform2D>(e).getPosition()
+           ecx.get<attractor_t>(e),
+           ecx.get<Transform2D>(e).getPosition()
         });
     }
     const auto sz = attractors.size();
@@ -30,8 +29,8 @@ void update_motion_system(float dt) {
     const aabb2_t bounds = aabb2_from_rect(rect_wh(WIDTH, HEIGHT));
     for (auto e_ : ecs::view<motion_t>()) {
         auto e = e_.index;
-        auto& mot = w.get<motion_t>(e);
-        auto& tra = w.get<Transform2D>(e);
+        auto& mot = ecx.get<motion_t>(e);
+        auto& tra = ecx.get<Transform2D>(e);
 
         auto p = tra.getPosition();
         auto v = mot.velocity;
@@ -40,8 +39,8 @@ void update_motion_system(float dt) {
             const auto attractor = attrs[i];
             const auto diff = attractor.position - p;
             const auto len = length_vec2(diff);
-            const float factor = 1 - saturate(len / attractor.props.radius);
-            v += dt * attractor.props.force * factor * factor * diff / len;
+            const float factor = 1.0f - saturate(len / attractor.props.radius);
+            v += (dt * attractor.props.force * factor * factor / len) * diff;
         }
 
         p += dt * mot.velocity;

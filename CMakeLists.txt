@@ -43,7 +43,7 @@ target_link_libraries(${PROJECT_NAME}
 add_definitions("-ffast-math -fno-exceptions -fno-rtti -Wall -Wextra")
 
 if (CMAKE_BUILD_TYPE MATCHES Debug)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g")
     #    add_definitions(-DNDEBUG)
 else ()
     #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Oz -ffast-math -fno-exceptions -fno-rtti -Wall -Wextra")

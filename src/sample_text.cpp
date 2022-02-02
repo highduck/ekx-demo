@@ -13,7 +13,7 @@ namespace ek {
 
 ecs::EntityApi createText(string_hash_t name, string_hash_t font, const char* text) {
     auto e = createNode2D(name);
-    auto* tf = new Text2D();
+    auto* tf = text2d_setup(e.index);
 
     tf->format.font = R_FONT(font);
     tf->format.size = 48.0f;
@@ -47,7 +47,6 @@ ecs::EntityApi createText(string_hash_t name, string_hash_t font, const char* te
     tf->format.layersCount = 4;
 
     tf->text = text;
-    e.assign<Display2D>().drawable.reset(tf);
 
     return e;
 }
@@ -56,18 +55,17 @@ ecs::EntityApi createScreenZones() {
     rect_t resolution = rect_wh(360, 480);
     auto zones = createNode2D(H("zones"));
     auto e = createNode2D(H("zone"));
-    auto* q = new Quad2D();
+    auto* q = quad2d_setup(e.index);
     q->setGradientVertical(COLOR_WHITE, ARGB(0x77FFFFFF));
     q->rect = resolution;
-    e.assign<Display2D>(q);
     e.get<Transform2D>().color.scale = ARGB(0x33FF00FF);
     e.assign<LayoutRect>().fill(true, true).doSafeInsets = true;
     append(zones, e);
+
     e = createNode2D(H("safe_zone"));
-    q = new Quad2D();
+    q = quad2d_setup(e.index);
     q->setGradientVertical(COLOR_WHITE, ARGB(0x77FFFFFF));
     q->rect = resolution;
-    e.assign<Display2D>(q);
     e.get<Transform2D>().color.scale = ARGB(0x3300FF00);
     append(zones, e);
     return zones;
@@ -81,26 +79,26 @@ SampleText::SampleText() :
 
     auto bmText = createText(H("bmfont"), H("TickingTimebombBB"),
                              "88:88:88\n-=98");
-    getDrawable<Text2D>(bmText).format.setAlignment(Alignment::Center);
-    getDrawable<Text2D>(bmText).format.size = 24;
-    getDrawable<Text2D>(bmText).borderColor = COLOR_BLACK;
-    getDrawable<Text2D>(bmText).rect = {{0, 0, 360 - 40, 100}};
+    bmText.get<Text2D>().format.setAlignment(Alignment::Center);
+    bmText.get<Text2D>().format.size = 24;
+    bmText.get<Text2D>().borderColor = COLOR_BLACK;
+    bmText.get<Text2D>().rect = {{0, 0, 360 - 40, 100}};
 
     setPosition(bmText, vec2(20, 20));
     append(container, bmText);
 
     auto ttfText = createText(H("TTF-Cousine-Regular"), H("Cousine-Regular"),
                               u8"£ü÷\n< Приветики >\n你好\nनमस्कार\nこんにちは");
-    getDrawable<Text2D>(ttfText).format.setAlignment(Alignment::Right | Alignment::Top);
-    getDrawable<Text2D>(ttfText).format.leading = -8;
-    getDrawable<Text2D>(ttfText).format.setTextColor(ARGB(0xFF00FF00));
+    ttfText.get<Text2D>().format.setAlignment(Alignment::Right | Alignment::Top);
+    ttfText.get<Text2D>().format.leading = -8;
+    ttfText.get<Text2D>().format.setTextColor(ARGB(0xFF00FF00));
     setPosition(ttfText, vec2(360 - 20, 120));
     append(container, ttfText);
 
     auto ttfText2 = createText(H("TTF-Comfortaa-Regular"), H("Comfortaa-Regular"),
                                u8"I don't know KERN TABLE.\nНо кириллица тоже есть");
-    getDrawable<Text2D>(ttfText2).format.setTextColor(ARGB(0xFFFF00FF));
-    getDrawable<Text2D>(ttfText2).format.size = 24;
+    ttfText2.get<Text2D>().format.setTextColor(ARGB(0xFFFF00FF));
+    ttfText2.get<Text2D>().format.size = 24;
     setPosition(ttfText2, vec2(20, 340));
     append(container, ttfText2);
 }

@@ -12,6 +12,8 @@ public:
 
     void preload() override;
 
+    void terminate() override;
+
 protected:
     void onUpdateFrame(float dt) override;
 

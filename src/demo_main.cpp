@@ -10,6 +10,8 @@
 #include "sample_audio.hpp"
 #include "sim/Motion.hpp"
 #include "3d/camera_arcball.hpp"
+#include "ek/goodies/helpers/follow.h"
+#include "piko/examples.h"
 
 #include <ek/rnd.h>
 #include <ek/scenex/systems/main_flow.hpp>
@@ -40,9 +42,11 @@ void ek_app_main() {
 
 namespace ek {
 
-Array<std::function<SampleBase*()>> sampleFactory;
+typedef SampleBase*(*sample_factory_fn)();
+
+Array<sample_factory_fn> sampleFactory;
 int currentSampleIndex = 0;
-std::unique_ptr<SampleBase> currentSample = nullptr;
+SampleBase* currentSample = nullptr;
 ecs::EntityApi tfSampleTitle;
 ecs::EntityApi tfFPS = nullptr;
 int prevFPS = 0;
@@ -51,14 +55,14 @@ fps_counter fps_cnt = {};
 void setCurrentSample(int index);
 
 void initSamples() {
-    sampleFactory.emplace_back([] { return new SampleSim(); });
-    sampleFactory.emplace_back([] { return new SamplePiko(); });
-    //sampleFactory.emplace_back([] { return new SampleFlash("test1"); });
-    sampleFactory.emplace_back([] { return new SampleFlash("test2"); });
-    sampleFactory.emplace_back([] { return new Sample3D(); });
-    sampleFactory.emplace_back([] { return new SampleAudio(); });
-    sampleFactory.emplace_back([] { return new SampleIntegrations(); });
-    sampleFactory.emplace_back([] { return new SampleText(); });
+    sampleFactory.push_back([] () -> SampleBase* { return new SampleSim(); });
+    sampleFactory.push_back([]() -> SampleBase* { return new SamplePiko(); });
+    sampleFactory.push_back([]() -> SampleBase* { return new SampleFlash("test1", "TEST 1"); });
+    sampleFactory.push_back([]() -> SampleBase* { return new SampleFlash("test2", "TEST 2"); });
+    sampleFactory.push_back([]() -> SampleBase* { return new Sample3D(); });
+    sampleFactory.push_back([]() -> SampleBase* { return new SampleAudio(); });
+    sampleFactory.push_back([]() -> SampleBase* { return new SampleIntegrations(); });
+    sampleFactory.push_back([]() -> SampleBase* { return new SampleText(); });
     setCurrentSample(0);
 }
 
@@ -71,8 +75,9 @@ void setCurrentSample(int index) {
     if (currentSampleIndex < 0) {
         currentSampleIndex = samplesCount - 1;
     }
-    currentSample.reset(sampleFactory[currentSampleIndex]());
-    getDrawable<Text2D>(tfSampleTitle).text = currentSample->title;
+    delete currentSample;
+    currentSample = sampleFactory[currentSampleIndex]();
+    tfSampleTitle.get<Text2D>().text = currentSample->title;
 }
 
 void scrollSample(int delta) {
@@ -99,6 +104,9 @@ void DemoApp::initialize() {
     ECX_COMPONENT(sim::attractor_t);
     ECX_COMPONENT(CameraArcBall);
     ECX_COMPONENT(test_rotation_comp);
+    ECX_COMPONENT(target_follow_comp);
+    ECX_COMPONENT(mouse_follow_comp);
+    ECX_COMPONENT(piko::diamonds);
 
     auto& cam = Camera2D::Main.get<Camera2D>();
     cam.clearColorEnabled = true;
@@ -120,7 +128,7 @@ void DemoApp::onUpdateFrame(float dt) {
         auto fps = (int) fps_cnt.average;
         if (fps != prevFPS) {
             prevFPS = fps;
-            tfFPS.get<Display2D>().get<Text2D>().text = String::format("FPS: %d", fps);
+            tfFPS.get<Text2D>().text = String::format("FPS: %d", fps);
         }
     }
 }
@@ -157,7 +165,7 @@ void DemoApp::onAppStart() {
     {
         tfFPS = createNode2D(H("fps"));
         addText(tfFPS, "");
-        tfFPS.get<Display2D>().get<Text2D>().format.alignment = vec2(0, 0);
+        tfFPS.get<Text2D>().format.alignment = vec2(0, 0);
         tfFPS.assign<LayoutRect>()
                 .enableAlignX(0.0, 10)
                 .enableAlignY(0.0, 10);
@@ -176,6 +184,11 @@ void DemoApp::onAppStart() {
     initSamples();
 
     play_music(H("sfx/music1"));
+}
+
+void DemoApp::terminate() {
+    delete currentSample;
+    currentSample = nullptr;
 }
 
 DemoApp::~DemoApp() = default;

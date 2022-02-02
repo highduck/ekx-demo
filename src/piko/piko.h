@@ -3,8 +3,6 @@
 #include <ek/math.h>
 #include <ek/time.h>
 
-#include <algorithm>
-
 namespace ek::piko {
 
 static color_t palette[] = {
@@ -44,9 +42,12 @@ inline static float time() {
 
 inline static float mid(float x, float y, float z = 0.0f) {
     if (x > y) {
-        std::swap(x, y);
+        const float tmp = x;
+        x = y;
+        y = tmp;
     }
-    return std::max(x, std::min(y, z));
+    const float yz = MIN(y, z);
+    return MAX(x, yz);
 }
 
 inline static float sqr(float a) {

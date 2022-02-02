@@ -22,7 +22,7 @@ SampleIntegrations::SampleIntegrations() :
         ek_leaderboard_submit("CgkIpvfh798IEAIQAA", ++bestScore);
     });
     setPosition(btn, pos);
-    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -31,7 +31,7 @@ SampleIntegrations::SampleIntegrations() :
         ek_leaderboard_show("CgkIpvfh798IEAIQAA");
     });
     setPosition(btn, pos);
-    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -39,7 +39,7 @@ SampleIntegrations::SampleIntegrations() :
         ek_achievement_show();
     });
     setPosition(btn, pos);
-    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -50,7 +50,7 @@ SampleIntegrations::SampleIntegrations() :
         });
     });
     setPosition(btn, pos);
-    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -61,7 +61,7 @@ SampleIntegrations::SampleIntegrations() :
         });
     });
     setPosition(btn, pos);
-    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -69,7 +69,7 @@ SampleIntegrations::SampleIntegrations() :
         g_ads->purchaseRemoveAds();
     });
     setPosition(btn, pos);
-    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -79,7 +79,7 @@ SampleIntegrations::SampleIntegrations() :
     });
 
     setPosition(btn, pos);
-    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 }

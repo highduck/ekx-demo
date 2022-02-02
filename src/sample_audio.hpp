@@ -25,7 +25,7 @@ public:
             startMusicTrack();
         });
         setPosition(btn, pos);
-        getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+        btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
         append(container, btn);
         pos.y += spaceY;
 
@@ -33,7 +33,7 @@ public:
             auph_vibrate(10);
         });
         setPosition(btn, pos);
-        getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+        btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
         append(container, btn);
         pos.y += spaceY;
 
@@ -41,7 +41,7 @@ public:
             auph_vibrate(100);
         });
         setPosition(btn, pos);
-        getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+        btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
         append(container, btn);
         pos.y += spaceY;
     }

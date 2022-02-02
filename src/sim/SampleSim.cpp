@@ -8,8 +8,7 @@
 #include <ek/scenex/base/Node.hpp>
 #include <ek/scenex/2d/Display2D.hpp>
 #include <ek/goodies/helpers/Trail2D.hpp>
-#include <ek/goodies/helpers/mouse_follow_script.hpp>
-#include <ek/goodies/helpers/target_follow_script.hpp>
+#include <ek/goodies/helpers/follow.h>
 #include <ui/minimal.hpp>
 #include <ek/scenex/base/DestroyTimer.hpp>
 
@@ -34,10 +33,9 @@ void add_objects(ecs::EntityApi game, unsigned addCount) {
         auto& mot = q.assign<motion_t>();
         mot.velocity = vec2(random_range_f(-50.0f, 50.0f), random_range_f(-50.0f, 50.0f));
 
-        auto* quad = new Quad2D();
+        auto* quad = quad2d_setup(q.index);
         quad->rect = rect(-0.25f, -0.25f, 0.5f, 0.5f);
         quad->setColor(RGB(0xFFFFFF));
-        q.assign<Display2D>(quad);
 
         append(game, q);
 
@@ -45,10 +43,12 @@ void add_objects(ecs::EntityApi game, unsigned addCount) {
         trail_data.drain_speed = 1.0f;
 
         auto trailRenderer = createNode2D();
-        auto* renderer = new TrailRenderer2D(q);
-        renderer->width = 0.25f;
-        renderer->minWidth = 0.0f;
-        trailRenderer.assign<Display2D>(renderer);
+
+        auto& renderer = trailRenderer.assign<TrailRenderer2D>();
+        renderer.target = q;
+        renderer.width = 0.25f;
+        renderer.minWidth = 0.0f;
+        trailRenderer.assign<Display2D>().draw = trail_renderer2d_draw;
         append(game, trailRenderer);
     }
 }
@@ -66,11 +66,11 @@ SampleSim::SampleSim() {
     append(container, particlesContainer);
 
     auto mouse_entity = createNode2D(H("Mouse"));
-    assignScript<mouse_follow_script>(mouse_entity);
+    mouse_entity.assign<mouse_follow_comp>();
 
     auto attractor_entity = createNode2D(H("Follower"));
     attractor_entity.assign<attractor_t>();
-    auto& attr = assignScript<target_follow_script>(attractor_entity);
+    auto& attr = attractor_entity.assign<target_follow_comp>();
     attr.target_entity = ecs::EntityRef{mouse_entity};
     attr.k = 0.1f;
     attractor_entity.get<attractor_t>().radius = 100.0f;
@@ -104,7 +104,7 @@ SampleSim::SampleSim() {
         }
     });
     btn.get<Transform2D>().setPosition(360.0f / 2.0f, 60.0f);
-    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
     append(container, btn);
 
     btn = createButton("RESET", [this] {
@@ -114,7 +114,7 @@ SampleSim::SampleSim() {
         updateCountLabel();
     });
     btn.get<Transform2D>().setPosition(360.0f / 2.0f, 120.0f);
-    getDrawable<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
     append(container, btn);
 }
 
@@ -125,11 +125,13 @@ void SampleSim::draw() {
 void SampleSim::update(float dt) {
     SampleBase::update(dt);
 
+    update_mouse_follow_comps();
+    update_target_follow_comps(dt);
     sim::update_motion_system(g_time_layers[TIME_LAYER_GAME].dt);
 }
 
 void SampleSim::updateCountLabel() const {
-    countLabel.get<Display2D>().get<Text2D>().text = String::format("%d", particlesCount);
+    countLabel.get<Text2D>().text = String::format("%d", particlesCount);
 }
 
 }
