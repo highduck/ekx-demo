@@ -131,7 +131,7 @@ void SampleSim::update(float dt) {
 }
 
 void SampleSim::updateCountLabel() const {
-    countLabel.get<Text2D>().text = String::format("%d", particlesCount);
+    setTextF(countLabel.index, "%d", particlesCount);
 }
 
 }

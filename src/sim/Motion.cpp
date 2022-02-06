@@ -18,8 +18,8 @@ void update_motion_system(float dt) {
     for (auto e_ : ecs::view<attractor_t>()) {
         const auto e = e_.index;
         attractors.push_back(AttractorsState{
-           ecx.get<attractor_t>(e),
-           ecx.get<Transform2D>(e).getPosition()
+           ecs::get<attractor_t>(e),
+           ecs::get<Transform2D>(e).getPosition()
         });
     }
     const auto sz = attractors.size();
@@ -29,8 +29,8 @@ void update_motion_system(float dt) {
     const aabb2_t bounds = aabb2_from_rect(rect_wh(WIDTH, HEIGHT));
     for (auto e_ : ecs::view<motion_t>()) {
         auto e = e_.index;
-        auto& mot = ecx.get<motion_t>(e);
-        auto& tra = ecx.get<Transform2D>(e);
+        auto& mot = ecs::get<motion_t>(e);
+        auto& tra = ecs::get<Transform2D>(e);
 
         auto p = tra.getPosition();
         auto v = mot.velocity;

@@ -77,7 +77,7 @@ void setCurrentSample(int index) {
     }
     delete currentSample;
     currentSample = sampleFactory[currentSampleIndex]();
-    tfSampleTitle.get<Text2D>().text = currentSample->title;
+    set_text(tfSampleTitle, currentSample->title);
 }
 
 void scrollSample(int delta) {
@@ -128,7 +128,7 @@ void DemoApp::onUpdateFrame(float dt) {
         auto fps = (int) fps_cnt.average;
         if (fps != prevFPS) {
             prevFPS = fps;
-            tfFPS.get<Text2D>().text = String::format("FPS: %d", fps);
+            setTextF(tfFPS.index, "FPS: %d", fps);
         }
     }
 }

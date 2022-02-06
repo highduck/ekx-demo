@@ -152,7 +152,9 @@ diamonds::~diamonds() {
     if(pass.id) sg_destroy_pass(pass);
     if(rt.id) {
         sg_destroy_image(rt);
-        g_game_app->dispatcher.listeners.remove(this);
+        if(g_game_app) {
+            g_game_app->dispatcher.listeners.remove(this);
+        }
     }
 }
 

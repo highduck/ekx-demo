@@ -17,3 +17,4 @@ public:
 
 }
 
+ECX_COMP_TYPE_SPARSE(ek::test_rotation_comp)

@@ -12,8 +12,8 @@ Text2D& addText(ecs::EntityApi e, const char* text) {
     tf->format.font = R_FONT(H("mini"));
     tf->format.size = 14;
     tf->format.addShadow(COLOR_BLACK, 8);
-    tf->text = text;
     tf->format.setAlignment(Alignment::Center);
+    set_text(e, text);
     return *tf;
 }
 
@@ -26,7 +26,7 @@ ecs::EntityApi createButton(const char* label, const std::function<void()>& fn) 
     tf.rect = {{-20, -20, 40, 40}};
     e.assign<Interactive>().cursor = EK_MOUSE_CURSOR_BUTTON;
     e.assign<Button>();
-    e.assign<NodeEventHandler>().on(BUTTON_EVENT_CLICK, [fn](const NodeEventData& event) {
+    e.assign<NodeEventHandler>().on(BUTTON_EVENT_CLICK, [fn](const NodeEventData&) {
         fn();
     });
     return e;

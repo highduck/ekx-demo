@@ -46,7 +46,7 @@ ecs::EntityApi createText(string_hash_t name, string_hash_t font, const char* te
 
     tf->format.layersCount = 4;
 
-    tf->text = text;
+    set_text(e, text);
 
     return e;
 }

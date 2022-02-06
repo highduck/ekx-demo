@@ -121,7 +121,7 @@ void Sample3D::draw() {
     }
 
     if (main_scene_3d) {
-        auto light = find(main_scene_3d, H("light"));
+        ecs::EntityApi light = find(main_scene_3d, H("light"));
         if (light) {
             static float lt = 0.0f;
             lt += dt;
