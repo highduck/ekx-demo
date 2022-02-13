@@ -10,7 +10,7 @@ SampleBase::SampleBase() {
 }
 
 SampleBase::~SampleBase() {
-    destroyNode(container);
+    destroy_node(container);
 }
 
 void SampleBase::draw() {}
@@ -19,6 +19,6 @@ void SampleBase::update(float dt) {
     (void)dt;
 }
 
-ecs::EntityApi SampleBase::samplesContainer{};
+ecs::Entity SampleBase::samplesContainer{};
 
 }

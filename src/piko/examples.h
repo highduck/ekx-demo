@@ -1,7 +1,7 @@
 #pragma once
 
 #include <ek/gfx.h>
-#include <ecxx/ecxx.hpp>
+#include <ecx/ecx.hpp>
 #include <ek/scenex/app/GameAppListener.hpp>
 
 namespace ek::piko {

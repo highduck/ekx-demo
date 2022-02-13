@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ecxx/ecxx.hpp>
+#include <ecx/ecx.hpp>
 
 namespace ek {
 
@@ -15,8 +15,8 @@ public:
     virtual void update(float dt);
 
     const char* title = nullptr;
-    static ecs::EntityApi samplesContainer;
-    ecs::EntityApi container;
+    static ecs::Entity samplesContainer;
+    ecs::Entity container;
 private:
 };
 

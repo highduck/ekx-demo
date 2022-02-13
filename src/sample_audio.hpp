@@ -24,24 +24,24 @@ public:
             ++trackIndex;
             startMusicTrack();
         });
-        setPosition(btn, pos);
-        btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
+        set_position(btn, pos);
+        ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
         append(container, btn);
         pos.y += spaceY;
 
         btn = createButton("VIBRATE 10 MS", [] {
             auph_vibrate(10);
         });
-        setPosition(btn, pos);
-        btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
+        set_position(btn, pos);
+        ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
         append(container, btn);
         pos.y += spaceY;
 
         btn = createButton("VIBRATE 100 MS", [] {
             auph_vibrate(100);
         });
-        setPosition(btn, pos);
-        btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
+        set_position(btn, pos);
+        ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
         append(container, btn);
         pos.y += spaceY;
     }

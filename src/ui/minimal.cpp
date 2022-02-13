@@ -7,8 +7,8 @@
 
 namespace ek {
 
-Text2D& addText(ecs::EntityApi e, const char* text) {
-    auto* tf = text2d_setup(e.index);
+Text2D& addText(ecs::Entity e, const char* text) {
+    auto* tf = text2d_setup(e);
     tf->format.font = R_FONT(H("mini"));
     tf->format.size = 14;
     tf->format.addShadow(COLOR_BLACK, 8);
@@ -17,16 +17,16 @@ Text2D& addText(ecs::EntityApi e, const char* text) {
     return *tf;
 }
 
-ecs::EntityApi createButton(const char* label, const std::function<void()>& fn) {
+ecs::Entity createButton(const char* label, const std::function<void()>& fn) {
     auto e = createNode2D(H(label));
     auto& tf = addText(e, label);
     tf.fillColor = ARGB(0x77000000);
     tf.borderColor = ARGB(0x77FFFFFF);
     tf.hitFullBounds = true;
     tf.rect = {{-20, -20, 40, 40}};
-    e.assign<Interactive>().cursor = EK_MOUSE_CURSOR_BUTTON;
-    e.assign<Button>();
-    e.assign<NodeEventHandler>().on(BUTTON_EVENT_CLICK, [fn](const NodeEventData&) {
+    ecs::add<Interactive>(e).cursor = EK_MOUSE_CURSOR_BUTTON;
+    ecs::add<Button>(e);
+    ecs::add<NodeEventHandler>(e).on(BUTTON_EVENT_CLICK, [fn](const NodeEventData&) {
         fn();
     });
     return e;

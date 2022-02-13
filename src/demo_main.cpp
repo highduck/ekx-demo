@@ -47,8 +47,8 @@ typedef SampleBase*(*sample_factory_fn)();
 Array<sample_factory_fn> sampleFactory;
 int currentSampleIndex = 0;
 SampleBase* currentSample = nullptr;
-ecs::EntityApi tfSampleTitle;
-ecs::EntityApi tfFPS = nullptr;
+ecs::Entity tfSampleTitle;
+ecs::Entity tfFPS = nullptr;
 int prevFPS = 0;
 fps_counter fps_cnt = {};
 
@@ -108,7 +108,7 @@ void DemoApp::initialize() {
     ECX_COMPONENT(mouse_follow_comp);
     ECX_COMPONENT(piko::diamonds);
 
-    auto& cam = Camera2D::Main.get<Camera2D>();
+    auto& cam = ecs::get<Camera2D>(Camera2D::Main);
     cam.clearColorEnabled = true;
     cam.clearColor = vec4_color(ARGB(0xFF666666));
 
@@ -128,7 +128,7 @@ void DemoApp::onUpdateFrame(float dt) {
         auto fps = (int) fps_cnt.average;
         if (fps != prevFPS) {
             prevFPS = fps;
-            setTextF(tfFPS.index, "FPS: %d", fps);
+            set_text_f(tfFPS, "FPS: %d", fps);
         }
     }
 }
@@ -155,18 +155,18 @@ void DemoApp::onAppStart() {
 
     auto prev = createButton("<", [] { scrollSample(-1); });
     auto next = createButton(">", [] { scrollSample(+1); });
-    prev.assign<LayoutRect>().enableAlignX(0, 30);
-    next.assign<LayoutRect>().enableAlignX(1, -30);
+    ecs::add<LayoutRect>(prev).enableAlignX(0, 30);
+    ecs::add<LayoutRect>(next).enableAlignX(1, -30);
 
     tfSampleTitle = createNode2D(H("title"));
     addText(tfSampleTitle, "");
-    tfSampleTitle.assign<LayoutRect>().enableAlignX(0.5);
+    ecs::add<LayoutRect>(tfSampleTitle).enableAlignX(0.5);
 
     {
         tfFPS = createNode2D(H("fps"));
         addText(tfFPS, "");
-        tfFPS.get<Text2D>().format.alignment = vec2(0, 0);
-        tfFPS.assign<LayoutRect>()
+        ecs::get<Text2D>(tfFPS).format.alignment = vec2(0, 0);
+        ecs::add<LayoutRect>(tfFPS)
                 .enableAlignX(0.0, 10)
                 .enableAlignY(0.0, 10);
         append(root, tfFPS);
@@ -176,7 +176,7 @@ void DemoApp::onAppStart() {
     append(controls, tfSampleTitle);
     append(controls, prev);
     append(controls, next);
-    controls.assign<LayoutRect>().enableAlignY(1, -30);
+    ecs::add<LayoutRect>(controls).enableAlignY(1, -30);
 
     append(root, controls);
 

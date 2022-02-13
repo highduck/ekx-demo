@@ -7,7 +7,8 @@
         "build:web": "ekx web clean --verbose",
         "build:android": "ekx android bundle clean --verbose",
         "build:assets:dev": "ekx assets --dev -v",
-        "clean": "rimraf ./build ./export ./.firebase"
+        "clean": "rimraf ./build ./export ./.firebase",
+        "run-web": "ekx web -v --run"
     },
     "dependencies": {
         "@ekx/appbox": "0.0.7",

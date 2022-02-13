@@ -10,39 +10,39 @@ namespace ek {
 
 namespace piko {
 
-void create(ecs::EntityApi container) {
+void create(ecs::Entity container) {
 
-    ecs::EntityApi e;
+    ecs::Entity e;
     e = createNode2D(H("book"));
-    e.assign<Display2D>().callback = draw_book;
+    ecs::add<Display2D>(e).callback = draw_book;
     //ecs::get<transform_2d>(e).scale = {2.0f, 2.0f};
-    e.get<Transform2D>().setPosition(20.0f, 20.0f);
+    ecs::get<Transform2D>(e).set_position(20.0f, 20.0f);
     // TODO: fix scissors stats
     {
-        auto& bounds = e.assign<Bounds2D>();
+        auto& bounds = ecs::add<Bounds2D>(e);
         bounds.rect = rect_wh(128, 128);
         bounds.flags |= BOUNDS_2D_SCISSORS;
     }
     append(container, e);
 
     e = createNode2D(H("dna"));
-    e.assign<Display2D>().callback = draw_dna;
+    ecs::add<Display2D>(e).callback = draw_dna;
 //    ecs::get<transform_2d>(e).scale = {2.0f, 2.0f};
-    e.get<Transform2D>().setPosition(20.0f, 20.0f + 128.0f + 10.0f);
+    ecs::get<Transform2D>(e).set_position(20.0f, 20.0f + 128.0f + 10.0f);
     // TODO: fix scissors stats
     {
-        auto& bounds = e.assign<Bounds2D>();
+        auto& bounds = ecs::add<Bounds2D>(e);
         bounds.rect = rect_wh(128, 128);
         bounds.flags |= BOUNDS_2D_SCISSORS;
     }
     append(container, e);
 
     e = createNode2D(H("diamonds"));
-    e.assign<diamonds>();
-    e.assign<Display2D>().callback = draw_diamonds;
-    e.get<Transform2D>().setPosition(20.0f + 128.0f + 10.0f, 20.0f);
+    ecs::add<diamonds>(e);
+    ecs::add<Display2D>(e).callback = draw_diamonds;
+    ecs::get<Transform2D>(e).set_position(20.0f + 128.0f + 10.0f, 20.0f);
     {
-        auto& bounds = e.assign<Bounds2D>();
+        auto& bounds = ecs::add<Bounds2D>(e);
         bounds.rect = rect_wh(128, 128);
         bounds.flags |= BOUNDS_2D_SCISSORS;
     }

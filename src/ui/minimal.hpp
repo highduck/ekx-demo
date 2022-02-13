@@ -1,15 +1,15 @@
 #pragma once
 
-#include <ecxx/ecxx.hpp>
+#include <ecx/ecx.hpp>
 #include <functional>
 
 namespace ek {
 
-class Text2D;
+struct Text2D;
 
-Text2D& addText(ecs::EntityApi e, const char* text);
+Text2D& addText(ecs::Entity e, const char* text);
 
-ecs::EntityApi createButton(const char* label, const std::function<void()>& fn);
+ecs::Entity createButton(const char* label, const std::function<void()>& fn);
 
 }
 

@@ -21,8 +21,8 @@ SampleIntegrations::SampleIntegrations() :
         static int bestScore = 1;
         ek_leaderboard_submit("CgkIpvfh798IEAIQAA", ++bestScore);
     });
-    setPosition(btn, pos);
-    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
+    set_position(btn, pos);
+    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -30,16 +30,16 @@ SampleIntegrations::SampleIntegrations() :
     btn = createButton("LEADERBOARD", [] {
         ek_leaderboard_show("CgkIpvfh798IEAIQAA");
     });
-    setPosition(btn, pos);
-    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
+    set_position(btn, pos);
+    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
     btn = createButton("ACHIEVEMENTS", [] {
         ek_achievement_show();
     });
-    setPosition(btn, pos);
-    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
+    set_position(btn, pos);
+    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -49,8 +49,8 @@ SampleIntegrations::SampleIntegrations() :
             // TODO:
         });
     });
-    setPosition(btn, pos);
-    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
+    set_position(btn, pos);
+    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -60,16 +60,16 @@ SampleIntegrations::SampleIntegrations() :
             // TODO:
         });
     });
-    setPosition(btn, pos);
-    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
+    set_position(btn, pos);
+    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
     btn = createButton("REMOVE ADS", [] {
         g_ads->purchaseRemoveAds();
     });
-    setPosition(btn, pos);
-    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
+    set_position(btn, pos);
+    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 
@@ -78,8 +78,8 @@ SampleIntegrations::SampleIntegrations() :
         ((SampleIntegrations*)nullptr)->title = "";
     });
 
-    setPosition(btn, pos);
-    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
+    set_position(btn, pos);
+    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
     pos.y += spaceY;
 }

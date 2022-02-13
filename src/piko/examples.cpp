@@ -3,6 +3,7 @@
 #include <ek/canvas.h>
 #include <ek/rnd.h>
 #include <ek/time.h>
+#include <ekx/app/time_layers.h>
 #include <ek/scenex/app/basic_application.hpp>
 
 namespace ek::piko {
@@ -134,7 +135,7 @@ void draw_dna(entity_t e) {
 //flip()goto _
 
 void draw_diamonds(entity_t e) {
-    auto& d = ecs::EntityApi{e}.get<diamonds>();
+    auto& d = ecs::Entity{e}.get<diamonds>();
     if(!d.rt.id) {
         d.start();
     }

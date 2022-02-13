@@ -1,7 +1,7 @@
 #include "Motion.hpp"
 
 #include <ek/scenex/2d/Transform2D.hpp>
-#include <ek/ds/Array.hpp>
+#include <ek/ds/FixedArray.hpp>
 
 namespace ek::sim {
 
@@ -15,8 +15,7 @@ struct AttractorsState {
 
 void update_motion_system(float dt) {
     FixedArray<AttractorsState, 10> attractors;
-    for (auto e_ : ecs::view<attractor_t>()) {
-        const auto e = e_.index;
+    for (auto e : ecs::view<attractor_t>()) {
         attractors.push_back(AttractorsState{
            ecs::get<attractor_t>(e),
            ecs::get<Transform2D>(e).getPosition()
@@ -27,8 +26,7 @@ void update_motion_system(float dt) {
 
     const auto dumpFactor = expf(-6.0f * dt);
     const aabb2_t bounds = aabb2_from_rect(rect_wh(WIDTH, HEIGHT));
-    for (auto e_ : ecs::view<motion_t>()) {
-        auto e = e_.index;
+    for (auto e : ecs::view<motion_t>()) {
         auto& mot = ecs::get<motion_t>(e);
         auto& tra = ecs::get<Transform2D>(e);
 
@@ -61,7 +59,7 @@ void update_motion_system(float dt) {
         }
 
         mot.velocity = v * dumpFactor;
-        tra.setPosition(p);
+        tra.set_position(p);
     }
 }
 

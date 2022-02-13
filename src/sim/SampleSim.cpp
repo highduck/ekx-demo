@@ -22,33 +22,33 @@ inline const float HEIGHT = 480;
 unsigned ParticlesAddCount = 5000;
 unsigned ParticlesMaxCount = 25000;
 
-void add_objects(ecs::EntityApi game, unsigned addCount) {
+void add_objects(ecs::Entity game, unsigned addCount) {
     for (unsigned i = 0; i < addCount; ++i) {
         auto q = createNode2D();
-        q.get<Node>().setTouchable(false);
+        set_touchable(q, false);
         const vec2_t pos = vec2(random_range_f(0.0f, WIDTH),
                                 random_range_f(0.0f, HEIGHT));
-        q.get<Transform2D>().setPosition(pos);
+        ecs::get<Transform2D>(q).set_position(pos);
 
-        auto& mot = q.assign<motion_t>();
+        auto& mot = ecs::add<motion_t>(q);
         mot.velocity = vec2(random_range_f(-50.0f, 50.0f), random_range_f(-50.0f, 50.0f));
 
-        auto* quad = quad2d_setup(q.index);
+        auto* quad = quad2d_setup(q);
         quad->rect = rect(-0.25f, -0.25f, 0.5f, 0.5f);
         quad->setColor(RGB(0xFFFFFF));
 
         append(game, q);
 
-        auto& trail_data = q.assign<Trail2D>();
+        auto& trail_data = ecs::add<Trail2D>(q);
         trail_data.drain_speed = 1.0f;
 
         auto trailRenderer = createNode2D();
 
-        auto& renderer = trailRenderer.assign<TrailRenderer2D>();
+        auto& renderer = ecs::add<TrailRenderer2D>(trailRenderer);
         renderer.target = q;
         renderer.width = 0.25f;
         renderer.minWidth = 0.0f;
-        trailRenderer.assign<Display2D>().draw = trail_renderer2d_draw;
+        ecs::add<Display2D>(trailRenderer).draw = trail_renderer2d_draw;
         append(game, trailRenderer);
     }
 }
@@ -66,29 +66,29 @@ SampleSim::SampleSim() {
     append(container, particlesContainer);
 
     auto mouse_entity = createNode2D(H("Mouse"));
-    mouse_entity.assign<mouse_follow_comp>();
+    ecs::add<mouse_follow_comp>(mouse_entity);
 
     auto attractor_entity = createNode2D(H("Follower"));
-    attractor_entity.assign<attractor_t>();
-    auto& attr = attractor_entity.assign<target_follow_comp>();
-    attr.target_entity = ecs::EntityRef{mouse_entity};
+    ecs::add<attractor_t>(attractor_entity);
+    auto& attr = ecs::add<target_follow_comp>(attractor_entity);
+    attr.target_entity = mouse_entity;
     attr.k = 0.1f;
-    attractor_entity.get<attractor_t>().radius = 100.0f;
-    attractor_entity.get<attractor_t>().force = 5'000.0f;
+    ecs::get<attractor_t>(attractor_entity).radius = 100.0f;
+    ecs::get<attractor_t>(attractor_entity).force = 5'000.0f;
 
     append(container, mouse_entity);
     append(container, attractor_entity);
 
     attractor_entity = createNode2D(H("Centroid"));
-    attractor_entity.assign<attractor_t>();
-    attractor_entity.get<attractor_t>().radius = 200.0f;
-    attractor_entity.get<attractor_t>().force = -1000.0f;
-    attractor_entity.get<Transform2D>().setPosition(300.0f, 400.0f);
+    ecs::add<attractor_t>(attractor_entity);
+    ecs::get<attractor_t>(attractor_entity).radius = 200.0f;
+    ecs::get<attractor_t>(attractor_entity).force = -1000.0f;
+    ecs::get<Transform2D>(attractor_entity).set_position(300.0f, 400.0f);
     append(container, attractor_entity);
 
     countLabel = createNode2D(H("lbl"));
     addText(countLabel, "");
-    countLabel.get<Transform2D>().setPosition(360.0f / 2.0f, 15.0f);
+    ecs::get<Transform2D>(countLabel).set_position(360.0f / 2.0f, 15.0f);
     append(container, countLabel);
 
     add_objects(particlesContainer, ParticlesAddCount);
@@ -103,18 +103,18 @@ SampleSim::SampleSim() {
             updateCountLabel();
         }
     });
-    btn.get<Transform2D>().setPosition(360.0f / 2.0f, 60.0f);
-    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
+    ecs::get<Transform2D>(btn).set_position(360.0f / 2.0f, 60.0f);
+    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
 
     btn = createButton("RESET", [this] {
         particlesCount = 0;
-        destroyChildrenDelay(particlesContainer);
+        destroy_children_later(particlesContainer);
 
         updateCountLabel();
     });
-    btn.get<Transform2D>().setPosition(360.0f / 2.0f, 120.0f);
-    btn.get<Text2D>().rect = {{-100, -25, 200, 50}};
+    ecs::get<Transform2D>(btn).set_position(360.0f / 2.0f, 120.0f);
+    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
     append(container, btn);
 }
 
@@ -131,7 +131,7 @@ void SampleSim::update(float dt) {
 }
 
 void SampleSim::updateCountLabel() const {
-    setTextF(countLabel.index, "%d", particlesCount);
+    set_text_f(countLabel, "%d", particlesCount);
 }
 
 }
