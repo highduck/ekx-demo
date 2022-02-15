@@ -47,3 +47,26 @@ Build cmake project executable, then copy `wasm` and `js` output to `export/web`
 ```bash
 ekx web
 ```
+
+## Credits
+
+### Libraries
+
+- [pocketmod](https://github.com/rombankzero/pocketmod)
+
+### Music
+
+| Filename             | Author           | License           |
+|----------------------|------------------|-------------------|
+| bananasplit.mod | dizzy / cncd     | ModArchive license |
+| chill.mod       | Chromag          | ModArchive license |
+| elysium.mod     | Jester           | CC BY-NC-SA 3.0 |
+| king.mod        | Dreamweaver      | ModArchive license |
+| nemesis.mod    | radix            | ModArchive license |
+| overture.mod   | Jogeir Liljedahl | ModArchive license |
+| spacedeb.mod   | Markus Kaarlonen | ModArchive license |
+| stardstm.mod   | Jester           | CC BY-NC-SA 3.0 |
+| sundance.mod   | Purple Motion    | ModArchive license |
+| sundown.mod    | Chromag          | ModArchive license |
+| supernova.mod  | radix            | ModArchive license |
+

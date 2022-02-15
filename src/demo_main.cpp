@@ -183,7 +183,7 @@ void DemoApp::onAppStart() {
     log_debug("Start Demo: initSamples");
     initSamples();
 
-    play_music(H("sfx/music1"));
+    SampleAudio::startMusicTrack();
 }
 
 void DemoApp::terminate() {

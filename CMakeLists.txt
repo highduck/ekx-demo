@@ -23,6 +23,7 @@ add_executable(${PROJECT_NAME}
         src/sample_flash.cpp
         src/sample_integrations.cpp
         src/ui/minimal.cpp
+        src/modplay/pocketmod.c
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
