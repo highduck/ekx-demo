@@ -87,7 +87,7 @@ SampleText::SampleText() :
     set_position(bmText, vec2(20, 20));
     append(container, bmText);
 
-    auto ttfText = createText(H("TTF-Cousine-Regular"), H("Cousine-Regular"),
+    auto ttfText = createText(H("TTF-Fallback"), H("Comfortaa-Regular"),
                               u8"£ü÷\n< Приветики >\n你好\nनमस्कार\nこんにちは");
     ecs::get<Text2D>(ttfText).format.setAlignment(Alignment::Right | Alignment::Top);
     ecs::get<Text2D>(ttfText).format.leading = -8;
@@ -111,7 +111,7 @@ void SampleText::prepareInternalResources() {
     R(Font) native = R_FONT(H("native"));
     REF_RESOLVE(res_font, native).impl = ttfFont;
 
-    RES_NAME_RESOLVE(res_font, H("Cousine-Regular")).fallback = native;
+    RES_NAME_RESOLVE(res_font, H("Comfortaa-Regular")).fallback = native;
 }
 
 void SampleText::update(float dt) {

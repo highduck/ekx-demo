@@ -9,14 +9,7 @@
 #include "ui/minimal.hpp"
 #include <ek/local_res.h>
 
-#include "modplay/pocketmod.h"
-
-typedef struct user_stream {
-    void* userdata;
-    void* callback;
-    uint64_t cursor;
-    float prev[24];
-} user_stream;
+#include <pocketmod.h>
 
 void play_mod_stream(void* userdata, float* samples, uint32_t count) {
     pocketmod_context* ctx = (pocketmod_context*) userdata;
@@ -70,7 +63,7 @@ public:
         pos.y += spaceY;
 
         btn = createButton("X0.5", [] {
-            if(vc.id) {
+            if (vc.id) {
                 auph_set_rate(vc, 0.5f);
             }
         });
@@ -79,7 +72,7 @@ public:
         append(container, btn);
 
         btn = createButton("X1", [] {
-            if(vc.id) {
+            if (vc.id) {
                 auph_set_rate(vc, 1.0f);
             }
         });
@@ -88,7 +81,7 @@ public:
         append(container, btn);
 
         btn = createButton("X2", [] {
-            if(vc.id) {
+            if (vc.id) {
                 auph_set_rate(vc, 2.0f);
             }
         });
@@ -99,7 +92,7 @@ public:
         pos.y += spaceY;
 
         btn = createButton("RESTART", [] {
-            if(vc.id) {
+            if (vc.id) {
                 ctx.pattern = 0;
                 ctx.sample = 0;
                 ctx.tick = 0;
@@ -154,11 +147,7 @@ public:
 
                                   if (pocketmod_init(&ctx, lr->buffer, lr->length,
                                                      auph_get(AUPH_MIXER, AUPH_PARAM_SAMPLE_RATE))) {
-                                      auto* stream = (user_stream*) malloc(sizeof(user_stream));
-                                      stream->userdata = &ctx;
-                                      stream->callback = (void*) play_mod_stream;
-                                      buf = auph_load_data(stream, 0, 16);
-
+                                      buf = auph_load_callback(play_mod_stream, &ctx);
                                       vc = auph_play_f(buf, 1, 0, 0.5f, true, false, AUPH_BUS_MUSIC);
                                   } else {
                                       log_error("can't read MOD file");

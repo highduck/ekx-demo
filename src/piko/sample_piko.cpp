@@ -5,6 +5,8 @@
 #include <ek/scenex/2d/Transform2D.hpp>
 #include <ek/scenex/2d/Display2D.hpp>
 #include <ek/scenex/SceneFactory.hpp>
+#include "../scripting/scripting.h"
+#include "ui/minimal.hpp"
 
 namespace ek {
 
@@ -47,6 +49,18 @@ void create(ecs::Entity container) {
         bounds.flags |= BOUNDS_2D_SCISSORS;
     }
     append(container, e);
+
+
+    float spaceY = 40.0f;
+    rect_t default_rect = rect(-100, -15, 200, 30);
+    vec2_t pos = vec2(360.0f / 2, 300.0f);
+    auto btn = createButton("RELOAD", [] {
+        load_script("assets/scripts/main.js");
+    });
+    set_position(btn, pos);
+    ecs::get<Text2D>(btn).rect = default_rect;
+    append(container, btn);
+    pos.y += spaceY;
 }
 
 }
@@ -54,6 +68,10 @@ void create(ecs::Entity container) {
 SamplePiko::SamplePiko() {
     piko::create(container);
     title = "PIKO PIKO";
+
+    js_initialize();
+    js_register();
+    load_script("assets/scripts/main.js");
 }
 
 void SamplePiko::draw() {

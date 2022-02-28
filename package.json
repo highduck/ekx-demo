@@ -8,12 +8,17 @@
         "build:android": "ekx android bundle clean --verbose",
         "build:assets:dev": "ekx assets --dev -v",
         "clean": "rimraf ./build ./export ./.firebase",
-        "run-web": "ekx web -v --run"
+        "run-web": "ekx web -v --run",
+        "build-server": "node build-server.js",
+        "gen-api": "node scripts/gen.js"
     },
     "dependencies": {
         "@ekx/appbox": "0.0.7",
+        "@ekx/pocketmod": "0.0.1",
         "@ekx/cli": "0.1.11",
-        "cmake-build": "0.0.4"
+        "cmake-build": "0.0.4",
+        "@ekx/nep": "0.0.1",
+        "@ekx/quickjs": "0.0.1"
     },
     "devDependencies": {
         "rimraf": "^3.0.2"

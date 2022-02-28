@@ -32,7 +32,7 @@
 #endif
 
 void ek_app_main() {
-    ek_firebase_init();
+    firebase(FIREBASE_CMD_INIT);
     ek_app.config.title = "ekx";
     ek_app.config.width = 360;
     ek_app.config.height = 480;
@@ -42,7 +42,7 @@ void ek_app_main() {
 
 namespace ek {
 
-typedef SampleBase*(*sample_factory_fn)();
+typedef SampleBase* (* sample_factory_fn)();
 
 Array<sample_factory_fn> sampleFactory;
 int currentSampleIndex = 0;
@@ -55,8 +55,8 @@ fps_counter fps_cnt = {};
 void setCurrentSample(int index);
 
 void initSamples() {
-    sampleFactory.push_back([] () -> SampleBase* { return new SampleSim(); });
     sampleFactory.push_back([]() -> SampleBase* { return new SamplePiko(); });
+    sampleFactory.push_back([]() -> SampleBase* { return new SampleSim(); });
     sampleFactory.push_back([]() -> SampleBase* { return new SampleFlash("test1", "TEST 1"); });
     sampleFactory.push_back([]() -> SampleBase* { return new SampleFlash("test2", "TEST 2"); });
     sampleFactory.push_back([]() -> SampleBase* { return new Sample3D(); });
@@ -95,6 +95,8 @@ DemoApp::DemoApp() :
 #endif
 }
 
+extern "C" void temp_test(void);
+
 void DemoApp::initialize() {
     basic_application::initialize();
 
@@ -113,6 +115,9 @@ void DemoApp::initialize() {
     cam.clearColor = vec4_color(ARGB(0xFF666666));
 
     SampleIntegrations::initializePlugins();
+
+    temp_test();
+
 }
 
 void DemoApp::preload() {

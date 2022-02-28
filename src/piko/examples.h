@@ -20,7 +20,6 @@ struct diamonds : public GameAppListener {
 
     sg_image rt{};
     sg_pass pass{};
-    float time = 0.0f;
     bool first_frame = true;
 };
 

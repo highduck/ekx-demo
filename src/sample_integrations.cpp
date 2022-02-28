@@ -5,6 +5,7 @@
 #include <ek/scenex/base/Node.hpp>
 #include <ek/admob.h>
 #include <appbox/Ads.hpp>
+#include <ek/firebase.h>
 #include "sample_integrations.hpp"
 
 namespace ek {
@@ -15,23 +16,48 @@ SampleIntegrations::SampleIntegrations() :
 
     // TODO: show all leaderboards, achievements, ads
 
-    float spaceY = 60.0f;
+    float spaceY = 40.0f;
+    rect_t default_rect = rect(-100, -15, 200, 30);
     vec2_t pos = vec2(360.0f / 2, 50.0f);
-    auto btn = createButton("POST SCORE", [] {
+
+    auto btn = createButton("LOG IN", [] {
+        firebase(FIREBASE_CMD_AUTH_LOGIN);
+    });
+    set_position(btn, pos);
+    ecs::get<Text2D>(btn).rect = default_rect;
+    append(container, btn);
+    pos.y += spaceY;
+
+    btn = createButton("LOG OUT", [] {
+        firebase(FIREBASE_CMD_AUTH_LOGOUT);
+    });
+    set_position(btn, pos);
+    ecs::get<Text2D>(btn).rect =default_rect;
+    append(container, btn);
+    pos.y += spaceY;
+
+    btn = createButton("DELETE ACC", [] {
+        firebase(FIREBASE_CMD_AUTH_DELETE_ACCOUNT);
+    });
+    set_position(btn, pos);
+    ecs::get<Text2D>(btn).rect = default_rect;
+    append(container, btn);
+    pos.y += spaceY;
+
+    btn = createButton("POST SCORE", [] {
         static int bestScore = 1;
         ek_leaderboard_submit("CgkIpvfh798IEAIQAA", ++bestScore);
     });
     set_position(btn, pos);
-    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    ecs::get<Text2D>(btn).rect = default_rect;
     append(container, btn);
     pos.y += spaceY;
-
 
     btn = createButton("LEADERBOARD", [] {
         ek_leaderboard_show("CgkIpvfh798IEAIQAA");
     });
     set_position(btn, pos);
-    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    ecs::get<Text2D>(btn).rect = default_rect;
     append(container, btn);
     pos.y += spaceY;
 
@@ -39,7 +65,7 @@ SampleIntegrations::SampleIntegrations() :
         ek_achievement_show();
     });
     set_position(btn, pos);
-    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    ecs::get<Text2D>(btn).rect = default_rect;
     append(container, btn);
     pos.y += spaceY;
 
@@ -50,7 +76,7 @@ SampleIntegrations::SampleIntegrations() :
         });
     });
     set_position(btn, pos);
-    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    ecs::get<Text2D>(btn).rect = default_rect;
     append(container, btn);
     pos.y += spaceY;
 
@@ -61,7 +87,7 @@ SampleIntegrations::SampleIntegrations() :
         });
     });
     set_position(btn, pos);
-    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    ecs::get<Text2D>(btn).rect =default_rect;
     append(container, btn);
     pos.y += spaceY;
 
@@ -69,7 +95,7 @@ SampleIntegrations::SampleIntegrations() :
         g_ads->purchaseRemoveAds();
     });
     set_position(btn, pos);
-    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    ecs::get<Text2D>(btn).rect = default_rect;
     append(container, btn);
     pos.y += spaceY;
 
@@ -79,7 +105,7 @@ SampleIntegrations::SampleIntegrations() :
     });
 
     set_position(btn, pos);
-    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    ecs::get<Text2D>(btn).rect = default_rect;
     append(container, btn);
     pos.y += spaceY;
 }

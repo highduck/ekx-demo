@@ -9,7 +9,6 @@ add_executable(${PROJECT_NAME}
         src/3d/camera_arcball.cpp
         src/sample_text.cpp
         src/sample_base.cpp
-        src/piko/piko.h
         src/piko/examples.h
         src/piko/examples.cpp
         src/piko/sample_piko.cpp
@@ -24,6 +23,9 @@ add_executable(${PROJECT_NAME}
         src/sample_integrations.cpp
         src/ui/minimal.cpp
         src/modplay/pocketmod.c
+        src/temp_test.c
+        src/scripting/scripting.c
+        src/scripting/js_api.c
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -32,13 +34,19 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
         CXX_EXTENSIONS NO
         )
 
-#target_compile_definitions(${PROJECT_NAME} PUBLIC
-#        )
+add_custom_target(${PROJECT_NAME}-assets ALL
+        COMMAND ekx assets -v
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}-assets)
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 
 target_link_libraries(${PROJECT_NAME}
         PUBLIC ekx::appbox
+        PUBLIC ekx::pocketmod
+        PUBLIC ekx::nep
+        PUBLIC ekx::quickjs
         )
 
 add_definitions("-ffast-math -fno-exceptions -fno-rtti -Wall -Wextra")
