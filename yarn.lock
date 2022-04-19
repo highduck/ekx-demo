@@ -43,10 +43,10 @@
     "@ekx/std" "0.0.3"
     cmake-build "0.0.5"
 
-"@ekx/bmfont-export@0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@ekx/bmfont-export/-/bmfont-export-0.0.3.tgz#3f86c49ea2a427603e3adbd6e7352fe155772b24"
-  integrity sha512-QAbcvqbifiQ/n37PcdB0TnXrGoimLrLFRwKUdo99mnziiZHpU2+LooMp01/KbHwj0dQauHeKROBKHbe/DvmqAg==
+"@ekx/bmfont-export@0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@ekx/bmfont-export/-/bmfont-export-0.0.4.tgz#eb78dc1ec2de64f5eaed11f72337431c74e4dbd4"
+  integrity sha512-D3exsddb9v3MI1sVJ5TnzWBioCgIE0lDyI8QAT2xYCaa38GR34x2XwtpmOqrGNSU8TXOEH4TBZNwr2E7mfr7IQ==
   dependencies:
     "@ekx/freetype" "0.0.11"
     "@ekx/pugixml" "0.0.7"
@@ -59,16 +59,16 @@
   resolved "https://registry.yarnpkg.com/@ekx/cairo/-/cairo-0.0.8.tgz#9618a520fb6b305dc384ee4cd90b6f4bf710deeb"
   integrity sha512-BMUGv7UlzOrRlmt84LC3MGL2N2EKW2cMyK6vF1eDgX5hSiHjgATJy532yD7rnFzCuep/rCREZkTC4YPmUYbw/Q==
 
-"@ekx/cli@0.1.12":
-  version "0.1.12"
-  resolved "https://registry.yarnpkg.com/@ekx/cli/-/cli-0.1.12.tgz#f0b942dcfa0314d9e8ad0708069869c566c08f8a"
-  integrity sha512-frTptrknD0PLxjhkLMAmuRPcGj0KScKcatAUmx6tmhXg6561enFAT7VpWaQCRy5z1L8uPt6Kf/D8ZEvrN3ntGg==
+"@ekx/cli@0.1.13":
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/@ekx/cli/-/cli-0.1.13.tgz#cfca2b1cf3a7125eef806fe7f5d064d0775af0a4"
+  integrity sha512-zmCN+MnlpmQmx6/tNXI8Z5uJVcblcs/mjPAXTB7diUSKbCeOeEqBow5Wm40BCK7giD62N7UDh+z2VomdqcbYuA==
   dependencies:
-    "@ekx/bmfont-export" "0.0.3"
-    "@ekx/flash-export" "0.0.8"
+    "@ekx/bmfont-export" "0.0.4"
+    "@ekx/flash-export" "0.0.9"
     "@ekx/obj-export" "0.0.3"
     "@ekx/scenex" "0.1.9"
-    "@ekx/sprite-packer" "0.0.3"
+    "@ekx/sprite-packer" "0.0.4"
     android-proj-gen "0.0.7"
     chalk "^4.1.2"
     cmake-build "0.0.5"
@@ -109,10 +109,10 @@
     "@ekx/doctest" "0.0.4"
     cmake-build "0.0.5"
 
-"@ekx/flash-export@0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@ekx/flash-export/-/flash-export-0.0.8.tgz#0543e63fcdb6212d44d56f2f7769c665b309bf55"
-  integrity sha512-ZPzvU0OdiTebp8yiyUNe+gMYkUmZ7ZGWRiWjWsZNoX93f18wSgTVDKg13V2OKyBAT3p4TApmAl4/CLqRO+JDmA==
+"@ekx/flash-export@0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@ekx/flash-export/-/flash-export-0.0.9.tgz#5c1eaaec146121874b516c8957ec8665efcf4d8b"
+  integrity sha512-UYNxVy8D46uhnts6xnQUbe3J7tAUj/SvB360WGun+aT0nJHYEeLO1zZI7r06PtbF7PKkERxsfA2IZRkAxzAVfA==
   dependencies:
     "@ekx/cairo" "0.0.8"
     "@ekx/miniz" "0.0.5"
@@ -263,10 +263,10 @@
   resolved "https://registry.yarnpkg.com/@ekx/sokol/-/sokol-0.0.14.tgz#14e93fa9e262589d953d2e309c054c4462f7a79f"
   integrity sha512-V7a07vBPAo9c5QU3MwzX7Kf1PSlgkQJWdhqQBhVh35cs7aZuiq6YyVdcIgPhdBZpSCaiSWycRl68po4Mzz7ehw==
 
-"@ekx/sprite-packer@0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@ekx/sprite-packer/-/sprite-packer-0.0.3.tgz#70949ee529a4c4d3d4c325b8a448e648b2c7f385"
-  integrity sha512-Evt+biKJmx/XlhvA8zojNuzKMPodeSdAY0VKKLrKXh2uJNGjzDKIksXfRN3zprG6I32CajHLU98oVHkpoEB0YA==
+"@ekx/sprite-packer@0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@ekx/sprite-packer/-/sprite-packer-0.0.4.tgz#81c49fcaa30eefa89d682522e56c35ccd3b4b5d2"
+  integrity sha512-1LB3f9Ojo6oNqj6hxT7LbYItZaKWfkSEE4/t4tPkIZu47sOcJbpp4JjTBQlscgsQ1nf04zMPaqY9LGSmEEVt4A==
   dependencies:
     "@ekx/miniz" "0.0.5"
     "@ekx/pugixml" "0.0.7"

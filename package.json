@@ -14,7 +14,7 @@
     },
     "dependencies": {
         "@ekx/appbox": "0.0.8",
-        "@ekx/cli": "0.1.12",
+        "@ekx/cli": "0.1.13",
         "@ekx/nep": "0.0.2",
         "@ekx/pocketmod": "0.0.1",
         "@ekx/quickjs": "0.0.1",
