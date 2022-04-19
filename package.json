@@ -1,6 +1,6 @@
 {
     "name": "@ekx/demo",
-    "version": "1.5.14+89",
+    "version": "1.5.16+91",
     "private": true,
     "scripts": {
         "postinstall": "cmake-build",
@@ -9,16 +9,16 @@
         "build:assets:dev": "ekx assets --dev -v",
         "clean": "rimraf ./build ./export ./.firebase",
         "run-web": "ekx web -v --run",
-        "build-server": "node build-server.js",
-        "gen-api": "node scripts/gen.js"
+        "gen-api": "node scripts/gen.js",
+        "release-patch-web": "ekx web clean --bump patch --deploy internal -v"
     },
     "dependencies": {
-        "@ekx/appbox": "0.0.7",
+        "@ekx/appbox": "0.0.8",
+        "@ekx/cli": "0.1.12",
+        "@ekx/nep": "0.0.2",
         "@ekx/pocketmod": "0.0.1",
-        "@ekx/cli": "0.1.11",
-        "cmake-build": "0.0.4",
-        "@ekx/nep": "0.0.1",
-        "@ekx/quickjs": "0.0.1"
+        "@ekx/quickjs": "0.0.1",
+        "cmake-build": "0.0.5"
     },
     "devDependencies": {
         "rimraf": "^3.0.2"

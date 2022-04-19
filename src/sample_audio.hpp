@@ -115,7 +115,7 @@ public:
         string_hash_t music = ((trackIndex & 1) == 0) ? H("sfx/music1") : H("sfx/music2");
 //        play_music(music);
 
-        static const char* mods_path[] = {
+        static const char* mods_path[12] = {
                 "assets/mods/virgill_-_cherry_coke.mod",
                 "assets/mods/bananasplit.mod",
                 "assets/mods/chill.mod",
@@ -137,9 +137,9 @@ public:
             ek_local_res_close(&slr);
             slr = {};
         }
+        trackIndex = trackIndex % (sizeof(mods_path) / sizeof(mods_path[0]));
         const char* track_path = mods_path[trackIndex];
-        trackIndex = (trackIndex + 1) % (sizeof(mods_path) / sizeof(mods_path[0]));
-        log_info("Play %s", track_path);
+        log_info("Play # %d : %s", trackIndex, track_path);
         ek_local_res_load(track_path,
                           [](ek_local_res* lr) {
                               slr = *lr;
