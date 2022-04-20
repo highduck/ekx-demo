@@ -10,14 +10,14 @@
     "@ekx/std" "0.0.4"
     cmake-build "0.0.5"
 
-"@ekx/appbox@0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@ekx/appbox/-/appbox-0.0.10.tgz#1627a088351544231d1e015348c90c06b30a7143"
-  integrity sha512-jUXyXRG+x18n0f3cHv1LcaMiPB3ehKLaopy8XhyFpZ86+UoGDgZoruoG5Kv0toMtjrsOSDYVAuxz9OyzWMxADA==
+"@ekx/appbox@0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@ekx/appbox/-/appbox-0.0.11.tgz#250731e6f0bcdf2bf1eb67182f47a28e559b20e2"
+  integrity sha512-4glWzCIgjRMeiyXtd7h0TMOPuHpLlxoDVrUpenrRVAGQLszSn0TxoieDPZSLsr5A1MKBTJXk517YISJNHKESKA==
   dependencies:
-    "@ekx/plugin-admob" "0.0.10"
-    "@ekx/plugin-billing" "0.0.10"
-    "@ekx/plugin-game-services" "0.0.10"
+    "@ekx/plugin-admob" "0.0.11"
+    "@ekx/plugin-billing" "0.0.11"
+    "@ekx/plugin-game-services" "0.0.11"
     "@ekx/scenex" "0.1.11"
     cmake-build "0.0.5"
 
@@ -154,36 +154,36 @@
     "@ekx/sg-file" "0.1.10"
     cmake-build "0.0.5"
 
-"@ekx/plugin-admob@0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@ekx/plugin-admob/-/plugin-admob-0.0.10.tgz#ffe50002ee1c3786869d623f8244e13b3ea3d9de"
-  integrity sha512-h9y1rzeC1KIqqjDUklz280TCmXtWYa3KQoowFv47dr+/msfJ2Y4FizYyvPQ7VShNL3yXOWD75OXY7nvdLbsdOg==
+"@ekx/plugin-admob@0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@ekx/plugin-admob/-/plugin-admob-0.0.11.tgz#5bcdf73b300470ea39cf1ac139a070abcf159ef0"
+  integrity sha512-CYEu6kzEpFzmyW/sj96SENwQGBr2g4aVuqGMU6KGYEvJ/udxn+k3C/dUjOrckSMLFy0pAIm5NdAVxlCKnfRuIw==
   dependencies:
-    "@ekx/plugin-firebase" "0.0.5"
+    "@ekx/plugin-firebase" "0.0.6"
     "@ekx/scenex" "0.1.11"
     cmake-build "0.0.5"
 
-"@ekx/plugin-billing@0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@ekx/plugin-billing/-/plugin-billing-0.0.10.tgz#1997fd00d79be1dfb7652b5db51035022e29ad5a"
-  integrity sha512-5trvkzZqSglxLRPGlpygsT1tX9iyP4tOSkbDfkBhaU4nhTK/8NtaZ2KNArvJu6eLk24K4c/p4ru5v4ovmTRwDg==
+"@ekx/plugin-billing@0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@ekx/plugin-billing/-/plugin-billing-0.0.11.tgz#6496b4db0e86442a20d02f6817f853c3d2e3853b"
+  integrity sha512-KFdVDIQ94sN3hlCX82ZgwMiqREQzEt2ylAYPrq42vEooPybnFRE6O3spcZzPhEi5AoDGl1ahh9gGN6GNTwgdDA==
   dependencies:
     "@ekx/scenex" "0.1.11"
     cmake-build "0.0.5"
 
-"@ekx/plugin-firebase@0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@ekx/plugin-firebase/-/plugin-firebase-0.0.5.tgz#1466211c097c60e14d5d53e4591bce35f31a17df"
-  integrity sha512-kTdmyb58IEXG15hOrmcNm+AL1S1dkkW87AIEBuQbt54Uh3ROhYsQdShGKrIjf93IZwzBr2UYwIf7ItjEQ075PQ==
+"@ekx/plugin-firebase@0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@ekx/plugin-firebase/-/plugin-firebase-0.0.6.tgz#58de9c7e9edfdcf274b1b6ca9f15302ec2adf317"
+  integrity sha512-LZKRNiPiqkkoNq2L445xYcxtuPoNTABn0ItrvqbDfha1NTlqXrp7/jVX4zz4ldSj3zAWfX0/Sm391hDfrotZMw==
   dependencies:
     "@ekx/app" "0.1.11"
     cmake-build "0.0.5"
     firebase "^9.6.11"
 
-"@ekx/plugin-game-services@0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@ekx/plugin-game-services/-/plugin-game-services-0.0.10.tgz#afcc659d4ff4ef96ea7d4a02f4be712109187ef6"
-  integrity sha512-W0RUVx45vDGvqGvNidTsPKTuKkTt4SdHMdSEGsTdwOA4LCvdxWVYVESi2m/KF5rnZAXvwXm9EIlHiqx0Tbuhpw==
+"@ekx/plugin-game-services@0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@ekx/plugin-game-services/-/plugin-game-services-0.0.11.tgz#977f119245db3f7234f6a609ae2c2940c2843112"
+  integrity sha512-h/5TfcWT+//XQF4J8k3Z7MX45TDctdR/8MLWKuDiwSIP4T2fYwMkCO+so70q16594wOLdCqLvplMYnwX3/3xKg==
   dependencies:
     "@ekx/app" "0.1.11"
     "@ekx/core" "0.1.10"

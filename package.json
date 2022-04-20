@@ -13,7 +13,7 @@
         "release-patch-web": "ekx web clean --bump patch --deploy internal -v"
     },
     "dependencies": {
-        "@ekx/appbox": "0.0.10",
+        "@ekx/appbox": "0.0.11",
         "@ekx/cli": "0.1.15",
         "@ekx/pocketmod": "0.0.2",
         "@ekx/quickjs": "0.0.1",
