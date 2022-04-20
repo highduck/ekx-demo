@@ -56,6 +56,5 @@ module.exports = function (project) {
 
     project.importModule("@ekx/appbox");
     project.importModule("@ekx/pocketmod");
-    project.importModule("@ekx/nep");
     project.importModule("@ekx/quickjs");
 };
