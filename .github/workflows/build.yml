@@ -57,7 +57,7 @@ jobs:
     name: Build Web
     runs-on: ubuntu-latest
     env:
-      EM_VERSION: 2.0.15
+      EM_VERSION: 3.0.0
       EM_CACHE_FOLDER: 'emsdk-cache'
     steps:
       # setup native build tools
