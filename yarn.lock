@@ -2,53 +2,53 @@
 # yarn lockfile v1
 
 
-"@ekx/app@0.1.10":
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/@ekx/app/-/app-0.1.10.tgz#2adb4ffce02f2c627979da25ef3b069d37b290c1"
-  integrity sha512-7pN6mzP45dznA2YbsVOW2AlHh3EaT9fDVHn9vzIjJJcGPsayu0zkIDvfpAA8/1F76M9c9+ki+C47pTH41hICww==
+"@ekx/app@0.1.11":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@ekx/app/-/app-0.1.11.tgz#09af82361d464edb8a22cca06e1b5b20e051ac17"
+  integrity sha512-SyyGg7dpvxDVLMXyjjsLrMuk+EpbsdTTdTQ+1ClAnJefq3+dPfa6BS0YkiXuZtEkfh1U5cDW89B2NG36xQkZZg==
   dependencies:
-    "@ekx/std" "0.0.3"
+    "@ekx/std" "0.0.4"
     cmake-build "0.0.5"
 
-"@ekx/appbox@0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@ekx/appbox/-/appbox-0.0.9.tgz#fde791d228a6dbeb70f7fae152e292d607b8a451"
-  integrity sha512-PrweezYIHXqyeER/04VUU7Xzh9eXuzL6fIclWDYK9Uuoji9PounOy5DGJuLq+A58oRK5SXy9GEvtMxH9qgqA7A==
+"@ekx/appbox@0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@ekx/appbox/-/appbox-0.0.10.tgz#1627a088351544231d1e015348c90c06b30a7143"
+  integrity sha512-jUXyXRG+x18n0f3cHv1LcaMiPB3ehKLaopy8XhyFpZ86+UoGDgZoruoG5Kv0toMtjrsOSDYVAuxz9OyzWMxADA==
   dependencies:
-    "@ekx/plugin-admob" "0.0.9"
-    "@ekx/plugin-billing" "0.0.9"
-    "@ekx/plugin-game-services" "0.0.9"
-    "@ekx/scenex" "0.1.10"
+    "@ekx/plugin-admob" "0.0.10"
+    "@ekx/plugin-billing" "0.0.10"
+    "@ekx/plugin-game-services" "0.0.10"
+    "@ekx/scenex" "0.1.11"
     cmake-build "0.0.5"
 
-"@ekx/audio@0.1.10":
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/@ekx/audio/-/audio-0.1.10.tgz#74a56044384aa920e1840f87cfd24188e7b67524"
-  integrity sha512-cPBAkCGi+qJ0Jum5RludNRlC9IKSOlf1z/RhegnIHqdCG6xfLerUdbvBofiHtDaZFGmRkH24+WfmzIrYYnJClw==
+"@ekx/audio@0.1.11":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@ekx/audio/-/audio-0.1.11.tgz#7418add373ae9738cfbfe6e023e4fb705131abff"
+  integrity sha512-yp0MnMGuhaKkNn2/BrI5czmLgShszVUb8p7qvGGWDvFMMYD9sO3Q3RuZFa2NO5cvuaYfu6P/Y2yJGenUtr7/LQ==
   dependencies:
-    "@ekx/app" "0.1.10"
-    "@ekx/auph" "0.1.3"
+    "@ekx/app" "0.1.11"
+    "@ekx/auph" "0.1.4"
     cmake-build "0.0.5"
 
-"@ekx/auph@0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@ekx/auph/-/auph-0.1.3.tgz#ef0134589119efd7bc94275d435affadbca44c30"
-  integrity sha512-lSJJcD8tMwHbgR+7Hya1XIqtlgvncCds8D7vzzfPKRPLTWPzaOuULEDiKYOxWajk19d43fCJvODgLroADMJ3lQ==
+"@ekx/auph@0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@ekx/auph/-/auph-0.1.4.tgz#b55be69f1ac3f658101c95a817f65a3a563c0fba"
+  integrity sha512-Uk9abVPTciiWxamDSNm3WRTZBROAWxj35GHEZRDJr38mp6J4981F6LJad1ft2BfaV/RDAQv82N5pZy2dkJoPww==
   dependencies:
     "@ekx/dr-libs" "0.0.4"
     "@ekx/stb" "0.0.8"
-    "@ekx/std" "0.0.3"
+    "@ekx/std" "0.0.4"
     cmake-build "0.0.5"
 
-"@ekx/bmfont-export@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@ekx/bmfont-export/-/bmfont-export-0.0.4.tgz#eb78dc1ec2de64f5eaed11f72337431c74e4dbd4"
-  integrity sha512-D3exsddb9v3MI1sVJ5TnzWBioCgIE0lDyI8QAT2xYCaa38GR34x2XwtpmOqrGNSU8TXOEH4TBZNwr2E7mfr7IQ==
+"@ekx/bmfont-export@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@ekx/bmfont-export/-/bmfont-export-0.0.5.tgz#232e69660e01b5e91d205aeecf24b02b0e1eb07d"
+  integrity sha512-XU4DcffKph72XLU8c9hodbid3ts0+W647nyN0xscIGMeuRpGOM7n5w7no3FjuYdSr5WCGvQo4CVTn6UWfH+Zmg==
   dependencies:
     "@ekx/freetype" "0.0.11"
     "@ekx/pugixml" "0.0.7"
-    "@ekx/sg-file" "0.1.9"
-    "@ekx/std" "0.0.3"
+    "@ekx/sg-file" "0.1.10"
+    "@ekx/std" "0.0.4"
     cmake-build "0.0.5"
 
 "@ekx/cairo@0.0.8":
@@ -56,16 +56,16 @@
   resolved "https://registry.yarnpkg.com/@ekx/cairo/-/cairo-0.0.8.tgz#9618a520fb6b305dc384ee4cd90b6f4bf710deeb"
   integrity sha512-BMUGv7UlzOrRlmt84LC3MGL2N2EKW2cMyK6vF1eDgX5hSiHjgATJy532yD7rnFzCuep/rCREZkTC4YPmUYbw/Q==
 
-"@ekx/cli@0.1.14":
-  version "0.1.14"
-  resolved "https://registry.yarnpkg.com/@ekx/cli/-/cli-0.1.14.tgz#0e5ec3c7d5c8caa761382f92271142f05c11d984"
-  integrity sha512-ubl8C7PtFLLrjzPP5UugMybgq/KCkGb5Uygnzm5giZn0DnuVP3wZgx8XWxSqkPiKa/NWfQkQR0UOOYhbHjBv3g==
+"@ekx/cli@0.1.15":
+  version "0.1.15"
+  resolved "https://registry.yarnpkg.com/@ekx/cli/-/cli-0.1.15.tgz#0ec33b5697d53652aa280d0320f935055597df62"
+  integrity sha512-hIgoAuVk+t2ArguhZ7F9jTQ1+L4AhEzDMuUnBevK8MMaVwn5M0Y7qKniJA3zgV6ixiHIPzyj6J0Nl9SzK/90HQ==
   dependencies:
-    "@ekx/bmfont-export" "0.0.4"
-    "@ekx/flash-export" "0.0.9"
-    "@ekx/obj-export" "0.0.3"
-    "@ekx/scenex" "0.1.10"
-    "@ekx/sprite-packer" "0.0.4"
+    "@ekx/bmfont-export" "0.0.5"
+    "@ekx/flash-export" "0.0.10"
+    "@ekx/obj-export" "0.0.4"
+    "@ekx/scenex" "0.1.11"
+    "@ekx/sprite-packer" "0.0.5"
     android-proj-gen "0.0.8"
     chalk "^4.1.2"
     cmake-build "0.0.5"
@@ -78,13 +78,13 @@
     xcode "^3.0.1"
     xmldoc "^1.1.2"
 
-"@ekx/core@0.1.9":
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/@ekx/core/-/core-0.1.9.tgz#2127dedd14a85d0dce434614394ec33cf9b9331d"
-  integrity sha512-giGB9SCzmd1kRubpyubSWtlKffskdeEUZ5qpQPPenAYK11qJSW4YFQikC3fjhlX0aTCq8OWVSTHK8a4bQ9BM2A==
+"@ekx/core@0.1.10":
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/@ekx/core/-/core-0.1.10.tgz#9172d73ed9e2f207863236bbf3cea0ddff019fad"
+  integrity sha512-QwoV9E7ThvZg4bOnQOLfEATRqlh9mzoeqNrMnkR6d8lUDvoyqD2SE5FrJoM7V/CsHbglB5v9ySpu6QOhsAuT6Q==
   dependencies:
     "@ekx/doctest" "0.0.4"
-    "@ekx/std" "0.0.3"
+    "@ekx/std" "0.0.4"
     cmake-build "0.0.5"
 
 "@ekx/doctest@0.0.4":
@@ -97,24 +97,24 @@
   resolved "https://registry.yarnpkg.com/@ekx/dr-libs/-/dr-libs-0.0.4.tgz#1b445073b804eda5812d9ac2f5d33bb9a07b3c13"
   integrity sha512-K3/VZfDg/v3e+R84uVS7BVJdQKYE12B9Nb9eygdbqa5lBPR4i+J+laMeoG760ec1xfpefXJ7w2+OpmAPSAsTVg==
 
-"@ekx/ecs@0.1.9":
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/@ekx/ecs/-/ecs-0.1.9.tgz#e20061a0509958c5ff78beabb3dfaca043219df5"
-  integrity sha512-MJZMIR9Mog8uv9GBcXoOfpzPyy/SEnCKAmFHbMEkZYiDS7P1LZF9xmybjCXOixFMRcVVRlOe2DYL4ungozfeEw==
+"@ekx/ecs@0.1.10":
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/@ekx/ecs/-/ecs-0.1.10.tgz#651a409c30d3e6a89c21a1f0996fa126f01a171e"
+  integrity sha512-k0hTZcJTSWb4+uOq2xoU4HVVYpsm3JirloJYwFeLy1xIPAVv46O62R/XOQSwLFEPMtl/j3KZu8njkWDdlqJy8g==
   dependencies:
-    "@ekx/core" "0.1.9"
+    "@ekx/core" "0.1.10"
     "@ekx/doctest" "0.0.4"
     cmake-build "0.0.5"
 
-"@ekx/flash-export@0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@ekx/flash-export/-/flash-export-0.0.9.tgz#5c1eaaec146121874b516c8957ec8665efcf4d8b"
-  integrity sha512-UYNxVy8D46uhnts6xnQUbe3J7tAUj/SvB360WGun+aT0nJHYEeLO1zZI7r06PtbF7PKkERxsfA2IZRkAxzAVfA==
+"@ekx/flash-export@0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@ekx/flash-export/-/flash-export-0.0.10.tgz#9a2d1497a6c74afc7a3dcdb64c6d37ceb65c228f"
+  integrity sha512-9sPJwfveiH+mERT0byM2jsRV5pczofWIaEJ33jPXLTpgY1c+oeTT9fgQZz/Yy0jjo6yaDUV6GlPSY61YmwpV7Q==
   dependencies:
     "@ekx/cairo" "0.0.8"
     "@ekx/miniz" "0.0.5"
     "@ekx/pugixml" "0.0.7"
-    "@ekx/sg-file" "0.1.9"
+    "@ekx/sg-file" "0.1.10"
     cmake-build "0.0.5"
 
 "@ekx/freetype@0.0.11":
@@ -122,22 +122,22 @@
   resolved "https://registry.yarnpkg.com/@ekx/freetype/-/freetype-0.0.11.tgz#1c9e6f939315f2debdeead1aadffcc30b8c5cc27"
   integrity sha512-hhXUbMzZummZF2w7IKQbMAGSTRCQF00ro17a5rlspQ/6OlK1wBlqxAcrrFTyulfwJafzk6roOZmwH8iA6uJOzQ==
 
-"@ekx/graphics@0.1.10":
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/@ekx/graphics/-/graphics-0.1.10.tgz#67ae871fcb17478ee45637b0f1642f3b3afe99b3"
-  integrity sha512-WmCVPLW1LHE3yOOCEbBDPq7ouB6j/0DhPA6IUV9fJmUQVAKYt4EYuxVMu2wC+3sbPw87BdRt+OWNyicXK4QJDQ==
+"@ekx/graphics@0.1.11":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@ekx/graphics/-/graphics-0.1.11.tgz#0592d1001e8b8e95b145a4d7c5a22deddb02c6ee"
+  integrity sha512-fIwcollQrYtaRofEd0Z4idm3tGipv+hWX8lZynz7+DnzUXxAZCIfGw8UZHShPRQ0OcVq8YUHA7J4qFdhFqkWYg==
   dependencies:
-    "@ekx/app" "0.1.10"
-    "@ekx/core" "0.1.9"
+    "@ekx/app" "0.1.11"
+    "@ekx/core" "0.1.10"
     "@ekx/sokol" "0.0.14"
     cmake-build "0.0.5"
 
-"@ekx/local-storage@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@ekx/local-storage/-/local-storage-0.0.4.tgz#a2278cf0ca17384545d6add38cd0b6b516d14695"
-  integrity sha512-00Y0k+BXpMLZ+ch/RmgjpbbT/KWVpehGbkxGUww32RrlwASomi2CJElmEK2Breb8RlzJSQ/D5GsCkyj3gtedPA==
+"@ekx/local-storage@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@ekx/local-storage/-/local-storage-0.0.5.tgz#c43c4c4e544185092e6e7d14bd8bc2ce70bcf865"
+  integrity sha512-YZWOyXDm/zTUGc7k0TV6xyBF633eykgAoCmmyvSewebb/mRvFUSKMGefVRCxoQNrkMMqK3+HWxRjxQJZVLVIcA==
   dependencies:
-    "@ekx/app" "0.1.10"
+    "@ekx/app" "0.1.11"
     cmake-build "0.0.5"
 
 "@ekx/miniz@0.0.5":
@@ -145,48 +145,48 @@
   resolved "https://registry.yarnpkg.com/@ekx/miniz/-/miniz-0.0.5.tgz#6e04d1cc2be7f174aa5e1f9f678511ea33f9a37f"
   integrity sha512-AipNU32yrnzixXCH9kxtyWg/v2pDOGtdY+booES3AXOCwTQDOpYasO87GerMLi8oC8p77/FEz0bjyzs6R2L1Zw==
 
-"@ekx/obj-export@0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@ekx/obj-export/-/obj-export-0.0.3.tgz#d37c506465ab6a9488030622ff6dd15b7b9bb03b"
-  integrity sha512-CuutG3UwxF8x+hHmrIEDfjR/+//Lq10Hqm/WWEG6lWSNy/N7mlP5OWbEfeuOzUXKPcD2tPbfvOwGT++fmz7YBA==
-  dependencies:
-    "@ekx/core" "0.1.9"
-    "@ekx/sg-file" "0.1.9"
-    cmake-build "0.0.5"
-
-"@ekx/plugin-admob@0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@ekx/plugin-admob/-/plugin-admob-0.0.9.tgz#66c163ffe62074e664ea2b125f20c265c12fe6a5"
-  integrity sha512-wR9ZlZQaSRcLTGoTcEvrmhYBNN5Yt9W1QbsIRr4sBM5Y8RwSIJnjp8zFOeuyDXPBS45eNuDDUTjV/1/op8Lb1g==
-  dependencies:
-    "@ekx/plugin-firebase" "0.0.4"
-    "@ekx/scenex" "0.1.10"
-    cmake-build "0.0.5"
-
-"@ekx/plugin-billing@0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@ekx/plugin-billing/-/plugin-billing-0.0.9.tgz#0ab997d30dfb970526e85cf1d22de54e72d43818"
-  integrity sha512-oE+0BvMcGloxys7Z9BXwrke5HOuV2iZ+JtgBxTr4C9kE9zj9ZTA+rA444oju7AB/dKMr8pg22V/y7GI5KJV1Sg==
-  dependencies:
-    "@ekx/scenex" "0.1.10"
-    cmake-build "0.0.5"
-
-"@ekx/plugin-firebase@0.0.4":
+"@ekx/obj-export@0.0.4":
   version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@ekx/plugin-firebase/-/plugin-firebase-0.0.4.tgz#b3f2a436e352a33785d9dba1d1db34fd2d583e81"
-  integrity sha512-0uJmCpOWITZ03AiYshyGAAkGfNQrSed6rlYikHVmWW7kCxct1O/8gd7P6XFQQVgi70j/se6V8cdlN7EdxpZjpA==
+  resolved "https://registry.yarnpkg.com/@ekx/obj-export/-/obj-export-0.0.4.tgz#feefcbf4373bed9e007c4c2c4be9783b1f65e7c9"
+  integrity sha512-mOYRnlPLSDwe/FtCGnm7B0RdzFRCRVwLCWgYUWsa1c4Xa8wzfcLDc21t9+pvBiP0gnFdDAUl8zQ7kAp1pFJIEg==
   dependencies:
-    "@ekx/app" "0.1.10"
+    "@ekx/core" "0.1.10"
+    "@ekx/sg-file" "0.1.10"
+    cmake-build "0.0.5"
+
+"@ekx/plugin-admob@0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@ekx/plugin-admob/-/plugin-admob-0.0.10.tgz#ffe50002ee1c3786869d623f8244e13b3ea3d9de"
+  integrity sha512-h9y1rzeC1KIqqjDUklz280TCmXtWYa3KQoowFv47dr+/msfJ2Y4FizYyvPQ7VShNL3yXOWD75OXY7nvdLbsdOg==
+  dependencies:
+    "@ekx/plugin-firebase" "0.0.5"
+    "@ekx/scenex" "0.1.11"
+    cmake-build "0.0.5"
+
+"@ekx/plugin-billing@0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@ekx/plugin-billing/-/plugin-billing-0.0.10.tgz#1997fd00d79be1dfb7652b5db51035022e29ad5a"
+  integrity sha512-5trvkzZqSglxLRPGlpygsT1tX9iyP4tOSkbDfkBhaU4nhTK/8NtaZ2KNArvJu6eLk24K4c/p4ru5v4ovmTRwDg==
+  dependencies:
+    "@ekx/scenex" "0.1.11"
+    cmake-build "0.0.5"
+
+"@ekx/plugin-firebase@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@ekx/plugin-firebase/-/plugin-firebase-0.0.5.tgz#1466211c097c60e14d5d53e4591bce35f31a17df"
+  integrity sha512-kTdmyb58IEXG15hOrmcNm+AL1S1dkkW87AIEBuQbt54Uh3ROhYsQdShGKrIjf93IZwzBr2UYwIf7ItjEQ075PQ==
+  dependencies:
+    "@ekx/app" "0.1.11"
     cmake-build "0.0.5"
     firebase "^9.6.11"
 
-"@ekx/plugin-game-services@0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@ekx/plugin-game-services/-/plugin-game-services-0.0.9.tgz#c6d8b894673cb47d6cf0cb7d50e30c4e021e9416"
-  integrity sha512-og9s5VTP/p8LreVBdNyBtNV4BPsD2uHkA3C04856InPdbCTmQdFRPkx2gRTGFlR4MjHyz5GI/U+1M5yCqjoWKw==
+"@ekx/plugin-game-services@0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@ekx/plugin-game-services/-/plugin-game-services-0.0.10.tgz#afcc659d4ff4ef96ea7d4a02f4be712109187ef6"
+  integrity sha512-W0RUVx45vDGvqGvNidTsPKTuKkTt4SdHMdSEGsTdwOA4LCvdxWVYVESi2m/KF5rnZAXvwXm9EIlHiqx0Tbuhpw==
   dependencies:
-    "@ekx/app" "0.1.10"
-    "@ekx/core" "0.1.9"
+    "@ekx/app" "0.1.11"
+    "@ekx/core" "0.1.10"
     cmake-build "0.0.5"
 
 "@ekx/pocketmod@0.0.2":
@@ -204,37 +204,37 @@
   resolved "https://registry.yarnpkg.com/@ekx/quickjs/-/quickjs-0.0.1.tgz#f0cb66a4fa3ffbb9a00dc5fccb2dec866278327e"
   integrity sha512-q8aZmkIgWFW5kTg+pe4l6x8CNaCqZNtX+fCW+4CNZz9yEBDF97D5dcA5nLgaVW5BJIFFQTqo0J88P7Q+KHUItQ==
 
-"@ekx/res@0.1.10":
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/@ekx/res/-/res-0.1.10.tgz#9af2566a1ac4d7de28f6792eef01048e036dfbf0"
-  integrity sha512-M3+14hVyLJ0zzXBr4EE1JuI7IJezdugJzORdG770Med7C0ObzjCH5VX+hfNEVx1IUQjYcw3mAhfYMa6reb6mFQ==
+"@ekx/res@0.1.11":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@ekx/res/-/res-0.1.11.tgz#405af8a75890d737e998d1ba4883bb4e297c4d8f"
+  integrity sha512-Jta42jlIJt1IvAErpC2f4+lYlE1s0/fmGuZYyl8QQPwE+6RHAWqCozhrLV4u2DNNcelYv/FVqX49UfBdVCgFow==
   dependencies:
-    "@ekx/app" "0.1.10"
+    "@ekx/app" "0.1.11"
     "@ekx/doctest" "0.0.4"
     cmake-build "0.0.5"
 
-"@ekx/scenex@0.1.10":
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/@ekx/scenex/-/scenex-0.1.10.tgz#dac96daa5dd449a3525f5a09c732272fcf3c83b9"
-  integrity sha512-pt2AiUlUdQJOUPIg/YDf4vlfKiuuMQp9tFMFjsIvU9Iwu/7RFkb7g6Hj6C0cfQwVRYAcJbxmIX4ZqKpYQtp1qQ==
+"@ekx/scenex@0.1.11":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@ekx/scenex/-/scenex-0.1.11.tgz#667ff3e7cb55ab170cc80e55a81c4b083625b337"
+  integrity sha512-HaEbE2j4UXhekv1wEHLghBSwipStwo/i/XKeijM+GDdiTdh3NPK5SVyP+5Ac7ngYnrNGEXTp8+IMh1hrwTHxIQ==
   dependencies:
-    "@ekx/app" "0.1.10"
-    "@ekx/audio" "0.1.10"
-    "@ekx/core" "0.1.9"
-    "@ekx/ecs" "0.1.9"
-    "@ekx/graphics" "0.1.10"
-    "@ekx/local-storage" "0.0.4"
-    "@ekx/res" "0.1.10"
-    "@ekx/sg-file" "0.1.9"
-    "@ekx/texture-loader" "0.0.4"
+    "@ekx/app" "0.1.11"
+    "@ekx/audio" "0.1.11"
+    "@ekx/core" "0.1.10"
+    "@ekx/ecs" "0.1.10"
+    "@ekx/graphics" "0.1.11"
+    "@ekx/local-storage" "0.0.5"
+    "@ekx/res" "0.1.11"
+    "@ekx/sg-file" "0.1.10"
+    "@ekx/texture-loader" "0.0.5"
     cmake-build "0.0.5"
 
-"@ekx/sg-file@0.1.9":
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/@ekx/sg-file/-/sg-file-0.1.9.tgz#4b628296c0d6f1f840d316e5de0d4ce1dba307c6"
-  integrity sha512-SgRCWAJR7NtXkSifL4k+kcvQh24fDn97HXK3SEm3FyIC+fw8JKfk+Lg44luThRK1HxEzZoKojr/WZwZf+6TzBA==
+"@ekx/sg-file@0.1.10":
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/@ekx/sg-file/-/sg-file-0.1.10.tgz#9088d689ec09457edd982907bdb9734ab5e08a9d"
+  integrity sha512-jLb9iw2zF+vSF3ULvnk5M9raujygcO53nXhqimmryi60QLa9vCIav4o8o68W+wjBlI/1KRQVS4S1IGQ6peY6vg==
   dependencies:
-    "@ekx/core" "0.1.9"
+    "@ekx/core" "0.1.10"
     cmake-build "0.0.5"
 
 "@ekx/sokol@0.0.14":
@@ -242,14 +242,14 @@
   resolved "https://registry.yarnpkg.com/@ekx/sokol/-/sokol-0.0.14.tgz#14e93fa9e262589d953d2e309c054c4462f7a79f"
   integrity sha512-V7a07vBPAo9c5QU3MwzX7Kf1PSlgkQJWdhqQBhVh35cs7aZuiq6YyVdcIgPhdBZpSCaiSWycRl68po4Mzz7ehw==
 
-"@ekx/sprite-packer@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@ekx/sprite-packer/-/sprite-packer-0.0.4.tgz#81c49fcaa30eefa89d682522e56c35ccd3b4b5d2"
-  integrity sha512-1LB3f9Ojo6oNqj6hxT7LbYItZaKWfkSEE4/t4tPkIZu47sOcJbpp4JjTBQlscgsQ1nf04zMPaqY9LGSmEEVt4A==
+"@ekx/sprite-packer@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@ekx/sprite-packer/-/sprite-packer-0.0.5.tgz#0d36727318c7de764637f022805f47db5222eafc"
+  integrity sha512-xw9AOS3nns/GkcCEPLinX3rGrvPA1hCUhXhnF53FPdRJpAwiDe8cCFk51lzxTeZzGcPLS8Me5UD2Vbznh7v/iQ==
   dependencies:
     "@ekx/miniz" "0.0.5"
     "@ekx/pugixml" "0.0.7"
-    "@ekx/std" "0.0.3"
+    "@ekx/std" "0.0.4"
     cmake-build "0.0.5"
 
 "@ekx/stb@0.0.8":
@@ -257,23 +257,23 @@
   resolved "https://registry.yarnpkg.com/@ekx/stb/-/stb-0.0.8.tgz#05570faf971cf4edbd2d10da78eec66f5c418a9b"
   integrity sha512-Ko/g5JBImUMqEPuWuogIEbNpeNNzsAZEVVaoZrNTZE0gNY0q7QRWcTJgZN7NlsoEEQEawpCV/+mtbMBQyygbug==
 
-"@ekx/std@0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@ekx/std/-/std-0.0.3.tgz#c743a875d9806f64006389a2250bdb6fda97dfc9"
-  integrity sha512-F5Lvr8iCD0bC5REmrzfCmGcxNmSG5aWtrzerbpaPtHoj9G7fsb8GbLQVnSmXNd6OVjmxFCb+7S7dZgBNn4GS3Q==
+"@ekx/std@0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@ekx/std/-/std-0.0.4.tgz#20cf5e7dbf1463f32b0db296bc89e242c327193d"
+  integrity sha512-uqj3FFYo1H1ql27x862kd+sbbkYfnGYuYcAI4PE2KzydKgVQClBZGpCsBgzldiTPo2I2tCNw/f8MlQLPS4mr0A==
   dependencies:
     "@ekx/doctest" "0.0.4"
     "@ekx/sokol" "0.0.14"
     "@ekx/stb" "0.0.8"
     cmake-build "0.0.5"
 
-"@ekx/texture-loader@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@ekx/texture-loader/-/texture-loader-0.0.4.tgz#82b22b8bc7a404b22736eba1ead0bf3e778aff45"
-  integrity sha512-TCQjvxVznmKnDgDMg6QYEVif52D12cF4Gub3gEjQJxhAsi0x+Oc+uDZUbK+w6RgtQ7GYIyb0TtY+4ogau7fZ6w==
+"@ekx/texture-loader@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@ekx/texture-loader/-/texture-loader-0.0.5.tgz#ed8005f33b7ac8d4559a04303272c04499160817"
+  integrity sha512-2PvDkziGiUYUWLGb9Hed12tlXQH1TiR5wBriyLAdI6MvqpVtZlVJpYziJKB6ZaLYXkhS0oqesqT4k60nNl/QEw==
   dependencies:
-    "@ekx/app" "0.1.10"
-    "@ekx/core" "0.1.9"
+    "@ekx/app" "0.1.11"
+    "@ekx/core" "0.1.10"
     "@ekx/sokol" "0.0.14"
 
 "@firebase/analytics-compat@0.1.9":

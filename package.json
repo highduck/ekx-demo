@@ -1,6 +1,6 @@
 {
     "name": "@ekx/demo",
-    "version": "1.5.16+91",
+    "version": "1.5.17+92",
     "private": true,
     "scripts": {
         "postinstall": "cmake-build",
@@ -13,8 +13,8 @@
         "release-patch-web": "ekx web clean --bump patch --deploy internal -v"
     },
     "dependencies": {
-        "@ekx/appbox": "0.0.9",
-        "@ekx/cli": "0.1.14",
+        "@ekx/appbox": "0.0.10",
+        "@ekx/cli": "0.1.15",
         "@ekx/pocketmod": "0.0.2",
         "@ekx/quickjs": "0.0.1",
         "cmake-build": "0.0.5"
