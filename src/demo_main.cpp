@@ -26,6 +26,7 @@
 #include <ek/log.h>
 #include <ekx/app/audio_manager.h>
 #include <ek/scenex/3d/Scene3D.h>
+#include "config/build_info.h"
 
 #ifdef EK_UITEST
 #include "screenshots.hpp"
@@ -95,8 +96,6 @@ DemoApp::DemoApp() :
 #endif
 }
 
-extern "C" void temp_test(void);
-
 void DemoApp::initialize() {
     basic_application::initialize();
 
@@ -115,9 +114,6 @@ void DemoApp::initialize() {
     cam.clearColor = vec4_color(ARGB(0xFF666666));
 
     SampleIntegrations::initializePlugins();
-
-    temp_test();
-
 }
 
 void DemoApp::preload() {
@@ -170,11 +166,26 @@ void DemoApp::onAppStart() {
     {
         tfFPS = createNode2D(H("fps"));
         addText(tfFPS, "");
-        ecs::get<Text2D>(tfFPS).format.alignment = vec2(0, 0);
+        auto& tf = ecs::get<Text2D>(tfFPS);
+        tf.format.alignment = vec2(0, 0);
+        tf.format.size = 8.0f;
         ecs::add<LayoutRect>(tfFPS)
                 .enableAlignX(0.0, 10)
                 .enableAlignY(0.0, 10);
         append(root, tfFPS);
+    }
+
+
+    {
+        entity_t tf_version = createNode2D(H("version"));
+        addText(tf_version, APP_VERSION_NAME "+" APP_VERSION_CODE);
+        auto& tf = ecs::get<Text2D>(tf_version);
+        tf.format.alignment = vec2(1, 0);
+        tf.format.size = 8.0f;
+        ecs::add<LayoutRect>(tf_version)
+                .enableAlignX(1.0, -10)
+                .enableAlignY(0.0, 10);
+        append(root, tf_version);
     }
 
     auto controls = createNode2D(H("controls"));

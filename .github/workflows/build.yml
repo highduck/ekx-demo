@@ -15,7 +15,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt update
-          sudo apt install libwebp-dev
+          sudo apt install webp
 
       - name: Install WebP (macOS)
         if: runner.os == 'macOS'
@@ -75,7 +75,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt update
-          sudo apt install libwebp-dev
+          sudo apt install webp
 
       - name: Install WebP (macOS)
         if: runner.os == 'macOS'
@@ -105,6 +105,6 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           path: keys
 
-      - name: Build Web
-        run: yarn run build:web
+      - name: Build and Release Web
+        run: yarn release-patch-web
         working-directory: ./main
