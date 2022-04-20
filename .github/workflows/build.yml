@@ -107,7 +107,7 @@ jobs:
         working-directory: ./main
 
       - name: Install Firebase CLI
-        run: yarn i -g firebase-tools
+        run: npm i -g firebase-tools
 
       - name: Keys
         uses: actions/checkout@v2
