@@ -23,7 +23,6 @@ add_executable(${PROJECT_NAME}
         src/sample_integrations.cpp
         src/ui/minimal.cpp
         src/modplay/pocketmod.c
-        src/temp_test.c
         src/scripting/scripting.c
         src/scripting/js_api.c
 )
@@ -45,7 +44,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC src)
 target_link_libraries(${PROJECT_NAME}
         PUBLIC ekx::appbox
         PUBLIC ekx::pocketmod
-        PUBLIC ekx::nep
         PUBLIC ekx::quickjs
         )
 
