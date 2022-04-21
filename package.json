@@ -13,11 +13,11 @@
         "release-patch-web": "ekx web clean --bump patch --deploy internal -v"
     },
     "dependencies": {
-        "@ekx/appbox": "0.0.11",
-        "@ekx/cli": "0.1.15",
+        "@ekx/appbox": "0.0.12",
+        "@ekx/cli": "0.1.16",
         "@ekx/pocketmod": "0.0.2",
         "@ekx/quickjs": "0.0.1",
-        "cmake-build": "0.0.5"
+        "cmake-build": "0.0.6"
     },
     "devDependencies": {
         "rimraf": "^3.0.2"
