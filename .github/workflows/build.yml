@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # strange but we cannot use ninja from NDK?
-      - name: Setup Ninja
-        uses: seanmiddleditch/gha-setup-ninja@master
+#      - name: Setup Ninja
+#        uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: Install WebP (Linux)
         if: runner.os == 'Linux'
