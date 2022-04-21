@@ -13,7 +13,7 @@ jobs:
 
       # See b/206099937. Hack needed to make ninja visible to cmake during NDK builds
       - name: Setup Ninja
-        run: ln -s "/usr/bin/ninja" "${GITHUB_WORKSPACE}/ninja-build/ninja"
+        run: ln -s "/usr/bin/ninja" "${GITHUB_WORKSPACE}/ninja-build/bin/ninja"
 
       - name: Install WebP (Linux)
         if: runner.os == 'Linux'
