@@ -10,11 +10,10 @@ jobs:
       # strange but we cannot use ninja from NDK?
       - name: Setup Ninja
         uses: seanmiddleditch/gha-setup-ninja@master
-        run: |
-          # See b/206099937. Hack needed to make ninja visible to cmake during NDK builds
-          if [ ! -e "/usr/bin/ninja" ]; then
-            ln -s "/usr/bin/ninja" "${GITHUB_WORKSPACE}/ninja-build/ninja"
-          fi
+
+      # See b/206099937. Hack needed to make ninja visible to cmake during NDK builds
+      - name: Setup Ninja
+        run: ln -s "/usr/bin/ninja" "${GITHUB_WORKSPACE}/ninja-build/ninja"
 
       - name: Install WebP (Linux)
         if: runner.os == 'Linux'
