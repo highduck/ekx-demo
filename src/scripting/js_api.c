@@ -22,6 +22,7 @@ extern void js_canvas_save_transform(void);
 extern void js_canvas_restore_transform(void);
 extern void js_canvas_set_empty_image(void);
 extern double js_time(void);
+extern void js_log_print(uint32_t a0, const char* a1);
 
 #ifdef __EMSCRIPTEN__
 void js_register(void) {
@@ -35,6 +36,7 @@ void js_register(void) {
         this["canvas_restore_transform"] = _js_canvas_restore_transform;
         this["canvas_set_empty_image"] = _js_canvas_set_empty_image;
         this["time"] = _js_time;
+        this["log_print"] = _js_log_print;
 
    });
 }
@@ -48,13 +50,13 @@ static JSValue qjs_canvas_fill_circle(JSContext* ctx, JSValueConst this_val, int
   JS_ToFloat64(ctx, &a1, argv[1]);
   double a2;
   JS_ToFloat64(ctx, &a2, argv[2]);
-  int32_t a3;
-  JS_ToInt32(ctx, &a3, argv[3]);
-  int32_t a4;
-  JS_ToInt32(ctx, &a4, argv[4]);
-  int32_t a5;
-  JS_ToInt32(ctx, &a5, argv[5]);
-js_canvas_fill_circle((float)a0, (float)a1, (float)a2, (uint32_t)a3, (uint32_t)a4, (uint32_t)a5);
+  uint32_t a3;
+  JS_ToUint32(ctx, &a3, argv[3]);
+  uint32_t a4;
+  JS_ToUint32(ctx, &a4, argv[4]);
+  uint32_t a5;
+  JS_ToUint32(ctx, &a5, argv[5]);
+js_canvas_fill_circle((float)a0, (float)a1, (float)a2, a3, a4, a5);
   return JS_UNDEFINED;
 }
 static JSValue qjs_canvas_line(JSContext* ctx, JSValueConst this_val, int argc, JSValueConst* argv) {
@@ -66,11 +68,11 @@ static JSValue qjs_canvas_line(JSContext* ctx, JSValueConst this_val, int argc, 
   JS_ToFloat64(ctx, &a2, argv[2]);
   double a3;
   JS_ToFloat64(ctx, &a3, argv[3]);
-  int32_t a4;
-  JS_ToInt32(ctx, &a4, argv[4]);
+  uint32_t a4;
+  JS_ToUint32(ctx, &a4, argv[4]);
   double a5;
   JS_ToFloat64(ctx, &a5, argv[5]);
-js_canvas_line((float)a0, (float)a1, (float)a2, (float)a3, (uint32_t)a4, (float)a5);
+js_canvas_line((float)a0, (float)a1, (float)a2, (float)a3, a4, (float)a5);
   return JS_UNDEFINED;
 }
 static JSValue qjs_canvas_quad_color(JSContext* ctx, JSValueConst this_val, int argc, JSValueConst* argv) {
@@ -82,9 +84,9 @@ static JSValue qjs_canvas_quad_color(JSContext* ctx, JSValueConst this_val, int 
   JS_ToFloat64(ctx, &a2, argv[2]);
   double a3;
   JS_ToFloat64(ctx, &a3, argv[3]);
-  int32_t a4;
-  JS_ToInt32(ctx, &a4, argv[4]);
-js_canvas_quad_color((float)a0, (float)a1, (float)a2, (float)a3, (uint32_t)a4);
+  uint32_t a4;
+  JS_ToUint32(ctx, &a4, argv[4]);
+js_canvas_quad_color((float)a0, (float)a1, (float)a2, (float)a3, a4);
   return JS_UNDEFINED;
 }
 static JSValue qjs_canvas_scale(JSContext* ctx, JSValueConst this_val, int argc, JSValueConst* argv) {
@@ -118,6 +120,15 @@ js_canvas_set_empty_image();
 static JSValue qjs_time(JSContext* ctx, JSValueConst this_val, int argc, JSValueConst* argv) {
   return JS_NewFloat64(ctx, js_time());
 }
+static JSValue qjs_log_print(JSContext* ctx, JSValueConst this_val, int argc, JSValueConst* argv) {
+  uint32_t a0;
+  JS_ToUint32(ctx, &a0, argv[0]);
+  const char* a1;
+  a1 = JS_ToCString(ctx, argv[1]);
+js_log_print(a0, a1);
+  JS_FreeCString(ctx, a1);
+  return JS_UNDEFINED;
+}
 
 
 void js_register(void) {
@@ -131,6 +142,7 @@ void js_register(void) {
    JS_SetPropertyStr(qjs_ctx, global_object, "canvas_restore_transform", JS_NewCFunction(qjs_ctx, qjs_canvas_restore_transform, "canvas_restore_transform", 1));
    JS_SetPropertyStr(qjs_ctx, global_object, "canvas_set_empty_image", JS_NewCFunction(qjs_ctx, qjs_canvas_set_empty_image, "canvas_set_empty_image", 1));
    JS_SetPropertyStr(qjs_ctx, global_object, "time", JS_NewCFunction(qjs_ctx, qjs_time, "time", 1));
+   JS_SetPropertyStr(qjs_ctx, global_object, "log_print", JS_NewCFunction(qjs_ctx, qjs_log_print, "log_print", 1));
 }
 
 

@@ -36,6 +36,11 @@ const api_data = [
     {
         name: "time",
         return_type: "f64"
+    },
+    {
+        name: "log_print",
+        params: ["level", "text"],
+        sig: ["u32", "cstring"]
     }
 ];
 
@@ -63,7 +68,8 @@ const convert_arg_type_qjs = {
     f32: "float",
     f64: "double",
     i32: "int32_t",
-    u32: "uint32_t"
+    u32: "uint32_t",
+    cstring: "const char*",
 };
 
 const convert_type_qjs = {
@@ -71,14 +77,17 @@ const convert_type_qjs = {
     f32: "double",
     f64: "double",
     i32: "int32_t",
-    u32: "int32_t"
+    u32: "uint32_t",
+    cstring: "const char*",
 };
 
 const convert_function_qjs = {
     void: "void",
     f32: "JS_ToFloat64",
     f64: "JS_ToFloat64",
-    u32: "JS_ToInt32"
+    i32: "JS_ToInt32",
+    u32: "JS_ToUint32",
+    cstring: "JS_ToCString"
 };
 
 const qjs_new_primitive = {
@@ -131,15 +140,34 @@ for (let fn of Object.keys(functions)) {
     let values = [];
     for (let i = 0; i < sig.length; ++i) {
         proxy_qjs += `  ${convert_type_qjs[sig[i]]} a${i};\n`;
-        proxy_qjs += `  ${convert_function_qjs[sig[i]]}(ctx, &a${i}, argv[${i}]);\n`;
-        values.push("(" + convert_arg_type_qjs[sig[i]] + ")a" + i);
+        if(sig[i] === "cstring") {
+            proxy_qjs += `  a${i} = ${convert_function_qjs[sig[i]]}(ctx, argv[${i}]);\n`;
+        }
+        else {
+            proxy_qjs += `  ${convert_function_qjs[sig[i]]}(ctx, &a${i}, argv[${i}]);\n`;
+        }
+        let castExpr = "";
+        if(convert_arg_type_qjs[sig[i]] !== convert_type_qjs[sig[i]]) {
+            castExpr = "(" + convert_arg_type_qjs[sig[i]] + ")";
+        }
+        values.push(castExpr + "a" + i);
     }
 
     let val = `js_${fn}(${values.join(", ")})`;
+
+    let finalizers = "";
+    for (let i = 0; i < sig.length; ++i) {
+        if(sig[i] === "cstring") {
+            finalizers += `  JS_FreeCString(ctx, a${i});\n`;
+        }
+    }
+
     if (ret !== "void") {
+        // TODO: add finalizers
         proxy_qjs += `  return ${qjs_new_primitive[ret]}(ctx, ${val});\n`;
     } else {
         proxy_qjs += val + ";\n";
+        proxy_qjs += finalizers;
         proxy_qjs += "  return JS_UNDEFINED;\n";
     }
     proxy_qjs += "}\n";
@@ -209,6 +237,7 @@ type u32 = number;
 type i32 = number;
 type f32 = number;
 type f64 = number;
+type cstring = number;
 
 ${ts_declarations.join("\n\n")}
 

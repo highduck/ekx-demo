@@ -1,10 +1,10 @@
 (() => {
-    console.log(' [QUICKJS] => Script loaded. Ok. \n');
+    log_print(0, ' [QUICKJS] => Script loaded. Ok. \n');
     for (let n = 1; n <= 5; n++) {
-        console.log(` [QUICKJS-TRACE] n = ${n}/5 `);
+        log_print(0, ` [QUICKJS-TRACE] n = ${n}/5 `);
     }
     const sqr = (x) => x * x;
-    const RGB = (x) => 0xFF000000 | (x & 0x0000FF00) | ((0xFF0000 & x) >>> 16) | ((x & 0xFF) << 16);
+    const RGB = (x) => (0xFF << 24) | (x & 0xFF00) | ((0xFF0000 & x) >>> 16) | ((x & 0xFF) << 16);
     const palette = [
         RGB(0x000000), //black
         RGB(0x1D2B53), // dark-blue
@@ -58,7 +58,7 @@
         canvas_quad_color(20, 20, 128 - 40, 128 - 40, 0xFF2277BB);
 
         if(1) {
-            const random_color = () => 0xFF000000 | (Math.random() * 0xFFFFFF);
+            const random_color = () => (0xFF << 24) | (Math.random() * 0xFFFFFF);
             let pad = 0;
             for (let i = 0; i < 7; ++i) {
                 canvas_quad_color(pad, pad, 128 - pad * 2, 128 - pad * 2, random_color());
@@ -123,7 +123,7 @@
           goto _
            */
         canvas_set_empty_image();
-        canvas_quad_color(0, 0, 128, 128, 0xFF000000);
+        canvas_quad_color(0, 0, 128, 128, (0xFF << 24));
         const t = time();
         for (let i = 0; i <= 288; ++i) {
             const x = i % 17;

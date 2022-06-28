@@ -3,6 +3,7 @@ type u32 = number;
 type i32 = number;
 type f32 = number;
 type f64 = number;
+type cstring = number;
 
 declare function canvas_fill_circle(x: f32, y: f32, radius: f32, color0: u32, color1: u32, segments: u32):void;
 
@@ -21,4 +22,6 @@ declare function canvas_restore_transform():void;
 declare function canvas_set_empty_image():void;
 
 declare function time():f64;
+
+declare function log_print(level: u32, text: cstring):void;
 

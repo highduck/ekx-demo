@@ -55,6 +55,10 @@ JS_API double js_time(void) {
     return ek_time_now();
 }
 
+JS_API void js_log_print(uint32_t a0, const char* a1) {
+    log_print(a0, 0, 0, "%s", a1);
+}
+
 #ifdef __cplusplus
 }
 #endif
