@@ -7,19 +7,11 @@
         "build:web": "ekx web clean --verbose",
         "build:android": "ekx android bundle clean --verbose",
         "build:assets:dev": "ekx assets --dev -v",
-        "clean": "rimraf ./build ./export ./.firebase",
         "run-web": "ekx web -v --run",
         "gen-api": "node scripts/gen.js",
         "release-patch-web": "ekx web clean --bump patch --deploy internal -v"
     },
     "dependencies": {
-        "@ekx/appbox": "0.0.12",
-        "@ekx/cli": "0.1.16",
-        "@ekx/pocketmod": "0.0.2",
-        "@ekx/quickjs": "0.0.1",
-        "cmake-build": "0.0.6"
-    },
-    "devDependencies": {
-        "rimraf": "^3.0.2"
+        "@ekx/ekx": "0.1.10"
     }
 }

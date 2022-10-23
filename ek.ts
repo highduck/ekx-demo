@@ -1,9 +1,9 @@
-const path = require("path");
+import * as path from "https://deno.land/std/path/mod.ts";
+import {Project} from "../ekx/modules/cli/project.ts";
 
-module.exports = function (project) {
+export async function setup(project: Project) {
     project.addModule({
         name: "demo",
-        path: __dirname,
         cpp: "src"
     });
 
@@ -54,7 +54,7 @@ module.exports = function (project) {
         image: "https://play-ilj.web.app/icons/icon192.png"
     };
 
-    project.importModule("@ekx/appbox");
-    project.importModule("@ekx/pocketmod");
-    project.importModule("@ekx/quickjs");
-};
+    await project.importModule("@ekx/ekx/packages/appbox/ek.ts");
+    await project.importModule("@ekx/ekx/external/pocketmod/ek.ts");
+    await project.importModule("@ekx/ekx/external/quickjs/ek.ts");
+}

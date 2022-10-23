@@ -25,10 +25,10 @@ namespace ek {
 
 class SampleAudio : public SampleBase {
     inline static uint32_t trackIndex = 0;
-    inline static pocketmod_context ctx;
-    inline static ek_local_res slr;
-    inline static auph_buffer buf;
-    inline static auph_voice vc;
+    inline static pocketmod_context ctx = {};
+    inline static ek_local_res slr = {};
+    inline static auph_buffer buf = {};
+    inline static auph_voice vc = {};
 public:
     ~SampleAudio() override = default;
 
@@ -144,9 +144,10 @@ public:
                           [](ek_local_res* lr) {
                               slr = *lr;
                               if (ek_local_res_success(lr)) {
-
-                                  if (pocketmod_init(&ctx, lr->buffer, lr->length,
-                                                     auph_get(AUPH_MIXER, AUPH_PARAM_SAMPLE_RATE))) {
+                                  const int sample_rate = auph_get(AUPH_MIXER, AUPH_PARAM_SAMPLE_RATE);
+                                  log_info("init pocketmod: sample rate = %d, buffer length = %d, bytes = %p",
+                                           sample_rate, (int) lr->length, lr->buffer);
+                                  if (pocketmod_init(&ctx, lr->buffer, (int) lr->length, sample_rate)) {
                                       buf = auph_load_callback(play_mod_stream, &ctx);
                                       vc = auph_play_f(buf, 1, 0, 0.5f, true, false, AUPH_BUS_MUSIC);
                                   } else {

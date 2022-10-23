@@ -27,17 +27,16 @@ extern void js_log_print(uint32_t a0, const char* a1);
 #ifdef __EMSCRIPTEN__
 void js_register(void) {
     EM_ASM({
-        this["canvas_fill_circle"] = _js_canvas_fill_circle;
-        this["canvas_line"] = _js_canvas_line;
-        this["canvas_quad_color"] = _js_canvas_quad_color;
-        this["canvas_scale"] = _js_canvas_scale;
-        this["canvas_translate"] = _js_canvas_translate;
-        this["canvas_save_transform"] = _js_canvas_save_transform;
-        this["canvas_restore_transform"] = _js_canvas_restore_transform;
-        this["canvas_set_empty_image"] = _js_canvas_set_empty_image;
-        this["time"] = _js_time;
-        this["log_print"] = _js_log_print;
-
+        window["canvas_fill_circle"] = _js_canvas_fill_circle;
+        window["canvas_line"] = _js_canvas_line;
+        window["canvas_quad_color"] = _js_canvas_quad_color;
+        window["canvas_scale"] = _js_canvas_scale;
+        window["canvas_translate"] = _js_canvas_translate;
+        window["canvas_save_transform"] = _js_canvas_save_transform;
+        window["canvas_restore_transform"] = _js_canvas_restore_transform;
+        window["canvas_set_empty_image"] = _js_canvas_set_empty_image;
+        window["time"] = _js_time;
+        window["log_print"] = _js_log_print;
    });
 }
 #else

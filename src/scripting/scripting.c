@@ -69,7 +69,7 @@ JS_API void js_log_print(uint32_t a0, const char* a1) {
 void js_call_global(const char* name) {
     EM_ASM({
         const id = UTF8ToString($0);
-        if(this[id]) this[id]();
+        if(window[id]) window[id]();
     }, name);
 }
 

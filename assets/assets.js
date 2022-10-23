@@ -2,7 +2,7 @@
  *
  * @param builder {AssetBuilder}
  */
-function on_populate(builder) {
+export function on_populate(builder) {
     for (const mod of builder.glob("mods/*.mod")) {
         builder.copy({filepath: mod});
     }
@@ -77,7 +77,3 @@ function on_populate(builder) {
         filepath: "tests"
     });
 }
-
-module.exports = {
-    on_populate
-};
