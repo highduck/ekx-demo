@@ -1,5 +1,5 @@
-import * as path from "https://deno.land/std/path/mod.ts";
-import {Project} from "../ekx/modules/cli/project.ts";
+import * as path from "path";
+import {Project} from "../ekx/modules/cli/project.js";
 
 export async function setup(project: Project) {
     project.addModule({
@@ -55,6 +55,6 @@ export async function setup(project: Project) {
     };
 
     await project.importModule("@ekx/ekx/packages/appbox/ek.ts");
-    await project.importModule("@ekx/ekx/external/pocketmod/ek.ts");
+    //await project.importModule("@ekx/ekx/external/pocketmod/ek.ts");
     await project.importModule("@ekx/ekx/external/quickjs/ek.ts");
 }

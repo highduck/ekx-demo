@@ -9,7 +9,7 @@
 #include "ui/minimal.hpp"
 #include <ek/local_res.h>
 
-#include <pocketmod.h>
+#include <pocketmod/pocketmod.h>
 
 void play_mod_stream(void* userdata, float* samples, uint32_t count) {
     pocketmod_context* ctx = (pocketmod_context*) userdata;

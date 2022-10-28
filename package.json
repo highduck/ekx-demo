@@ -1,7 +1,8 @@
 {
     "name": "@ekx/demo",
-    "version": "1.5.17+92",
+    "version": "1.5.18+93",
     "private": true,
+    "type": "module",
     "scripts": {
         "postinstall": "cmake-build",
         "build:web": "ekx web clean --verbose",
@@ -9,7 +10,7 @@
         "build:assets:dev": "ekx assets --dev -v",
         "run-web": "ekx web -v --run",
         "gen-api": "node scripts/gen.js",
-        "release-patch-web": "ekx web clean --bump patch --deploy internal -v"
+        "deploy:web-patch": "ekx web clean --bump patch --deploy internal -v"
     },
     "dependencies": {
         "@ekx/ekx": "0.1.10"
