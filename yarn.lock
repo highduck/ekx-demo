@@ -9,10 +9,10 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@ekx/ekx@0.1.11":
-  version "0.1.11"
-  resolved "https://registry.yarnpkg.com/@ekx/ekx/-/ekx-0.1.11.tgz#5beb4591be3a4fec5d796dc7c482419f328fad71"
-  integrity sha512-Fz4bag3a3Ncni23CCtsqCPPODP8S8ukjgRfkEKpdLyVMTuUdIdIc1rwfQ19fn1kl059H9xcCZugepOvAaLhx0Q==
+"@ekx/ekx@0.1.12":
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/@ekx/ekx/-/ekx-0.1.12.tgz#e34b3edd23495c686e8f8585b4187278038d00bd"
+  integrity sha512-Hy/JlWPTNsnjauSsAiRIR5ofD1PLRcvyZQGNW6oWLhyXsvUalcKqqyRU3BK56VdlujvqHBZTHHLjSXpQot9tbg==
   dependencies:
     "@swc/core" "^1.3.11"
     "@types/glob" "^8.0.0"
