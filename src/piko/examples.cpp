@@ -21,7 +21,7 @@ void draw_diamonds(entity_t e) {
         d.start();
     }
 
-    auto info = sg_query_image_info(d.rt);
+    const sg_image_desc info = sg_query_image_desc(d.rt);
     canvas_set_image(d.rt);
     canvas_set_image_rect(rect_01());
     canvas_quad(0, 0, (float) info.width, (float) info.height);
@@ -52,7 +52,7 @@ void diamonds::start() {
 }
 
 void diamonds::onPreRender() {
-    auto info = sg_query_image_info(rt);
+    const sg_image_desc info = sg_query_image_desc(rt);
     int w = info.width;
     int h = info.height;
 
