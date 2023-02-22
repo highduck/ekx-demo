@@ -13,6 +13,6 @@
         "deploy:web-patch": "ekx web clean --bump patch --deploy internal -v"
     },
     "dependencies": {
-        "@ekx/ekx": "0.1.10"
+        "@ekx/ekx": "0.1.11"
     }
 }
