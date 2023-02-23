@@ -4,7 +4,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "postinstall": "which ekx && which ts-node && ekx cmake",
+        "postinstall": "ekx cmake",
         "build:web": "ekx web clean --verbose",
         "build:android": "ekx android bundle clean --verbose",
         "build:assets:dev": "ekx assets --dev -v",
@@ -13,6 +13,10 @@
         "deploy:web-patch": "ekx web clean --bump patch --deploy internal -v"
     },
     "dependencies": {
-        "@ekx/ekx": "1.0.8"
+        "@ekx/ekx": "1.0.11"
+    },
+    "engines": {
+        "node": ">=18.0.0",
+        "npm": ">=7.0.0"
     }
 }
