@@ -4,7 +4,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "postinstall": "cmake-build",
+        "postinstall": "ekx cmake",
         "build:web": "ekx web clean --verbose",
         "build:android": "ekx android bundle clean --verbose",
         "build:assets:dev": "ekx assets --dev -v",
