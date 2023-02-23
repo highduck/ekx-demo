@@ -73,7 +73,7 @@ jobs:
           key: ${{env.EM_VERSION}}-${{ runner.os }}
 
       - name: Setup Ninja
-        uses: eliasku/gha-setup-ninja
+        uses: eliasku/gha-setup-ninja@master
 
       - name: Install WebP (Linux)
         if: runner.os == 'Linux'
