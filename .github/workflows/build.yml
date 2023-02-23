@@ -99,13 +99,13 @@ jobs:
           brew update
           brew list webp || brew install webp
 
-#      - name: Install CCache
-#        uses: eliasku/install-ccache-action@master
-#
-#      - name: Setup CCache
-#        uses: eliasku/ccache-action@main
-#        with:
-#          key: ${{ runner.os }}
+      - name: Install CCache
+        uses: eliasku/install-ccache-action@master
+
+      - name: Setup CCache
+        uses: eliasku/ccache-action@main
+        with:
+          key: ${{ runner.os }}
 
       - name: Setup Emscripten
         uses: mymindstorm/setup-emsdk@v11
