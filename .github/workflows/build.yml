@@ -47,7 +47,7 @@ jobs:
           path: main
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: npm ci
         working-directory: ./main
 
       - name: Checkout Keys
@@ -58,7 +58,7 @@ jobs:
           path: keys
 
       - name: Build Android
-        run: yarn run build:android
+        run: npm run build:android
         working-directory: ./main
 
   build-web:
@@ -115,7 +115,7 @@ jobs:
           path: main
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: npm ci
         working-directory: ./main
 
       - name: Install Firebase CLI
@@ -129,5 +129,5 @@ jobs:
           path: keys
 
       - name: Build and Release Web
-        run: yarn release-patch-web
+        run: npm run release-patch-web
         working-directory: ./main
