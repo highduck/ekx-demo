@@ -6,6 +6,9 @@ jobs:
   build-android:
     name: Build Android
     runs-on: ubuntu-latest
+    env:
+      CC: clang
+      CXX: clang++
     steps:
       # strange but we cannot use ninja from NDK?
       - name: Setup Ninja
@@ -67,6 +70,8 @@ jobs:
     env:
       EM_VERSION: 3.1.8
       EM_CACHE_FOLDER: 'emsdk-cache'
+      CC: clang
+      CXX: clang++
     steps:
       # setup native build tools
       - name: Setup system cache
@@ -91,13 +96,13 @@ jobs:
           brew update
           brew list webp || brew install webp
 
-      - name: Install CCache
-        uses: eliasku/install-ccache-action@master
-
-      - name: Setup CCache
-        uses: eliasku/ccache-action@main
-        with:
-          key: ${{ runner.os }}
+#      - name: Install CCache
+#        uses: eliasku/install-ccache-action@master
+#
+#      - name: Setup CCache
+#        uses: eliasku/ccache-action@main
+#        with:
+#          key: ${{ runner.os }}
 
       - name: Setup Emscripten
         uses: mymindstorm/setup-emsdk@v11
