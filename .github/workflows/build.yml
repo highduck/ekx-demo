@@ -9,7 +9,7 @@ jobs:
     steps:
       # strange but we cannot use ninja from NDK?
       - name: Setup Ninja
-        uses: seanmiddleditch/gha-setup-ninja@master
+        uses: eliasku/gha-setup-ninja@master
 
       # See b/206099937. Hack needed to make ninja visible to cmake during NDK builds
       - name: Link Ninja binary
@@ -73,7 +73,7 @@ jobs:
           key: ${{env.EM_VERSION}}-${{ runner.os }}
 
       - name: Setup Ninja
-        uses: seanmiddleditch/gha-setup-ninja@master
+        uses: eliasku/gha-setup-ninja
 
       - name: Install WebP (Linux)
         if: runner.os == 'Linux'
