@@ -37,8 +37,12 @@ jobs:
 #      - name: Setup Android SDK
 #        uses: android-actions/setup-android@v2
 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
       - name: Checkout Project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: main
 
@@ -47,7 +51,7 @@ jobs:
         working-directory: ./main
 
       - name: Checkout Keys
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: highduck/keys
           token: ${{ secrets.GH_TOKEN }}
@@ -101,8 +105,12 @@ jobs:
           version: ${{env.EM_VERSION}}
           actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
       - name: Checkout Project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: main
 
@@ -114,7 +122,7 @@ jobs:
         run: npm i -g firebase-tools
 
       - name: Keys
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: highduck/keys
           token: ${{ secrets.GH_TOKEN }}
