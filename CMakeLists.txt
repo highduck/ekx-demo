@@ -34,7 +34,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
         )
 
 add_custom_target(${PROJECT_NAME}-assets ALL
-        COMMAND yarn ekx assets -v
+        COMMAND npm exec --package @ekx/ekx -- ekx dev --clean -V
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}-assets)
