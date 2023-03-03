@@ -1,8 +1,7 @@
-/**
- *
- * @param builder {AssetBuilder}
- */
-export function on_populate(builder) {
+import {AssetBuilder} from "@ekx/ekx/modules/cli/assets/AssetBuilder.js";
+import {TextureDataType} from "@ekx/ekx/modules/cli/assets/Texture.js";
+
+export function on_populate(builder:AssetBuilder) {
     for (const mod of builder.glob("mods/*.mod")) {
         builder.copy({filepath: mod});
     }
@@ -47,7 +46,7 @@ export function on_populate(builder) {
             "skybox/front.jpg",
             "skybox/back.jpg",
         ],
-        type: "cubemap",
+        type: TextureDataType.CubeMap,
         webp: {
             lossless: false
         }
