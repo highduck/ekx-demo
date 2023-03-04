@@ -1,5 +1,5 @@
 import * as path from "path";
-import {Project} from "@ekx/ekx/modules/cli/project.js";
+import {Project} from "ekx/modules/cli/project.js";
 
 export async function setup(project: Project) {
     project.addModule({
@@ -54,7 +54,7 @@ export async function setup(project: Project) {
         image: "https://play-ilj.web.app/icons/icon192.png"
     };
 
-    await project.importModule("@ekx/ekx/packages/appbox/ek.ts");
-    //await project.importModule("@ekx/ekx/external/pocketmod/ek.ts");
-    await project.importModule("@ekx/ekx/external/quickjs/ek.ts");
+    await project.importModule("ekx/packages/appbox/ek.ts");
+    //await project.importModule("ekx/external/pocketmod/ek.ts");
+    await project.importModule("ekx/external/quickjs/ek.ts");
 }
