@@ -7,7 +7,7 @@
         "postinstall": "ekx cmake",
         "build:web": "ekx web clean --verbose",
         "build:android": "ekx android bundle clean --verbose",
-        "build:assets:dev": "ekx assets --dev -v",
+        "dev-assets": "ekx dev -V",
         "run-web": "ekx web -v --run",
         "gen-api": "node scripts/gen.js",
         "deploy:web-patch": "ekx web clean --bump patch --deploy internal -v"

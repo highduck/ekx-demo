@@ -112,7 +112,7 @@ public:
     }
 
     static void startMusicTrack() {
-        string_hash_t music = ((trackIndex & 1) == 0) ? H("sfx/music1") : H("sfx/music2");
+//        string_hash_t music = ((trackIndex & 1) == 0) ? H("sfx/music1") : H("sfx/music2");
 //        play_music(music);
 
         static const char* mods_path[12] = {
