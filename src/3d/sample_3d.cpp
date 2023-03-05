@@ -17,6 +17,9 @@
 #include "sample_3d.hpp"
 #include "camera_arcball.hpp"
 
+#define EK_FORMAT_MODEL_3D_IMPLEMENT
+#include <ek/format/model3d.h>
+
 namespace ek {
 
 static ecs::Entity main_camera{};
@@ -66,9 +69,9 @@ void create_lights() {
 }
 
 void create_coordinate_system_gizmo() {
-    static auto cube_x = new StaticMesh(Model3D::createCube(vec3(0, 0, 0), vec3(1, 1, 1), RGB(0xFF0000)));
-    static auto cube_y = new StaticMesh(Model3D::createCube(vec3(0, 0, 0), vec3(1, 1, 1), RGB(0x00FF00)));
-    static auto cube_z = new StaticMesh(Model3D::createCube(vec3(0, 0, 0), vec3(1, 1, 1), RGB(0x0000FF)));
+    static auto cube_x = new StaticMesh(create_cube(vec3(0, 0, 0), vec3(1, 1, 1), RGB(0xFF0000)));
+    static auto cube_y = new StaticMesh(create_cube(vec3(0, 0, 0), vec3(1, 1, 1), RGB(0x00FF00)));
+    static auto cube_z = new StaticMesh(create_cube(vec3(0, 0, 0), vec3(1, 1, 1), RGB(0x0000FF)));
 
     auto e = ecs::create<Node, Transform3D>();
     set_tag(e, H("cs"));
@@ -151,7 +154,7 @@ Sample3D::Sample3D() {
     //    asset_t<static_mesh_t>{"torus"}.reset(new static_mesh_t(load_obj(get_resource_content("assets/torus.obj"))));
 //    asset_t<static_mesh_t>{"monkey"}.reset(new static_mesh_t(load_obj(get_resource_content("assets/monkey.obj"))));
 //    asset_t<static_mesh_t>{"sphere"}.reset(new static_mesh_t(load_obj(get_resource_content("assets/sphere.obj"))));
-    RES_NAME_RESOLVE(res_mesh3d, H("cube")) = new StaticMesh(Model3D::createCube(vec3(0, 0, 0), vec3(1, 1, 1)));
+    RES_NAME_RESOLVE(res_mesh3d, H("cube")) = new StaticMesh(create_cube(vec3(0, 0, 0), vec3(1, 1, 1), COLOR_WHITE));
 
     main_scene_3d = ecs::create<Node, Transform3D>();
     set_tag(main_scene_3d, H("scene 3d"));
