@@ -113,5 +113,5 @@ jobs:
           path: keys
 
       - name: Build and Release Web
-        run: npm run deploy:web-patch
+        run: npm run deploy:web
         working-directory: ./main
