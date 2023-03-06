@@ -1,7 +1,7 @@
-import {AssetBuilder} from "ekx/modules/cli/assets/AssetBuilder.js";
-import {TextureDataType} from "ekx/modules/cli/assets/Texture.js";
+import {AssetBuilder} from "ekx/lib/cli/assets/AssetBuilder.js";
+import {TextureDataType} from "ekx/lib/cli/assets/Texture.js";
 
-export function on_populate(builder:AssetBuilder) {
+export function on_populate(builder: AssetBuilder) {
     for (const mod of builder.glob("mods/*.mod")) {
         builder.copy({filepath: mod});
     }
