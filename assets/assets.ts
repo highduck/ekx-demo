@@ -1,4 +1,4 @@
-import {AssetBuilder} from "ekx/lib/cli/assets/AssetBuilder.js";
+import {AssetBuilder} from "ekx/lib/assets/AssetBuilder.js";
 import {TextureDataType} from "ekx/lib/cli/assets/Texture.js";
 
 export function on_populate(builder: AssetBuilder) {
