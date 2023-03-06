@@ -2,7 +2,7 @@
 #ifndef APP_BUILD_INFO_H
 #define APP_BUILD_INFO_H
 
-#define APP_VERSION_NAME "1.5.20" 
-#define APP_VERSION_CODE "95" 
+#define APP_VERSION_NAME "1.5.21" 
+#define APP_VERSION_CODE "102" 
 
 #endif // APP_BUILD_INFO_H
