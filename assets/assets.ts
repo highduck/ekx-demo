@@ -1,5 +1,5 @@
 import {AssetBuilder} from "ekx/lib/assets/AssetBuilder.js";
-import {TextureDataType} from "ekx/lib/cli/assets/Texture.js";
+import {TextureDataType} from "ekx/lib/assets/Texture.js";
 
 export function on_populate(builder: AssetBuilder) {
     for (const mod of builder.glob("mods/*.mod")) {
