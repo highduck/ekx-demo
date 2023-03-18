@@ -54,7 +54,8 @@ export async function setup(project: Project) {
         image: "https://play-ilj.web.app/icons/icon192.png"
     };
 
-    await project.importModule("ekx/packages/appbox/ek.ts");
-    //await project.importModule("ekx/external/pocketmod/ek.ts");
-    await project.importModule("ekx/external/quickjs/ek.ts");
+    await project.import(
+        "ekx/packages/appbox/ek.ts",
+        "ekx/external/quickjs/ek.ts",
+    );
 }

@@ -58,7 +58,7 @@ jobs:
     name: Build Web
     runs-on: ubuntu-latest
     env:
-      EM_VERSION: 3.1.8
+      EM_VERSION: 3.1.32
       EM_CACHE_FOLDER: 'emsdk-cache'
       CC: clang
       CXX: clang++

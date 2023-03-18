@@ -1,8 +1,6 @@
 #include <ek/scenex/3d/Material3D.hpp>
 #include <ek/scenex/3d/Transform3D.hpp>
 #include <ek/scenex/3d/Camera3D.hpp>
-#include <ek/scenex/3d/Transform3D.hpp>
-#include <ek/time.h>
 #include <ek/scenex/3d/RenderSystem3D.hpp>
 #include <ek/scenex/base/Node.hpp>
 #include <ekx/app/time_layers.h>
@@ -14,11 +12,9 @@
 #include <ek/rnd.h>
 #include <ek/scenex/2d/Camera2D.hpp>
 #include <stb/stb_sprintf.h>
+#include "model_utils.h"
 #include "sample_3d.hpp"
 #include "camera_arcball.hpp"
-
-#define EK_FORMAT_MODEL_3D_IMPLEMENT
-#include <ek/format/model3d.h>
 
 namespace ek {
 

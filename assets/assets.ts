@@ -1,5 +1,5 @@
 import {AssetBuilder} from "ekx/lib/assets/AssetBuilder.js";
-import {TextureDataType} from "ekx/lib/assets/Texture.js";
+import {image_data_type} from "ekx/packages/calo/lib/generated/gen_sg.js";
 
 export function on_populate(builder: AssetBuilder) {
     for (const mod of builder.glob("mods/*.mod")) {
@@ -46,7 +46,7 @@ export function on_populate(builder: AssetBuilder) {
             "skybox/front.jpg",
             "skybox/back.jpg",
         ],
-        type: TextureDataType.CubeMap,
+        type: image_data_type.IMAGE_DATA_CUBE_MAP,
         webp: {
             lossless: false
         }

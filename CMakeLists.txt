@@ -7,6 +7,7 @@ add_executable(${PROJECT_NAME}
         src/demo_main.cpp
         src/3d/sample_3d.cpp
         src/3d/camera_arcball.cpp
+        src/3d/model_utils.c
         src/sample_text.cpp
         src/sample_base.cpp
         src/piko/examples.h
@@ -28,6 +29,7 @@ add_executable(${PROJECT_NAME}
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
+        C_STANDARD 11
         CXX_STANDARD 17
         CXX_STANDARD_REQUIRED YES
         CXX_EXTENSIONS NO
