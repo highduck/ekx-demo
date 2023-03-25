@@ -1,6 +1,6 @@
 {
     "name": "@ekx/demo",
-    "version": "1.5.23+105",
+    "version": "1.5.24+106",
     "private": true,
     "type": "module",
     "scripts": {
@@ -15,7 +15,7 @@
         "deploy:ios": "ekx ios clean --deploy internal -V"
     },
     "dependencies": {
-        "ekx": "0.0.3"
+        "ekx": "0.0.4"
     },
     "engines": {
         "node": ">=18.0.0",

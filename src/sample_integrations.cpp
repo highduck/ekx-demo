@@ -91,17 +91,17 @@ void SampleIntegrations::initializePlugins() {
     ek_admob_config adMobConfig{};
     adMobConfig.child_directed = EK_ADMOB_CHILD_DIRECTED_UNSPECIFIED;
 
-    Ads::Config adHelperConfig{};
+    ads_premium_config adHelperConfig{};
 #if EK_ANDROID
     adMobConfig.banner = "ca-app-pub-3931267664278058/7752333837";
     adMobConfig.inters = "ca-app-pub-3931267664278058/5126170492";
     adMobConfig.video = "ca-app-pub-3931267664278058/1733720395";
-    adHelperConfig.skuRemoveAds = "remove_ads";
+    adHelperConfig.sku_remove_ads = "remove_ads";
 #elif EK_IOS
     adMobConfig.banner = "ca-app-pub-3931267664278058/6010811099";
     adMobConfig.inters = "ca-app-pub-3931267664278058/4697729428";
     adMobConfig.video = "ca-app-pub-3931267664278058/5819239403";
-    adHelperConfig.skuRemoveAds = "remove_ads";
+    adHelperConfig.sku_remove_ads = "remove_ads";
 #endif
 
     billing::initialize(billingKey);
