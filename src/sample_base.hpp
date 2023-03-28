@@ -15,8 +15,8 @@ public:
     virtual void update(float dt);
 
     const char* title = nullptr;
-    static ecs::Entity samplesContainer;
-    ecs::Entity container;
+    static entity_t samplesContainer;
+    entity_t container;
 private:
 };
 

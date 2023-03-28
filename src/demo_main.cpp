@@ -16,9 +16,9 @@
 #include <ek/rnd.h>
 #include <ek/scenex/systems/main_flow.hpp>
 #include <ek/scenex/asset2/Asset.hpp>
-#include <ek/scenex/SceneFactory.hpp>
-#include <ek/scenex/base/Interactive.hpp>
-#include <ek/scenex/base/Node.hpp>
+#include <ek/scenex/scene_factory.h>
+#include <ek/scenex/base/interactiv.h>
+#include <ek/scenex/base/node.h>
 #include <ek/scenex/2d/LayoutRect.hpp>
 #include <ui/minimal.hpp>
 #include <ek/scenex/2d/Camera2D.hpp>
@@ -48,8 +48,8 @@ typedef SampleBase* (* sample_factory_fn)();
 Array<sample_factory_fn> sampleFactory;
 int currentSampleIndex = 0;
 SampleBase* currentSample = nullptr;
-ecs::Entity tfSampleTitle;
-ecs::Entity tfFPS = nullptr;
+entity_t tfSampleTitle;
+entity_t tfFPS = NULL_ENTITY;
 int prevFPS = 0;
 fps_counter fps_cnt = {};
 
@@ -124,7 +124,7 @@ void DemoApp::onUpdateFrame(float dt) {
     if (currentSample) {
         currentSample->update(dt);
     }
-    if (tfFPS) {
+    if (tfFPS.id) {
         fps_counter_update(&fps_cnt, dt);
         auto fps = (int) fps_cnt.average;
         if (fps != prevFPS) {
@@ -151,7 +151,7 @@ void DemoApp::onAppStart() {
     log_debug("Start Demo: prepareInternalResources");
     SampleText::prepareInternalResources();
 
-    SampleBase::samplesContainer = createNode2D(H("sample"));
+    SampleBase::samplesContainer = create_node2d(H("sample"));
     append(root, SampleBase::samplesContainer);
 
     auto prev = createButton("<", [] { scrollSample(-1); });
@@ -159,12 +159,12 @@ void DemoApp::onAppStart() {
     ecs::add<LayoutRect>(prev).enableAlignX(0, 30);
     ecs::add<LayoutRect>(next).enableAlignX(1, -30);
 
-    tfSampleTitle = createNode2D(H("title"));
+    tfSampleTitle = create_node2d(H("title"));
     addText(tfSampleTitle, "");
     ecs::add<LayoutRect>(tfSampleTitle).enableAlignX(0.5);
 
     {
-        tfFPS = createNode2D(H("fps"));
+        tfFPS = create_node2d(H("fps"));
         addText(tfFPS, "");
         auto& tf = ecs::get<Text2D>(tfFPS);
         tf.format.alignment = vec2(0, 0);
@@ -177,7 +177,7 @@ void DemoApp::onAppStart() {
 
 
     {
-        entity_t tf_version = createNode2D(H("version"));
+        entity_t tf_version = create_node2d(H("version"));
         addText(tf_version, APP_VERSION_NAME "+" APP_VERSION_CODE);
         auto& tf = ecs::get<Text2D>(tf_version);
         tf.format.alignment = vec2(1, 0);
@@ -188,7 +188,7 @@ void DemoApp::onAppStart() {
         append(root, tf_version);
     }
 
-    auto controls = createNode2D(H("controls"));
+    auto controls = create_node2d(H("controls"));
     append(controls, tfSampleTitle);
     append(controls, prev);
     append(controls, next);

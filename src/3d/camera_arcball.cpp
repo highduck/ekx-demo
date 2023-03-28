@@ -3,7 +3,7 @@
 #include <ecx/ecx.hpp>
 #include <ek/scenex/3d/Camera3D.hpp>
 #include <ek/scenex/3d/Transform3D.hpp>
-#include <ek/scenex/InteractionSystem.hpp>
+#include <ek/scenex/interaction_system.h>
 
 #include <ekx/app/input_state.h>
 

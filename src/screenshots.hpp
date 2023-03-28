@@ -6,7 +6,7 @@
 #include <ekx/app/localization.h>
 #include <ek/assert.h>
 #include <ek/scenex/2d/Button.hpp>
-#include <ek/scenex/base/Interactive.hpp>
+#include <ek/scenex/base/interactiv.h>
 #include <appbox/Ads.hpp>
 
 namespace ek::uitest {

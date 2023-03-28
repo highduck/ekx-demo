@@ -2,7 +2,7 @@
 #include <ek/game_services.h>
 #include <ek/scenex/2d/Display2D.hpp>
 #include <ek/scenex/2d/Transform2D.hpp>
-#include <ek/scenex/base/Node.hpp>
+#include <ek/scenex/base/node.h>
 #include <ek/admob.h>
 #include <appbox/Ads.hpp>
 #include <ek/firebase.h>

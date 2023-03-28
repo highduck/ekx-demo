@@ -16,7 +16,7 @@ void draw_dna(entity_t e) {
 }
 
 void draw_diamonds(entity_t e) {
-    auto& d = ecs::Entity{e}.get<diamonds>();
+    auto& d = ecs::get<diamonds>(e);
     if(!d.rt.id) {
         d.start();
     }

@@ -1,11 +1,11 @@
 #include "sample_base.hpp"
-#include <ek/scenex/SceneFactory.hpp>
-#include <ek/scenex/base/Node.hpp>
+#include <ek/scenex/scene_factory.h>
+#include <ek/scenex/base/node.h>
 
 namespace ek {
 
 SampleBase::SampleBase() {
-    container = createNode2D(H("sample content"));
+    container = create_node2d(H("sample content"));
     append(SampleBase::samplesContainer, container);
 }
 
@@ -19,6 +19,6 @@ void SampleBase::update(float dt) {
     (void)dt;
 }
 
-ecs::Entity SampleBase::samplesContainer{};
+entity_t SampleBase::samplesContainer = NULL_ENTITY;
 
 }

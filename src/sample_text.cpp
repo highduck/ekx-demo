@@ -3,16 +3,16 @@
 #include <ek/scenex/text/TextEngine.hpp>
 #include <ek/scenex/text/TrueTypeFont.hpp>
 #include <ek/scenex/app/basic_application.hpp>
-#include <ek/scenex/SceneFactory.hpp>
-#include <ek/scenex/base/Node.hpp>
+#include <ek/scenex/scene_factory.h>
+#include <ek/scenex/base/node.h>
 #include <ek/scenex/2d/LayoutRect.hpp>
 #include <ek/scenex/2d/Display2D.hpp>
 #include <piko/examples.h>
 
 namespace ek {
 
-ecs::Entity createText(string_hash_t name, string_hash_t font, const char* text) {
-    auto e = createNode2D(name);
+entity_t createText(string_hash_t name, string_hash_t font, const char* text) {
+    entity_t e = create_node2d(name);
     auto* tf = text2d_setup(e);
 
     tf->format.font = R_FONT(font);
@@ -51,10 +51,10 @@ ecs::Entity createText(string_hash_t name, string_hash_t font, const char* text)
     return e;
 }
 
-ecs::Entity createScreenZones() {
+entity_t createScreenZones() {
     rect_t resolution = rect_wh(360, 480);
-    auto zones = createNode2D(H("zones"));
-    auto e = createNode2D(H("zone"));
+    auto zones = create_node2d(H("zones"));
+    auto e = create_node2d(H("zone"));
     auto* q = quad2d_setup(e);
     q->setGradientVertical(COLOR_WHITE, ARGB(0x77FFFFFF));
     q->rect = resolution;
@@ -62,7 +62,7 @@ ecs::Entity createScreenZones() {
     ecs::add<LayoutRect>(e).fill(true, true).doSafeInsets = true;
     append(zones, e);
 
-    e = createNode2D(H("safe_zone"));
+    e = create_node2d(H("safe_zone"));
     q = quad2d_setup(e);
     q->setGradientVertical(COLOR_WHITE, ARGB(0x77FFFFFF));
     q->rect = resolution;
@@ -87,7 +87,7 @@ SampleText::SampleText() :
     set_position(bmText, vec2(20, 20));
     append(container, bmText);
 
-    auto ttfText = createText(H("TTF-Fallback"), H("Comfortaa-Regular"),
+    entity_t ttfText = createText(H("TTF-Fallback"), H("Comfortaa-Regular"),
                               u8"£ü÷\n< Приветики >\n你好\nनमस्कार\nこんにちは");
     ecs::get<Text2D>(ttfText).format.setAlignment(Alignment::Right | Alignment::Top);
     ecs::get<Text2D>(ttfText).format.leading = -8;
@@ -95,7 +95,7 @@ SampleText::SampleText() :
     set_position(ttfText, vec2(360 - 20, 120));
     append(container, ttfText);
 
-    auto ttfText2 = createText(H("TTF-Comfortaa-Regular"), H("Comfortaa-Regular"),
+    entity_t ttfText2 = createText(H("TTF-Comfortaa-Regular"), H("Comfortaa-Regular"),
                                u8"I don't know KERN TABLE.\nНо кириллица тоже есть");
     ecs::get<Text2D>(ttfText2).format.setTextColor(ARGB(0xFFFF00FF));
     ecs::get<Text2D>(ttfText2).format.size = 24;

@@ -1,10 +1,10 @@
 #include "sample_piko.hpp"
 
 #include "examples.h"
-#include <ek/scenex/base/Node.hpp>
+#include <ek/scenex/base/node.h>
 #include <ek/scenex/2d/Transform2D.hpp>
 #include <ek/scenex/2d/Display2D.hpp>
-#include <ek/scenex/SceneFactory.hpp>
+#include <ek/scenex/scene_factory.h>
 #include "../scripting/scripting.h"
 #include "ui/minimal.hpp"
 
@@ -12,10 +12,8 @@ namespace ek {
 
 namespace piko {
 
-void create(ecs::Entity container) {
-
-    ecs::Entity e;
-    e = createNode2D(H("book"));
+void create(entity_t container) {
+    entity_t e = create_node2d(H("book"));
     ecs::add<Display2D>(e).callback = draw_book;
     //ecs::get<transform_2d>(e).scale = {2.0f, 2.0f};
     ecs::get<Transform2D>(e).set_position(20.0f, 20.0f);
@@ -27,7 +25,7 @@ void create(ecs::Entity container) {
     }
     append(container, e);
 
-    e = createNode2D(H("dna"));
+    e = create_node2d(H("dna"));
     ecs::add<Display2D>(e).callback = draw_dna;
 //    ecs::get<transform_2d>(e).scale = {2.0f, 2.0f};
     ecs::get<Transform2D>(e).set_position(20.0f, 20.0f + 128.0f + 10.0f);
@@ -39,7 +37,7 @@ void create(ecs::Entity container) {
     }
     append(container, e);
 
-    e = createNode2D(H("diamonds"));
+    e = create_node2d(H("diamonds"));
     ecs::add<diamonds>(e);
     ecs::add<Display2D>(e).callback = draw_diamonds;
     ecs::get<Transform2D>(e).set_position(20.0f + 128.0f + 10.0f, 20.0f);

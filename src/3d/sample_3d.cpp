@@ -2,9 +2,8 @@
 #include <ek/scenex/3d/Transform3D.hpp>
 #include <ek/scenex/3d/Camera3D.hpp>
 #include <ek/scenex/3d/RenderSystem3D.hpp>
-#include <ek/scenex/base/Node.hpp>
+#include <ek/scenex/base/node.h>
 #include <ekx/app/time_layers.h>
-#include <ek/scenex/SceneFactory.hpp>
 #include <ek/scenex/3d/Light3D.hpp>
 #include <ek/scenex/3d/StaticMesh.hpp>
 
@@ -18,8 +17,8 @@
 
 namespace ek {
 
-static ecs::Entity main_camera{};
-static ecs::Entity main_scene_3d{};
+static entity_t main_camera{};
+static entity_t main_scene_3d{};
 
 static string_hash_t test_materials[4] = {
        H("test0"),
@@ -27,6 +26,7 @@ static string_hash_t test_materials[4] = {
        H("test2"),
        H("test3"),
 };
+
 static string_hash_t test_models[4] = {
         H("torus"),
         H("monkey"),
@@ -119,9 +119,9 @@ void Sample3D::draw() {
         }
     }
 
-    if (main_scene_3d) {
-        ecs::Entity light = find(main_scene_3d, H("light"));
-        if (light) {
+    if (main_scene_3d.id) {
+        entity_t light = find(main_scene_3d, H("light"));
+        if (light.id) {
             static float lt = 0.0f;
             lt += dt;
             ecs::get<Transform3D>(light).position = vec3(
@@ -221,7 +221,7 @@ Sample3D::Sample3D() {
 
 Sample3D::~Sample3D() {
     destroy_node(main_scene_3d);
-    main_scene_3d = nullptr;
+    main_scene_3d = NULL_ENTITY;
     ecs::get<Camera2D>(Camera2D::Main).clearColorEnabled = true;
 }
 

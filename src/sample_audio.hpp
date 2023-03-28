@@ -5,7 +5,7 @@
 
 #include <ek/scenex/2d/Display2D.hpp>
 #include <ek/scenex/2d/Transform2D.hpp>
-#include <ek/scenex/base/Node.hpp>
+#include <ek/scenex/base/node.h>
 #include "ui/minimal.hpp"
 #include <ek/local_res.h>
 

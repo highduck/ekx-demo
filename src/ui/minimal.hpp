@@ -7,9 +7,9 @@ namespace ek {
 
 struct Text2D;
 
-Text2D& addText(ecs::Entity e, const char* text);
+Text2D& addText(entity_t e, const char* text);
 
-ecs::Entity createButton(const char* label, const std::function<void()>& fn);
+entity_t createButton(const char* label, const std::function<void()>& fn);
 
 }
 
