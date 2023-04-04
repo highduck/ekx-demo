@@ -113,7 +113,7 @@ void DemoApp::initialize() {
     cam.clearColorEnabled = true;
     cam.clearColor = vec4_color(ARGB(0xFF666666));
 
-    SampleIntegrations::initializePlugins();
+    sample_plugins_setup();
 }
 
 void DemoApp::preload() {

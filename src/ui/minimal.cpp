@@ -12,7 +12,7 @@ Text2D& addText(entity_t e, const char* text) {
     tf->format.font = R_FONT(H("mini"));
     tf->format.size = 14;
     tf->format.addShadow(COLOR_BLACK, 8);
-    tf->format.setAlignment(Alignment::Center);
+    tf->format.setAlignment(ALIGNMENT_CENTER);
     set_text(e, text);
     return *tf;
 }

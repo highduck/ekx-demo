@@ -5,7 +5,6 @@
 #include <ek/scenex/base/node.h>
 #include <ek/admob.h>
 #include <appbox/Ads.hpp>
-#include <ek/firebase.h>
 #include "sample_integrations.hpp"
 
 namespace ek {
@@ -86,35 +85,31 @@ SampleIntegrations::SampleIntegrations() :
     pos.y += spaceY;
 }
 
-void SampleIntegrations::initializePlugins() {
-    const char* billingKey = "";
-    ek_admob_config adMobConfig{};
-    adMobConfig.child_directed = EK_ADMOB_CHILD_DIRECTED_UNSPECIFIED;
-
-    ads_premium_config adHelperConfig{};
-#if EK_ANDROID
-    adMobConfig.banner = "ca-app-pub-3931267664278058/7752333837";
-    adMobConfig.inters = "ca-app-pub-3931267664278058/5126170492";
-    adMobConfig.video = "ca-app-pub-3931267664278058/1733720395";
-    adHelperConfig.sku_remove_ads = "remove_ads";
-#elif EK_IOS
-    adMobConfig.banner = "ca-app-pub-3931267664278058/6010811099";
-    adMobConfig.inters = "ca-app-pub-3931267664278058/4697729428";
-    adMobConfig.video = "ca-app-pub-3931267664278058/5819239403";
-    adHelperConfig.sku_remove_ads = "remove_ads";
-#endif
-
-    billing::initialize(billingKey);
-    ek_admob_init(adMobConfig);
-
-    adHelperConfig.key0 = "_ads_removed_purchase_cache";
-    adHelperConfig.val0 = 12345;
-    adHelperConfig.key1 = "_ads_removed_key";
-    adHelperConfig.val1 = 98765;
-
-    ads_init(adHelperConfig);
-
-    ek_game_services_init();
 }
 
+void sample_plugins_setup() {
+    const char* billing_key = "";
+    ek_admob_config admob_config = {};
+    admob_config.child_directed = EK_ADMOB_CHILD_DIRECTED_UNSPECIFIED;
+
+    ads_premium_config ads_premium_conf;
+    ads_premium_conf.key0 = "_ads_removed_purchase_cache";
+    ads_premium_conf.val0 = 12345;
+    ads_premium_conf.key1 = "_ads_removed_key";
+    ads_premium_conf.val1 = 98765;
+    ads_premium_conf.sku_remove_ads = "remove_ads";
+#if EK_ANDROID
+    admob_config.banner = "ca-app-pub-3931267664278058/7752333837";
+    admob_config.inters = "ca-app-pub-3931267664278058/5126170492";
+    admob_config.video = "ca-app-pub-3931267664278058/1733720395";
+#elif EK_IOS
+    admob_config.banner = "ca-app-pub-3931267664278058/6010811099";
+    admob_config.inters = "ca-app-pub-3931267664278058/4697729428";
+    admob_config.video = "ca-app-pub-3931267664278058/5819239403";
+#endif
+
+    billing_setup(billing_key);
+    ek_admob_init(admob_config);
+    ads_init(ads_premium_conf);
+    ek_game_services_init();
 }

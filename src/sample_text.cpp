@@ -79,7 +79,7 @@ SampleText::SampleText() :
 
     auto bmText = createText(H("bmfont"), H("TickingTimebombBB"),
                              "88:88:88\n-=98");
-    ecs::get<Text2D>(bmText).format.setAlignment(Alignment::Center);
+    ecs::get<Text2D>(bmText).format.setAlignment(ALIGNMENT_CENTER);
     ecs::get<Text2D>(bmText).format.size = 24;
     ecs::get<Text2D>(bmText).borderColor = COLOR_BLACK;
     ecs::get<Text2D>(bmText).rect = {{0, 0, 360 - 40, 100}};
@@ -89,7 +89,7 @@ SampleText::SampleText() :
 
     entity_t ttfText = createText(H("TTF-Fallback"), H("Comfortaa-Regular"),
                               u8"£ü÷\n< Приветики >\n你好\nनमस्कार\nこんにちは");
-    ecs::get<Text2D>(ttfText).format.setAlignment(Alignment::Right | Alignment::Top);
+    ecs::get<Text2D>(ttfText).format.setAlignment(ALIGNMENT_RIGHT | ALIGNMENT_TOP);
     ecs::get<Text2D>(ttfText).format.leading = -8;
     ecs::get<Text2D>(ttfText).format.setTextColor(ARGB(0xFF00FF00));
     set_position(ttfText, vec2(360 - 20, 120));
