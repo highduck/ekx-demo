@@ -3,8 +3,8 @@
 #include "sample_base.hpp"
 #include <ekx/app/audio_manager.h>
 
-#include <ek/scenex/2d/Display2D.hpp>
-#include <ek/scenex/2d/Transform2D.hpp>
+#include <ek/scenex/2d/text2d.h>
+#include <ek/scenex/2d/transform2d.h>
 #include <ek/scenex/base/node.h>
 #include "ui/minimal.hpp"
 #include <ek/local_res.h>
@@ -42,7 +42,7 @@ public:
             startMusicTrack();
         });
         set_position(btn, pos);
-        ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+        get_text2d(btn)->rect = {{-100, -25, 200, 50}};
         append(container, btn);
         pos.y += spaceY;
 
@@ -50,7 +50,7 @@ public:
             auph_vibrate(10);
         });
         set_position(btn, pos);
-        ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+        get_text2d(btn)->rect = {{-100, -25, 200, 50}};
         append(container, btn);
         pos.y += spaceY;
 
@@ -58,7 +58,7 @@ public:
             auph_vibrate(100);
         });
         set_position(btn, pos);
-        ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+        get_text2d(btn)->rect = {{-100, -25, 200, 50}};
         append(container, btn);
         pos.y += spaceY;
 
@@ -68,7 +68,7 @@ public:
             }
         });
         set_position(btn, pos);
-        ecs::get<Text2D>(btn).rect = {{-100, -25, 50, 50}};
+        get_text2d(btn)->rect = {{-100, -25, 50, 50}};
         append(container, btn);
 
         btn = createButton("X1", [] {
@@ -77,7 +77,7 @@ public:
             }
         });
         set_position(btn, pos);
-        ecs::get<Text2D>(btn).rect = {{-50, -25, 50, 50}};
+        get_text2d(btn)->rect = {{-50, -25, 50, 50}};
         append(container, btn);
 
         btn = createButton("X2", [] {
@@ -86,7 +86,7 @@ public:
             }
         });
         set_position(btn, pos);
-        ecs::get<Text2D>(btn).rect = {{0, -25, 50, 50}};
+        get_text2d(btn)->rect = {{0, -25, 50, 50}};
         append(container, btn);
 
         pos.y += spaceY;
@@ -100,7 +100,7 @@ public:
             }
         });
         set_position(btn, pos);
-        ecs::get<Text2D>(btn).rect = {{-50, -25, 200, 50}};
+        get_text2d(btn)->rect = {{-50, -25, 200, 50}};
         append(container, btn);
 
         pos.y += spaceY;

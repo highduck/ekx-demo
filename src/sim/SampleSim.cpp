@@ -1,14 +1,14 @@
 #include "SampleSim.hpp"
 
-#include <ek/time.h>
-#include <ek/rnd.h>
 #include "Motion.hpp"
+#include <ek/scenex/2d/display2d.h>
+#include <ek/rnd.h>
 #include <ek/scenex/scene_factory.h>
-#include <ek/scenex/2d/Transform2D.hpp>
+#include <ek/scenex/2d/transform2d.h>
 #include <ek/scenex/base/node.h>
-#include <ek/scenex/2d/Display2D.hpp>
+#include <ek/scenex/2d/text2d.h>
 #include <ek/goodies/helpers/Trail2D.hpp>
-#include <ek/goodies/helpers/follow.h>
+#include <sim/follow.h>
 #include <ui/minimal.hpp>
 #include <ek/scenex/base/destroy_timer.h>
 
@@ -26,29 +26,25 @@ void add_objects(entity_t game, unsigned addCount) {
     for (unsigned i = 0; i < addCount; ++i) {
         entity_t q = create_node2d(0);
         set_touchable(q, false);
-        const vec2_t pos = vec2(random_range_f(0.0f, WIDTH),
-                                random_range_f(0.0f, HEIGHT));
-        ecs::get<Transform2D>(q).set_position(pos);
+        get_transform2d(q)->pos = vec2(random_range_f(0.0f, WIDTH),
+                                       random_range_f(0.0f, HEIGHT));;
 
-        motion_t& mot = ecs::add<motion_t>(q);
-        mot.velocity = vec2(random_range_f(-50.0f, 50.0f), random_range_f(-50.0f, 50.0f));
+        motion_t* mot = ecs::add<motion_t>(q);
+        mot->velocity = vec2(random_range_f(-50.0f, 50.0f), random_range_f(-50.0f, 50.0f));
 
-        Quad2D* quad = quad2d_setup(q);
-        quad->rect = rect(-0.25f, -0.25f, 0.5f, 0.5f);
-        quad->setColor(RGB(0xFFFFFF));
-
+        set_color_quad(q, rect(-0.25f, -0.25f, 0.5f, 0.5f), RGB(0xFFFFFF));
         append(game, q);
 
-        Trail2D& trail_data = ecs::add<Trail2D>(q);
-        trail_data.drain_speed = 1.0f;
+        Trail2D* trail_data = ecs::add<Trail2D>(q);
+        trail_data->drain_speed = 1.0f;
 
         entity_t trail_renderer = create_node2d(0);
 
-        TrailRenderer2D& renderer = ecs::add<TrailRenderer2D>(trail_renderer);
-        renderer.target = q;
-        renderer.width = 0.25f;
-        renderer.minWidth = 0.0f;
-        ecs::add<Display2D>(trail_renderer).draw = trail_renderer2d_draw;
+        TrailRenderer2D* renderer = ecs::add<TrailRenderer2D>(trail_renderer);
+        renderer->target = q;
+        renderer->width = 0.25f;
+        renderer->minWidth = 0.0f;
+        add_display2d(trail_renderer)->draw = trail_renderer2d_draw;
         append(game, trail_renderer);
     }
 }
@@ -65,30 +61,34 @@ SampleSim::SampleSim() {
 
     append(container, particles_container);
 
-    entity_t mouse_entity = create_node2d(H("Mouse"));
-    ecs::add<mouse_follow_comp>(mouse_entity);
+    {
+        entity_t mouse_entity = create_node2d(H("Mouse"));
+        add_follow_mouse(mouse_entity);
 
-    entity_t attractor_entity = create_node2d(H("Follower"));
-    ecs::add<attractor_t>(attractor_entity);
-    target_follow_comp& attr = ecs::add<target_follow_comp>(attractor_entity);
-    attr.target_entity = mouse_entity;
-    attr.k = 0.1f;
-    ecs::get<attractor_t>(attractor_entity).radius = 100.0f;
-    ecs::get<attractor_t>(attractor_entity).force = 5'000.0f;
+        entity_t attractor_entity = create_node2d(H("Follower"));
+        attractor_t* attractor = ecs::add<attractor_t>(attractor_entity);
+        follow_target_t* attr = add_follow_target(attractor_entity);
+        attr->target_entity = mouse_entity;
+        attr->k = 0.1f;
+        attractor->radius = 100.0f;
+        attractor->force = 5000.0f;
 
-    append(container, mouse_entity);
-    append(container, attractor_entity);
+        append(container, mouse_entity);
+        append(container, attractor_entity);
+    }
 
-    attractor_entity = create_node2d(H("Centroid"));
-    ecs::add<attractor_t>(attractor_entity);
-    ecs::get<attractor_t>(attractor_entity).radius = 200.0f;
-    ecs::get<attractor_t>(attractor_entity).force = -1000.0f;
-    ecs::get<Transform2D>(attractor_entity).set_position(300.0f, 400.0f);
-    append(container, attractor_entity);
+    {
+        entity_t attractor_entity = create_node2d(H("Centroid"));
+        attractor_t* attractor = ecs::add<attractor_t>(attractor_entity);
+        attractor->radius = 200.0f;
+        attractor->force = -1000.0f;
+        get_transform2d(attractor_entity)->pos = vec2(300.0f, 400.0f);
+        append(container, attractor_entity);
+    }
 
     count_label = create_node2d(H("lbl"));
     addText(count_label, "");
-    ecs::get<Transform2D>(count_label).set_position(360.0f / 2.0f, 15.0f);
+    get_transform2d(count_label)->pos = vec2(360.0f / 2.0f, 15.0f);
     append(container, count_label);
 
     add_objects(particles_container, ParticlesAddCount);
@@ -103,8 +103,8 @@ SampleSim::SampleSim() {
             updateCountLabel();
         }
     });
-    ecs::get<Transform2D>(btn).set_position(360.0f / 2.0f, 60.0f);
-    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    get_transform2d(btn)->pos = vec2(360.0f / 2.0f, 60.0f);
+    get_text2d(btn)->rect = {{-100, -25, 200, 50}};
     append(container, btn);
 
     btn = createButton("RESET", [this] {
@@ -113,8 +113,8 @@ SampleSim::SampleSim() {
 
         updateCountLabel();
     });
-    ecs::get<Transform2D>(btn).set_position(360.0f / 2.0f, 120.0f);
-    ecs::get<Text2D>(btn).rect = {{-100, -25, 200, 50}};
+    get_transform2d(btn)->pos = vec2(360.0f / 2.0f, 120.0f);
+    get_text2d(btn)->rect = {{-100, -25, 200, 50}};
     append(container, btn);
 }
 
@@ -124,9 +124,7 @@ void SampleSim::draw() {
 
 void SampleSim::update(float dt) {
     SampleBase::update(dt);
-
-    update_mouse_follow_comps();
-    update_target_follow_comps(dt);
+    Follow_update(dt);
     sim::update_motion_system(g_time_layers[TIME_LAYER_GAME].dt);
 }
 

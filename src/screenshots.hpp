@@ -5,8 +5,8 @@
 #include <ek/scenex/app/uitest.hpp>
 #include <ekx/app/localization.h>
 #include <ek/assert.h>
-#include <ek/scenex/2d/Button.hpp>
-#include <ek/scenex/base/interactiv.h>
+#include <ek/scenex/2d/button.h>
+#include <ek/scenex/base/interactive.h>
 #include <appbox/Ads.hpp>
 
 namespace ek::uitest {

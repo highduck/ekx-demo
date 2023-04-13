@@ -14,6 +14,7 @@ add_executable(${PROJECT_NAME}
         src/piko/examples.cpp
         src/piko/sample_piko.cpp
 
+        src/sim/follow.c
         src/sim/Motion.cpp
         src/sim/Motion.hpp
         src/sim/SampleSim.cpp

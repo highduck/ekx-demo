@@ -1,6 +1,6 @@
 #include "Motion.hpp"
 
-#include <ek/scenex/2d/Transform2D.hpp>
+#include <ek/scenex/2d/transform2d.h>
 #include <ek/ds/FixedArray.hpp>
 
 namespace ek::sim {
@@ -17,8 +17,8 @@ void update_motion_system(float dt) {
     FixedArray<AttractorsState, 10> attractors;
     for (auto e : ecs::view<attractor_t>()) {
         attractors.push_back(AttractorsState{
-           ecs::get<attractor_t>(e),
-           ecs::get<Transform2D>(e).getPosition()
+           *ecs::get<attractor_t>(e),
+           get_transform2d(e)->pos
         });
     }
     const auto sz = attractors.size();
@@ -27,11 +27,11 @@ void update_motion_system(float dt) {
     const auto dumpFactor = expf(-6.0f * dt);
     const aabb2_t bounds = aabb2_from_rect(rect_wh(WIDTH, HEIGHT));
     for (auto e : ecs::view<motion_t>()) {
-        auto& mot = ecs::get<motion_t>(e);
-        auto& tra = ecs::get<Transform2D>(e);
+        auto* mot = ecs::get<motion_t>(e);
+        transform2d_t* tra = get_transform2d(e);
 
-        auto p = tra.getPosition();
-        auto v = mot.velocity;
+        auto p = tra->pos;
+        auto v = mot->velocity;
 
         for (unsigned i = 0; i < sz; ++i) {
             const auto attractor = attrs[i];
@@ -41,7 +41,7 @@ void update_motion_system(float dt) {
             v += (dt * attractor.props.force * factor * factor / len) * diff;
         }
 
-        p += dt * mot.velocity;
+        p += dt * mot->velocity;
 
         if (p.x < bounds.x0) {
             v.x = -v.x;
@@ -58,8 +58,8 @@ void update_motion_system(float dt) {
             p.y = bounds.y1;
         }
 
-        mot.velocity = v * dumpFactor;
-        tra.set_position(p);
+        mot->velocity = v * dumpFactor;
+        tra->pos = p;
     }
 }
 

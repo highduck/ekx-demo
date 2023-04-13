@@ -2,8 +2,9 @@
 
 #include "examples.h"
 #include <ek/scenex/base/node.h>
-#include <ek/scenex/2d/Transform2D.hpp>
-#include <ek/scenex/2d/Display2D.hpp>
+#include <ek/scenex/2d/transform2d.h>
+#include <ek/scenex/2d/display2d.h>
+#include <ek/scenex/2d/text2d.h>
 #include <ek/scenex/scene_factory.h>
 #include "../scripting/scripting.h"
 #include "ui/minimal.hpp"
@@ -14,37 +15,37 @@ namespace piko {
 
 void create(entity_t container) {
     entity_t e = create_node2d(H("book"));
-    ecs::add<Display2D>(e).callback = draw_book;
-    //ecs::get<transform_2d>(e).scale = {2.0f, 2.0f};
-    ecs::get<Transform2D>(e).set_position(20.0f, 20.0f);
+    add_display2d(e)->callback = draw_book;
+    //ecs::get<transform_2d>(e)->scale = {2.0f, 2.0f};
+    get_transform2d(e)->pos = vec2(20.0f, 20.0f);
     // TODO: fix scissors stats
     {
-        auto& bounds = ecs::add<Bounds2D>(e);
-        bounds.rect = rect_wh(128, 128);
-        bounds.flags |= BOUNDS_2D_SCISSORS;
+        bounds2d_t* bounds = add_bounds2d(e);
+        bounds->rect = rect_wh(128, 128);
+        bounds->flags |= BOUNDS_2D_SCISSORS;
     }
     append(container, e);
 
     e = create_node2d(H("dna"));
-    ecs::add<Display2D>(e).callback = draw_dna;
-//    ecs::get<transform_2d>(e).scale = {2.0f, 2.0f};
-    ecs::get<Transform2D>(e).set_position(20.0f, 20.0f + 128.0f + 10.0f);
+    add_display2d(e)->callback = draw_dna;
+//    ecs::get<transform_2d>(e)->scale = {2.0f, 2.0f};
+    get_transform2d(e)->pos = vec2(20.0f, 20.0f + 128.0f + 10.0f);
     // TODO: fix scissors stats
     {
-        auto& bounds = ecs::add<Bounds2D>(e);
-        bounds.rect = rect_wh(128, 128);
-        bounds.flags |= BOUNDS_2D_SCISSORS;
+        bounds2d_t* bounds = add_bounds2d(e);
+        bounds->rect = rect_wh(128, 128);
+        bounds->flags |= BOUNDS_2D_SCISSORS;
     }
     append(container, e);
 
     e = create_node2d(H("diamonds"));
     ecs::add<diamonds>(e);
-    ecs::add<Display2D>(e).callback = draw_diamonds;
-    ecs::get<Transform2D>(e).set_position(20.0f + 128.0f + 10.0f, 20.0f);
+    add_display2d(e)->callback = draw_diamonds;
+    get_transform2d(e)->pos = vec2(20.0f + 128.0f + 10.0f, 20.0f);
     {
-        auto& bounds = ecs::add<Bounds2D>(e);
-        bounds.rect = rect_wh(128, 128);
-        bounds.flags |= BOUNDS_2D_SCISSORS;
+        bounds2d_t* bounds = add_bounds2d(e);
+        bounds->rect = rect_wh(128, 128);
+        bounds->flags |= BOUNDS_2D_SCISSORS;
     }
     append(container, e);
 
@@ -56,7 +57,7 @@ void create(entity_t container) {
         load_script("assets/scripts/main.js");
     });
     set_position(btn, pos);
-    ecs::get<Text2D>(btn).rect = default_rect;
+    get_text2d(btn)->rect = default_rect;
     append(container, btn);
     pos.y += spaceY;
 }

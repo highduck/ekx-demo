@@ -16,13 +16,13 @@ void draw_dna(entity_t e) {
 }
 
 void draw_diamonds(entity_t e) {
-    auto& d = ecs::get<diamonds>(e);
-    if(!d.rt.id) {
-        d.start();
+    auto* d = ecs::get<diamonds>(e);
+    if(!d->rt.id) {
+        d->start();
     }
 
-    const sg_image_desc info = sg_query_image_desc(d.rt);
-    canvas_set_image(d.rt);
+    const sg_image_desc info = sg_query_image_desc(d->rt);
+    canvas_set_image(d->rt);
     canvas_set_image_rect(rect_01());
     canvas_quad(0, 0, (float) info.width, (float) info.height);
 //    recorder.render();

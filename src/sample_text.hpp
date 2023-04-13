@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ek/scenex/text/TextEngine.hpp>
+#include <ek/scenex/text/text_engine.h>
 #include "sample_base.hpp"
 
 namespace ek {

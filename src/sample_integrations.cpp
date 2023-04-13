@@ -1,7 +1,7 @@
 #include <ui/minimal.hpp>
 #include <ek/game_services.h>
-#include <ek/scenex/2d/Display2D.hpp>
-#include <ek/scenex/2d/Transform2D.hpp>
+#include <ek/scenex/2d/text2d.h>
+#include <ek/scenex/2d/transform2d.h>
 #include <ek/scenex/base/node.h>
 #include <ek/admob.h>
 #include <appbox/Ads.hpp>
@@ -24,7 +24,7 @@ SampleIntegrations::SampleIntegrations() :
         ek_leaderboard_submit("CgkIpvfh798IEAIQAA", ++bestScore);
     });
     set_position(btn, pos);
-    ecs::get<Text2D>(btn).rect = default_rect;
+    get_text2d(btn)->rect = default_rect;
     append(container, btn);
     pos.y += spaceY;
 
@@ -32,7 +32,7 @@ SampleIntegrations::SampleIntegrations() :
         ek_leaderboard_show("CgkIpvfh798IEAIQAA");
     });
     set_position(btn, pos);
-    ecs::get<Text2D>(btn).rect = default_rect;
+    get_text2d(btn)->rect = default_rect;
     append(container, btn);
     pos.y += spaceY;
 
@@ -40,7 +40,7 @@ SampleIntegrations::SampleIntegrations() :
         ek_achievement_show();
     });
     set_position(btn, pos);
-    ecs::get<Text2D>(btn).rect = default_rect;
+    get_text2d(btn)->rect = default_rect;
     append(container, btn);
     pos.y += spaceY;
 
@@ -51,7 +51,7 @@ SampleIntegrations::SampleIntegrations() :
         });
     });
     set_position(btn, pos);
-    ecs::get<Text2D>(btn).rect = default_rect;
+    get_text2d(btn)->rect = default_rect;
     append(container, btn);
     pos.y += spaceY;
 
@@ -62,7 +62,7 @@ SampleIntegrations::SampleIntegrations() :
         });
     });
     set_position(btn, pos);
-    ecs::get<Text2D>(btn).rect =default_rect;
+    get_text2d(btn)->rect =default_rect;
     append(container, btn);
     pos.y += spaceY;
 
@@ -70,7 +70,7 @@ SampleIntegrations::SampleIntegrations() :
         g_ads->purchaseRemoveAds();
     });
     set_position(btn, pos);
-    ecs::get<Text2D>(btn).rect = default_rect;
+    get_text2d(btn)->rect = default_rect;
     append(container, btn);
     pos.y += spaceY;
 
@@ -80,7 +80,7 @@ SampleIntegrations::SampleIntegrations() :
     });
 
     set_position(btn, pos);
-    ecs::get<Text2D>(btn).rect = default_rect;
+    get_text2d(btn)->rect = default_rect;
     append(container, btn);
     pos.y += spaceY;
 }

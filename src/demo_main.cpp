@@ -9,23 +9,19 @@
 #include "sample_integrations.hpp"
 #include "sample_audio.hpp"
 #include "sim/Motion.hpp"
+#include "sim/follow.h"
 #include "3d/camera_arcball.hpp"
-#include "ek/goodies/helpers/follow.h"
 #include "piko/examples.h"
 
-#include <ek/rnd.h>
-#include <ek/scenex/systems/main_flow.hpp>
-#include <ek/scenex/asset2/Asset.hpp>
+#include <ek/scenex/systems/main_flow.h>
 #include <ek/scenex/scene_factory.h>
-#include <ek/scenex/base/interactiv.h>
 #include <ek/scenex/base/node.h>
-#include <ek/scenex/2d/LayoutRect.hpp>
+#include <ek/scenex/2d/layout_rect.h>
 #include <ui/minimal.hpp>
-#include <ek/scenex/2d/Camera2D.hpp>
-#include <ek/scenex/2d/Display2D.hpp>
+#include <ek/scenex/2d/camera2d.h>
+#include <ek/scenex/2d/text2d.h>
 #include <ek/log.h>
-#include <ekx/app/audio_manager.h>
-#include <ek/scenex/3d/Scene3D.h>
+#include <ek/scenex/3d/scene3d.h>
 #include "config/build_info.h"
 
 #ifdef EK_UITEST
@@ -99,19 +95,18 @@ DemoApp::DemoApp() :
 void DemoApp::initialize() {
     basic_application::initialize();
 
-    initScene3D();
+    scene3d_setup();
 
     ECX_COMPONENT(sim::motion_t);
     ECX_COMPONENT(sim::attractor_t);
     ECX_COMPONENT(CameraArcBall);
     ECX_COMPONENT(test_rotation_comp);
-    ECX_COMPONENT(target_follow_comp);
-    ECX_COMPONENT(mouse_follow_comp);
+    Follow_setup();
     ECX_COMPONENT(piko::diamonds);
 
-    auto& cam = ecs::get<Camera2D>(Camera2D::Main);
-    cam.clearColorEnabled = true;
-    cam.clearColor = vec4_color(ARGB(0xFF666666));
+    camera2d_t* cam = get_camera2d(main_camera);
+    cam->clearColorEnabled = true;
+    cam->clearColor = vec4_color(ARGB(0xFF666666));
 
     sample_plugins_setup();
 }
@@ -135,11 +130,11 @@ void DemoApp::onUpdateFrame(float dt) {
 }
 
 void DemoApp::onPreRender() {
-    preRenderScene3D();
+    scene3d_prerender();
 }
 
 void DemoApp::onRenderSceneBefore() {
-    renderScene3D(&display.info);
+    scene3d_render(&display.info);
 
     if (started_ && currentSample) {
         currentSample->draw();
@@ -156,22 +151,22 @@ void DemoApp::onAppStart() {
 
     auto prev = createButton("<", [] { scrollSample(-1); });
     auto next = createButton(">", [] { scrollSample(+1); });
-    ecs::add<LayoutRect>(prev).enableAlignX(0, 30);
-    ecs::add<LayoutRect>(next).enableAlignX(1, -30);
+    LayoutRect_enableAlignX(add_layout_rect(prev), 0, 30);
+    LayoutRect_enableAlignX(add_layout_rect(next), 1, -30);
 
     tfSampleTitle = create_node2d(H("title"));
     addText(tfSampleTitle, "");
-    ecs::add<LayoutRect>(tfSampleTitle).enableAlignX(0.5);
+    LayoutRect_enableAlignX(add_layout_rect(tfSampleTitle), 0.5, 0);
 
     {
         tfFPS = create_node2d(H("fps"));
         addText(tfFPS, "");
-        auto& tf = ecs::get<Text2D>(tfFPS);
-        tf.format.alignment = vec2(0, 0);
-        tf.format.size = 8.0f;
-        ecs::add<LayoutRect>(tfFPS)
-                .enableAlignX(0.0, 10)
-                .enableAlignY(0.0, 10);
+        auto* tf = get_text2d(tfFPS);
+        tf->format.alignment = vec2(0, 0);
+        tf->format.size = 8.0f;
+        layout_rect_t* ll = add_layout_rect(tfFPS);
+        LayoutRect_enableAlignX(ll, 0.0, 10);
+        LayoutRect_enableAlignY(ll, 0.0, 10);
         append(root, tfFPS);
     }
 
@@ -179,12 +174,12 @@ void DemoApp::onAppStart() {
     {
         entity_t tf_version = create_node2d(H("version"));
         addText(tf_version, APP_VERSION_NAME "+" APP_VERSION_CODE);
-        auto& tf = ecs::get<Text2D>(tf_version);
-        tf.format.alignment = vec2(1, 0);
-        tf.format.size = 8.0f;
-        ecs::add<LayoutRect>(tf_version)
-                .enableAlignX(1.0, -10)
-                .enableAlignY(0.0, 10);
+        auto* tf = get_text2d(tf_version);
+        tf->format.alignment = vec2(1, 0);
+        tf->format.size = 8.0f;
+        layout_rect_t* ll = add_layout_rect(tf_version);
+        LayoutRect_enableAlignX(ll, 1.0, -10);
+        LayoutRect_enableAlignY(ll, 0.0, 10);
         append(root, tf_version);
     }
 
@@ -192,7 +187,7 @@ void DemoApp::onAppStart() {
     append(controls, tfSampleTitle);
     append(controls, prev);
     append(controls, next);
-    ecs::add<LayoutRect>(controls).enableAlignY(1, -30);
+    LayoutRect_enableAlignY(add_layout_rect(controls), 1, -30);
 
     append(root, controls);
 
