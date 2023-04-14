@@ -7,7 +7,7 @@
 #include <ek/scenex/2d/transform2d.h>
 #include <ek/scenex/base/node.h>
 #include <ek/scenex/2d/text2d.h>
-#include <ek/goodies/helpers/Trail2D.hpp>
+#include <ek/goodies/trail2d.h>
 #include <sim/follow.h>
 #include <ui/minimal.hpp>
 #include <ek/scenex/base/destroy_timer.h>
@@ -35,16 +35,14 @@ void add_objects(entity_t game, unsigned addCount) {
         set_color_quad(q, rect(-0.25f, -0.25f, 0.5f, 0.5f), RGB(0xFFFFFF));
         append(game, q);
 
-        Trail2D* trail_data = ecs::add<Trail2D>(q);
+        trail2d_t* trail_data = add_trail2d(q);
         trail_data->drain_speed = 1.0f;
 
         entity_t trail_renderer = create_node2d(0);
 
-        TrailRenderer2D* renderer = ecs::add<TrailRenderer2D>(trail_renderer);
-        renderer->target = q;
+        trail_renderer2d_t * renderer = add_trail_renderer2d(trail_renderer, q);
         renderer->width = 0.25f;
         renderer->minWidth = 0.0f;
-        add_display2d(trail_renderer)->draw = trail_renderer2d_draw;
         append(game, trail_renderer);
     }
 }
