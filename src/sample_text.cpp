@@ -29,6 +29,7 @@ entity_t createText(string_hash_t name, string_hash_t font, const char* text) {
     tf->format.layers[1].blurIterations = 3;
     tf->format.layers[1].strength = 5;
     tf->format.layers[1].color = RGB(0x330000);
+    tf->format.layers[1].visible = true;
 
     // outer stroke
     tf->format.layers[2].type = TEXT_LAYER_STROKE2;
@@ -36,6 +37,7 @@ entity_t createText(string_hash_t name, string_hash_t font, const char* text) {
     tf->format.layers[2].blurIterations = 3;
     tf->format.layers[2].strength = 5;
     tf->format.layers[2].color = RGB(0xFFFFFF);
+    tf->format.layers[2].visible = true;
 
     // shadow
     tf->format.layers[3].type = TEXT_LAYER_SHADOW;
@@ -44,6 +46,7 @@ entity_t createText(string_hash_t name, string_hash_t font, const char* text) {
     tf->format.layers[3].strength = 1;
     tf->format.layers[3].offset = vec2(4, 4);
     tf->format.layers[3].color = COLOR_BLACK;
+    tf->format.layers[3].visible = true;
 
     tf->format.layersCount = 4;
 
@@ -113,7 +116,7 @@ SampleText::SampleText() :
 }
 
 void SampleText::prepareInternalResources() {
-    const float scale_factor = g_game_app->asset_manager.scale_factor;
+    const float scale_factor = asset_manager.scale_factor;
     auto* ttfFont = new TrueTypeFont(scale_factor, 48, H("default_glyph_cache"));
     ttfFont->loadDeviceFont("Arial Unicode MS");
 
