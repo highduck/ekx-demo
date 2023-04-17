@@ -34,7 +34,7 @@ void ek_app_main() {
     ek_app.config.width = 360;
     ek_app.config.height = 480;
     ek_app.config.need_depth = true;
-    ek::run_app<DemoApp>();
+    run_app<DemoApp>();
 }
 
 namespace ek {

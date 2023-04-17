@@ -2,7 +2,7 @@
 
 #include <ek/scenex/app/basic_application.hpp>
 
-class DemoApp : public ek::basic_application {
+class DemoApp : public ::basic_application {
 public:
     DemoApp();
 

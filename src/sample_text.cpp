@@ -1,7 +1,7 @@
 #include "sample_text.hpp"
 
 #include <ek/scenex/text/text_engine.h>
-#include <ek/scenex/text/TrueTypeFont.hpp>
+#include <ek/scenex/text/font.h>
 #include <ek/scenex/app/basic_application.hpp>
 #include <ek/scenex/scene_factory.h>
 #include <ek/scenex/base/node.h>
@@ -116,12 +116,12 @@ SampleText::SampleText() :
 }
 
 void SampleText::prepareInternalResources() {
-    const float scale_factor = asset_manager.scale_factor;
-    auto* ttfFont = new TrueTypeFont(scale_factor, 48, H("default_glyph_cache"));
-    ttfFont->loadDeviceFont("Arial Unicode MS");
-
     R(Font) native = R_FONT(H("native"));
-    REF_RESOLVE(res_font, native).base = ttfFont;
+    font_t* device_font = &REF_RESOLVE(res_font, native);
+
+    const float scale_factor = asset_manager.scale_factor;
+    font_init_ttf(device_font, scale_factor, 48, H("default_glyph_cache"));
+    font_load_device_font(device_font, "Arial Unicode MS");
 
     RES_NAME_RESOLVE(res_font, H("Comfortaa-Regular")).fallback = native;
 }
