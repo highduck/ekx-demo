@@ -7,6 +7,7 @@
 #include <ek/scenex/2d/transform2d.h>
 #include <ek/scenex/base/node.h>
 #include "ui/minimal.hpp"
+#include <ek/log.h>
 #include <ek/local_res.h>
 
 #include <pocketmod/pocketmod.h>

@@ -22,9 +22,9 @@ entity_t createButton(const char* label, const std::function<void()>& fn) {
     tf->fillColor = ARGB(0x77000000);
     tf->borderColor = ARGB(0x77FFFFFF);
     tf->rect = {{-20, -20, 40, 40}};
-    interactive_add(e)->cursor = EK_MOUSE_CURSOR_BUTTON;
+    add_interactive(e)->cursor = EK_MOUSE_CURSOR_BUTTON;
     add_button(e);
-    ecs::add<NodeEventHandler>(e)->on(BUTTON_EVENT_CLICK, [fn](const node_event_t*) {
+    add_node_events(e)->signal.add(BUTTON_EVENT_CLICK, [fn](const node_event_t*) {
         fn();
     });
     return e;

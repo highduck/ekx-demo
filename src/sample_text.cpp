@@ -1,8 +1,7 @@
 #include "sample_text.hpp"
 
-#include <ek/scenex/text/text_engine.h>
+#include <ek/scenex/assets/asset_manager.h>
 #include <ek/scenex/text/font.h>
-#include <ek/scenex/app/basic_application.hpp>
 #include <ek/scenex/scene_factory.h>
 #include <ek/scenex/base/node.h>
 #include <ek/scenex/2d/layout_rect.h>

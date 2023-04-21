@@ -2,8 +2,8 @@
 #include <ek/scenex/base/node.h>
 #include <ekx/app/time_layers.h>
 
-#include <demo_main.hpp>
 #include <ek/rnd.h>
+#include <ek/print.h>
 #include <ek/scenex/2d/camera2d.h>
 #include <stb/stb_sprintf.h>
 #include "model_utils.h"
@@ -41,7 +41,7 @@ void create_lights() {
         add_light3d(e_dir_light)[0] = light3d(LIGHT_DIRECTIONAL);
         mesh_renderer_t* mr = add_mesh_renderer(e_dir_light);
         add_transform3d(e_dir_light);
-        Node_add(e_dir_light)->tag = H("light_dir");
+        add_node(e_dir_light)->tag = H("light_dir");
         mr->mesh = H("sphere");
         mr->material = H("light_material");
         mr->cast_shadows = false;
@@ -60,7 +60,7 @@ void create_lights() {
 
         mesh_renderer_t* mr = add_mesh_renderer(e_light);
         add_transform3d(e_light);
-        Node_add(e_light)->tag = H("light");
+        add_node(e_light)->tag = H("light");
 
         get_transform3d(e_light)->position = vec3(0.0f, 0.0f, 15.0f);
         mr->mesh = H("sphere");
@@ -78,7 +78,7 @@ void create_coordinate_system_gizmo() {
 
     entity_t e = create_entity();
     {
-        Node_add(e)->tag = H("cs");
+        add_node(e)->tag = H("cs");
         transform3d_t* t = add_transform3d(e);
         t->scale = vec3(5.0f, 5.0f, 5.0f);
         append(main_scene_3d, e);
@@ -87,7 +87,7 @@ void create_coordinate_system_gizmo() {
     const float axis_size = 5.0f;
     {
         entity_t node = create_entity();
-        Node_add(node);
+        add_node(node);
         mesh_renderer_t* r = add_mesh_renderer(node);
         transform3d_t* t = add_transform3d(node);
         r->mesh_ptr = &cube_x;
@@ -98,7 +98,7 @@ void create_coordinate_system_gizmo() {
 
     {
         entity_t node = create_entity();
-        Node_add(node);
+        add_node(node);
         mesh_renderer_t* r = add_mesh_renderer(node);
         transform3d_t* t = add_transform3d(node);
         r->mesh_ptr = &cube_y;
@@ -109,7 +109,7 @@ void create_coordinate_system_gizmo() {
 
     {
         entity_t node = create_entity();
-        Node_add(node);
+        add_node(node);
         mesh_renderer_t* r = add_mesh_renderer(node);
         transform3d_t* t = add_transform3d(node);
         r->mesh_ptr = &cube_z;
@@ -175,11 +175,11 @@ Sample3D::Sample3D() {
     RES_NAME_RESOLVE(res_mesh3d, H("cube")) = static_mesh(create_cube(vec3(0, 0, 0), vec3(1, 1, 1), COLOR_WHITE));
 
     main_scene_3d = create_entity();
-    Node_add(main_scene_3d)->tag = H("scene 3d");
+    add_node(main_scene_3d)->tag = H("scene 3d");
     add_transform3d(main_scene_3d);
 
     main_camera_3d = create_entity();
-    Node_add(main_camera_3d)->tag = H("main camera");
+    add_node(main_camera_3d)->tag = H("main camera");
     add_transform3d(main_camera_3d);
     ecs::add<CameraArcBall>(main_camera_3d);
     camera3d_t* c = add_camera3d(main_camera_3d);
@@ -200,7 +200,7 @@ Sample3D::Sample3D() {
         entity_t e_ground = create_entity();
         mesh_renderer_t* r = add_mesh_renderer(e_ground);
         transform3d_t* ground_transform = add_transform3d(e_ground);
-        Node_add(e_ground);
+        add_node(e_ground);
         r->mesh = H("cube");
         r->material = H("ground");
 
@@ -215,7 +215,7 @@ Sample3D::Sample3D() {
         mesh_renderer_t* renderer = add_mesh_renderer(es);
         ecs::add<test_rotation_comp>(es);
         transform3d_t* t = add_transform3d(es);
-        Node_add(es);
+        add_node(es);
         renderer->mesh = H("sphere");
 
         char mat_id[64];
@@ -238,7 +238,7 @@ Sample3D::Sample3D() {
         mesh_renderer_t* renderer = add_mesh_renderer(e_cube);
         ecs::add<test_rotation_comp>(e_cube);
         transform3d_t* t = add_transform3d(e_cube);
-        Node_add(e_cube);
+        add_node(e_cube);
         renderer->mesh = test_models[random_n(4)];
         renderer->material = test_materials[random_n(4)];
         set_tag(e_cube, H("cube"));

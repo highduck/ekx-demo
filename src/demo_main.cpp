@@ -1,6 +1,3 @@
-#include <ek/firebase.h>
-
-#include "demo_main.hpp"
 #include "sample_text.hpp"
 #include "sample_flash.hpp"
 #include "3d/sample_3d.hpp"
@@ -12,21 +9,38 @@
 #include "sim/follow.h"
 #include "3d/camera_arcball.hpp"
 #include "piko/examples.h"
+#include "config/build_info.h"
+#include <ui/minimal.hpp>
 
+#include <ek/firebase.h>
+#include <ek/scenex/app/base_game.h>
 #include <ek/scenex/systems/main_flow.h>
 #include <ek/scenex/scene_factory.h>
 #include <ek/scenex/base/node.h>
 #include <ek/scenex/2d/layout_rect.h>
-#include <ui/minimal.hpp>
 #include <ek/scenex/2d/camera2d.h>
 #include <ek/scenex/2d/text2d.h>
 #include <ek/log.h>
 #include <ek/scenex/3d/scene3d.h>
-#include "config/build_info.h"
+#include <ekx/app/time_layers.h>
+#include <appbox/appbox.h>
+#include <ekx/app/profiler.h>
 
 #ifdef EK_UITEST
 #include "screenshots.hpp"
 #endif
+
+static void on_pre_load(void);
+
+static void on_start(void);
+
+static void on_update(void);
+
+static void on_pre_render(void);
+
+static void on_pre_render_scene(void);
+
+static void on_terminate(void);
 
 void ek_app_main() {
     firebase(FIREBASE_CMD_INIT);
@@ -34,7 +48,13 @@ void ek_app_main() {
     ek_app.config.width = 360;
     ek_app.config.height = 480;
     ek_app.config.need_depth = true;
-    run_app<DemoApp>();
+    game_app_state.delegate.pre_load = on_pre_load;
+    game_app_state.delegate.start = on_start;
+    game_app_state.delegate.update = on_update;
+    game_app_state.delegate.pre_render = on_pre_render;
+    game_app_state.delegate.pre_render_scene = on_pre_render_scene;
+    game_app_state.delegate.terminate = on_terminate;
+    run_app();
 }
 
 namespace ek {
@@ -49,9 +69,9 @@ entity_t tfFPS = NULL_ENTITY;
 int prevFPS = 0;
 fps_counter fps_cnt = {};
 
-void setCurrentSample(int index);
+void activate_sample(int index);
 
-void initSamples() {
+void init_samples() {
     sampleFactory.push_back([]() -> SampleBase* { return new SamplePiko(); });
     sampleFactory.push_back([]() -> SampleBase* { return new SampleSim(); });
     sampleFactory.push_back([]() -> SampleBase* { return new SampleFlash("test1", "TEST 1"); });
@@ -60,10 +80,10 @@ void initSamples() {
     sampleFactory.push_back([]() -> SampleBase* { return new SampleAudio(); });
     sampleFactory.push_back([]() -> SampleBase* { return new SampleIntegrations(); });
     sampleFactory.push_back([]() -> SampleBase* { return new SampleText(); });
-    setCurrentSample(0);
+    activate_sample(0);
 }
 
-void setCurrentSample(int index) {
+void activate_sample(int index) {
     int samplesCount = static_cast<int>(sampleFactory.size());
     currentSampleIndex = index;
     if (currentSampleIndex >= samplesCount) {
@@ -77,23 +97,30 @@ void setCurrentSample(int index) {
     set_text(tfSampleTitle, currentSample->title);
 }
 
-void scrollSample(int delta) {
-    setCurrentSample(currentSampleIndex + delta);
+void scroll_sample(int delta) {
+    activate_sample(currentSampleIndex + delta);
 }
 
 }
 
 using namespace ek;
 
-DemoApp::DemoApp() :
-        basic_application() {
-#ifdef EK_UITEST
-    uitest::UITest("screenshots", uitest::runScreenshotScript);
-#endif
+static void on_pre_render() {
+    scene3d_prerender();
+    pre_render_diamonds();
 }
 
-void DemoApp::initialize() {
-    basic_application::initialize();
+static void on_pre_render_scene(void) {
+    scene3d_render(&game_app_state.display.info);
+    if (game_app_state.started && currentSample) {
+        currentSample->draw();
+    }
+}
+
+static void on_pre_load(void) {
+#ifdef EK_UITEST
+    ::uitest("screenshots", do_game_screenshots);
+#endif
 
     scene3d_setup();
 
@@ -111,11 +138,8 @@ void DemoApp::initialize() {
     sample_plugins_setup();
 }
 
-void DemoApp::preload() {
-    basic_application::preload();
-}
-
-void DemoApp::onUpdateFrame(float dt) {
+void on_update(void) {
+    const float dt = g_time_dt;
     if (currentSample) {
         currentSample->update(dt);
     }
@@ -129,19 +153,10 @@ void DemoApp::onUpdateFrame(float dt) {
     }
 }
 
-void DemoApp::onPreRender() {
-    scene3d_prerender();
-}
+static void on_start(void) {
+    appbox_on_game_start();
 
-void DemoApp::onRenderSceneBefore() {
-    scene3d_render(&display.info);
-
-    if (started_ && currentSample) {
-        currentSample->draw();
-    }
-}
-
-void DemoApp::onAppStart() {
+    const entity_t root = game_app_state.root;
 //    setup_game(w, game);
     log_debug("Start Demo: prepareInternalResources");
     SampleText::prepareInternalResources();
@@ -149,8 +164,8 @@ void DemoApp::onAppStart() {
     SampleBase::samplesContainer = create_node2d(H("sample"));
     append(root, SampleBase::samplesContainer);
 
-    auto prev = createButton("<", [] { scrollSample(-1); });
-    auto next = createButton(">", [] { scrollSample(+1); });
+    entity_t prev = createButton("<", +[]() -> void { scroll_sample(-1); });
+    entity_t next = createButton(">", +[]() -> void { scroll_sample(1); });
     LayoutRect_enableAlignX(add_layout_rect(prev), 0, 30);
     LayoutRect_enableAlignX(add_layout_rect(next), 1, -30);
 
@@ -161,7 +176,7 @@ void DemoApp::onAppStart() {
     {
         tfFPS = create_node2d(H("fps"));
         addText(tfFPS, "");
-        auto* tf = get_text2d(tfFPS);
+        text2d_t* tf = get_text2d(tfFPS);
         tf->format.alignment = vec2(0, 0);
         tf->format.size = 8.0f;
         layout_rect_t* ll = add_layout_rect(tfFPS);
@@ -174,7 +189,7 @@ void DemoApp::onAppStart() {
     {
         entity_t tf_version = create_node2d(H("version"));
         addText(tf_version, APP_VERSION_NAME "+" APP_VERSION_CODE);
-        auto* tf = get_text2d(tf_version);
+        text2d_t* tf = get_text2d(tf_version);
         tf->format.alignment = vec2(1, 0);
         tf->format.size = 8.0f;
         layout_rect_t* ll = add_layout_rect(tf_version);
@@ -183,7 +198,7 @@ void DemoApp::onAppStart() {
         append(root, tf_version);
     }
 
-    auto controls = create_node2d(H("controls"));
+    entity_t controls = create_node2d(H("controls"));
     append(controls, tfSampleTitle);
     append(controls, prev);
     append(controls, next);
@@ -192,14 +207,12 @@ void DemoApp::onAppStart() {
     append(root, controls);
 
     log_debug("Start Demo: initSamples");
-    initSamples();
+    init_samples();
 
     SampleAudio::startMusicTrack();
 }
 
-void DemoApp::terminate() {
+static void on_terminate(void) {
     delete currentSample;
     currentSample = nullptr;
 }
-
-DemoApp::~DemoApp() = default;

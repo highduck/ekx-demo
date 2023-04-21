@@ -3,7 +3,6 @@ include(npm.cmake)
 project(ekx-demo)
 
 add_executable(${PROJECT_NAME}
-        src/demo_main.hpp
         src/demo_main.cpp
         src/3d/sample_3d.cpp
         src/3d/camera_arcball.cpp
