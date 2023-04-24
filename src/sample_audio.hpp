@@ -6,7 +6,7 @@
 #include <ek/scenex/2d/text2d.h>
 #include <ek/scenex/2d/transform2d.h>
 #include <ek/scenex/base/node.h>
-#include "ui/minimal.hpp"
+#include "ui/minimal_ui.h"
 #include <ek/log.h>
 #include <ek/local_res.h>
 
@@ -38,7 +38,7 @@ public:
 
         float spaceY = 60.0f;
         vec2_t pos = vec2(360.0f / 2, 50.0f);
-        auto btn = createButton("NEXT TRACK", [] {
+        auto btn = create_button("NEXT TRACK", +[](const node_event_t*) {
             ++trackIndex;
             startMusicTrack();
         });
@@ -47,7 +47,7 @@ public:
         append(container, btn);
         pos.y += spaceY;
 
-        btn = createButton("VIBRATE 10 MS", [] {
+        btn = create_button("VIBRATE 10 MS", +[](const node_event_t*) {
             auph_vibrate(10);
         });
         set_position(btn, pos);
@@ -55,7 +55,7 @@ public:
         append(container, btn);
         pos.y += spaceY;
 
-        btn = createButton("VIBRATE 100 MS", [] {
+        btn = create_button("VIBRATE 100 MS", +[](const node_event_t*) {
             auph_vibrate(100);
         });
         set_position(btn, pos);
@@ -63,7 +63,7 @@ public:
         append(container, btn);
         pos.y += spaceY;
 
-        btn = createButton("X0.5", [] {
+        btn = create_button("X0.5", +[](const node_event_t*) {
             if (vc.id) {
                 auph_set_rate(vc, 0.5f);
             }
@@ -72,7 +72,7 @@ public:
         get_text2d(btn)->rect = {{-100, -25, 50, 50}};
         append(container, btn);
 
-        btn = createButton("X1", [] {
+        btn = create_button("X1", +[](const node_event_t*) {
             if (vc.id) {
                 auph_set_rate(vc, 1.0f);
             }
@@ -81,7 +81,7 @@ public:
         get_text2d(btn)->rect = {{-50, -25, 50, 50}};
         append(container, btn);
 
-        btn = createButton("X2", [] {
+        btn = create_button("X2", +[](const node_event_t*) {
             if (vc.id) {
                 auph_set_rate(vc, 2.0f);
             }
@@ -92,7 +92,7 @@ public:
 
         pos.y += spaceY;
 
-        btn = createButton("RESTART", [] {
+        btn = create_button("RESTART", +[](const node_event_t*) {
             if (vc.id) {
                 ctx.pattern = 0;
                 ctx.sample = 0;

@@ -7,7 +7,7 @@
 #include <ek/scenex/2d/text2d.h>
 #include <ek/scenex/scene_factory.h>
 #include "../scripting/scripting.h"
-#include "ui/minimal.hpp"
+#include "ui/minimal_ui.h"
 
 namespace ek {
 
@@ -53,7 +53,7 @@ void create(entity_t container) {
     float spaceY = 40.0f;
     rect_t default_rect = rect(-100, -15, 200, 30);
     vec2_t pos = vec2(360.0f / 2, 300.0f);
-    auto btn = createButton("RELOAD", [] {
+    entity_t btn = create_button("RELOAD", +[](const node_event_t*) {
         load_script("assets/scripts/main.js");
     });
     set_position(btn, pos);

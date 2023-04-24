@@ -9,7 +9,7 @@
 #include <ek/scenex/2d/text2d.h>
 #include <ek/goodies/trail2d.h>
 #include <sim/follow.h>
-#include <ui/minimal.hpp>
+#include <ui/minimal_ui.h>
 #include <ek/scenex/base/destroy_timer.h>
 
 namespace ek {
@@ -49,9 +49,15 @@ void add_objects(entity_t game, unsigned addCount) {
 
 }
 
-SampleSim::SampleSim() {
+SampleSim* sim_sample;
 
+SampleSim::~SampleSim() {
+    sim_sample = NULL;
+}
+
+SampleSim::SampleSim() {
     using namespace ek::sim;
+    sim_sample = this;
 
     title = "SIMULATION";
 
@@ -85,7 +91,7 @@ SampleSim::SampleSim() {
     }
 
     count_label = create_node2d(H("lbl"));
-    addText(count_label, "");
+    add_text(count_label, "");
     get_transform2d(count_label)->pos = vec2(360.0f / 2.0f, 15.0f);
     append(container, count_label);
 
@@ -93,23 +99,25 @@ SampleSim::SampleSim() {
     particles_count += ParticlesAddCount;
     updateCountLabel();
 
-    entity_t btn = createButton("ADD 5000", [this] {
-        if(particles_count < ParticlesMaxCount) {
-            add_objects(particles_container, ParticlesAddCount);
-            particles_count += ParticlesAddCount;
+    entity_t btn = create_button("ADD 5000", +[](const node_event_t*) {
+        if(sim_sample && sim_sample->particles_count < ParticlesMaxCount) {
+            add_objects(sim_sample->particles_container, ParticlesAddCount);
+            sim_sample->particles_count += ParticlesAddCount;
 
-            updateCountLabel();
+            sim_sample->updateCountLabel();
         }
     });
     get_transform2d(btn)->pos = vec2(360.0f / 2.0f, 60.0f);
     get_text2d(btn)->rect = {{-100, -25, 200, 50}};
     append(container, btn);
 
-    btn = createButton("RESET", [this] {
-        particles_count = 0;
-        destroy_children_later(particles_container, 0, 0);
+    btn = create_button("RESET", +[](const node_event_t*) {
+        if(sim_sample) {
+            sim_sample->particles_count = 0;
+            destroy_children_later(sim_sample->particles_container, 0, 0);
 
-        updateCountLabel();
+            sim_sample->updateCountLabel();
+        }
     });
     get_transform2d(btn)->pos = vec2(360.0f / 2.0f, 120.0f);
     get_text2d(btn)->rect = {{-100, -25, 200, 50}};

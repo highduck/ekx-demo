@@ -10,7 +10,7 @@
 #include "3d/camera_arcball.hpp"
 #include "piko/examples.h"
 #include "config/build_info.h"
-#include <ui/minimal.hpp>
+#include <ui/minimal_ui.h>
 
 #include <ek/firebase.h>
 #include <ek/scenex/app/base_game.h>
@@ -164,18 +164,18 @@ static void on_start(void) {
     SampleBase::samplesContainer = create_node2d(H("sample"));
     append(root, SampleBase::samplesContainer);
 
-    entity_t prev = createButton("<", +[]() -> void { scroll_sample(-1); });
-    entity_t next = createButton(">", +[]() -> void { scroll_sample(1); });
+    entity_t prev = create_button("<", +[](const node_event_t*) -> void { scroll_sample(-1); });
+    entity_t next = create_button(">", +[](const node_event_t*) -> void { scroll_sample(1); });
     LayoutRect_enableAlignX(add_layout_rect(prev), 0, 30);
     LayoutRect_enableAlignX(add_layout_rect(next), 1, -30);
 
     tfSampleTitle = create_node2d(H("title"));
-    addText(tfSampleTitle, "");
+    add_text(tfSampleTitle, "");
     LayoutRect_enableAlignX(add_layout_rect(tfSampleTitle), 0.5, 0);
 
     {
         tfFPS = create_node2d(H("fps"));
-        addText(tfFPS, "");
+        add_text(tfFPS, "");
         text2d_t* tf = get_text2d(tfFPS);
         tf->format.alignment = vec2(0, 0);
         tf->format.size = 8.0f;
@@ -188,7 +188,7 @@ static void on_start(void) {
 
     {
         entity_t tf_version = create_node2d(H("version"));
-        addText(tf_version, APP_VERSION_NAME "+" APP_VERSION_CODE);
+        add_text(tf_version, APP_VERSION_NAME "+" APP_VERSION_CODE);
         text2d_t* tf = get_text2d(tf_version);
         tf->format.alignment = vec2(1, 0);
         tf->format.size = 8.0f;

@@ -1,4 +1,4 @@
-#include <ui/minimal.hpp>
+#include <ui/minimal_ui.h>
 #include <ek/game_services.h>
 #include <ek/scenex/2d/text2d.h>
 #include <ek/scenex/2d/transform2d.h>
@@ -19,7 +19,7 @@ SampleIntegrations::SampleIntegrations() :
     rect_t default_rect = rect(-100, -15, 200, 30);
     vec2_t pos = vec2(360.0f / 2, 50.0f);
 
-    auto btn = createButton("POST SCORE", [] {
+    auto btn = create_button("POST SCORE", +[](const node_event_t*) {
         static int bestScore = 1;
         ek_leaderboard_submit("CgkIpvfh798IEAIQAA", ++bestScore);
     });
@@ -28,7 +28,7 @@ SampleIntegrations::SampleIntegrations() :
     append(container, btn);
     pos.y += spaceY;
 
-    btn = createButton("LEADERBOARD", [] {
+    btn = create_button("LEADERBOARD", +[](const node_event_t*) {
         ek_leaderboard_show("CgkIpvfh798IEAIQAA");
     });
     set_position(btn, pos);
@@ -36,7 +36,7 @@ SampleIntegrations::SampleIntegrations() :
     append(container, btn);
     pos.y += spaceY;
 
-    btn = createButton("ACHIEVEMENTS", [] {
+    btn = create_button("ACHIEVEMENTS", +[](const node_event_t*) {
         ek_achievement_show();
     });
     set_position(btn, pos);
@@ -45,7 +45,7 @@ SampleIntegrations::SampleIntegrations() :
     pos.y += spaceY;
 
     pos.y += 10.0f;
-    btn = createButton("INTERSTITIAL AD", [] {
+    btn = create_button("INTERSTITIAL AD", +[](const node_event_t*) {
         g_ads->gameOver([] {
             // TODO:
         });
@@ -55,8 +55,8 @@ SampleIntegrations::SampleIntegrations() :
     append(container, btn);
     pos.y += spaceY;
 
-    btn = createButton("VIDEO AD", [] {
-        g_ads->showRewardVideo([](bool rewarded) {
+    btn = create_button("VIDEO AD", +[](const node_event_t*) {
+        g_ads->showRewardVideo(+[](bool rewarded) {
             (void)rewarded;
             // TODO:
         });
@@ -66,7 +66,7 @@ SampleIntegrations::SampleIntegrations() :
     append(container, btn);
     pos.y += spaceY;
 
-    btn = createButton("REMOVE ADS", [] {
+    btn = create_button("REMOVE ADS", +[](const node_event_t*) {
         g_ads->purchaseRemoveAds();
     });
     set_position(btn, pos);
@@ -74,7 +74,7 @@ SampleIntegrations::SampleIntegrations() :
     append(container, btn);
     pos.y += spaceY;
 
-    btn = createButton("CRASH ME", [] {
+    btn = create_button("CRASH ME", +[](const node_event_t*) {
         // simple null-pointer abort
         ((SampleIntegrations*)nullptr)->title = "";
     });
