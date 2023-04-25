@@ -46,9 +46,7 @@ SampleIntegrations::SampleIntegrations() :
 
     pos.y += 10.0f;
     btn = create_button("INTERSTITIAL AD", +[](const node_event_t*) {
-        g_ads->gameOver([] {
-            // TODO:
-        });
+        g_ads->gameOver(+[]() {});
     });
     set_position(btn, pos);
     get_text2d(btn)->rect = default_rect;
@@ -56,13 +54,10 @@ SampleIntegrations::SampleIntegrations() :
     pos.y += spaceY;
 
     btn = create_button("VIDEO AD", +[](const node_event_t*) {
-        g_ads->showRewardVideo(+[](bool rewarded) {
-            (void)rewarded;
-            // TODO:
-        });
+        g_ads->showRewardVideo(+[](bool rewarded) {});
     });
     set_position(btn, pos);
-    get_text2d(btn)->rect =default_rect;
+    get_text2d(btn)->rect = default_rect;
     append(container, btn);
     pos.y += spaceY;
 
@@ -76,7 +71,7 @@ SampleIntegrations::SampleIntegrations() :
 
     btn = create_button("CRASH ME", +[](const node_event_t*) {
         // simple null-pointer abort
-        ((SampleIntegrations*)nullptr)->title = "";
+        ((SampleIntegrations*) nullptr)->title = "";
     });
 
     set_position(btn, pos);
