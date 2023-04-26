@@ -1,7 +1,6 @@
 #include "Motion.hpp"
 
 #include <ek/scenex/2d/transform2d.h>
-#include <ek/ds/FixedArray.hpp>
 
 namespace ek::sim {
 
@@ -14,29 +13,29 @@ struct AttractorsState {
 };
 
 void update_motion_system(float dt) {
-    FixedArray<AttractorsState, 10> attractors;
-    for (auto e : ecs::view<attractor_t>()) {
-        attractors.push_back(AttractorsState{
+    AttractorsState attractors[10];
+    uint32_t attractors_num = 0;
+
+    for (entity_t e : ecs::view<attractor_t>()) {
+        attractors[attractors_num++] = AttractorsState{
            *ecs::get<attractor_t>(e),
            get_transform2d(e)->pos
-        });
+        };
     }
-    const auto sz = attractors.size();
-    const auto* attrs = attractors.data();
 
     const auto dumpFactor = expf(-6.0f * dt);
     const aabb2_t bounds = aabb2_from_rect(rect_wh(WIDTH, HEIGHT));
-    for (auto e : ecs::view<motion_t>()) {
-        auto* mot = ecs::get<motion_t>(e);
+    for (entity_t e : ecs::view<motion_t>()) {
+        motion_t* mot = ecs::get<motion_t>(e);
         transform2d_t* tra = get_transform2d(e);
 
-        auto p = tra->pos;
-        auto v = mot->velocity;
+        vec2_t p = tra->pos;
+        vec2_t v = mot->velocity;
 
-        for (unsigned i = 0; i < sz; ++i) {
-            const auto attractor = attrs[i];
-            const auto diff = attractor.position - p;
-            const auto len = length_vec2(diff);
+        for (uint32_t i = 0; i < attractors_num; ++i) {
+            const AttractorsState attractor = attractors[i];
+            const vec2_t diff = attractor.position - p;
+            const float len = length_vec2(diff);
             const float factor = 1.0f - saturate(len / attractor.props.radius);
             v += (dt * attractor.props.force * factor * factor / len) * diff;
         }

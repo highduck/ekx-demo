@@ -14,7 +14,7 @@
 #define TIMEOUT_END(seconds)  },0,0},(seconds));
 
 void do_game_screenshots(void) {
-    g_ads->cheat_RemoveAds();
+    ads_cheat_remove_ads();
     TIMEOUT_BEGIN
         uitest_screenshot("trails");
         uitest_click(H("controls"), H(">"));

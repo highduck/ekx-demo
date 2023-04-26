@@ -13,7 +13,6 @@
 #include <ui/minimal_ui.h>
 
 #include <ek/firebase.h>
-#include <ek/ds/PodArray.hpp>
 #include <ek/scenex/app/base_game.h>
 #include <ek/scenex/systems/main_flow.h>
 #include <ek/scenex/scene_factory.h>
@@ -62,7 +61,12 @@ namespace ek {
 
 typedef SampleBase* (* sample_factory_fn)();
 
-PodArray<sample_factory_fn> sampleFactory;
+enum{
+    SAMPLES_NUM = 8,
+};
+
+sample_factory_fn sampleFactory[SAMPLES_NUM];
+
 int currentSampleIndex = 0;
 SampleBase* currentSample = nullptr;
 entity_t tfSampleTitle;
@@ -73,25 +77,24 @@ fps_counter fps_cnt = {};
 void activate_sample(int index);
 
 void init_samples() {
-    sampleFactory.push_back([]() -> SampleBase* { return new SamplePiko(); });
-    sampleFactory.push_back([]() -> SampleBase* { return new SampleSim(); });
-    sampleFactory.push_back([]() -> SampleBase* { return new SampleFlash("test1", "TEST 1"); });
-    sampleFactory.push_back([]() -> SampleBase* { return new SampleFlash("test2", "TEST 2"); });
-    sampleFactory.push_back([]() -> SampleBase* { return new Sample3D(); });
-    sampleFactory.push_back([]() -> SampleBase* { return new SampleAudio(); });
-    sampleFactory.push_back([]() -> SampleBase* { return new SampleIntegrations(); });
-    sampleFactory.push_back([]() -> SampleBase* { return new SampleText(); });
+    sampleFactory[0] = +[]() -> SampleBase* { return new SamplePiko(); };
+    sampleFactory[1] = +[]() -> SampleBase* { return new SampleSim(); };
+    sampleFactory[2] = +[]() -> SampleBase* { return new SampleFlash("test1", "TEST 1"); };
+    sampleFactory[3] = +[]() -> SampleBase* { return new SampleFlash("test2", "TEST 2"); };
+    sampleFactory[4] = +[]() -> SampleBase* { return new Sample3D(); };
+    sampleFactory[5] = +[]() -> SampleBase* { return new SampleAudio(); };
+    sampleFactory[6] = +[]() -> SampleBase* { return new SampleIntegrations(); };
+    sampleFactory[7] = +[]() -> SampleBase* { return new SampleText(); };
     activate_sample(0);
 }
 
 void activate_sample(int index) {
-    int samplesCount = static_cast<int>(sampleFactory.size());
     currentSampleIndex = index;
-    if (currentSampleIndex >= samplesCount) {
+    if (currentSampleIndex >= SAMPLES_NUM) {
         currentSampleIndex = 0;
     }
     if (currentSampleIndex < 0) {
-        currentSampleIndex = samplesCount - 1;
+        currentSampleIndex = SAMPLES_NUM - 1;
     }
     delete currentSample;
     currentSample = sampleFactory[currentSampleIndex]();
