@@ -13,6 +13,7 @@
 #include <ui/minimal_ui.h>
 
 #include <ek/firebase.h>
+#include <ek/ds/PodArray.hpp>
 #include <ek/scenex/app/base_game.h>
 #include <ek/scenex/systems/main_flow.h>
 #include <ek/scenex/scene_factory.h>
@@ -61,7 +62,7 @@ namespace ek {
 
 typedef SampleBase* (* sample_factory_fn)();
 
-Array<sample_factory_fn> sampleFactory;
+PodArray<sample_factory_fn> sampleFactory;
 int currentSampleIndex = 0;
 SampleBase* currentSample = nullptr;
 entity_t tfSampleTitle;

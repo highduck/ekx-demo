@@ -4,7 +4,7 @@
 #include <ek/scenex/2d/transform2d.h>
 #include <ek/scenex/base/node.h>
 #include <ek/admob.h>
-#include <appbox/Ads.hpp>
+#include <appbox/ads.h>
 #include "sample_integrations.hpp"
 
 namespace ek {
@@ -46,7 +46,7 @@ SampleIntegrations::SampleIntegrations() :
 
     pos.y += 10.0f;
     btn = create_button("INTERSTITIAL AD", +[](const node_event_t*) {
-        g_ads->gameOver(+[]() {});
+        ads_game_over(+[]() {});
     });
     set_position(btn, pos);
     get_text2d(btn)->rect = default_rect;
@@ -54,7 +54,7 @@ SampleIntegrations::SampleIntegrations() :
     pos.y += spaceY;
 
     btn = create_button("VIDEO AD", +[](const node_event_t*) {
-        g_ads->showRewardVideo(+[](bool rewarded) {});
+        ads_show_reward_video(+[](bool) {});
     });
     set_position(btn, pos);
     get_text2d(btn)->rect = default_rect;
@@ -62,7 +62,7 @@ SampleIntegrations::SampleIntegrations() :
     pos.y += spaceY;
 
     btn = create_button("REMOVE ADS", +[](const node_event_t*) {
-        g_ads->purchaseRemoveAds();
+        ads_purchase_remove_ads();
     });
     set_position(btn, pos);
     get_text2d(btn)->rect = default_rect;

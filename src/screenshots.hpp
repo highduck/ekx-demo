@@ -8,7 +8,7 @@
 #include <ek/assert.h>
 #include <ek/scenex/2d/button.h>
 #include <ek/scenex/base/interactive.h>
-#include <appbox/Ads.hpp>
+#include <appbox/ads.h>
 
 #define TIMEOUT_BEGIN  ek_set_timeout((ek_timer_callback){+[](void*)->void{
 #define TIMEOUT_END(seconds)  },0,0},(seconds));
