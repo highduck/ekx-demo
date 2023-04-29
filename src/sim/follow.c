@@ -1,12 +1,16 @@
 #include "follow.h"
+#include "ekx/app/time_layers.h"
 
 #include <ek/scenex/2d/camera2d.h>
 #include <ek/scenex/2d/transform2d.h>
 #include <ek/scenex/base/node.h>
 #include <ek/scenex/interaction_system.h>
 
-ecx_component_type FollowMouse;
-ecx_component_type FollowTarget;
+ECX_DEFINE_TYPE(follow_mouse_t);
+ECX_DEFINE_TYPE(follow_target_t);
+
+#define FollowMouse ECX_ID(follow_mouse_t)
+#define FollowTarget ECX_ID(follow_target_t)
 
 void FollowTarget_ctor(component_handle_t i) {
     follow_target_t f = {0};
@@ -18,17 +22,14 @@ void FollowTarget_ctor(component_handle_t i) {
     ((follow_target_t*) FollowTarget.data[0])[i] = f;
 }
 
-void Follow_setup(void) {
-    init_component_type(&FollowMouse, (ecx_component_type_decl) {
-            "Follow Mouse", 8, 0, {0}
-    });
-    init_component_type(&FollowTarget, (ecx_component_type_decl) {
-            "Follow Target", 8, 1, {sizeof(follow_target_t)}
-    });
+void setup_follow(void) {
+    ECX_TYPE_0(follow_mouse_t, 8);
+    ECX_TYPE(follow_target_t, 8);
     FollowTarget.ctor = FollowTarget_ctor;
 }
 
-void Follow_update(float dt) {
+void update_follow(void) {
+    const float dt = g_time_layers[0].dt;
     for (uint32_t i = 1; i < FollowMouse.size; ++i) {
         const entity_t e = get_entity(&FollowMouse, i);
         const entity_t parent = get_parent(e);
@@ -43,7 +44,7 @@ void Follow_update(float dt) {
     }
 
     for (uint32_t i = 1; i < FollowTarget.size; ++i) {
-        follow_target_t* data = (follow_target_t*)get_component_data(&FollowTarget, i, 0);
+        follow_target_t* data = (follow_target_t*) get_component_data(&FollowTarget, i, 0);
         ++data->counter;
         data->time_accum += dt;
         if (data->counter >= data->n) {
@@ -53,7 +54,7 @@ void Follow_update(float dt) {
             if (is_entity(data->target_entity)) {
                 const entity_t parent = get_parent(e);
                 if (parent.id) {
-                    data->target = local_to_local(data->target_entity, parent, vec2(0,0));
+                    data->target = local_to_local(data->target_entity, parent, vec2(0, 0));
                 }
             } else {
                 data->target_entity = NULL_ENTITY;
@@ -62,16 +63,19 @@ void Follow_update(float dt) {
             vec2_t current = sub_vec2(tr->pos, data->offset);
             if (data->integration == FOLLOW_INTEGRATION_EXP) {
                 const float c = logf(1.0f - data->k) * data->fixed_frame_rate;
-                current = add_vec2(current, scale_vec2(sub_vec2(data->target, current), (1.0f - exp(c * data->time_accum))));
+                current = add_vec2(current,
+                                   scale_vec2(sub_vec2(data->target, current), (1.0f - exp(c * data->time_accum))));
             } else if (data->integration == FOLLOW_INTEGRATION_STEPS) {
                 const float timeStep = 1.0f / data->fixed_frame_rate;
                 while (data->time_accum >= timeStep) {
                     current = add_vec2(current, scale_vec2(sub_vec2(data->target, current), data->k));
                     data->time_accum -= timeStep;
                 }
-                current = add_vec2(current, scale_vec2(sub_vec2(data->target, current), data->k * (data->time_accum * data->fixed_frame_rate)));
+                current = add_vec2(current, scale_vec2(sub_vec2(data->target, current),
+                                                       data->k * (data->time_accum * data->fixed_frame_rate)));
             } else if (data->integration == FOLLOW_INTEGRATION_NONE) {
-                current = add_vec2(current, scale_vec2(sub_vec2(data->target, current), data->k * (data->time_accum * data->fixed_frame_rate)));
+                current = add_vec2(current, scale_vec2(sub_vec2(data->target, current),
+                                                       data->k * (data->time_accum * data->fixed_frame_rate)));
             }
 
             tr->pos = add_vec2(data->offset, current);

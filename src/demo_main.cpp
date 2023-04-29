@@ -126,13 +126,13 @@ static void on_pre_load(void) {
     ::uitest("screenshots", do_game_screenshots);
 #endif
 
-    scene3d_setup();
+    setup_scene3d();
 
     ECX_COMPONENT(sim::motion_t);
     ECX_COMPONENT(sim::attractor_t);
     ECX_COMPONENT(CameraArcBall);
     ECX_COMPONENT(test_rotation_comp);
-    Follow_setup();
+    setup_follow();
     ECX_COMPONENT(piko::diamonds);
 
     camera2d_t* cam = get_camera2d(main_camera);

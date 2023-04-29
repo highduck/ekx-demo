@@ -34,14 +34,17 @@ typedef struct {
 
 } follow_target_t;
 
-extern ecx_component_type FollowMouse;
-extern ecx_component_type FollowTarget;
+typedef void follow_mouse_t;
 
-void Follow_setup(void);
-void Follow_update(float dt);
+extern ECX_DEFINE_TYPE(follow_mouse_t);
+extern ECX_DEFINE_TYPE(follow_target_t);
 
-#define add_follow_target(e) ((follow_target_t*)add_component(&FollowTarget, e))
-#define add_follow_mouse(e) ((void*)add_component(&FollowMouse, e))
+void setup_follow(void);
+
+void update_follow(void);
+
+#define add_follow_target(e) ECX_ADD(follow_target_t,e)
+#define add_follow_mouse(e) ECX_ADD(follow_mouse_t,e)
 
 #ifdef __cplusplus
 }
