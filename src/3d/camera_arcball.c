@@ -1,14 +1,13 @@
-#include "camera_arcball.hpp"
+#include "camera_arcball.h"
 
-#include <ecx/ecx.hpp>
 #include <ek/scenex/3d/scene3d.h>
 #include <ek/scenex/interaction_system.h>
 
 #include <ekx/app/input_state.h>
 
-namespace ek {
+ECX_DEFINE_TYPE(camera_arc_ball_t);
 
-void updateCameraArcBall(float dt) {
+void update_camera_arc_ball(float dt) {
     static vec2_t prev_pointer = {};
     static bool prev_down = false;
 
@@ -22,11 +21,12 @@ void updateCameraArcBall(float dt) {
     }
     if (prev_down) {
         vec2_t cur = g_interaction_system.pointerScreenPosition_;
-        delta = cur - prev_pointer;
+        delta = sub_vec2(cur, prev_pointer);
         prev_pointer = cur;
     }
-    for (auto e: ecs::view<CameraArcBall>()) {
-        auto* arc_ball = ecs::get<CameraArcBall>(e);
+    ECX_FOR_DRAFT(camera_arc_ball_t) {
+        entity_t e = get_entity(&ECX_ID(camera_arc_ball_t), h_camera_arc_ball_t);
+        camera_arc_ball_t* arc_ball = (camera_arc_ball_t*)get_component_data(&ECX_ID(camera_arc_ball_t), h_camera_arc_ball_t, 0);
         camera3d_t* camera_data = get_camera3d(e);
         transform3d_t* camera_transform = get_transform3d(e);
         if(camera_data && camera_transform) {
@@ -57,4 +57,3 @@ void updateCameraArcBall(float dt) {
     }
 }
 
-}

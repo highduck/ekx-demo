@@ -3,37 +3,29 @@ include(npm.cmake)
 project(ekx-demo)
 
 add_executable(${PROJECT_NAME}
-        src/demo_main.cpp
-        src/3d/sample_3d.cpp
-        src/3d/camera_arcball.cpp
+        src/demo_main.c
+        src/3d/sample_3d.c
+        src/3d/camera_arcball.c
         src/3d/model_utils.c
-        src/sample_text.cpp
-        src/sample_base.cpp
-        src/piko/examples.h
-        src/piko/examples.cpp
-        src/piko/sample_piko.cpp
+        src/sample_text.c
+        src/sample_base.c
+        src/piko/examples.c
+        src/piko/sample_piko.c
+        src/sample_audio.c
 
         src/sim/follow.c
-        src/sim/Motion.cpp
-        src/sim/Motion.hpp
-        src/sim/SampleSim.cpp
-        src/sim/SampleSim.hpp
+        src/sim/motion.c
+        src/sim/sample_sim.c
 
-        src/sample_flash.hpp
-        src/sample_flash.cpp
-        src/sample_integrations.cpp
+        src/sample_flash.c
+        src/sample_integrations.c
         src/ui/minimal_ui.c
         src/modplay/pocketmod.c
         src/scripting/scripting.c
         src/scripting/js_api.c
 )
 
-set_target_properties(${PROJECT_NAME} PROPERTIES
-        C_STANDARD 11
-        CXX_STANDARD 17
-        CXX_STANDARD_REQUIRED YES
-        CXX_EXTENSIONS NO
-        )
+set_target_properties(${PROJECT_NAME} PROPERTIES C_STANDARD 11)
 
 add_custom_target(${PROJECT_NAME}-assets ALL
         COMMAND npm run dev-assets
@@ -51,13 +43,9 @@ target_link_libraries(${PROJECT_NAME}
 add_definitions("-ffast-math -fno-exceptions -fno-rtti -Wall -Wextra")
 
 if (CMAKE_BUILD_TYPE MATCHES Debug)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g")
-    #    add_definitions(-DNDEBUG)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -g")
 else ()
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Oz -ffast-math -fno-exceptions -fno-rtti -Wall -Wextra")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Oz -flto")
-    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-dead_strip -Wl,-dead_strip_dylibs")
-    #    add_definitions(-DNDEBUG)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Oz -flto")
 endif ()
 
 if(EK_UITEST)

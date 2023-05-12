@@ -1,29 +1,20 @@
 #pragma once
 
 #include <ek/gfx.h>
-#include <ecx/ecx.hpp>
+#include <ecx/ecx.h>
 
-namespace ek::piko {
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 void draw_book(entity_t e);
 void draw_dna(entity_t e);
-
-struct diamonds {
-    diamonds();
-
-    ~diamonds();
-
-    void start();
-
-    sg_image rt{};
-    sg_pass pass{};
-    bool first_frame = true;
-};
-
 void draw_diamonds(entity_t e);
-
-}
+void stop_diamonds(void);
 
 void pre_render_diamonds(void);
 
-ECX_COMP_TYPE_CXX(ek::piko::diamonds)
+#ifdef __cplusplus
+}
+#endif
+

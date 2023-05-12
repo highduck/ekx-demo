@@ -1,17 +1,14 @@
-#include "sample_text.hpp"
+#include "sample_text.h"
 
-#include <ek/scenex/assets/asset_manager.h>
-#include <ek/scenex/text/font.h>
-#include <ek/scenex/scene_factory.h>
-#include <ek/scenex/base/node.h>
+#include <ek/scenex/2d/display2d.h>
 #include <ek/scenex/2d/layout_rect.h>
 #include <ek/scenex/2d/text2d.h>
-#include <ek/scenex/2d/display2d.h>
-#include <piko/examples.h>
+#include <ek/scenex/assets/asset_manager.h>
+#include <ek/scenex/base/node.h>
+#include <ek/scenex/scene_factory.h>
+#include <ek/scenex/text/font.h>
 
-namespace ek {
-
-entity_t createText(string_hash_t name, string_hash_t font, const char* text) {
+static entity_t createText(string_hash_t name, string_hash_t font, const char* text) {
     entity_t e = create_node2d(name);
     text2d_t* tf = text2d_setup(e);
 
@@ -54,10 +51,10 @@ entity_t createText(string_hash_t name, string_hash_t font, const char* text) {
     return e;
 }
 
-entity_t createScreenZones() {
+static entity_t createScreenZones() {
     rect_t resolution = rect_wh(360, 480);
-    auto zones = create_node2d(H("zones"));
-    auto e = create_node2d(H("zone"));
+    entity_t zones = create_node2d(H("zones"));
+    entity_t e = create_node2d(H("zone"));
     set_gradient_quad(e, resolution, COLOR_WHITE, ARGB(0x77FFFFFF));
     get_transform2d(e)->color.scale = ARGB(0x33FF00FF);
     layout_rect_t* l = add_layout_rect(e);
@@ -69,14 +66,12 @@ entity_t createScreenZones() {
     set_gradient_quad(e, resolution, COLOR_WHITE, ARGB(0x77FFFFFF));
     get_transform2d(e)->color.scale = ARGB(0x3300FF00);
     append(zones, e);
+
     return zones;
 }
 
-SampleText::SampleText() :
-        SampleBase() {
-    title = "TEXT";
-
-    append(container, createScreenZones());
+static void start_sample_text(entity_t e) {
+    append(e, createScreenZones());
 
     {
         entity_t bmText = createText(H("bmfont"), H("TickingTimebombBB"),
@@ -85,10 +80,10 @@ SampleText::SampleText() :
         text_format_align(&txt->format, ALIGNMENT_CENTER);
         txt->format.size = 24;
         txt->borderColor = COLOR_BLACK;
-        txt->rect = {{0, 0, 360 - 40, 100}};
+        txt->rect = rect(0, 0, 360 - 40, 100);
 
         set_position(bmText, vec2(20, 20));
-        append(container, bmText);
+        append(e, bmText);
     }
 
     {
@@ -100,22 +95,30 @@ SampleText::SampleText() :
         txt->format.leading = -8;
 
         set_position(ttfText, vec2(360 - 20, 120));
-        append(container, ttfText);
+        append(e, ttfText);
     }
     {
         entity_t ttfText = createText(H("TTF-Comfortaa-Regular"), H("Comfortaa-Regular"),
-                                       u8"I don't know KERN TABLE.\nНо кириллица тоже есть");
+                                      u8"I don't know KERN TABLE.\nНо кириллица тоже есть");
         text2d_t* txt = get_text2d(ttfText);
         text_format_set_text_color(&txt->format, ARGB(0xFFFF00FF));
         txt->format.size = 24;
 
         set_position(ttfText, vec2(20, 340));
-        append(container, ttfText);
+        append(e, ttfText);
     }
 }
 
-void SampleText::prepareInternalResources() {
-    R(Font) native = R_FONT(H("native"));
+sample_t sample_text(void) {
+    sample_t s = INIT_ZERO;
+    s.title = "TEXT";
+    s.start = start_sample_text;
+    return s;
+}
+
+void preload_sample_text(void) {
+    R(Font)
+    native = R_FONT(H("native"));
     font_t* device_font = &REF_RESOLVE(res_font, native);
 
     const float scale_factor = asset_manager.scale_factor;
@@ -123,10 +126,4 @@ void SampleText::prepareInternalResources() {
     font_load_device_font(device_font, "Arial Unicode MS");
 
     RES_NAME_RESOLVE(res_font, H("Comfortaa-Regular")).fallback = native;
-}
-
-void SampleText::update(float dt) {
-    SampleBase::update(dt);
-}
-
 }
