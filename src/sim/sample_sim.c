@@ -100,7 +100,7 @@ void start_sample_sim(entity_t container) {
     append(container, count_label);
 
     add_objects(particles_container, ParticlesAddCount);
-    particles_count += ParticlesAddCount;
+    particles_count = ParticlesAddCount;
     update_count_label();
 
     entity_t btn = create_button("ADD 5000", on_add_sim_objects);

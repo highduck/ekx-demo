@@ -3,6 +3,6 @@
 #define APP_BUILD_INFO_H
 
 #define APP_VERSION_NAME "1.5.28" 
-#define APP_VERSION_CODE "111" 
+#define APP_VERSION_CODE "112" 
 
 #endif // APP_BUILD_INFO_H

@@ -1,6 +1,6 @@
 {
     "name": "@ekx/demo",
-    "version": "1.5.28+111",
+    "version": "1.5.28+112",
     "private": true,
     "type": "module",
     "scripts": {
