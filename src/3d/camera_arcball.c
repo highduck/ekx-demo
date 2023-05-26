@@ -1,6 +1,6 @@
 #include "camera_arcball.h"
 
-#include <ek/scenex/3d/scene3d.h>
+#include "../render3d/scene3d.h"
 #include <ek/scenex/interaction_system.h>
 
 #include <ekx/app/input_state.h>

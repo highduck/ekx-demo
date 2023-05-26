@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ek/scenex/text/text_engine.h>
+#include <sce/text/text_engine.h>
 #include "sample_base.h"
 
 #ifdef __cplusplus

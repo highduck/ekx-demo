@@ -3,10 +3,10 @@
 #include <ek/scenex/2d/display2d.h>
 #include <ek/scenex/2d/layout_rect.h>
 #include <ek/scenex/2d/text2d.h>
-#include <ek/scenex/assets/asset_manager.h>
+#include <sce/assets/asset_manager.h>
 #include <ek/scenex/base/node.h>
 #include <ek/scenex/scene_factory.h>
-#include <ek/scenex/text/font.h>
+#include <sce/font.h>
 
 static entity_t createText(string_hash_t name, string_hash_t font, const char* text) {
     entity_t e = create_node2d(name);

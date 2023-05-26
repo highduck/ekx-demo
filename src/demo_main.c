@@ -1,5 +1,6 @@
 #include "sample_text.h"
 #include "sample_flash.h"
+#include "render3d/scene3d.h"
 #include "3d/sample_3d.h"
 #include "piko/sample_piko.h"
 #include "sim/sample_sim.h"
@@ -21,7 +22,6 @@
 #include <ek/scenex/2d/camera2d.h>
 #include <ek/scenex/2d/text2d.h>
 #include <ek/log.h>
-#include <ek/scenex/3d/scene3d.h>
 #include <ekx/app/time_layers.h>
 #include <appbox/appbox.h>
 #include <ekx/app/profiler.h>

@@ -5,6 +5,7 @@
     "type": "module",
     "scripts": {
         "postinstall": "ekx cmake",
+        "build:shaders": "ts-node ./build-shaders.ts",
         "build:web": "ekx web clean --verbose",
         "build:android": "ekx android bundle clean --verbose",
         "dev-assets": "ekx dev -V",

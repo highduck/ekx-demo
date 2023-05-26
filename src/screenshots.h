@@ -4,7 +4,7 @@
 
 #include <ek/time.h>
 #include <ekx/app/uitest.h>
-#include <ekx/app/localization.h>
+#include <sce/localization.h>
 #include <ek/assert.h>
 #include <ek/scenex/2d/button.h>
 #include <ek/scenex/base/interactive.h>
